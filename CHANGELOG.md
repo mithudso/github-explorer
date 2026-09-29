@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.3.0 — 2026-09-29
+
+- Add twelve common Git/GitHub actions as bottom buttons and F1–F12 hotkeys.
+- Add direct Git commands, a searchable local Git menu, and explicit checkout context.
+- Keep preview/confirmation for shortcuts and terminal mode for interactive workflows.
+- Use Down to expand collapsed branches and arrows to navigate trees and nearby controls.
+- Preserve dropdown selection and text editing; support navigation in settings and confirmations.
+
 ## 0.2.0 — 2026-09-29
 
 - Show searchable GitHub default-branch files above the CLI tree by default.

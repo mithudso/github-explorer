@@ -1,6 +1,6 @@
 # Continuation record
-Version: 9
-Delta: Complete repository files and settings after the retry request.
+Version: 11
+Delta: Add common command shortcuts and directional arrow navigation.
 
 ## Request and scope
 Create a standalone GitHub Explorer TUI and public mithudso/github-explorer repository.
@@ -101,3 +101,19 @@ previously installed github-panel and skillsx commands remain unchanged.
 
 - Implementation lesson: Textual 8 uses Select.NULL for an unselected value. Select.BLANK resolves to False and caused InvalidSelectValueError: Illegal select value False in RepoSettings.show_settings. Use Select.NULL for settings and the existing Add flag guard; regression coverage includes an unselected boolean and Add flag with no choice.
 - Retry continuation: live read-only UI smoke passed with 21 remote files and all 23 local repo edit flags at 120x40; bottom field and Review changes remained accessible. No GitHub settings were changed. Test retry clicks now wait for the Textual button active animation to end.
+
+## v0.3.0 - 2026-09-29 — Common command shortcuts
+- Request: bottom buttons and hotkeys for pull, push, merge, PR, CO and other common commands.
+- Baseline: clean worktree at 4e571cb; application 0.2.0; 57 tests.
+- Design: twelve compact buttons paired with F1-F12. Each populates the command editor and opens the existing confirmation. Prompt-driven flows use terminal mode. Ordinary typing must remain unaffected and modal/busy screens must block shortcuts.
+- Commands: Git status, pull --ff-only, push, fetch, diff, add --patch and commit; gh pr create, checkout, merge, list and checks. CO means PR checkout; local branch switching/merging remains available through curated Git menu entries and the command editor.
+- Context: direct Git commands use the working directory, not GH_REPO. Confirmations must make this distinction visible; do not silently redirect Git to the GitHub override.
+- Constraints: preserve shell-free argv, confirmations, cancellation, output limits, transient output, local-help-only gh discovery and the existing file/settings UI. No Stele project is associated; semantic indexing remains paused.
+- Completed: shortcuts and curated Git menu entries in catalog.py; direct Git argv and environment isolation in runner.py; compact responsive buttons, confirmation hints and ArrowNavigation in panel.py. Tests are in test_shortcuts.py, test_navigation.py and test_runner.py.
+- Completed: version 0.3.0 in package metadata and lockfile; usage, architecture, security, execution metadata and test documentation updated. Prompts version 10 and memory version 11 preserve both requests.
+- Validation: uv sync --locked, all 79 tests, Ruff and uv build passed. The source archive includes the new tests and shared fixtures. A live read-only 120x40 smoke loaded remote files/local CLI help, exercised tree arrows and all button visibility, and confirmed git status successfully. No live pull, push, stage, commit or merge was performed.
+- Finalization: regenerate operation metadata and static indexes, check drift, and commit the reviewed project changes. The commit containing this entry records completion; no push is authorized. Remote CI and real-terminal interactive flows remain unverified.
+
+- Additional request: use all arrow keys for TUI navigation. Down expands collapsed tree branches before advancing; Select retains its dropdown keys. Move spatially between controls, preserving text editing and scrolling. Apply navigation to settings and confirmation dialogs as well.
+- Working-tree constraint: .github/FUNDING.yml appeared during this task and is unrelated; leave it untouched and outside this commit.
+- Static-index scope: exclude the unrelated untracked .github/FUNDING.yml only during generation/checks with a temporary process-local Git excludes file. Do not change or stage that file. A normal census in this dirty checkout will flag it until its owner commits or removes it.

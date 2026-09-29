@@ -5,8 +5,8 @@
 | Integration | Calling code | Data and authentication |
 | --- | --- | --- |
 | Installed `gh` help | `catalog.help_text`, `catalog.load_catalog` | Local help text out; installed binary resolved through PATH; no Explorer API client |
-| Captured `gh` command | `runner.CommandRunner.run` | Explicit argv/cwd/env in; combined stdout/stderr and exit status out; `gh` owns auth/network behavior |
-| Terminal `gh` command | `runner.run_interactive` | Explicit argv/cwd/env in; inherited terminal streams; `gh` owns auth/network behavior |
+| Captured `gh`/`git` command | `runner.CommandRunner.run` | Explicit argv/cwd/env in; combined stdout/stderr and exit status out; the selected executable owns auth/network behavior |
+| Terminal `gh`/`git` command | `runner.run_interactive` | Explicit argv/cwd/env in; inherited terminal streams; the selected executable owns auth/network behavior |
 | Host terminal / clipboard | `panel.GitHubPanel` via Textual | Explicit copy of last captured result; terminal capabilities determine clipboard behavior |
 
 Explorer has no hardcoded GitHub API base URL or direct HTTP SDK. The installed
@@ -16,7 +16,8 @@ record the subprocess boundaries.
 
 ## Assumptions
 
-- PATH selects a trusted `gh`; aliases/extensions may execute arbitrary local tools.
+- PATH selects trusted `gh` and `git`; aliases/extensions/hooks may execute local tools.
+  Direct Git uses the checkout and configured remotes; GH_REPO does not redirect it.
 - Help reference uses Markdown headings and root help uses labeled command sections.
   Future CLI formatting changes may require parser updates.
 - The current directory is an existing local directory. A repo override is

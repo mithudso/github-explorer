@@ -1,10 +1,10 @@
 # github-explorer — infrastructure and links
-> Source: . · https://github.com/mithudso/github-explorer @ 360b0c8 dirty
+> Source: . · https://github.com/mithudso/github-explorer @ 4e571cb dirty
 > Generated: 2026-09-29 by crawl-repo-to-llms v1.2.0
-> Census: 75 enumerated / 20 deep-read / 55 shallow · partial: remaining metadata cards shallow; no index probes
+> Census: 77 enumerated / 22 deep-read / 55 shallow · partial: remaining metadata cards shallow; no index probes
 
 ## Toolchain and CI
-Package: github-explorer; version: 0.2.0. [src: pyproject.toml]
+Package: github-explorer; version: 0.3.0. [src: pyproject.toml]
 Purpose: A standalone terminal workbench for the full installed GitHub CLI. [src: pyproject.toml]
 Requires Python >=3.11. [src: pyproject.toml]
 Runtime dependencies: textual>=8,<9, rich>=13. [src: pyproject.toml]

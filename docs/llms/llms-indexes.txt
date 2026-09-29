@@ -1,7 +1,7 @@
 # github-explorer — index inventory
-> Source: . · https://github.com/mithudso/github-explorer @ 360b0c8 dirty
+> Source: . · https://github.com/mithudso/github-explorer @ 4e571cb dirty
 > Generated: 2026-09-29 by crawl-repo-to-llms v1.2.0
-> Census: 75 enumerated / 20 deep-read / 55 shallow · partial: remaining metadata cards shallow; no index probes
+> Census: 77 enumerated / 22 deep-read / 55 shallow · partial: remaining metadata cards shallow; no index probes
 
 ## Static indexes
 docs/high_signal_file_index.json and docs/llms/filemap.json store path, role, importance, size, hash, symbols and public source links. [src: scripts/generate_repo_indexes.py]

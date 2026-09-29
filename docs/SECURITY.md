@@ -8,9 +8,10 @@ applies GitHub authorization. Explorer does not create a credential store or
 restrict commands to read-only operations. A confirmed command can change local
 files, repositories, organizations, or account state.
 
-The main boundaries are user input → Python argv, Python → installed `gh`, and
-`gh` → GitHub or installed extensions. A trusted `gh` binary on PATH is required.
-Aliases and extensions may invoke shells or other programs independently.
+The main boundaries are user input → Python argv, Python → installed `gh`/`git`, and
+those programs → configured remotes or installed tools. Trusted `gh` and `git`
+binaries on PATH are required. Aliases, extensions, Git hooks and credential
+helpers may invoke shells or other programs independently.
 
 ## STRIDE review
 
@@ -31,8 +32,10 @@ update the GitHub CLI configuration outside this repository. Explorer supplies n
 credential rotation mechanism.
 
 `shlex.split` parses command text; `shlex.join` previews and appends arguments.
-Standalone shell operators are rejected. The optional repository override accepts
-`OWNER/REPO` or `HOST/OWNER/REPO`, not a URL. The working directory must exist.
+Standalone shell operators are rejected. For GitHub CLI commands, the optional repository override accepts
+`OWNER/REPO` or `HOST/OWNER/REPO`, not a URL. The working directory must exist. Direct Git ignores the repository override
+and removes inherited `GH_REPO`; it uses normal Git remote/upstream configuration.
+Quick actions require the same explicit confirmation as manually entered commands.
 Command stdout/stderr is displayed as literal text rather than Rich markup.
 Captured text and preview arguments may still contain private information; inspect
 and sanitize them before copying or reporting a problem.

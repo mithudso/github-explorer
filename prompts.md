@@ -1,6 +1,6 @@
 # Prompts
-Version: 8
-Delta: Resume and finish repository files and settings validation.
+Version: 10
+Delta: Add directional arrow navigation alongside common command shortcuts.
 
 ## 2026-09-29
 > Create a new project ~/dev/github-explorer as a standalone TUI using the github-panel as the basis and create a public remote github repo for it.
@@ -27,3 +27,9 @@ The repeated request resumed the interrupted turn before any tool work began.
 
 ## Prompt v8 - 2026-09-29
 > retry
+
+## Prompt v9 - 2026-09-29
+> Add the most common github commands as both hotkeys and buttons at the bottom, which should include, but is not limited to, pull (which I don't see in the command menu that you just built?), push, merge, pr, co, and the top commands you believe would be most used.
+
+## Prompt v10 - 2026-09-29
+> When I have the explorer loaded, and I press the down-arrow key, if I am currently on a dropdown it should expand the dropdown, but if there is nothing to dropdown then it should go to the item directly beneath it, similarly all the arrows should be used for navigation in the TUI.

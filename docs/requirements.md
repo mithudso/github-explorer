@@ -15,6 +15,10 @@
 11. Load GitHub default-branch files by default above the existing CLI tree; support search and previews.
 12. Discover all repo edit options from installed help, display available current values, and confirm selected changes.
 
+13. Provide common Git/GitHub actions as matching bottom buttons and F1–F12 bindings.
+14. Expand/navigate trees and move focus using arrows while preserving text editing.
+15. Keep direct Git working-directory scope distinct from the GitHub repository override.
+
 ## Non-functional requirements
 
 Support Python 3.11+ on macOS/Linux and Textual 8 embedding. Bound retained captured
@@ -37,6 +41,7 @@ set, including transitive dependencies. `uv sync --locked` installs that set.
 | pytest | `>=8` (dev) | Test runner |
 | pytest-asyncio | `>=0.24` (dev) | Async UI tests |
 | Ruff | `>=0.11` (dev) | Lint and import checks |
+| Git | Installed on PATH; no pinned version | Local checkout commands and shortcuts |
 | GitHub CLI | Installed on PATH; no pinned version | Command discovery and execution |
 | uv | Developer/install tool; no pinned version | Environment, lock, tests, build |
 

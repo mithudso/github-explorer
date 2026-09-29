@@ -1,10 +1,10 @@
 # github-explorer — static repository reference
-> Source: . · https://github.com/mithudso/github-explorer @ 360b0c8 dirty
+> Source: . · https://github.com/mithudso/github-explorer @ 4e571cb dirty
 > Generated: 2026-09-29 by crawl-repo-to-llms v1.2.0
-> Census: 75 enumerated / 20 deep-read / 55 shallow · partial: remaining metadata cards shallow; no index probes
+> Census: 77 enumerated / 22 deep-read / 55 shallow · partial: remaining metadata cards shallow; no index probes
 
 ## Architecture
-Package: github-explorer; version: 0.2.0. [src: pyproject.toml]
+Package: github-explorer; version: 0.3.0. [src: pyproject.toml]
 Purpose: A standalone terminal workbench for the full installed GitHub CLI. [src: pyproject.toml]
 Requires Python >=3.11. [src: pyproject.toml]
 Runtime dependencies: textual>=8,<9, rich>=13. [src: pyproject.toml]
@@ -34,7 +34,7 @@ tests/test_maintenance.py: Regression checks for maintenance writes and static o
 Use uv sync --locked, uv run pytest, uv run ruff check . and uv build for the documented development workflow. [src: README.md#development]
 Opening the panel reads GitHub repository metadata and default-branch files; selecting a file reads its blob. Settings options come from local gh repo edit help and require confirmed changes. [src: src/github_explorer/panel.py; src/github_explorer/runner.py]
 Catalog discovery reads local gh help; discovered aliases and extensions can execute external programs when explicitly requested. [src: src/github_explorer/catalog.py]
-Stop cannot undo completed GitHub actions. [src: README.md#execution-behavior]
+Stop cannot undo completed local or remote actions. [src: README.md#execution-behavior]
 Shell expansion, pipelines and redirects are not supported by command execution. [src: README.md#execution-behavior]
 ## Development and maintenance
 Restart the app after source changes; no service, database or watch server is required. Select the uv .venv interpreter for the integrated-terminal VS Code launch. [src: docs/DEVELOPMENT.md#prerequisites-and-setup]
@@ -46,7 +46,7 @@ No numeric coverage threshold or standalone type-checker is configured. Fixtures
 ## Runtime boundaries
 The application has no listening port or persistent datastore. Operations metadata is not a second executor. [src: docs/ARCHITECTURE.md#context-and-containers; docs/ARCHITECTURE.md#components]
 Local help calls each time out after 30 seconds. Captured mode defaults to 300 seconds; the UI accepts greater than zero through 86400 seconds. Terminal mode has no application timeout. [src: docs/ARCHITECTURE.md#deployment-and-quality-attributes]
-Confirmation is a UX boundary, not a sandbox: installed gh, aliases and extensions retain the user's permissions and may run other programs. [src: docs/SECURITY.md#principals-and-trust-boundaries; docs/SECURITY.md#stride-review]
+Confirmation is a UX boundary, not a sandbox: installed gh/git, aliases, extensions and hooks retain the user's permissions and may run other programs. [src: docs/SECURITY.md#principals-and-trust-boundaries; docs/SECURITY.md#stride-review]
 There is no durable command audit trail, central error file or remote telemetry. Sanitize captured text and arguments before copying or reporting them. [src: docs/SECURITY.md#secrets-input-and-output; docs/SECURITY.md#reporting-and-incidents]
 The package exposes and consumes no MCP tools; project MCP configuration contains empty server maps. [src: docs/MCP.md]
 --help and --version require no gh installation; --list-commands needs local gh help only. The ghx and github-explorer launchers are equivalent. [src: docs/INSTALLATION.md]
@@ -65,7 +65,7 @@ docs/TESTING.md: Testing; Strategy and suites; Writing tests; Targets and CI gat
 docs/archive/README.md: . [src: docs/archive/README.md]
 docs/bootstrap-file-report.md: Bootstrap file report. [src: docs/bootstrap-file-report.md]
 docs/caching-and-optimization.md: Caching and performance; In-memory state; Work scheduling and limits; Profiling; Repository data. [src: docs/caching-and-optimization.md]
-docs/cli-and-operations.md: CLI and operations; User entry points; Maintenance registry. [src: docs/cli-and-operations.md]
+docs/cli-and-operations.md: CLI and operations; User entry points; TUI shortcuts; Maintenance registry. [src: docs/cli-and-operations.md]
 docs/error-monitoring-guide.md: Error diagnosis; Where to look; Failure map; Escalation. [src: docs/error-monitoring-guide.md]
 docs/external-calls.md: External calls; Applicability of the five-standard service contract. [src: docs/external-calls.md]
 docs/integrations-and-assumptions.md: Integrations and assumptions; Runtime boundaries; Assumptions; Development services; Default repository reads. [src: docs/integrations-and-assumptions.md]

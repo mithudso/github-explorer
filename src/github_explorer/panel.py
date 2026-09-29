@@ -21,6 +21,7 @@ from textual.widgets import (
     Static,
     TabbedContent,
     TabPane,
+    Tabs,
     TextArea,
     Tree,
 )
@@ -28,9 +29,105 @@ from textual.worker import get_current_worker
 
 from . import catalog, runner
 
+ARROW_BINDINGS = [
+    Binding(key, f"navigate('{key}')", show=False, priority=True)
+    for key in ("up", "down", "left", "right")
+]
 
-class CommandConfirm(ModalScreen):
-    BINDINGS = [("escape", "cancel", "Cancel")]
+
+class ArrowNavigation:
+    """Directional focus, with native text, dropdown and tab navigation retained."""
+
+    def check_action(self, action, parameters):
+        if action == "navigate":
+            focused = self.focused
+            direction = parameters[0]
+            if isinstance(focused, TextArea):
+                if not focused.read_only:
+                    return False
+                row, column = focused.cursor_location
+                last_row = focused.document.line_count - 1
+                at_edge = {
+                    "up": row == 0,
+                    "down": row == last_row,
+                    "left": (row, column) == (0, 0),
+                    "right": (row, column) == (last_row, len(focused.document.get_line(last_row))),
+                }
+                if not at_edge[direction]:
+                    return False
+            if isinstance(focused, RichLog):
+                can_scroll = {
+                    "up": focused.scroll_y > 0,
+                    "down": focused.scroll_y < focused.max_scroll_y,
+                    "left": focused.scroll_x > 0,
+                    "right": focused.scroll_x < focused.max_scroll_x,
+                }
+                if can_scroll[direction]:
+                    return False
+            if isinstance(focused, (Input, Tabs)) and direction in {"left", "right"}:
+                return False
+            if focused:
+                for widget in focused.ancestors_with_self:
+                    if isinstance(widget, Select):
+                        if widget.expanded or direction in {"up", "down"}:
+                            return False
+        return super().check_action(action, parameters)
+
+    def action_navigate(self, direction):
+        focused = self.focused
+        if isinstance(focused, Tree):
+            node = focused.cursor_node
+            if node:
+                if direction in {"down", "right"} and node.children and not node.is_expanded:
+                    node.expand()
+                    return
+                if direction == "down" and focused.cursor_line < focused.last_line:
+                    focused.action_cursor_down()
+                    return
+                if direction == "up" and focused.cursor_line > 0:
+                    focused.action_cursor_up()
+                    return
+                if direction == "right" and node.children:
+                    focused.move_cursor(node.children[0])
+                    return
+                if direction == "left":
+                    if node.children and node.is_expanded:
+                        node.collapse()
+                        return
+                    if node.parent:
+                        focused.move_cursor(node.parent)
+                        return
+        self.focus_in_direction(direction)
+
+    def focus_in_direction(self, direction):
+        focused = self.focused
+        if focused is None:
+            self.focus_next()
+            return
+        origin = focused.region
+        horizontal = direction in {"left", "right"}
+        forward = direction in {"right", "down"}
+        candidates = []
+        for widget in self.focus_chain:
+            if widget is focused or not widget.region:
+                continue
+            region = widget.region
+            if horizontal:
+                distance = region.x - origin.right if forward else origin.x - region.right
+                overlap = min(origin.bottom, region.bottom) - max(origin.y, region.y)
+                offset = abs(region.center[1] - origin.center[1])
+            else:
+                distance = region.y - origin.bottom if forward else origin.y - region.bottom
+                overlap = min(origin.right, region.right) - max(origin.x, region.x)
+                offset = abs(region.center[0] - origin.center[0])
+            if distance >= 0:
+                candidates.append(((overlap <= 0, distance, offset), widget))
+        if candidates:
+            min(candidates, key=lambda candidate: candidate[0])[1].focus()
+
+
+class CommandConfirm(ArrowNavigation, ModalScreen):
+    BINDINGS = [("escape", "cancel", "Cancel"), *ARROW_BINDINGS]
     DEFAULT_CSS = """
     CommandConfirm { align: center middle; }
     CommandConfirm > Vertical { width: 100; max-width: 95%; height: auto;
@@ -39,15 +136,17 @@ class CommandConfirm(ModalScreen):
     CommandConfirm Horizontal { height: 3; }
     """
 
-    def __init__(self, invocation: runner.Invocation, interactive: bool):
+    def __init__(self, invocation: runner.Invocation, interactive: bool, hint: str = ""):
         super().__init__()
         self.invocation, self.interactive = invocation, interactive
+        self.hint = hint
 
     def compose(self) -> ComposeResult:
         with Vertical():
-            yield Label(
-                "Run GitHub command in terminal?" if self.interactive else "Run GitHub command?"
-            )
+            name = "Git" if self.invocation.program == "git" else "GitHub"
+            yield Label(f"Run {name} command{' in terminal' if self.interactive else ''}?")
+            if self.hint:
+                yield Static(self.hint, markup=False)
             yield TextArea(self.invocation.preview, read_only=True)
             with Horizontal():
                 yield Button("Run", variant="primary", id="gh-confirm-run")
@@ -62,10 +161,10 @@ class CommandConfirm(ModalScreen):
         self.dismiss(False)
 
 
-class RepoSettings(ModalScreen):
+class RepoSettings(ArrowNavigation, ModalScreen):
     """Edit CLI-discovered options against a repository identity frozen on load."""
 
-    BINDINGS = [("escape", "cancel", "Close")]
+    BINDINGS = [("escape", "cancel", "Close"), *ARROW_BINDINGS]
     DEFAULT_CSS = """
     RepoSettings { align: center middle; }
     RepoSettings > Vertical { width: 110; max-width: 95%; height: 90%;
@@ -183,15 +282,20 @@ class RepoSettings(ModalScreen):
         self.executor.cancel()
 
 
-class GitHubPanel(Screen):
+class GitHubPanel(ArrowNavigation, Screen):
     """Push onto any Textual 8 App; Escape returns to the host TUI.
 
-    repo_path is the actual working directory used for gh. repo is an optional
+    repo_path is the actual working directory used for gh and git. repo is an optional
     OWNER/REPO or HOST/OWNER/REPO GH_REPO override. Entry reads local help and
     remote repository files. Neither commands nor outputs are persisted to disk.
     """
 
-    BINDINGS = [Binding("escape", "close", "Back", priority=True)]
+    BINDINGS = [
+        Binding("escape", "close", "Back", priority=True),
+        *ARROW_BINDINGS,
+        *(Binding(action.key, f"quick_command('{action.id}')", action.label, priority=True)
+          for action in catalog.QUICK_ACTIONS),
+    ]
     DEFAULT_CSS = """
     GitHubPanel { background: $background; padding: 0 1; }
     GitHubPanel #gh-title { height: 2; text-style: bold; color: $accent; }
@@ -211,6 +315,10 @@ class GitHubPanel(Screen):
     GitHubPanel #gh-log { height: 1fr; }
     GitHubPanel #gh-status { height: 2; color: $text-muted; }
     GitHubPanel #gh-buttons { height: 6; layout: grid; grid-size: 4; }
+    GitHubPanel #gh-quick-title { height: 1; color: $accent; }
+    GitHubPanel #gh-quick-buttons { height: 2; layout: grid; grid-size: 6;
+        grid-rows: 1; grid-gutter: 0 1; }
+    GitHubPanel #gh-quick-buttons Button { height: 1; min-width: 0; }
     GitHubPanel Button { min-width: 10; width: 1fr; }
     GitHubPanel #gh-flag { width: 45%; }
     GitHubPanel #gh-timeout { width: 18; }
@@ -247,10 +355,10 @@ class GitHubPanel(Screen):
                 yield Input(placeholder="Find a repository file…", id="gh-file-search")
                 yield Static("Loading repository files…", id="gh-file-status", markup=False)
                 yield Tree("Repository files", id="gh-files")
-                yield Input(placeholder="Search every gh command…", id="gh-search")
-                yield Tree("GitHub CLI", id="gh-tree")
+                yield Input(placeholder="Search gh and Git commands…", id="gh-search")
+                yield Tree("Commands · gh + git", id="gh-tree")
             with Vertical(id="gh-detail"):
-                yield Label("Command · edit arguments or enter any gh command")
+                yield Label("Command · enter gh or git commands and arguments")
                 yield TextArea("gh repo view", id="gh-command")
                 with Horizontal(classes="gh-row"):
                     yield Select([], prompt="Add a flag", id="gh-flag")
@@ -286,11 +394,26 @@ class GitHubPanel(Screen):
             yield Button("Reload catalog", id="gh-reload")
             yield Button("Copy output", id="gh-copy")
             yield Button("Clear output", id="gh-clear")
+        yield Static("Common actions · buttons and F1–F12 open a confirmation", id="gh-quick-title")
+        with Horizontal(id="gh-quick-buttons"):
+            for action in catalog.QUICK_ACTIONS:
+                yield Button(
+                    f"{action.key.upper()} {action.label}", id=f"quick-{action.id}",
+                    compact=True, tooltip=f"{' '.join(action.argv)} — {action.description}",
+                )
 
     def on_mount(self):
         self.load_commands()
         self.refresh_files()
         self.query_one("#gh-files", Tree).focus()
+
+    def on_resize(self, event):
+        if not self.is_mounted:
+            return
+        columns = 6 if event.size.width >= 110 else 4 if event.size.width >= 76 else 3
+        bar = self.query_one("#gh-quick-buttons", Horizontal)
+        bar.styles.grid_size_columns = columns
+        bar.styles.height = (len(catalog.QUICK_ACTIONS) + columns - 1) // columns
 
     def current_context(self):
         return runner.prepare(
@@ -421,7 +544,7 @@ class GitHubPanel(Screen):
         self.commands = commands
         self.filter_commands()
         self.status(
-            f"{len(commands)} commands from installed gh. Account and organization commands retain their normal scope."
+            f"{len(commands)} gh commands plus local Git shortcuts. F1–F12: common actions."
         )
 
     def status(self, text):
@@ -432,23 +555,31 @@ class GitHubPanel(Screen):
         query = self.query_one("#gh-search", Input).value.casefold()
         tree = self.query_one("#gh-tree", Tree)
         tree.clear()
-        nodes = {(): tree.root}
-        for command in self.commands:
-            if query not in f"{command.name} {command.summary}".casefold():
+        nodes = {("gh", ()): tree.root}
+        for command in [*self.commands, *catalog.git_commands()]:
+            if query not in f"{command.program} {command.name} {command.summary}".casefold():
                 continue
+            program = command.program
+            if (program, ()) not in nodes:
+                nodes[(program, ())] = tree.root.add(Text("Git · local checkout"), expand=bool(query))
             for depth in range(1, len(command.path) + 1):
                 path = command.path[:depth]
-                if path not in nodes:
-                    nodes[path] = nodes[path[:-1]].add(Text(path[-1]), expand=bool(query))
-            nodes[command.path].data = command
+                if (program, path) not in nodes:
+                    nodes[(program, path)] = nodes[(program, path[:-1])].add(Text(path[-1]), expand=bool(query))
+            nodes[(program, command.path)].data = command
         tree.root.expand()
 
     @on(Tree.NodeSelected, "#gh-tree")
     def choose_command(self, event: Tree.NodeSelected):
         if not isinstance(event.node.data, catalog.Command):
             return
-        command = self.selected_command = event.node.data
-        self.query_one("#gh-command", TextArea).load_text(shlex.join(["gh", *command.path]))
+        self.show_command(event.node.data)
+
+    def show_command(self, command):
+        self.selected_command = command
+        self.query_one("#gh-command", TextArea).load_text(
+            shlex.join([command.program, *command.path, *command.default_args])
+        )
         self.query_one("#gh-help", TextArea).load_text(command.help)
         self.query_one("#gh-flag", Select).set_options(
             [
@@ -457,6 +588,28 @@ class GitHubPanel(Screen):
             ]
         )
         self.query_one("#gh-tabs", TabbedContent).active = "gh-help-tab"
+
+    def action_quick_command(self, action_id: str):
+        if self.app.screen is not self:
+            return
+        if self.busy:
+            self.status("A command is running. Stop it before starting another.")
+            return
+        action = next((item for item in catalog.QUICK_ACTIONS if item.id == action_id), None)
+        if action is None:
+            return
+        command = next((item for item in [*self.commands, *catalog.git_commands()]
+                        if item.program == action.argv[0]
+                        and item.path == action.argv[1:1 + len(item.path)]
+                        and len(item.path) == (1 if item.program == "git" else 2)), None)
+        if command:
+            self.show_command(command)
+        else:
+            self.show_command(catalog.Command(
+                action.argv[1:], action.description, action.description, program=action.argv[0],
+            ))
+        self.query_one("#gh-command", TextArea).load_text(shlex.join(action.argv))
+        self.request_run(action.interactive, hint=action.description)
 
     def append_arguments(self, *args):
         command = self.query_one("#gh-command", TextArea)
@@ -468,6 +621,8 @@ class GitHubPanel(Screen):
         action = event.button.id
         if action == "gh-close":
             self.action_close()
+        elif action and action.startswith("quick-"):
+            self.action_quick_command(action.removeprefix("quick-"))
         elif action == "gh-refresh-files":
             self.refresh_files()
         elif action == "gh-settings":
@@ -483,7 +638,7 @@ class GitHubPanel(Screen):
         elif action == "gh-stop":
             if self.runner:
                 self.runner.cancel()
-                self.status("Stopping command… Completed GitHub actions are not undone.")
+                self.status("Stopping command… Completed actions are not undone.")
         elif action == "gh-reload":
             if not self.busy:
                 self.repo_path = (
@@ -509,7 +664,10 @@ class GitHubPanel(Screen):
                 # Use only the catalog command path, not arbitrary entered arguments.
                 if self.selected_command:
                     self.query_one("#gh-command", TextArea).load_text(
-                        shlex.join(["gh", *self.selected_command.path, "--help"])
+                        shlex.join([
+                            self.selected_command.program, *self.selected_command.path,
+                            "-h" if self.selected_command.program == "git" else "--help",
+                        ])
                     )
                     self.request_run(False)
         elif action in {"gh-run", "gh-terminal"}:
@@ -523,7 +681,7 @@ class GitHubPanel(Screen):
                 self.query_one("#gh-log", RichLog).clear()
                 self.last_result = None
 
-    def request_run(self, interactive):
+    def request_run(self, interactive, hint=""):
         if self.busy:
             self.status("A command is running. Stop it before starting another.")
             return
@@ -540,7 +698,7 @@ class GitHubPanel(Screen):
             self.status(str(exc))
             return
         self.app.push_screen(
-            CommandConfirm(invocation, interactive),
+            CommandConfirm(invocation, interactive, hint),
             lambda yes: self.start_command(invocation, interactive, timeout) if yes else None,
         )
 
@@ -553,6 +711,8 @@ class GitHubPanel(Screen):
         self.query_one("#gh-stop", Button).disabled = interactive
         self.query_one("#gh-run", Button).disabled = True
         self.query_one("#gh-terminal", Button).disabled = True
+        for button in self.query("#gh-quick-buttons Button"):
+            button.disabled = True
         self.query_one("#gh-tabs", TabbedContent).active = "gh-output-tab"
         self.query_one("#gh-log", RichLog).clear()
         self.write_output(invocation.preview)
@@ -588,6 +748,8 @@ class GitHubPanel(Screen):
         self.query_one("#gh-stop", Button).disabled = True
         self.query_one("#gh-run", Button).disabled = False
         self.query_one("#gh-terminal", Button).disabled = False
+        for button in self.query("#gh-quick-buttons Button"):
+            button.disabled = False
         suffix = " · cancelled" if result.cancelled else " · timed out" if result.timed_out else ""
         if result.truncated:
             suffix += " · captured output limited to 2 million characters"

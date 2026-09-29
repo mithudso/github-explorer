@@ -1,7 +1,7 @@
 # github-explorer — executable inventory
-> Source: . · https://github.com/mithudso/github-explorer @ 360b0c8 dirty
+> Source: . · https://github.com/mithudso/github-explorer @ 4e571cb dirty
 > Generated: 2026-09-29 by crawl-repo-to-llms v1.2.0
-> Census: 75 enumerated / 20 deep-read / 55 shallow · partial: remaining metadata cards shallow; no index probes
+> Census: 77 enumerated / 22 deep-read / 55 shallow · partial: remaining metadata cards shallow; no index probes
 
 ## Entrypoints
 `github-explorer` → `github_explorer.__main__:main`. [src: pyproject.toml#project.scripts]
@@ -25,7 +25,7 @@ Parser definition in scripts/generate_ops_registry_doc.py. [src: scripts/generat
 ```python
 parser.add_argument("--check", action="store_true", help="Fail if generated files differ")
 ```
-Parser definition in scripts/generate_repo_indexes.py. [src: scripts/generate_repo_indexes.py:543]
+Parser definition in scripts/generate_repo_indexes.py. [src: scripts/generate_repo_indexes.py:555]
 ```python
 parser.add_argument("--refresh", action="store_true", help="Replace this generator's existing dossier")
 ```
@@ -65,7 +65,7 @@ src/github_explorer/catalog.py references environment names: GH_PAGER, NO_COLOR,
 src/github_explorer/panel.py references environment names: GH_REPO. [src: src/github_explorer/panel.py]
 src/github_explorer/runner.py references environment names: GH_FORCE_TTY, GH_PAGER, GH_PROMPT_DISABLED, GH_REPO, NO_COLOR, PAGER. [src: src/github_explorer/runner.py]
 The child process inherits the caller's environment; inherited credentials are not enumerated or persisted by this generator. [src: src/github_explorer/runner.py]
-GH_REPO is cleared from the inherited environment, then set from the selected repository when nonempty. [src: src/github_explorer/runner.py#Invocation.environment]
+GH_REPO is cleared, then set from a nonempty selected repository only for gh; direct Git uses the local checkout configuration. [src: src/github_explorer/runner.py#Invocation.environment]
 Captured mode sets GH_PROMPT_DISABLED=1, GH_PAGER=cat, PAGER=cat, NO_COLOR=1 and removes GH_FORCE_TTY. Interactive mode retains normal prompt behavior. [src: src/github_explorer/runner.py#Invocation.environment]
 Catalog help sets GH_PAGER=cat, PAGER=cat and NO_COLOR=1. [src: src/github_explorer/catalog.py#help_text]
 

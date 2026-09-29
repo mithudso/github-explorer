@@ -4,8 +4,8 @@
 
 GitHub Explorer is a local terminal application for a person using an installed
 GitHub CLI. It supplies discovery, argument editing, confirmation, and output
-handling. GitHub CLI owns authentication, API access, Git operations, aliases, and
-extensions. The application has no listening port or persistent datastore.
+handling. GitHub CLI owns GitHub authentication, API access, aliases and extensions.
+Direct Git commands use installed Git and the local checkout configuration. The application has no listening port or persistent datastore.
 
 ```text
 Person / terminal
@@ -16,7 +16,7 @@ GitHubPanel --- catalog.load_catalog --- gh help reference / gh --help
         |
 CommandConfirm --- runner.prepare --- CommandRunner / run_interactive
                                         |
-                                  installed gh process
+                                  installed gh or git process
                                         |
                        checkout / GitHub / user-installed tools
 ```
@@ -28,7 +28,9 @@ and extensions can perform actions beyond a repository. See [security](SECURITY.
 
 `__main__.py` validates startup options. `app.py` mounts the reusable screen.
 `panel.py` owns widgets and background workers. `catalog.py` parses local help into
-command/flag records, including settings from `gh repo edit --help`. `runner.py`
+command/flag records, including settings from `gh repo edit --help`, and declares
+curated Git commands and `QUICK_ACTIONS`. `ArrowNavigation` in `panel.py` handles
+spatial focus and tree expansion while preserving native text/dropdown behavior. `runner.py`
 owns invocation context, subprocess lifecycle, repository metadata/tree reads and
 bounded blob previews.
 `operations.py` describes these and clipboard boundaries for generated maintenance metadata;
@@ -42,7 +44,8 @@ it is not a second command executor. [Components](COMPONENTS.md) lists APIs.
    Git tree one directory at a time. File selection reads a blob by immutable SHA.
    Stale or cancelled workers cannot replace a newer repository or preview.
 4. CLI selection loads cached help; argument widgets quote each appended argument.
-5. Run or Terminal prepares argv and shows the exact directory/repository/command.
+5. Run, Terminal, a shortcut button or F1–F12 prepares argv and shows the exact
+   directory/repository/command. Git ignores the GH_REPO override; the preview says so.
 6. Confirmation starts execution. Captured mode streams bounded output; terminal
    mode suspends Textual and attaches the child to the terminal.
 7. Completion updates the screen. Stop requests cancellation in captured mode.
@@ -50,7 +53,7 @@ it is not a second command executor. [Components](COMPONENTS.md) lists APIs.
 
 ## Deployment and quality attributes
 
-One Python 3.11+ environment runs on macOS or Linux with `gh` on PATH. Textual 8
+One Python 3.11+ environment runs on macOS or Linux with `gh` and `git` on PATH. Textual 8
 and Rich are installed from the Python dependency metadata. Terminal layout is
 most comfortable around 120×40 or larger. There is no throughput/latency SLA.
 Help subprocesses have a 30-second timeout each. Captured commands default to

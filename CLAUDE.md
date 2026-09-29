@@ -23,13 +23,14 @@ uv run python scripts/generate_ops_registry_doc.py --check
 uv run python scripts/check_doc_indexes.py
 ```
 
-The app requires `gh` on PATH. Fixture tests do not require GitHub authentication.
+The app requires `gh` on PATH and uses `git` on PATH for local Git commands. Fixture tests do not require GitHub authentication.
 There is no separate type-checker or service to start.
 
 ## Runtime architecture
 
 `__main__.py` parses CLI options, `app.py` hosts `GitHubPanel` from `panel.py`,
-`catalog.py` reads local `gh` help, and `runner.py` executes confirmed argv.
+`catalog.py` reads local `gh` help and defines curated Git shortcuts; `runner.py`
+executes confirmed `gh` or `git` argv. `panel.py` owns directional navigation.
 The panel supports embedding in another Textual 8 app. No server, database, or
 background service runs. See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
 

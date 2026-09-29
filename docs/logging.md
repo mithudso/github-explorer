@@ -2,7 +2,8 @@
 
 ## Current approach
 
-The application exposes status messages and captured stdout/stderr in the TUI.
+The application exposes Git/GitHub status messages and captured stdout/stderr in the TUI.
+Shortcut previews use the same session-local output handling as manually entered commands.
 `CommandRunner` returns exit status, cancellation/timeout/truncation flags, and
 bounded captured text. CLI startup failures are printed to stderr. These surfaces
 are session-local; no application JSONL sink, rotating log file, remote collector,

@@ -4,7 +4,7 @@ Use `uv sync --locked`, `uv run pytest`, `uv run ruff check .` and `uv build`.
 Keep CLI discovery in catalog.py, execution in runner.py, the reusable screen in
 panel.py and the standalone host in app.py. Public exports belong in __init__.py.
 
-Discover commands using local gh help only. Never execute discovered aliases or
+Discover gh commands using local help only; keep curated Git shortcuts in catalog.py. Never execute discovered aliases or
 extensions during catalog loading. Execute argv without a shell. Preserve command
 previews, explicit execution, cancellation/timeouts and repository context.
 Do not persist command output or credentials. Use fixture commands in tests;

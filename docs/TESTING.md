@@ -11,6 +11,7 @@ headless Textual interactions. It does not mutate live GitHub data.
 | Runner | `uv run pytest tests/test_runner.py` | Exact argv/context, capture, exit status, cancellation, timeout, limits, terminal delegation |
 | CLI | `uv run pytest tests/test_cli.py` | Help/version, invalid context, missing gh, JSON inventory, standalone host |
 | Panel | `uv run pytest tests/test_panel.py` | Confirmation/cancel, argument editing, captured/terminal execution, stop, embed dismissal |
+| Shortcuts/navigation | `uv run pytest tests/test_shortcuts.py tests/test_navigation.py` | All twelve buttons/hotkeys, no execution before confirmation, Git scope, responsive bar, tree arrows, directional focus, dropdowns and editing |
 | Repository | `uv run pytest tests/test_repository.py tests/test_repository_panel.py` | Read-only metadata/trees/blobs, errors, host context, file browser, settings selection/cancel/confirm and stale reads |
 | Maintenance | `uv run pytest tests/test_maintenance.py tests/test_doc_indexes.py` | Rotation safety, metadata drift, index generation, private-file exclusions |
 | All tests | `uv run pytest` | Every collected test under `tests/`, including maintenance tooling tests |

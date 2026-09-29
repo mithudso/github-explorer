@@ -2,7 +2,7 @@
 
 ## Prerequisites
 
-Use macOS or Linux, Python 3.11+, `uv`, a terminal, and GitHub CLI (`gh`) on PATH.
+Use macOS or Linux, Python 3.11+, `uv`, a terminal, GitHub CLI (`gh`), and Git (`git`) on PATH.
 No hardware minimum is measured; a 120-column by 40-row terminal is recommended
 for the layout. No server, database, Node.js runtime, or MCP server is required.
 

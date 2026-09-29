@@ -24,10 +24,67 @@ class Command:
     help: str
     flags: tuple[Flag, ...] = ()
     external: bool = False
+    program: str = "gh"
+    default_args: tuple[str, ...] = ()
 
     @property
     def name(self) -> str:
         return " ".join(self.path)
+
+
+@dataclass(frozen=True)
+class QuickAction:
+    id: str
+    key: str
+    label: str
+    argv: tuple[str, ...]
+    description: str
+    interactive: bool = False
+
+
+QUICK_ACTIONS = (
+    QuickAction("status", "f1", "Status", ("git", "status", "--short", "--branch"),
+                "Show local branch, staged files and working-tree changes."),
+    QuickAction("pull", "f2", "Pull", ("git", "pull", "--ff-only"),
+                "Pull from the checkout's configured upstream; refuse divergent history."),
+    QuickAction("push", "f3", "Push", ("git", "push"),
+                "Push using this checkout's configured remote and push settings; no force flag."),
+    QuickAction("fetch", "f4", "Fetch", ("git", "fetch"),
+                "Fetch the checkout's configured remote without merging."),
+    QuickAction("diff", "f5", "Diff", ("git", "diff"),
+                "Show unstaged local changes. Add --staged to inspect staged changes."),
+    QuickAction("stage", "f6", "Stage", ("git", "add", "--patch"),
+                "Interactively choose tracked-file changes to stage. Use git add -- PATH for new files.", True),
+    QuickAction("commit", "f7", "Commit", ("git", "commit"),
+                "Commit already-staged changes; use your configured editor in the terminal.", True),
+    QuickAction("pr", "f8", "PR", ("gh", "pr", "create"),
+                "Create a pull request with CLI prompts for title, body and branches.", True),
+    QuickAction("co", "f9", "CO", ("gh", "pr", "checkout"),
+                "Choose and check out a pull request. For a local branch, enter git switch BRANCH.", True),
+    QuickAction("merge", "f10", "Merge", ("gh", "pr", "merge"),
+                "Merge the current branch's PR; choose the merge strategy in the terminal.", True),
+    QuickAction("prs", "f11", "PR List", ("gh", "pr", "list"),
+                "List open pull requests for the selected GitHub repository."),
+    QuickAction("checks", "f12", "Checks", ("gh", "pr", "checks"),
+                "Show checks for the current branch's PR; add a PR number to select another."),
+)
+
+
+def git_commands() -> list[Command]:
+    """Curated Git shortcuts, not discovered aliases or an expanded gh catalog."""
+    presets = [(action.argv, action.description) for action in QUICK_ACTIONS if action.argv[0] == "git"]
+    presets.extend([
+        (("git", "switch"), "Switch local branches: append a branch name, or -c NEW_BRANCH."),
+        (("git", "merge"), "Merge a local branch: append a branch name; use Terminal for editor prompts."),
+        (("git", "log", "--oneline", "-20"), "Show the last 20 commits in the local checkout."),
+    ])
+    return [Command(
+        (argv[1],), description,
+        f"{' '.join(argv)}\n\n{description}\n\n"
+        "Git uses the working directory and its configured remotes. The GitHub repository "
+        "override does not apply. Edit arguments before Run or Terminal. Fetch help shows local usage.",
+        program="git", default_args=argv[2:],
+    ) for argv, description in presets]
 
 
 def flags_from_help(text: str) -> tuple[Flag, ...]:

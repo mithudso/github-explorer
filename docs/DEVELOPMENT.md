@@ -4,7 +4,7 @@
 
 Use Python 3.11 or newer, `uv`, and a Git checkout. The lockfile supplies resolved
 versions; the CI matrix exercises Python 3.11 and 3.14 on macOS and Linux.
-Install GitHub CLI on PATH to run the app. Authenticate with `gh auth login` only
+Install GitHub CLI and Git on PATH to run the app and local Git actions. Authenticate with `gh auth login` only
 for the default repository file browser, settings reads, and commands that need GitHub access. Fixture tests require no account.
 
 ```sh
@@ -55,10 +55,11 @@ requests. There is no automated publication/deployment workflow.
 ## Environment
 
 The application does not load `.env`; [.env.example](../.env.example) documents
-inherited settings. `PATH` resolves `gh`. The repository field or `--repo` supplies
+inherited settings. `PATH` resolves `gh` and `git`. The repository field or `--repo` supplies
 `GH_REPO`; a blank field removes inherited `GH_REPO` for execution. Captured mode
 sets `GH_PROMPT_DISABLED=1`, `GH_PAGER=cat`, `PAGER=cat`, `NO_COLOR=1`, and removes
-`GH_FORCE_TTY`. Help discovery sets the pager/color variables. Terminal mode retains
+`GH_FORCE_TTY`. Direct Git execution always removes `GH_REPO`; captured Git also
+sets `GIT_TERMINAL_PROMPT=0` and `GIT_PAGER=cat`. Help discovery sets the pager/color variables. Terminal mode retains
 normal prompt/TTY settings. Authentication settings belong to GitHub CLI; do not
 record tokens in this repository.
 

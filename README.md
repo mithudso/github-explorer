@@ -1,14 +1,14 @@
 # GitHub Explorer
 
 A standalone terminal workbench for GitHub repositories and the installed GitHub
-CLI. Browse repository files, edit settings, read command help, and run GitHub
-operations without leaving your TUI.
+CLI. Browse repository files, edit settings, read command help, and run Git and
+GitHub operations without leaving your TUI.
 
 Built from the reusable GitHub panel with a public, self-contained Python package.
 
 ## Install and run
 
-Requires Python 3.11+, [GitHub CLI](https://cli.github.com/) on PATH, and a terminal.
+Requires Python 3.11+, [GitHub CLI](https://cli.github.com/) and Git on PATH, and a terminal.
 macOS and Linux are supported. Authenticate using your existing `gh` configuration:
 
 ```sh
@@ -67,6 +67,57 @@ github-explorer --list-commands
 python -m github_explorer --help
 ```
 
+## Common commands and keyboard navigation
+
+The bottom buttons and F1–F12 open the same command preview. Nothing runs until
+**Run** is confirmed. Cancel to edit the populated command before using **Run** or
+**Terminal**. On keyboards that reserve function keys for media controls, use Fn
+with the function key or configure the terminal to send F1–F12.
+
+| Key / button | Command | Mode |
+| --- | --- | --- |
+| F1 Status | `git status --short --branch` | Captured |
+| F2 Pull | `git pull --ff-only` | Captured |
+| F3 Push | `git push` | Captured |
+| F4 Fetch | `git fetch` | Captured |
+| F5 Diff | `git diff` | Captured |
+| F6 Stage | `git add --patch` | Terminal |
+| F7 Commit | `git commit` | Terminal |
+| F8 PR | `gh pr create` | Terminal |
+| F9 CO | `gh pr checkout` | Terminal |
+| F10 Merge | `gh pr merge` | Terminal |
+| F11 PR List | `gh pr list` | Captured |
+| F12 Checks | `gh pr checks` | Captured |
+
+Pull and push belong to Git. Find them under **Git · local checkout** in the
+command tree, alongside switch, merge, log and the other Git shortcuts. Direct Git
+commands use the working directory and its configured remotes; the GitHub repository
+field does not redirect them. Pull refuses divergent history with `--ff-only`.
+Push uses the checkout's configured push settings without adding a force flag.
+
+Stage selects tracked-file changes interactively; use `git add -- PATH` to add new
+files. Commit includes already-staged changes. Diff shows unstaged changes; add
+`--staged` for the index. CO checks out a pull request; use `git switch BRANCH` for a
+local branch. Merge merges the current branch's PR; use `git merge BRANCH` for a
+local merge. Terminal handles prompts and editors for these interactive actions.
+If a captured command needs authentication input, cancel its preview and use Terminal.
+`--list-commands` continues to export only the installed `gh` catalog.
+
+- **Down** expands a collapsed file/command branch. On an expanded branch or leaf,
+  it moves to the next visible item. At the end of a tree, it moves to the control below.
+- **Up** moves to the previous item or the control above the tree.
+- **Right** expands a branch, enters its first child, or moves to the control on the right.
+- **Left** collapses a branch, returns to its parent, or moves to the control on the left.
+- On buttons and other controls, arrows move focus in that direction. Dropdowns
+  open with Up/Down; their arrows and Enter retain normal option selection.
+- Text fields keep Left/Right for editing; Up/Down moves between controls. Multiline
+  editors retain their own cursor navigation. Previews and output scroll within
+  their content; at a boundary, arrows move to nearby controls. **Tab/Shift+Tab**
+  always move between controls. Arrows do not select a file or run a command;
+  use **Enter** to activate the focused item.
+
+Navigation also works in repository settings and command confirmation dialogs.
+
 ## Files and repository settings
 
 The left pane starts with repository files; the CLI tree remains underneath. Expand
@@ -98,14 +149,15 @@ values, especially if a command failed or was cancelled after partial changes.
 
 Captured mode disables prompts, combines stdout/stderr, limits retained output to
 two million characters and supports cancellation/timeouts. Use Terminal when a
-command requires prompts or stdin. Stop cannot undo completed GitHub actions.
+command requires prompts or stdin. Stop cannot undo completed local or remote actions.
 
 Commands run as argument arrays, without shell expansion, redirection or pipelines.
 Use native CLI options such as `--body-file`, `--input`, `--json`, `--jq` or
 `--template`. Installed aliases and extensions retain their own behavior.
 
 The directory controls local checkout actions. The optional repository field sets
-`GH_REPO` for commands that support it. A command's explicit `--repo` takes precedence.
+`GH_REPO` for GitHub CLI commands that support it; direct Git commands ignore it.
+A GitHub CLI command's explicit `--repo` takes precedence.
 Account and organization commands retain their normal scope. Authentication uses
 the installed GitHub CLI; the explorer does not store its own credentials.
 

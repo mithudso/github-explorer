@@ -21,6 +21,14 @@ arguments, then use Run or Terminal and approve the preview. Run captures bounde
 output with timeout/Stop. Terminal supports normal stdin/editors and suspends the
 TUI. No generic `run <operation-id>`, history, or reset CLI is implemented.
 
+## TUI shortcuts
+
+The bottom action bar pairs twelve buttons with F1–F12: Status, Pull, Push, Fetch,
+Diff, Stage, Commit, PR, CO, Merge, PR List and Checks. Each requires confirmation.
+The [command and navigation table](../README.md#common-commands-and-keyboard-navigation)
+documents exact argv, terminal modes and arrow behavior. The Git menu adds curated
+local commands; `--list-commands` still exports only the installed gh catalog.
+
 ## Maintenance registry
 
 `src/github_explorer/operations.py` declares the existing subprocess and clipboard boundaries.
