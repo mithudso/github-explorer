@@ -1,5 +1,31 @@
 # Changelog
 
+## 0.3.0 — 2026-09-29
+
+- Add twelve common Git/GitHub actions as bottom buttons and F1–F12 hotkeys.
+- Add direct Git commands, a searchable local Git menu, and explicit checkout context.
+- Keep preview/confirmation for shortcuts and terminal mode for interactive workflows.
+- Use Down to expand collapsed branches and arrows to navigate trees and nearby controls.
+- Preserve dropdown selection and text editing; support navigation in settings and confirmations.
+
+## 0.2.0 — 2026-09-29
+
+- Show searchable GitHub default-branch files above the CLI tree by default.
+- Preview text files in memory, with explicit binary/size limits and cancellation.
+- Add Repo settings with every installed gh repo edit flag and available current values.
+- Confirm only selected settings changes against a pinned repository and host.
+- Handle empty/inaccessible repositories and reject stale or truncated read results.
+- Use Textual 8 unselected dropdown values in settings and the Add flag control.
+
+## 0.1.1 — 2026-09-29
+
+- Add contributor, architecture, security, operations and troubleshooting docs.
+- Add deterministic static documentation and operation inventories with CI drift checks.
+- Exclude symlinked source directories from generated public documentation.
+- Add safe workflow-log rotation and regression coverage for maintenance tools.
+- Ignore stale cancelled catalog loads and report help timeouts without a traceback.
+- Preserve incomplete UTF-8 output at EOF and reject nonfinite execution timeouts.
+
 ## 0.1.0 — 2026-09-29
 
 - Extract the reusable GitHub panel into a standalone public project.

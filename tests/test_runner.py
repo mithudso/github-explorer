@@ -71,3 +71,45 @@ def test_interactive_uses_normal_terminal(tmp_path, monkeypatch):
     assert runner.run_interactive(command) == 3
     assert "stdin" not in calls[0][1] and "stdout" not in calls[0][1]
     assert calls[0][1]["cwd"] == tmp_path
+
+
+def test_incomplete_utf8_is_replaced_at_eof(tmp_path):
+    chunks = []
+    result = runner.CommandRunner().run(
+        invocation(tmp_path, "import os; os.write(1, b'prefix\\xe2\\x82')"), chunks.append
+    )
+    assert result.output == "prefix\ufffd"
+    assert "".join(chunks) == result.output
+
+
+@pytest.mark.parametrize("timeout", [float("nan"), float("inf"), -1, 0])
+def test_invalid_timeout_cannot_start_a_process(tmp_path, monkeypatch, timeout):
+    monkeypatch.setattr(runner.subprocess, "Popen", lambda *a, **kw: pytest.fail("started"))
+    with pytest.raises(ValueError, match="Timeout"):
+        runner.CommandRunner().run(invocation(tmp_path, "pass"), lambda text: None, timeout)
+
+
+def test_git_context_env_and_literal_arguments(tmp_path, monkeypatch):
+    monkeypatch.setattr(runner, "git_executable", lambda: "/fixture/git")
+    monkeypatch.setenv("GH_REPO", "inherited/repo")
+    monkeypatch.delenv("GIT_TERMINAL_PROMPT", raising=False)
+    command = runner.prepare('git commit -m "literal $(whoami)"', tmp_path, "not a GitHub repo")
+    assert command.argv == ("/fixture/git", "commit", "-m", "literal $(whoami)")
+    assert command.program == "git" and command.repo == ""
+    assert command.cwd == tmp_path.resolve()
+    assert "override does not apply" in command.preview
+    assert "GH_REPO" not in command.environment()
+    assert "GH_REPO" not in command.environment(interactive=True)
+    assert command.environment()["GIT_TERMINAL_PROMPT"] == "0"
+    assert "GIT_TERMINAL_PROMPT" not in command.environment(interactive=True)
+    for text in ["git", "git pull && git push", "git diff > patch"]:
+        with pytest.raises(ValueError):
+            runner.prepare(text, tmp_path)
+    with pytest.raises(ValueError, match="directory"):
+        runner.prepare("git status", tmp_path / "missing")
+
+
+def test_missing_git_is_actionable(tmp_path, monkeypatch):
+    monkeypatch.setattr(runner.shutil, "which", lambda name: None)
+    with pytest.raises(ValueError, match="Git is not installed"):
+        runner.prepare("git status", tmp_path)

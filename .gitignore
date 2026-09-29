@@ -12,3 +12,12 @@ dist/
 !.env.example
 .stele/
 .remember/
+
+# Local state and editor recovery files
+.idea/
+.coverage
+htmlcov/
+*.swp
+*.swo
+*~
+*.rotation-tmp

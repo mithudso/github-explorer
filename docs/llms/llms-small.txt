@@ -1,0 +1,34 @@
+# github-explorer — budget digest
+> Source: . · https://github.com/mithudso/github-explorer @ 2ddcc1b dirty
+> Generated: 2026-09-29 by crawl-repo-to-llms v1.2.0
+> Census: 78 enumerated / 22 deep-read / 56 shallow · partial: remaining metadata cards shallow; no index probes
+
+Package: github-explorer; version: 0.3.0. [src: pyproject.toml]
+Purpose: A standalone terminal workbench for the full installed GitHub CLI. [src: pyproject.toml]
+Requires Python >=3.11. [src: pyproject.toml]
+Runtime dependencies: textual>=8,<9, rich>=13. [src: pyproject.toml]
+
+## Key files
+.github/workflows/test.yml — high. [asserted]
+README.md — high. [asserted]
+pyproject.toml — critical. [asserted]
+src/github_explorer/__init__.py — high. [asserted]
+src/github_explorer/__main__.py — critical. [asserted]
+src/github_explorer/app.py — high. [asserted]
+src/github_explorer/catalog.py — high. [asserted]
+src/github_explorer/operations.py — high. [asserted]
+src/github_explorer/panel.py — high. [asserted]
+src/github_explorer/runner.py — high. [asserted]
+
+## Run and verify
+`github-explorer` → `github_explorer.__main__:main`. [src: pyproject.toml#project.scripts]
+`ghx` → `github_explorer.__main__:main`. [src: pyproject.toml#project.scripts]
+`python -m github_explorer` dispatches the package entrypoint. [src: src/github_explorer/__main__.py]
+`uv sync --locked --python ${{ matrix.python }}`. [src: .github/workflows/test.yml]
+`uv run pytest`. [src: .github/workflows/test.yml]
+`uv run ruff check .`. [src: .github/workflows/test.yml]
+`uv run python scripts/generate_ops_registry_doc.py --check`. [src: .github/workflows/test.yml]
+`uv run python scripts/check_doc_indexes.py`. [src: .github/workflows/test.yml]
+`uv build`. [src: .github/workflows/test.yml]
+
+See llms-full.txt for limitations and llms-executable.txt for exact parser definitions. [src: scripts/generate_repo_indexes.py]

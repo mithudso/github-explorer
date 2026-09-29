@@ -1,0 +1,19 @@
+# github-explorer — routing index
+> Source: . · https://github.com/mithudso/github-explorer @ 2ddcc1b dirty
+> Generated: 2026-09-29 by crawl-repo-to-llms v1.2.0
+> Census: 78 enumerated / 22 deep-read / 56 shallow · partial: remaining metadata cards shallow; no index probes
+
+A static map of the public GitHub Explorer source tree. [src: pyproject.toml]
+
+## Read by task
+- [Architecture and operations](llms-full.txt#architecture)
+- [Conventions and limits](llms-full.txt#conventions-and-gotchas)
+- [Budget digest](llms-small.txt)
+- [Atomic facts](llms-facts.txt)
+- [Files and review cards](llms-filemap.txt)
+- [Index inventory](llms-indexes.txt)
+- [Infrastructure and links](llms-infra.txt)
+- [History](llms-history.txt)
+- [Executable and option inventory](llms-executable.txt)
+- [Machine-readable filemap](filemap.json)
+- [Provenance and exclusions](manifest.json)
