@@ -7,11 +7,13 @@
 3. Search commands and display help in a reusable Textual screen.
 4. Edit raw commands and append separately quoted flags/arguments.
 5. Show the exact argv, working directory, and repository override before execution.
-6. Execute only after confirmation, without an application shell.
+6. Execute user commands and settings changes only after confirmation, without an application shell.
 7. Support captured output with cancellation and timeout, and explicit terminal mode.
 8. Preserve repository context and normal account/organization command scope.
 9. Expose `github-explorer`, `ghx`, module invocation, and local catalog JSON export.
 10. Keep captured output volatile; copy it only on an explicit user action.
+11. Load GitHub default-branch files by default above the existing CLI tree; support search and previews.
+12. Discover all repo edit options from installed help, display available current values, and confirm selected changes.
 
 ## Non-functional requirements
 

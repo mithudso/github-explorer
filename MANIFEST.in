@@ -1,4 +1,5 @@
 # Maintenance tests in the source archive need their scripts and metadata fixtures.
 recursive-include scripts *.py
+recursive-include tests *.py
 include docs/operations-registry.json
 include docs/tool-inventory.json

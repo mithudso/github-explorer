@@ -13,7 +13,10 @@
 | `--repo [HOST/]OWNER/REPO` | Set explicit repository context for supporting commands |
 | `--list-commands` | Read local help and print command/description/external JSON |
 
-With no inventory/help option, the command opens the TUI. Choose a command, edit
+With no inventory/help option, the command opens the TUI and reads the GitHub
+default-branch file list above the CLI catalog. Select files for read-only previews.
+Repo settings opens the CLI-derived form; checked changes require confirmation.
+Choose a command, edit
 arguments, then use Run or Terminal and approve the preview. Run captures bounded
 output with timeout/Stop. Terminal supports normal stdin/editors and suspends the
 TUI. No generic `run <operation-id>`, history, or reset CLI is implemented.

@@ -1,6 +1,6 @@
 # Continuation record
-Version: 7
-Delta: Finish the 0.1.1 bootstrap, close source-symlink privacy gap, verify and commit.
+Version: 9
+Delta: Complete repository files and settings after the retry request.
 
 ## Request and scope
 Create a standalone GitHub Explorer TUI and public mithudso/github-explorer repository.
@@ -15,7 +15,7 @@ concurrent work and remains unchanged. No private dependency or Git history is c
 Use the github_explorer package and github-explorer / ghx executables.
 Retain command discovery from installed gh help, argv execution, explicit command
 previews, cancellation and interactive terminal handoff. Preserve GitHubPanel as
-a reusable screen. No remote operation runs on opening the app.
+a reusable screen. Opening the app now reads remote repository metadata and default-branch files; mutations require confirmation.
 
 ## Verification
 13 tests passed: CLI validation and catalog export, standalone launch/quit,
@@ -85,3 +85,19 @@ previously installed github-panel and skillsx commands remain unchanged.
 - Release: retain the pending 0.1.1 bump; this continuation completes the same unreleased bootstrap. prompts.md is version 5; memory.md is version 7.
 - Final artifacts: docs/bootstrap-file-report.md lists all 81 changed files. The static dossier was regenerated and its drift check passed. All 38 tests also passed from the extracted source archive with imports verified against that archive. The commit containing this entry records the complete bootstrap.
 - Remaining: no required implementation work. The local commit has not been pushed; remote CI and a real-terminal interactive smoke check remain unverified. Semantic indexing remains paused.
+
+## v0.2.0 - 2026-09-29 — Repository files and settings
+- Request: show repository files above the existing CLI tree by default; add editable repository settings.
+- Baseline: clean worktree at 360b0c8; 38 tests; version 0.1.1.
+- Design: default to GitHub default-branch files, with search and an in-memory preview. Resolve repository and host through gh. Keep CLI catalog and its existing command execution controls.
+- Design: discover every repo edit flag from local help, show current REST metadata where available, and submit only explicitly selected changes through the command confirmation dialog. Visibility changes require explicit CLI consequence acceptance.
+- Constraint: automatic startup reads are now authorized by the requested file browser. Mutations still require confirmation. No output, content, credentials, or settings snapshots are persisted.
+- Risks: API failures, empty repositories, truncated trees, stale worker results, host/repository context drift, and unsupported setting values need explicit behavior and fixture coverage.
+- Completed: default remote file tree, search, bounded text previews, refresh/context handling, stale-read cancellation guards, and RepoSettings with all locally discovered edit flags. Settings mutations use the existing confirmation/captured runner and pin an explicit repository URL.
+- Completed: current REST value mapping, explicit boolean false and text clearing, visibility/squash dependency validation, and network-free UI fixtures. Expanded architecture, usage, security, testing, operation metadata and static documentation indexes. Version is 0.2.0 in package metadata and lockfile.
+- Validation: uv sync --locked, all 57 pytest tests, Ruff and uv build passed. Live read-only smoke loaded 21 remote default-branch files, decoded README and opened all 23 repo edit settings at 120x40. No live setting mutations were performed; mutation behavior is verified with fixtures.
+- Finalization: operation/static index generation and drift checks passed. Include shared test fixtures in the source archive through MANIFEST.in; archive imports and all 57 tests were verified against the extracted 0.2.0 package. Git history identifies the commit containing this completion record.
+- Remaining: no required implementation work. The commit is local; remote CI has not run. The file list reflects the remote default branch, so unpushed local changes do not appear there. No Stele project exists for this repository; semantic indexing remains paused.
+
+- Implementation lesson: Textual 8 uses Select.NULL for an unselected value. Select.BLANK resolves to False and caused InvalidSelectValueError: Illegal select value False in RepoSettings.show_settings. Use Select.NULL for settings and the existing Add flag guard; regression coverage includes an unselected boolean and Add flag with no choice.
+- Retry continuation: live read-only UI smoke passed with 21 remote files and all 23 local repo edit flags at 120x40; bottom field and Review changes remained accessible. No GitHub settings were changed. Test retry clicks now wait for the Textual button active animation to end.

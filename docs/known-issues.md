@@ -17,3 +17,12 @@ Update it when a reproducible issue is confirmed or fixed.
 No application error-history file, automatic retries, or rollback of completed
 GitHub mutations is provided. See [the diagnostic runbook](runbooks/troubleshooting.md)
 for failures and [testing](TESTING.md) for test limitations.
+
+## Repository browser and settings boundaries
+
+The browser shows GitHub's default branch, not the local checkout or unpushed
+changes. Large trees require multiple read-only requests and may hit API limits;
+Refresh files retries after the cause is resolved. Previews omit binary/non-UTF-8
+files and blobs larger than 500 KB. Settings values unavailable through the REST
+response are labeled unknown; the user can still select and submit supported CLI
+options. GitHub may reject a setting due to permissions, repository type or policy.

@@ -11,6 +11,7 @@ headless Textual interactions. It does not mutate live GitHub data.
 | Runner | `uv run pytest tests/test_runner.py` | Exact argv/context, capture, exit status, cancellation, timeout, limits, terminal delegation |
 | CLI | `uv run pytest tests/test_cli.py` | Help/version, invalid context, missing gh, JSON inventory, standalone host |
 | Panel | `uv run pytest tests/test_panel.py` | Confirmation/cancel, argument editing, captured/terminal execution, stop, embed dismissal |
+| Repository | `uv run pytest tests/test_repository.py tests/test_repository_panel.py` | Read-only metadata/trees/blobs, errors, host context, file browser, settings selection/cancel/confirm and stale reads |
 | Maintenance | `uv run pytest tests/test_maintenance.py tests/test_doc_indexes.py` | Rotation safety, metadata drift, index generation, private-file exclusions |
 | All tests | `uv run pytest` | Every collected test under `tests/`, including maintenance tooling tests |
 
@@ -50,3 +51,6 @@ CI matrix. Terminal-mode interaction needs manual verification in a real termina
 A safe local smoke check is `uv run github-explorer --list-commands`; this reads
 local CLI help. Optional live smoke commands must be read-only, explicitly selected,
 and must not persist sensitive output. See [logging](logging.md) for privacy rules.
+
+UI tests use `ui_repository` from `tests/conftest.py` to replace automatic GitHub reads.
+Tests never require network credentials or mutate real repository settings.

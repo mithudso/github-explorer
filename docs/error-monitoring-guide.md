@@ -30,3 +30,9 @@ Use [the troubleshooting runbook](runbooks/troubleshooting.md) and file a saniti
 reproduction using the issue template. For suspected credential exposure or a
 vulnerability, follow [security reporting](../.github/SECURITY.md). No on-call or
 response-time SLA is established.
+
+Repository read failures appear next to the file tree or inside Repo settings.
+Check the repository fields, authentication, permissions and GitHub rate limits,
+then refresh explicitly. A truncated directory response is an error, not a complete
+file list. Settings command failures use the Output tab; inspect actual GitHub state
+before retrying because the CLI may have applied some requested changes.

@@ -63,6 +63,7 @@ def test_catalog_timeout_exits_without_traceback(tmp_path, monkeypatch, capsys):
     assert "timed out" in capsys.readouterr().err
 
 
+@pytest.mark.usefixtures("ui_repository")
 async def test_standalone_host_branding_context_and_quit(tmp_path, monkeypatch):
     monkeypatch.setattr(catalog, "load_catalog", lambda path: [])
     app = GitHubExplorer(tmp_path, "owner/repository")

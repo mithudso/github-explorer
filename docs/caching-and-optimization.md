@@ -37,3 +37,11 @@ This prints profiling data and the catalog to the terminal without writing a
 profile artifact. Inspect time spent in help subprocess calls versus parsing.
 Use fixture tests to measure runner/UI changes; avoid benchmarking destructive
 GitHub operations. No performance SLA or benchmark gate is currently configured.
+
+## Repository data
+
+File lists, settings snapshots and the selected preview exist only in memory.
+Refresh files cancels previous reads and reloads the remote default-branch tree.
+Selecting another file cancels the previous preview. Context/worker guards discard
+late results. Each directory uses one GET request; there is no disk cache or retry
+loop. Tree size and GitHub rate limits constrain very large repositories.

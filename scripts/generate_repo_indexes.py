@@ -50,24 +50,24 @@ REVIEWED = {
         "Changing standalone startup, branding or exit behavior.", "GitHubExplorer.__init__, on_mount",
         ["src/github_explorer/panel.py"], "tests/test_cli.py"),
     "src/github_explorer/catalog.py": (
-        "Parse built-in gh help into immutable Command and Flag records.",
+        "Parse built-in gh help into Command and Flag records and derive repository setting arguments.",
         "The UI needs searchable local commands without executing aliases or extensions.",
         "Changing help parsing, external-command classification or discovery errors.",
         "load_catalog → help_text → parse_catalog; flags_from_help", [], "tests/test_catalog.py"),
     "src/github_explorer/runner.py": (
-        "Prepare shell-free argv and run captured or interactive child processes.",
+        "Prepare shell-free argv, run child processes and read GitHub repository metadata, trees and blobs.",
         "Execution shares repository context, bounded capture, cancellation and timeout semantics.",
         "Changing argument handling, subprocess cleanup, output decoding or environment isolation.",
         "prepare → Invocation.environment → CommandRunner.run; run_interactive",
         ["src/github_explorer/catalog.py"], "tests/test_runner.py"),
     "src/github_explorer/panel.py": (
-        "Compose the reusable command browser, argument controls, confirmation and output screen.",
+        "Compose the file browser, CLI controls, repository settings, confirmation and output screen.",
         "One screen connects discovery and execution while keeping explicit user confirmation.",
         "Changing UI actions, asynchronous catalog refresh, command previews or host integration.",
         "GitHubPanel.compose → load_commands/loaded → request_run → start_command/execute; CommandConfirm",
         ["src/github_explorer/catalog.py", "src/github_explorer/runner.py"], "tests/test_panel.py"),
     "src/github_explorer/operations.py": (
-        "Declare four operation metadata records and return independent copies.",
+        "Declare runtime operation metadata records and return independent copies.",
         "Maintainers can document behavior and remediation without triggering discovery or execution.",
         "Changing the public operation inventory, source anchors or remediation guidance.",
         "OPERATIONS; list_operations; get_operation",
@@ -94,6 +94,21 @@ REVIEWED = {
         "Missing, changed or deleted sources must make stale documentation visible in CI.",
         "Changing drift detection, missing-output diagnostics or snapshot handling.", "check; main",
         ["scripts/generate_repo_indexes.py"], "tests/test_doc_indexes.py"),
+    "tests/conftest.py": (
+        "Provide network-free repository fixtures for UI tests.",
+        "Automatic startup reads must never access a real account in tests.",
+        "Changing shared UI repository fixtures.", "ui_repository",
+        ["src/github_explorer/runner.py"], "tests/test_repository_panel.py"),
+    "tests/test_repository.py": (
+        "Verify repository identity, trees, previews, read failures and selected setting arguments.",
+        "Read requests and settings argv need exact host/context and side-effect boundaries.",
+        "Changing repository read helpers or setting discovery.", "FixtureRunner; repository",
+        ["src/github_explorer/runner.py", "src/github_explorer/catalog.py"], "tests/test_repository.py"),
+    "tests/test_repository_panel.py": (
+        "Exercise default file browsing, settings confirmation and stale repository reads.",
+        "User actions must preserve the resolved target and cancel without mutations.",
+        "Changing files and settings UI or worker lifecycle.", "test_settings_current_values_cancel_and_confirm_exact_changes",
+        ["src/github_explorer/panel.py"], "tests/test_repository_panel.py"),
     "tests/test_catalog.py": (
         "Test nested help parsing, alias classification, flags and the built-in-only discovery calls.",
         "Fixtures enforce discovery without executing discovered commands.",
@@ -370,6 +385,7 @@ def render(root: Path, metadata: dict | None = None) -> dict[str, str]:
     architecture = ["## Architecture", *facts, "", "## Operations", *commands,
                     "", "## Conventions and gotchas",
                     "Use uv sync --locked, uv run pytest, uv run ruff check . and uv build for the documented development workflow. [src: README.md#development]",
+                    "Opening the panel reads GitHub repository metadata and default-branch files; selecting a file reads its blob. Settings options come from local gh repo edit help and require confirmed changes. [src: src/github_explorer/panel.py; src/github_explorer/runner.py]",
                     "Catalog discovery reads local gh help; discovered aliases and extensions can execute external programs when explicitly requested. [src: src/github_explorer/catalog.py]",
                     "Stop cannot undo completed GitHub actions. [src: README.md#execution-behavior]",
                     "Shell expansion, pipelines and redirects are not supported by command execution. [src: README.md#execution-behavior]",

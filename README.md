@@ -1,7 +1,8 @@
 # GitHub Explorer
 
-A standalone terminal workbench for the full installed GitHub CLI. Browse commands,
-read their help, build arguments, and run GitHub operations without leaving your TUI.
+A standalone terminal workbench for GitHub repositories and the installed GitHub
+CLI. Browse repository files, edit settings, read command help, and run GitHub
+operations without leaving your TUI.
 
 Built from the reusable GitHub panel with a public, self-contained Python package.
 
@@ -36,6 +37,10 @@ or larger for the most comfortable layout.
 
 ## What it does
 
+- Browse and search default-branch files from GitHub above the CLI command tree.
+  Select a file for a read-only text preview; local uncommitted files are not shown.
+- Open **Repo settings** to see every option exposed by local `gh repo edit --help`,
+  view current values where available, and review selected changes before applying.
 - Discover and search the installed `gh` command catalog, including repository,
   PR, issue, Actions, release, project, discussion, API and administration commands.
 - Select flags and add their values or positional arguments. Edit the command
@@ -50,9 +55,9 @@ or larger for the most comfortable layout.
 
 Select a command in the tree to open its help and populate the command editor.
 Choose **Run** or **Terminal** when ready. **Escape** or **Quit** closes the app.
-The catalog comes from local `gh help reference` and `gh --help`; opening the app
-does not run GitHub API requests or repository actions. Command availability follows
-your installed GitHub CLI version. Raw entry supports commands and extension
+The command catalog comes from local `gh help reference` and `gh --help`. Opening
+the app also makes read-only GitHub requests for the repository and its default-branch
+file tree. Command availability follows your installed GitHub CLI version. Raw entry supports commands and extension
 subcommands that the generated reference does not list.
 
 For shell-friendly inventory without opening the TUI:
@@ -61,6 +66,33 @@ For shell-friendly inventory without opening the TUI:
 github-explorer --list-commands
 python -m github_explorer --help
 ```
+
+## Files and repository settings
+
+The left pane starts with repository files; the CLI tree remains underneath. Expand
+folders or use **Find a repository file** to reveal matching paths. The default
+**Repository files** tab previews the selected blob from GitHub in memory. Binary,
+non-UTF-8 and files larger than 500 KB have an explanatory placeholder. Submodule
+entries show their commit. Empty repositories show zero files; failed reads show
+an error without disabling the CLI tree.
+
+Press Enter after changing the working directory or repository field, or click
+**Refresh files**. This reads the GitHub default branch, even when your local
+checkout is on a different branch. Unpushed changes appear after pushing and refreshing.
+
+**Repo settings** loads the installed CLI's editable flags and current GitHub values.
+Check **Change** for each option to submit, then choose **Review changes**. Only
+checked options enter the command; empty description/homepage fields clear those
+values, and boolean options support both true and false. Unknown or permission-hidden
+values are labeled rather than assumed false. Topic actions accept comma-separated
+names. Unsupported values, organization policies and permissions are enforced by GitHub.
+
+Review the exact repository, directory and argv, then **Run** or **Cancel**. Cancelling
+keeps the form and its draft values. Visibility changes also require selecting and
+enabling `--accept-visibility-change-consequences`. Changing the squash message
+format also requires selecting and enabling `--enable-squash-merge`. The dialog pins its target when
+loaded. After execution the file browser refreshes; reopen settings to read current
+values, especially if a command failed or was cancelled after partial changes.
 
 ## Execution behavior
 

@@ -1,10 +1,10 @@
 # github-explorer — static repository reference
-> Source: . · https://github.com/mithudso/github-explorer @ 11a8a5b dirty
+> Source: . · https://github.com/mithudso/github-explorer @ 360b0c8 dirty
 > Generated: 2026-09-29 by crawl-repo-to-llms v1.2.0
-> Census: 72 enumerated / 17 deep-read / 55 shallow · partial: remaining metadata cards shallow; no index probes
+> Census: 75 enumerated / 20 deep-read / 55 shallow · partial: remaining metadata cards shallow; no index probes
 
 ## Architecture
-Package: github-explorer; version: 0.1.1. [src: pyproject.toml]
+Package: github-explorer; version: 0.2.0. [src: pyproject.toml]
 Purpose: A standalone terminal workbench for the full installed GitHub CLI. [src: pyproject.toml]
 Requires Python >=3.11. [src: pyproject.toml]
 Runtime dependencies: textual>=8,<9, rich>=13. [src: pyproject.toml]
@@ -32,6 +32,7 @@ tests/test_maintenance.py: Regression checks for maintenance writes and static o
 
 ## Conventions and gotchas
 Use uv sync --locked, uv run pytest, uv run ruff check . and uv build for the documented development workflow. [src: README.md#development]
+Opening the panel reads GitHub repository metadata and default-branch files; selecting a file reads its blob. Settings options come from local gh repo edit help and require confirmed changes. [src: src/github_explorer/panel.py; src/github_explorer/runner.py]
 Catalog discovery reads local gh help; discovered aliases and extensions can execute external programs when explicitly requested. [src: src/github_explorer/catalog.py]
 Stop cannot undo completed GitHub actions. [src: README.md#execution-behavior]
 Shell expansion, pipelines and redirects are not supported by command execution. [src: README.md#execution-behavior]
@@ -54,21 +55,21 @@ Workflow rotation defaults to dry-run, a 200000-byte threshold and three retaine
 The operation registry is declarative metadata and has no run/history/reset operation CLI. [src: docs/cli-and-operations.md]
 The application has no direct HTTP SDK or configured API base URL; gh chooses endpoints. Repository indexes use static text and JSON with no Ollama process or watcher. [src: docs/integrations-and-assumptions.md]
 ## Documentation routing
-docs/ARCHITECTURE.md: Architecture; Context and containers; Components; Runtime views; Deployment and quality attributes; Architectural decisions. [src: docs/ARCHITECTURE.md]
+docs/ARCHITECTURE.md: Architecture; Context and containers; Components; Runtime views; Deployment and quality attributes; Architectural decisions; Repository settings. [src: docs/ARCHITECTURE.md]
 docs/COMPONENTS.md: Components; Application modules; Embedding example; Inside a Textual 8 App method:; Maintenance tools and tests. [src: docs/COMPONENTS.md]
 docs/DEVELOPMENT.md: Development; Prerequisites and setup; Checks; Making a change; Environment; Troubleshooting. [src: docs/DEVELOPMENT.md]
 docs/INSTALLATION.md: Installation; Prerequisites; Install; Verification; Upgrade and uninstall. [src: docs/INSTALLATION.md]
 docs/MCP.md: MCP applicability. [src: docs/MCP.md]
-docs/SECURITY.md: Security model; Principals and trust boundaries; STRIDE review; Secrets, input, and output; Review checklist; Reporting and incidents. [src: docs/SECURITY.md]
+docs/SECURITY.md: Security model; Principals and trust boundaries; STRIDE review; Secrets, input, and output; Review checklist; Reporting and incidents; Repository browsing and settings. [src: docs/SECURITY.md]
 docs/TESTING.md: Testing; Strategy and suites; Writing tests; Targets and CI gates; Limitations and smoke checks. [src: docs/TESTING.md]
 docs/archive/README.md: . [src: docs/archive/README.md]
 docs/bootstrap-file-report.md: Bootstrap file report. [src: docs/bootstrap-file-report.md]
-docs/caching-and-optimization.md: Caching and performance; In-memory state; Work scheduling and limits; Profiling. [src: docs/caching-and-optimization.md]
+docs/caching-and-optimization.md: Caching and performance; In-memory state; Work scheduling and limits; Profiling; Repository data. [src: docs/caching-and-optimization.md]
 docs/cli-and-operations.md: CLI and operations; User entry points; Maintenance registry. [src: docs/cli-and-operations.md]
 docs/error-monitoring-guide.md: Error diagnosis; Where to look; Failure map; Escalation. [src: docs/error-monitoring-guide.md]
 docs/external-calls.md: External calls; Applicability of the five-standard service contract. [src: docs/external-calls.md]
-docs/integrations-and-assumptions.md: Integrations and assumptions; Runtime boundaries; Assumptions; Development services. [src: docs/integrations-and-assumptions.md]
-docs/known-issues.md: Known limitations and troubleshooting. [src: docs/known-issues.md]
+docs/integrations-and-assumptions.md: Integrations and assumptions; Runtime boundaries; Assumptions; Development services; Default repository reads. [src: docs/integrations-and-assumptions.md]
+docs/known-issues.md: Known limitations and troubleshooting; Repository browser and settings boundaries. [src: docs/known-issues.md]
 docs/logging.md: Logging and output; Current approach; Levels and diagnostics; Adding diagnostics. [src: docs/logging.md]
 docs/onboarding.md: Contributor onboarding. [src: docs/onboarding.md]
 docs/repo-bootstrap-audit-2026-09-29.md: Repository bootstrap audit — 2026-09-29; Outcome; Findings and resolution; Applicability decisions; Review coverage; Dependencies and tooling; Remaining scope; Final continuation review. [src: docs/repo-bootstrap-audit-2026-09-29.md]

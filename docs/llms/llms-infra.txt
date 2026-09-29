@@ -1,10 +1,10 @@
 # github-explorer — infrastructure and links
-> Source: . · https://github.com/mithudso/github-explorer @ 11a8a5b dirty
+> Source: . · https://github.com/mithudso/github-explorer @ 360b0c8 dirty
 > Generated: 2026-09-29 by crawl-repo-to-llms v1.2.0
-> Census: 72 enumerated / 17 deep-read / 55 shallow · partial: remaining metadata cards shallow; no index probes
+> Census: 75 enumerated / 20 deep-read / 55 shallow · partial: remaining metadata cards shallow; no index probes
 
 ## Toolchain and CI
-Package: github-explorer; version: 0.1.1. [src: pyproject.toml]
+Package: github-explorer; version: 0.2.0. [src: pyproject.toml]
 Purpose: A standalone terminal workbench for the full installed GitHub CLI. [src: pyproject.toml]
 Requires Python >=3.11. [src: pyproject.toml]
 Runtime dependencies: textual>=8,<9, rich>=13. [src: pyproject.toml]
@@ -25,6 +25,9 @@ https://github.com/mithudso — unverified; no network reachability probe. [src:
 https://github.com/mithudso — unverified; no network reachability probe. [src: CODE_OF_CONDUCT.md]
 https://cli.github.com/ — unverified; no network reachability probe. [src: README.md]
 https://github.com/mithudso/github-explorer.git — unverified; no network reachability probe. [src: README.md]
+https://HOST/OWNER/REPO — unverified; no network reachability probe. [src: docs/ARCHITECTURE.md]
+https://docs.github.com/en/rest/git/trees#get-a-tree — unverified; no network reachability probe. [src: docs/ARCHITECTURE.md]
+https://github.com/cli/cli/blob/trunk/pkg/cmd/repo/edit/edit.go — unverified; no network reachability probe. [src: docs/ARCHITECTURE.md]
 https://github.com/mithudso/github-explorer.git — unverified; no network reachability probe. [src: docs/INSTALLATION.md]
 https://docs.astral.sh/uv/guides/integration/dependabot/ — unverified; no network reachability probe. [src: docs/repo-bootstrap-audit-2026-09-29.md]
 https://github.com/mithudso/github-explorer — unverified; no network reachability probe. [src: pyproject.toml]
@@ -33,4 +36,5 @@ https://[^\s — unverified; no network reachability probe. [src: scripts/genera
 https://github.com/ — unverified; no network reachability probe. [src: scripts/generate_repo_indexes.py]
 https://github.com/owner/repo — unverified; no network reachability probe. [src: tests/test_doc_indexes.py]
 https://github.com/owner/repo.git?token=secret#secret — unverified; no network reachability probe. [src: tests/test_doc_indexes.py]
+https://git.example.test/o/r — unverified; no network reachability probe. [src: tests/test_repository.py]
 https://example.com/o/r — unverified; no network reachability probe. [src: tests/test_runner.py]

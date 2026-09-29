@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.2.0 — 2026-09-29
+
+- Show searchable GitHub default-branch files above the CLI tree by default.
+- Preview text files in memory, with explicit binary/size limits and cancellation.
+- Add Repo settings with every installed gh repo edit flag and available current values.
+- Confirm only selected settings changes against a pinned repository and host.
+- Handle empty/inaccessible repositories and reject stale or truncated read results.
+- Use Textual 8 unselected dropdown values in settings and the Add flag control.
+
 ## 0.1.1 — 2026-09-29
 
 - Add contributor, architecture, security, operations and troubleshooting docs.

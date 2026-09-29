@@ -13,6 +13,10 @@ limited to 5000 lines. Terminal execution delegates streams to the terminal and
 does not capture its output. Explicit Copy output asks Textual to copy the last
 captured result. Clear output clears the displayed/captured result when idle.
 
+Repository files, selected file text and settings snapshots also remain in memory.
+Automatic reads surface failures in the file or settings status and never write
+response bodies to disk. These reads do not populate Copy output.
+
 ## Levels and diagnostics
 
 There is no configured application logger or severity-level taxonomy. Success,

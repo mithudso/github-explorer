@@ -7,9 +7,9 @@
 | `src/github_explorer/__init__.py` | Exports `GitHubExplorer`, `GitHubPanel`; `__version__` identifies the release | Imports host and screen; keep public exports here |
 | `src/github_explorer/__main__.py` | `main(argv=None)` parses startup options; exits/returns a status | argparse, catalog, app; starts TUI or prints catalog JSON |
 | `src/github_explorer/app.py` | `GitHubExplorer(cwd=".", repo="")` hosts one panel | Textual; exits when standalone panel dismisses |
-| `src/github_explorer/panel.py` | `GitHubPanel(repo_path=".", repo="", standalone=False)`; `CommandConfirm(invocation, interactive)` | Textual/Rich, catalog, runner; UI workers, confirmation, explicit clipboard copy |
-| `src/github_explorer/catalog.py` | `Flag`, `Command`, `flags_from_help`, `parse_catalog`, `executable`, `help_text`, `load_catalog` | Parses strings into immutable records; help calls local `gh` with 30-second timeout |
-| `src/github_explorer/runner.py` | `Invocation`, `Result`, `prepare`, `re_repo`, `CommandRunner`, `run_interactive` | Validates argv/context; starts child processes; bounds captured output and manages stop/timeout |
+| `src/github_explorer/panel.py` | `GitHubPanel(repo_path=".", repo="", standalone=False)`; `CommandConfirm(invocation, interactive)`; `RepoSettings(context)` | Textual/Rich, catalog, runner; UI workers, confirmation, explicit clipboard copy |
+| `src/github_explorer/catalog.py` | `Flag`, `Command`, `flags_from_help`, `parse_catalog`, `executable`, `help_text`, `load_catalog`, `repository_settings`, `setting_value`, `settings_arguments` | Parses strings into immutable records; help calls local `gh` with 30-second timeout |
+| `src/github_explorer/runner.py` | `Invocation`, `Result`, `prepare`, `re_repo`, `CommandRunner`, `run_interactive`, `Repository`, `repository_info`, `repository_files`, `repository_file_text` | Validates argv/context; starts child processes; bounds captured output and manages stop/timeout |
 | `src/github_explorer/operations.py` | `OPERATIONS`, `list_operations()`, `get_operation(id)` | Declares subprocess/clipboard metadata; returns independent copies; no execution path |
 
 `parse_catalog(reference, root_help)` is pure. `load_catalog(cwd)` performs the two
@@ -43,6 +43,9 @@ embedded panel. The standalone host exits instead. Command output remains volati
 | `tests/test_runner.py` | Fixture subprocess behavior and execution safety |
 | `tests/test_cli.py` | CLI options, catalog export, and standalone host |
 | `tests/test_panel.py` | Headless Textual interaction and embedding |
+| `tests/conftest.py` | Network-free repository fixtures for UI tests |
+| `tests/test_repository.py` | Host/context pinning, trees/blobs, read errors, setting discovery and argv |
+| `tests/test_repository_panel.py` | Default file browsing, previews, settings confirmation and read races |
 | `tests/test_maintenance.py` | Log rotation safety, registry copies, generated metadata |
 | `tests/test_doc_indexes.py` | Index determinism, drift, inclusion boundaries, safe writes |
 

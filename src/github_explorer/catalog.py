@@ -104,3 +104,72 @@ def help_text(args: list[str], cwd: Path) -> str:
 
 def load_catalog(cwd: Path) -> list[Command]:
     return parse_catalog(help_text(["help", "reference"], cwd), help_text(["--help"], cwd))
+
+
+def repository_settings(cwd: Path) -> tuple[Flag, ...]:
+    """Discover every setting offered by this installation's built-in repo editor."""
+    return tuple(
+        flag for flag in flags_from_help(help_text(["repo", "edit", "--help"], cwd))
+        if flag.name != "--help"
+    )
+
+
+def setting_value(flag: Flag, settings: dict):
+    """Map known REST properties; absence means unknown, never false."""
+    names = {
+        "--description": "description", "--homepage": "homepage",
+        "--default-branch": "default_branch", "--visibility": "visibility",
+        "--template": "is_template", "--allow-forking": "allow_forking",
+        "--allow-update-branch": "allow_update_branch",
+        "--delete-branch-on-merge": "delete_branch_on_merge",
+        "--enable-auto-merge": "allow_auto_merge", "--enable-discussions": "has_discussions",
+        "--enable-issues": "has_issues", "--enable-projects": "has_projects",
+        "--enable-wiki": "has_wiki", "--enable-merge-commit": "allow_merge_commit",
+        "--enable-rebase-merge": "allow_rebase_merge",
+        "--enable-squash-merge": "allow_squash_merge",
+    }
+    if flag.name in names:
+        key = names[flag.name]
+        if key in settings and flag.name in {"--description", "--homepage"}:
+            return settings[key] or ""
+        return settings[key] if settings.get(key) is not None else None
+    security = {
+        "--enable-advanced-security": "advanced_security",
+        "--enable-secret-scanning": "secret_scanning",
+        "--enable-secret-scanning-push-protection": "secret_scanning_push_protection",
+    }
+    if flag.name in security:
+        state = (settings.get("security_and_analysis") or {}).get(security[flag.name], {})
+        if state.get("status") in {"enabled", "disabled"}:
+            return state["status"] == "enabled"
+    if flag.name == "--squash-merge-commit-message":
+        modes = {
+            ("COMMIT_OR_PR_TITLE", "COMMIT_MESSAGES"): "default",
+            ("PR_TITLE", "BLANK"): "pr-title",
+            ("PR_TITLE", "COMMIT_MESSAGES"): "pr-title-commits",
+            ("PR_TITLE", "PR_BODY"): "pr-title-description",
+        }
+        return modes.get((settings.get("squash_merge_commit_title"),
+                          settings.get("squash_merge_commit_message")))
+    return None
+
+
+def settings_arguments(flags: tuple[Flag, ...], changes: dict[str, str]) -> list[str]:
+    """Only selected settings enter argv; empty strings can clear text properties."""
+    known = {flag.name: flag for flag in flags}
+    if not changes:
+        raise ValueError("Select at least one setting to change")
+    if set(changes) - known.keys():
+        raise ValueError("Unknown repository setting")
+    if "--visibility" in changes and changes.get("--accept-visibility-change-consequences") != "true":
+        raise ValueError("Select and enable --accept-visibility-change-consequences first")
+    if "--squash-merge-commit-message" in changes and changes.get("--enable-squash-merge") != "true":
+        raise ValueError("Select and enable --enable-squash-merge to change its message format")
+    args = []
+    for name, value in changes.items():
+        if not known[name].value_type and value not in {"true", "false"}:
+            raise ValueError(f"Choose true or false for {name}")
+        if not value and name not in {"--description", "--homepage"}:
+            raise ValueError(f"Enter a value for {name}")
+        args.append(f"{name}={value}")
+    return args

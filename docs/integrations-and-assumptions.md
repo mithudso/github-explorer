@@ -35,3 +35,13 @@ services. uv downloads dependencies during setup/build as needed. There is no
 production/dev server split. Authentication and environment handling are documented
 in [development](DEVELOPMENT.md). Index generation is local and lexical; no Ollama,
 embedding process, or watcher is required or enabled.
+
+## Default repository reads
+
+The file browser automatically reads remote metadata and the default-branch Git
+tree through `gh repo view` and `gh api --method GET`; it does not enumerate local
+uncommitted files. Directory-by-directory traversal may take multiple requests for
+large repositories. File previews use immutable blob SHAs and a 500 KB limit.
+Settings use the repository REST response for known current values and local
+`gh repo edit --help` for the complete editable option set. GitHub permissions,
+repository type and organization policy can restrict changes or hide current values.

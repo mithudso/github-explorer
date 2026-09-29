@@ -1,10 +1,10 @@
 # github-explorer — codebase overview
-> Source: . · https://github.com/mithudso/github-explorer @ 11a8a5b dirty
+> Source: . · https://github.com/mithudso/github-explorer @ 360b0c8 dirty
 > Generated: 2026-09-29 by crawl-repo-to-llms v1.2.0
-> Census: 72 enumerated / 17 deep-read / 55 shallow · partial: remaining metadata cards shallow; no index probes
+> Census: 75 enumerated / 20 deep-read / 55 shallow · partial: remaining metadata cards shallow; no index probes
 
 ## Architecture
-Package: github-explorer; version: 0.1.1. [src: pyproject.toml]
+Package: github-explorer; version: 0.2.0. [src: pyproject.toml]
 Purpose: A standalone terminal workbench for the full installed GitHub CLI. [src: pyproject.toml]
 Requires Python >=3.11. [src: pyproject.toml]
 Runtime dependencies: textual>=8,<9, rich>=13. [src: pyproject.toml]
@@ -32,6 +32,7 @@ tests/test_maintenance.py: Regression checks for maintenance writes and static o
 
 ## Conventions and gotchas
 Use uv sync --locked, uv run pytest, uv run ruff check . and uv build for the documented development workflow. [src: README.md#development]
+Opening the panel reads GitHub repository metadata and default-branch files; selecting a file reads its blob. Settings options come from local gh repo edit help and require confirmed changes. [src: src/github_explorer/panel.py; src/github_explorer/runner.py]
 Catalog discovery reads local gh help; discovered aliases and extensions can execute external programs when explicitly requested. [src: src/github_explorer/catalog.py]
 Stop cannot undo completed GitHub actions. [src: README.md#execution-behavior]
 Shell expansion, pipelines and redirects are not supported by command execution. [src: README.md#execution-behavior]
@@ -54,21 +55,21 @@ Workflow rotation defaults to dry-run, a 200000-byte threshold and three retaine
 The operation registry is declarative metadata and has no run/history/reset operation CLI. [src: docs/cli-and-operations.md]
 The application has no direct HTTP SDK or configured API base URL; gh chooses endpoints. Repository indexes use static text and JSON with no Ollama process or watcher. [src: docs/integrations-and-assumptions.md]
 ## Documentation routing
-docs/ARCHITECTURE.md: Architecture; Context and containers; Components; Runtime views; Deployment and quality attributes; Architectural decisions. [src: docs/ARCHITECTURE.md]
+docs/ARCHITECTURE.md: Architecture; Context and containers; Components; Runtime views; Deployment and quality attributes; Architectural decisions; Repository settings. [src: docs/ARCHITECTURE.md]
 docs/COMPONENTS.md: Components; Application modules; Embedding example; Inside a Textual 8 App method:; Maintenance tools and tests. [src: docs/COMPONENTS.md]
 docs/DEVELOPMENT.md: Development; Prerequisites and setup; Checks; Making a change; Environment; Troubleshooting. [src: docs/DEVELOPMENT.md]
 docs/INSTALLATION.md: Installation; Prerequisites; Install; Verification; Upgrade and uninstall. [src: docs/INSTALLATION.md]
 docs/MCP.md: MCP applicability. [src: docs/MCP.md]
-docs/SECURITY.md: Security model; Principals and trust boundaries; STRIDE review; Secrets, input, and output; Review checklist; Reporting and incidents. [src: docs/SECURITY.md]
+docs/SECURITY.md: Security model; Principals and trust boundaries; STRIDE review; Secrets, input, and output; Review checklist; Reporting and incidents; Repository browsing and settings. [src: docs/SECURITY.md]
 docs/TESTING.md: Testing; Strategy and suites; Writing tests; Targets and CI gates; Limitations and smoke checks. [src: docs/TESTING.md]
 docs/archive/README.md: . [src: docs/archive/README.md]
 docs/bootstrap-file-report.md: Bootstrap file report. [src: docs/bootstrap-file-report.md]
-docs/caching-and-optimization.md: Caching and performance; In-memory state; Work scheduling and limits; Profiling. [src: docs/caching-and-optimization.md]
+docs/caching-and-optimization.md: Caching and performance; In-memory state; Work scheduling and limits; Profiling; Repository data. [src: docs/caching-and-optimization.md]
 docs/cli-and-operations.md: CLI and operations; User entry points; Maintenance registry. [src: docs/cli-and-operations.md]
 docs/error-monitoring-guide.md: Error diagnosis; Where to look; Failure map; Escalation. [src: docs/error-monitoring-guide.md]
 docs/external-calls.md: External calls; Applicability of the five-standard service contract. [src: docs/external-calls.md]
-docs/integrations-and-assumptions.md: Integrations and assumptions; Runtime boundaries; Assumptions; Development services. [src: docs/integrations-and-assumptions.md]
-docs/known-issues.md: Known limitations and troubleshooting. [src: docs/known-issues.md]
+docs/integrations-and-assumptions.md: Integrations and assumptions; Runtime boundaries; Assumptions; Development services; Default repository reads. [src: docs/integrations-and-assumptions.md]
+docs/known-issues.md: Known limitations and troubleshooting; Repository browser and settings boundaries. [src: docs/known-issues.md]
 docs/logging.md: Logging and output; Current approach; Levels and diagnostics; Adding diagnostics. [src: docs/logging.md]
 docs/onboarding.md: Contributor onboarding. [src: docs/onboarding.md]
 docs/repo-bootstrap-audit-2026-09-29.md: Repository bootstrap audit — 2026-09-29; Outcome; Findings and resolution; Applicability decisions; Review coverage; Dependencies and tooling; Remaining scope; Final continuation review. [src: docs/repo-bootstrap-audit-2026-09-29.md]
@@ -155,16 +156,19 @@ Generated outputs are excluded from the source census to prevent recursive drift
 - src/github_explorer/__init__.py: Expose GitHubExplorer, GitHubPanel and the package version. [src: src/github_explorer/__init__.py]
 - src/github_explorer/__main__.py: Parse launch options, validate repository context and select JSON catalog or TUI mode. Key symbols: main. [src: src/github_explorer/__main__.py]
 - src/github_explorer/app.py: Host GitHubPanel in a standalone Textual application. Key symbols: GitHubExplorer, __init__, on_mount. [src: src/github_explorer/app.py]
-- src/github_explorer/catalog.py: Parse built-in gh help into immutable Command and Flag records. Key symbols: Flag, Command, flags_from_help, parse_catalog, executable, help_text, load_catalog, name. [src: src/github_explorer/catalog.py]
-- src/github_explorer/operations.py: Declare four operation metadata records and return independent copies. Key symbols: list_operations, get_operation. [src: src/github_explorer/operations.py]
-- src/github_explorer/panel.py: Compose the reusable command browser, argument controls, confirmation and output screen. Key symbols: CommandConfirm, GitHubPanel, __init__, compose, choose, action_cancel, __init__, compose, on_mount, load_commands, catalog_failed, loaded. [src: src/github_explorer/panel.py]
-- src/github_explorer/runner.py: Prepare shell-free argv and run captured or interactive child processes. Key symbols: Invocation, prepare, re_repo, Result, CommandRunner, run_interactive, preview, environment, __init__, cancel, stop, run. [src: src/github_explorer/runner.py]
+- src/github_explorer/catalog.py: Parse built-in gh help into Command and Flag records and derive repository setting arguments. Key symbols: Flag, Command, flags_from_help, parse_catalog, executable, help_text, load_catalog, repository_settings, setting_value, settings_arguments, name. [src: src/github_explorer/catalog.py]
+- src/github_explorer/operations.py: Declare runtime operation metadata records and return independent copies. Key symbols: list_operations, get_operation. [src: src/github_explorer/operations.py]
+- src/github_explorer/panel.py: Compose the file browser, CLI controls, repository settings, confirmation and output screen. Key symbols: CommandConfirm, RepoSettings, GitHubPanel, __init__, compose, choose, action_cancel, __init__, compose, on_mount, load_settings, load_failed. [src: src/github_explorer/panel.py]
+- src/github_explorer/runner.py: Prepare shell-free argv, run child processes and read GitHub repository metadata, trees and blobs. Key symbols: Invocation, prepare, re_repo, Result, CommandRunner, run_interactive, Repository, read_json, api_read, repository_info, repository_files, repository_file_text. [src: src/github_explorer/runner.py]
 ### tests
+- tests/conftest.py: Provide network-free repository fixtures for UI tests. Key symbols: ui_repository. [src: tests/conftest.py]
 - tests/test_catalog.py: Test nested help parsing, alias classification, flags and the built-in-only discovery calls. Key symbols: test_full_reference_and_extensions_are_parsed_without_execution, test_flags_preserve_value_types_and_inherited_options, test_loading_uses_only_builtin_help_commands, run. [src: tests/test_catalog.py]
 - tests/test_cli.py: Test CLI help/version, validation, JSON export, timeout handling and standalone hosting. Key symbols: test_help_and_version_need_no_github_install, test_invalid_context_and_missing_gh, test_catalog_export_never_starts_tui, test_catalog_timeout_exits_without_traceback, test_standalone_host_branding_context_and_quit, missing, timeout. [src: tests/test_cli.py]
 - tests/test_doc_indexes.py: Test deterministic generation, stale sources, file deletion/addition, exclusions and collisions. Key symbols: repo, test_generation_is_deterministic_and_does_not_index_its_outputs, test_changed_source_is_stale, test_deleted_source_and_new_source_are_reported, test_missing_output_and_tampered_filemap_are_reported, test_private_ignored_files_and_symlinks_are_excluded, test_tracked_source_directory_replaced_by_symlink_is_excluded, test_collision_requires_owned_manifest_and_explicit_refresh, test_manifest_and_caps, test_options_are_extracted_without_importing_code, test_remote_credentials_are_not_published, test_generation_refuses_symlinked_output_directory. [src: tests/test_doc_indexes.py]
 - tests/test_maintenance.py: Test archival preservation and refusal, fenced headings, copied metadata and generated registries. Key symbols: script, test_rotation_preserves_all_sections_and_defaults_to_dry_run, test_rotation_refuses_all_writes_when_either_log_has_editor_marker, test_rotation_ignores_heading_in_fenced_example, test_metadata_is_copied_and_generated_artifacts_are_current, test_operation_generator_refuses_symlink_before_any_output_write, test_rotation_preserves_preexisting_temporary_file. [src: tests/test_maintenance.py]
 - tests/test_panel.py: Exercise embedded UI confirmation, argument editing, capture, clipboard, stopping and catalog races. Key symbols: Host, test_embed_catalog_flags_preview_run_and_return, test_stop_keeps_panel_until_command_ends, test_reload_ignores_cancelled_catalog_result, __init__, on_mount, run, run, load. [src: tests/test_panel.py]
+- tests/test_repository.py: Verify repository identity, trees, previews, read failures and selected setting arguments. Key symbols: FixtureRunner, repository, test_repository_identity_pins_host_and_cwd, test_file_walk_lists_hidden_nested_files_and_submodules, test_empty_and_truncated_trees, test_repository_read_errors_are_explicit, test_blob_previews_are_read_only_and_bounded, test_settings_discovery_includes_new_flags_without_executing_them, test_settings_arguments_preserve_clear_and_false_require_visibility_acceptance, test_squash_settings_current_mode_and_required_flag, __init__, run. [src: tests/test_repository.py]
+- tests/test_repository_panel.py: Exercise default file browsing, settings confirmation and stale repository reads. Key symbols: test_files_are_above_catalog_default_search_and_preview, test_settings_current_values_cancel_and_confirm_exact_changes, test_failed_repository_read_leaves_cli_usable, test_late_file_read_cannot_replace_refreshed_repository, test_visibility_requires_explicit_acceptance_before_confirmation, test_late_preview_cannot_replace_new_selection, preview, run, fail, files, preview. [src: tests/test_repository_panel.py]
 - tests/test_runner.py: Exercise literal argv, context, child exit status, cancellation, timeout and UTF-8 capture. Key symbols: invocation, test_exact_argv_context_and_no_shell, test_capture_exit_and_context, test_cancel_timeout_and_output_limit, test_cancel_before_start, test_interactive_uses_normal_terminal, test_incomplete_utf8_is_replaced_at_eof, test_invalid_timeout_cannot_start_a_process. [src: tests/test_runner.py]
 
 ## Generated outputs (excluded from recursive source census)

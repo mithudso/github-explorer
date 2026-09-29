@@ -4,17 +4,18 @@
   "schema_version": 1,
   "source": ".",
   "remote": "https://github.com/mithudso/github-explorer",
-  "commit": "11a8a5b2bf9cd5bb9fafbc3e0ddbe4b2c31e161f",
+  "commit": "360b0c837ca3404749846bc603860e23b1362791",
   "branch": "main",
   "generated_at": "2026-09-29",
   "dirty": true,
   "history": [
+    "360b0c8 2026-09-29 repo: complete bootstrap documentation, tooling, and runtime fixes",
     "11a8a5b 2026-09-29 docs: record public release verification",
     "ccade9e 2026-09-29 feat: launch standalone GitHub Explorer TUI"
   ],
   "census": {
-    "enumerated": 72,
-    "deep_read": 17,
+    "enumerated": 75,
+    "deep_read": 20,
     "shallow": 55
   },
   "files": [
@@ -83,11 +84,14 @@
     "src/github_explorer/operations.py",
     "src/github_explorer/panel.py",
     "src/github_explorer/runner.py",
+    "tests/conftest.py",
     "tests/test_catalog.py",
     "tests/test_cli.py",
     "tests/test_doc_indexes.py",
     "tests/test_maintenance.py",
     "tests/test_panel.py",
+    "tests/test_repository.py",
+    "tests/test_repository_panel.py",
     "tests/test_runner.py",
     "uv.lock"
   ],
@@ -114,15 +118,15 @@
     "library": 6,
     "meta": 6,
     "script": 4,
-    "test": 6
+    "test": 9
   },
   "counts_by_importance": {
     "critical": 2,
     "high": 8,
     "normal": 52,
-    "peripheral": 10
+    "peripheral": 13
   },
-  "budget_used": 17,
+  "budget_used": 20,
   "deferred_paths": [
     ".editorconfig",
     ".env.example",
@@ -231,7 +235,7 @@
     "method": "AST parser calls and manifest/CI declarations; no target execution"
   },
   "links": {
-    "unverified": 13,
+    "unverified": 17,
     "verified": 0
   }
 }

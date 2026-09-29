@@ -7,8 +7,9 @@ API retries, and any local/remote side effects. The explorer does not add retrie
 
 | Source and symbol | Target / trigger | Observation | Tests | Retry policy |
 | --- | --- | --- | --- | --- |
-| `catalog.py:help_text` | Two separate local subprocess calls: `gh help reference`, `gh --help`; startup, Reload catalog or `--list-commands` | TUI status or CLI stderr; 30-second help timeout | `test_catalog.py`, `test_cli.py` | Manual reload after repairing cause |
-| `runner.py:CommandRunner.run` | Confirmed argv via `Popen`; Run and explicitly requested Fetch help | Ephemeral output and Result: exit, cancellation, timeout, truncation | `test_runner.py`, `test_panel.py` | Never replay automatically; verify remote side effects first |
+| `catalog.py:help_text` | Local help subprocesses: `gh help reference`, `gh --help`, `gh repo edit --help`; startup, Reload catalog, settings dialog or `--list-commands` | TUI status or CLI stderr; 30-second help timeout | `test_catalog.py`, `test_cli.py` | Manual reload after repairing cause |
+| `runner.py:read_json` | Read-only `gh repo view` identity and explicit `gh api --method GET` metadata, trees and blobs; startup, Refresh files, selection, settings dialog | In-memory UI status/content; 30-second timeout per request; truncation rejected | `test_repository.py`, `test_repository_panel.py` | User-triggered refresh; no automatic retry |
+| `runner.py:CommandRunner.run` | Confirmed command/settings argv or fixed repository-read argv via `Popen` | Ephemeral output and Result: exit, cancellation, timeout, truncation | `test_runner.py`, `test_panel.py` | Never replay automatically; verify remote side effects first |
 | `runner.py:run_interactive` | Confirmed argv via `subprocess.call`; Terminal | Attached terminal output and exit status; Ctrl-C maps to 130 | `test_runner.py`, `test_panel.py` | Manual only; no captured-mode timeout |
 | `panel.py:GitHubPanel.pressed` | `App.copy_to_clipboard`; Copy output button | In-memory status; clipboard receipt cannot be verified | `test_panel.py` | User-directed; terminal support varies |
 

@@ -40,7 +40,8 @@ and sanitize them before copying or reporting a problem.
 ## Review checklist
 
 - Does discovery invoke only local help, including when aliases shadow command names?
-- Does every execution path preserve confirmation, argv handling, and context?
+- Do all user-entered commands and settings mutations preserve confirmation, argv handling, and context?
+- Are automatic repository reads limited to repo metadata, GET tree/blob requests, and local help?
 - Are cancellation, timeout, process cleanup, and output bounds still effective?
 - Do tests use fixtures instead of authenticated mutations?
 - Do logs/indexes/package artifacts exclude credentials, private output, and local state?
@@ -52,3 +53,14 @@ Follow [security reporting](../.github/SECURITY.md) and the
 remote telemetry, on-call service, or promised response SLA. The app makes no
 compliance certification or data-residency claim; GitHub CLI decides where its
 network requests go based on its configuration and the executed command.
+
+## Repository browsing and settings
+
+Startup performs read-only repository discovery and Git tree requests. Selected
+files are read by blob SHA and displayed as literal text; no remote path is opened
+as a local filesystem path. File contents and settings snapshots remain in memory.
+Previews are limited to 500 KB. Truncated API output is rejected. All API reads use
+explicit GET and the host resolved by `gh repo view`; Enterprise repositories retain
+their host. Repository edit commands pin an explicit target and require confirmation.
+Only selected flags are sent, including explicit false values. Visibility acceptance
+is never added automatically. GitHub remains responsible for permissions and policy.
