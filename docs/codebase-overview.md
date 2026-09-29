@@ -1,7 +1,7 @@
 # github-explorer — codebase overview
-> Source: . · https://github.com/mithudso/github-explorer @ 4e571cb dirty
+> Source: . · https://github.com/mithudso/github-explorer @ c9faa57 dirty
 > Generated: 2026-09-29 by crawl-repo-to-llms v1.2.0
-> Census: 77 enumerated / 22 deep-read / 55 shallow · partial: remaining metadata cards shallow; no index probes
+> Census: 78 enumerated / 22 deep-read / 56 shallow · partial: remaining metadata cards shallow; no index probes
 
 ## Architecture
 Package: github-explorer; version: 0.3.0. [src: pyproject.toml]
@@ -106,6 +106,7 @@ Generated outputs are excluded from the source census to prevent recursive drift
 - uv.lock: Config file; semantic purpose requires source review. [asserted]
 ### .github
 - .github/CODEOWNERS: Docs file; semantic purpose requires source review. [asserted]
+- .github/FUNDING.yml: Docs file; semantic purpose requires source review. [asserted]
 - .github/PULL_REQUEST_TEMPLATE.md: Docs file; semantic purpose requires source review. [asserted]
 - .github/SECURITY.md: Docs file; semantic purpose requires source review. [asserted]
 - .github/copilot-instructions.md: Docs file; semantic purpose requires source review. [asserted]

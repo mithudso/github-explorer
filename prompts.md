@@ -1,6 +1,6 @@
 # Prompts
-Version: 10
-Delta: Add directional arrow navigation alongside common command shortcuts.
+Version: 11
+Delta: Publish the completed changes through a pull request and merge.
 
 ## 2026-09-29
 > Create a new project ~/dev/github-explorer as a standalone TUI using the github-panel as the basis and create a public remote github repo for it.
@@ -33,3 +33,6 @@ The repeated request resumed the interrupted turn before any tool work began.
 
 ## Prompt v10 - 2026-09-29
 > When I have the explorer loaded, and I press the down-arrow key, if I am currently on a dropdown it should expand the dropdown, but if there is nothing to dropdown then it should go to the item directly beneath it, similarly all the arrows should be used for navigation in the TUI.
+
+## Prompt v11 - 2026-09-29
+> merge, push, pr, commit the changes.

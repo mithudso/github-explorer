@@ -1,7 +1,7 @@
 # github-explorer — routing index
-> Source: . · https://github.com/mithudso/github-explorer @ 4e571cb dirty
+> Source: . · https://github.com/mithudso/github-explorer @ c9faa57 dirty
 > Generated: 2026-09-29 by crawl-repo-to-llms v1.2.0
-> Census: 77 enumerated / 22 deep-read / 55 shallow · partial: remaining metadata cards shallow; no index probes
+> Census: 78 enumerated / 22 deep-read / 56 shallow · partial: remaining metadata cards shallow; no index probes
 
 A static map of the public GitHub Explorer source tree. [src: pyproject.toml]
 

@@ -1,7 +1,7 @@
 # github-explorer — atomic facts
-> Source: . · https://github.com/mithudso/github-explorer @ 4e571cb dirty
+> Source: . · https://github.com/mithudso/github-explorer @ c9faa57 dirty
 > Generated: 2026-09-29 by crawl-repo-to-llms v1.2.0
-> Census: 77 enumerated / 22 deep-read / 55 shallow · partial: remaining metadata cards shallow; no index probes
+> Census: 78 enumerated / 22 deep-read / 56 shallow · partial: remaining metadata cards shallow; no index probes
 
 Package: github-explorer; version: 0.3.0. [src: pyproject.toml]
 Purpose: A standalone terminal workbench for the full installed GitHub CLI. [src: pyproject.toml]

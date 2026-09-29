@@ -1,6 +1,6 @@
 # Continuation record
-Version: 11
-Delta: Add common command shortcuts and directional arrow navigation.
+Version: 12
+Delta: Publish version 0.3.0 through a pull request and merge.
 
 ## Request and scope
 Create a standalone GitHub Explorer TUI and public mithudso/github-explorer repository.
@@ -117,3 +117,11 @@ previously installed github-panel and skillsx commands remain unchanged.
 - Additional request: use all arrow keys for TUI navigation. Down expands collapsed tree branches before advancing; Select retains its dropdown keys. Move spatially between controls, preserving text editing and scrolling. Apply navigation to settings and confirmation dialogs as well.
 - Working-tree constraint: .github/FUNDING.yml appeared during this task and is unrelated; leave it untouched and outside this commit.
 - Static-index scope: exclude the unrelated untracked .github/FUNDING.yml only during generation/checks with a temporary process-local Git excludes file. Do not change or stage that file. A normal census in this dirty checkout will flag it until its owner commits or removes it.
+
+## v0.3.0 delivery - 2026-09-29
+- Request: commit, push, create a PR and merge the completed work. Publishing and merging are explicitly authorized.
+- Baseline: main at d541f15, three commits ahead of origin/main. The pending commits include bootstrap fixes, files/settings, shortcuts and navigation. No open PR existed.
+- Delivery branch: release/explorer-0.3.0. Funding was initially untracked; a concurrent commit c9faa57 added it to this branch during publishing. Preserve that committed change and include it in the static census.
+- Validation: the preceding implementation passed all 79 tests, Ruff, build, metadata checks and a live read-only smoke. No application source changes are required for delivery; retain release version 0.3.0.
+- Completed: pushed the release branch and opened PR #1 at https://github.com/mithudso/github-explorer/pull/1. Refreshed generated metadata to include all committed files and this delivery record.
+- Delivery status: the linked PR is the authoritative record of CI and merge completion. This note is committed before those external actions. If resuming, inspect PR #1, wait for its current-head checks, merge if still open, then fast-forward local main to origin/main. No implementation work remains.

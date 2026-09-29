@@ -1,7 +1,7 @@
 # github-explorer — infrastructure and links
-> Source: . · https://github.com/mithudso/github-explorer @ 4e571cb dirty
+> Source: . · https://github.com/mithudso/github-explorer @ c9faa57 dirty
 > Generated: 2026-09-29 by crawl-repo-to-llms v1.2.0
-> Census: 77 enumerated / 22 deep-read / 55 shallow · partial: remaining metadata cards shallow; no index probes
+> Census: 78 enumerated / 22 deep-read / 56 shallow · partial: remaining metadata cards shallow; no index probes
 
 ## Toolchain and CI
 Package: github-explorer; version: 0.3.0. [src: pyproject.toml]
@@ -21,6 +21,8 @@ src/github_explorer/panel.py references environment names: GH_REPO. [src: src/gi
 src/github_explorer/runner.py references environment names: GH_FORCE_TTY, GH_PAGER, GH_PROMPT_DISABLED, GH_REPO, NO_COLOR, PAGER. [src: src/github_explorer/runner.py]
 
 ## Links
+https://buymeacoffee.com/mitchphudsi — unverified; no network reachability probe. [src: .github/FUNDING.yml]
+https://www.paypal.com/ncp/payment/8WLQPBK6PHFX2 — unverified; no network reachability probe. [src: .github/FUNDING.yml]
 https://github.com/mithudso — unverified; no network reachability probe. [src: .github/SECURITY.md]
 https://github.com/mithudso — unverified; no network reachability probe. [src: CODE_OF_CONDUCT.md]
 https://cli.github.com/ — unverified; no network reachability probe. [src: README.md]
