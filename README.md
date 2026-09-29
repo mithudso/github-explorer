@@ -108,3 +108,29 @@ Tests use fixture commands and mocked CLI catalogs. They do not mutate GitHub.
 CI runs tests, lint and builds on macOS/Linux with Python 3.11 and 3.14.
 
 MIT licensed. See [LICENSE](LICENSE) and [NOTICE.md](NOTICE.md) for attribution.
+
+## Documentation
+
+- Getting started: [installation](docs/INSTALLATION.md), [onboarding](docs/onboarding.md),
+  [requirements](docs/requirements.md).
+- Design: [architecture](docs/ARCHITECTURE.md), [components](docs/COMPONENTS.md),
+  [integrations and assumptions](docs/integrations-and-assumptions.md), [MCP applicability](docs/MCP.md).
+- Engineering: [development](docs/DEVELOPMENT.md), [testing](docs/TESTING.md),
+  [security model](docs/SECURITY.md), [logging](docs/logging.md),
+  [caching and performance](docs/caching-and-optimization.md), [known limitations](docs/known-issues.md).
+- Operations: [CLI and registry](docs/cli-and-operations.md), [external calls](docs/external-calls.md),
+  [error diagnosis](docs/error-monitoring-guide.md), [troubleshooting](docs/runbooks/troubleshooting.md),
+  [release and rollback](docs/runbooks/release-and-rollback.md),
+  [metadata maintenance](docs/runbooks/metadata-maintenance.md).
+- Navigation: [file map](docs/codebase-overview.md), [retrieval index](docs/high_signal_file_index.json),
+  [operations metadata](docs/operations-registry.json), [tool inventory](docs/tool-inventory.json),
+  [LLM entry point](docs/llms/llms.txt).
+- Project workflow: [contributing](CONTRIBUTING.md), [code of conduct](CODE_OF_CONDUCT.md),
+  [security reporting](.github/SECURITY.md), [agent instructions](AGENTS.md),
+  [shared assistant conventions](CLAUDE.md), [Gemini conventions](GEMINI.md),
+  [prompt history](prompts.md), [work log](memory.md), [changelog](CHANGELOG.md),
+  [workflow archive](docs/archive/README.md).
+
+The standalone host mounts the same reusable panel exported for embedding. The
+panel delegates local help discovery to the catalog and confirmed subprocesses
+to the runner; see [architecture](docs/ARCHITECTURE.md) for the data flow.

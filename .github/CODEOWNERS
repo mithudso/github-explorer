@@ -1,0 +1,7 @@
+# Repository owner; CODEOWNERS requests review, not branch protection.
+* @mithudso
+/src/ @mithudso
+/tests/ @mithudso
+/scripts/ @mithudso
+/docs/ @mithudso
+/.github/ @mithudso

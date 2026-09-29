@@ -1,3 +1,6 @@
+import subprocess
+
+from github_explorer import catalog
 from github_explorer.catalog import flags_from_help, parse_catalog
 
 REFERENCE = """# gh reference
@@ -62,3 +65,28 @@ def test_flags_preserve_value_types_and_inherited_options():
         ("--json", "fields"),
         ("--help", ""),
     ]
+
+
+def test_loading_uses_only_builtin_help_commands(tmp_path, monkeypatch):
+    calls = []
+    monkeypatch.setattr(catalog, "executable", lambda: "/mock/gh")
+
+    def run(argv, **kwargs):
+        calls.append((argv, kwargs))
+        output = REFERENCE if argv[1:] == ["help", "reference"] else (
+            "ALIAS COMMANDS\n  co: Alias for pr checkout\n"
+            "EXTENSION COMMANDS\n  dash: Extension gh-dash\n"
+        )
+        return subprocess.CompletedProcess(argv, 0, output, "")
+
+    monkeypatch.setattr(catalog.subprocess, "run", run)
+    commands = catalog.load_catalog(tmp_path)
+    assert [argv for argv, _ in calls] == [
+        ["/mock/gh", "help", "reference"], ["/mock/gh", "--help"]
+    ]
+    assert {c.name for c in commands if c.external} == {"co", "dash"}
+    for _, kwargs in calls:
+        assert not kwargs.get("shell", False)
+        assert kwargs["cwd"] == tmp_path
+        assert kwargs["stdin"] == subprocess.DEVNULL
+        assert kwargs["timeout"] == 30

@@ -85,15 +85,18 @@ def executable() -> str:
 
 
 def help_text(args: list[str], cwd: Path) -> str:
-    result = subprocess.run(
-        [executable(), *args],
-        cwd=cwd,
-        env={**os.environ, "GH_PAGER": "cat", "PAGER": "cat", "NO_COLOR": "1"},
-        stdin=subprocess.DEVNULL,
-        capture_output=True,
-        text=True,
-        timeout=30,
-    )
+    try:
+        result = subprocess.run(
+            [executable(), *args],
+            cwd=cwd,
+            env={**os.environ, "GH_PAGER": "cat", "PAGER": "cat", "NO_COLOR": "1"},
+            stdin=subprocess.DEVNULL,
+            capture_output=True,
+            text=True,
+            timeout=30,
+        )
+    except subprocess.TimeoutExpired as exc:
+        raise ValueError("GitHub CLI help timed out after 30 seconds") from exc
     if result.returncode:
         raise ValueError(result.stderr.strip() or result.stdout.strip() or "gh help failed")
     return result.stdout

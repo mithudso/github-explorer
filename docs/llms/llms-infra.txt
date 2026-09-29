@@ -1,0 +1,36 @@
+# github-explorer — infrastructure and links
+> Source: . · https://github.com/mithudso/github-explorer @ 11a8a5b dirty
+> Generated: 2026-09-29 by crawl-repo-to-llms v1.2.0
+> Census: 72 enumerated / 17 deep-read / 55 shallow · partial: remaining metadata cards shallow; no index probes
+
+## Toolchain and CI
+Package: github-explorer; version: 0.1.1. [src: pyproject.toml]
+Purpose: A standalone terminal workbench for the full installed GitHub CLI. [src: pyproject.toml]
+Requires Python >=3.11. [src: pyproject.toml]
+Runtime dependencies: textual>=8,<9, rich>=13. [src: pyproject.toml]
+`uv sync --locked --python ${{ matrix.python }}`. [src: .github/workflows/test.yml]
+`uv run pytest`. [src: .github/workflows/test.yml]
+`uv run ruff check .`. [src: .github/workflows/test.yml]
+`uv run python scripts/generate_ops_registry_doc.py --check`. [src: .github/workflows/test.yml]
+`uv run python scripts/check_doc_indexes.py`. [src: .github/workflows/test.yml]
+`uv build`. [src: .github/workflows/test.yml]
+
+## Environment
+src/github_explorer/catalog.py references environment names: GH_PAGER, NO_COLOR, PAGER. [src: src/github_explorer/catalog.py]
+src/github_explorer/panel.py references environment names: GH_REPO. [src: src/github_explorer/panel.py]
+src/github_explorer/runner.py references environment names: GH_FORCE_TTY, GH_PAGER, GH_PROMPT_DISABLED, GH_REPO, NO_COLOR, PAGER. [src: src/github_explorer/runner.py]
+
+## Links
+https://github.com/mithudso — unverified; no network reachability probe. [src: .github/SECURITY.md]
+https://github.com/mithudso — unverified; no network reachability probe. [src: CODE_OF_CONDUCT.md]
+https://cli.github.com/ — unverified; no network reachability probe. [src: README.md]
+https://github.com/mithudso/github-explorer.git — unverified; no network reachability probe. [src: README.md]
+https://github.com/mithudso/github-explorer.git — unverified; no network reachability probe. [src: docs/INSTALLATION.md]
+https://docs.astral.sh/uv/guides/integration/dependabot/ — unverified; no network reachability probe. [src: docs/repo-bootstrap-audit-2026-09-29.md]
+https://github.com/mithudso/github-explorer — unverified; no network reachability probe. [src: pyproject.toml]
+https://github.com/mithudso/github-explorer/issues — unverified; no network reachability probe. [src: pyproject.toml]
+https://[^\s — unverified; no network reachability probe. [src: scripts/generate_repo_indexes.py]
+https://github.com/ — unverified; no network reachability probe. [src: scripts/generate_repo_indexes.py]
+https://github.com/owner/repo — unverified; no network reachability probe. [src: tests/test_doc_indexes.py]
+https://github.com/owner/repo.git?token=secret#secret — unverified; no network reachability probe. [src: tests/test_doc_indexes.py]
+https://example.com/o/r — unverified; no network reachability probe. [src: tests/test_runner.py]

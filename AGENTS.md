@@ -14,3 +14,18 @@ This repository is public. Commit only project code and documentation; exclude
 local state, credentials, private source-project data and generated build files.
 Retain LICENSE and NOTICE.md. Keep prompts.md and memory.md current, increment
 their versions/deltas and the release version when appropriate, and commit changes.
+
+## Contributor orientation
+
+Read [CLAUDE.md](CLAUDE.md) for shared commands and workflow logging, then
+[docs/DEVELOPMENT.md](docs/DEVELOPMENT.md) and
+[docs/ARCHITECTURE.md](docs/ARCHITECTURE.md). Keep generated operations metadata
+and documentation indexes current with the scripts listed there.
+
+## Repo-local agents
+
+There are no agent definitions under `.claude/agents/` or `.github/agents/`.
+There is no repo-local model, tool, credential, or authentication requirement for
+agent execution. User-level agents and MCP tools are outside this repository.
+If agents are added, inventory their names, scope, models, invocation conditions,
+and required auth here, with links to their definitions.

@@ -1,0 +1,21 @@
+# github-explorer — atomic facts
+> Source: . · https://github.com/mithudso/github-explorer @ 11a8a5b dirty
+> Generated: 2026-09-29 by crawl-repo-to-llms v1.2.0
+> Census: 72 enumerated / 17 deep-read / 55 shallow · partial: remaining metadata cards shallow; no index probes
+
+Package: github-explorer; version: 0.1.1. [src: pyproject.toml]
+Purpose: A standalone terminal workbench for the full installed GitHub CLI. [src: pyproject.toml]
+Requires Python >=3.11. [src: pyproject.toml]
+Runtime dependencies: textual>=8,<9, rich>=13. [src: pyproject.toml]
+scripts/check_doc_indexes.py: Check source paths, hashes and generated documentation without application probes. [src: scripts/check_doc_indexes.py]
+scripts/generate_ops_registry_doc.py: Generate public operation metadata without importing the application or invoking gh. [src: scripts/generate_ops_registry_doc.py]
+scripts/generate_repo_indexes.py: Generate portable static repository indexes without importing application code. [src: scripts/generate_repo_indexes.py]
+scripts/rotate_workflow_logs.py: Archive old workflow sections, preserving headers and recent continuation context. [src: scripts/rotate_workflow_logs.py]
+src/github_explorer/__init__.py: Standalone GitHub Explorer and its reusable Textual screen. [src: src/github_explorer/__init__.py]
+src/github_explorer/app.py: Standalone host; the panel remains embeddable in another Textual App. [src: src/github_explorer/app.py]
+src/github_explorer/catalog.py: Read the installed CLI's built-in reference; do not run aliases or extensions. [src: src/github_explorer/catalog.py]
+src/github_explorer/operations.py: Declarative inventory for maintainers; never executes or retries commands. [src: src/github_explorer/operations.py]
+src/github_explorer/panel.py: Reusable GitHub control screen. Depends only on Textual and this package. [src: src/github_explorer/panel.py]
+src/github_explorer/runner.py: Shell-free command execution with cancellation and bounded captured output. [src: src/github_explorer/runner.py]
+tests/test_doc_indexes.py: Exercise stale, deleted and newly added sources in isolated fixture repositories. [src: tests/test_doc_indexes.py]
+tests/test_maintenance.py: Regression checks for maintenance writes and static operation metadata. [src: tests/test_maintenance.py]

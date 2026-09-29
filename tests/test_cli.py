@@ -1,4 +1,5 @@
 import json
+import subprocess
 
 import pytest
 from textual.widgets import Button, Label
@@ -46,6 +47,20 @@ def test_catalog_export_never_starts_tui(tmp_path, monkeypatch, capsys):
     assert json.loads(capsys.readouterr().out) == [
         {"command": "repo view", "description": "View a repository", "external": False}
     ]
+
+
+def test_catalog_timeout_exits_without_traceback(tmp_path, monkeypatch, capsys):
+    monkeypatch.setattr(cli, "executable", lambda: "/mock/gh")
+    monkeypatch.setattr(catalog, "executable", lambda: "/mock/gh")
+
+    def timeout(*args, **kwargs):
+        raise subprocess.TimeoutExpired(args[0], kwargs["timeout"])
+
+    monkeypatch.setattr(catalog.subprocess, "run", timeout)
+    with pytest.raises(SystemExit) as result:
+        cli.main(["--cwd", str(tmp_path), "--list-commands"])
+    assert result.value.code == 1
+    assert "timed out" in capsys.readouterr().err
 
 
 async def test_standalone_host_branding_context_and_quit(tmp_path, monkeypatch):

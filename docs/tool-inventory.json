@@ -1,0 +1,7 @@
+{
+  "schemaVersion": 1,
+  "generatedBy": "scripts/generate_ops_registry_doc.py",
+  "totalTools": 0,
+  "tools": [],
+  "reason": "The application exposes no MCP tools or HTTP routes."
+}

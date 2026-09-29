@@ -71,3 +71,19 @@ def test_interactive_uses_normal_terminal(tmp_path, monkeypatch):
     assert runner.run_interactive(command) == 3
     assert "stdin" not in calls[0][1] and "stdout" not in calls[0][1]
     assert calls[0][1]["cwd"] == tmp_path
+
+
+def test_incomplete_utf8_is_replaced_at_eof(tmp_path):
+    chunks = []
+    result = runner.CommandRunner().run(
+        invocation(tmp_path, "import os; os.write(1, b'prefix\\xe2\\x82')"), chunks.append
+    )
+    assert result.output == "prefix\ufffd"
+    assert "".join(chunks) == result.output
+
+
+@pytest.mark.parametrize("timeout", [float("nan"), float("inf"), -1, 0])
+def test_invalid_timeout_cannot_start_a_process(tmp_path, monkeypatch, timeout):
+    monkeypatch.setattr(runner.subprocess, "Popen", lambda *a, **kw: pytest.fail("started"))
+    with pytest.raises(ValueError, match="Timeout"):
+        runner.CommandRunner().run(invocation(tmp_path, "pass"), lambda text: None, timeout)

@@ -1,0 +1,87 @@
+# github-explorer — executable inventory
+> Source: . · https://github.com/mithudso/github-explorer @ 11a8a5b dirty
+> Generated: 2026-09-29 by crawl-repo-to-llms v1.2.0
+> Census: 72 enumerated / 17 deep-read / 55 shallow · partial: remaining metadata cards shallow; no index probes
+
+## Entrypoints
+`github-explorer` → `github_explorer.__main__:main`. [src: pyproject.toml#project.scripts]
+`ghx` → `github_explorer.__main__:main`. [src: pyproject.toml#project.scripts]
+`python -m github_explorer` dispatches the package entrypoint. [src: src/github_explorer/__main__.py]
+`python scripts/check_doc_indexes.py`; inspect its options below before use. [src: scripts/check_doc_indexes.py]
+`python scripts/generate_ops_registry_doc.py`; inspect its options below before use. [src: scripts/generate_ops_registry_doc.py]
+`python scripts/generate_repo_indexes.py`; inspect its options below before use. [src: scripts/generate_repo_indexes.py]
+`python scripts/rotate_workflow_logs.py`; inspect its options below before use. [src: scripts/rotate_workflow_logs.py]
+
+## CI commands
+`uv sync --locked --python ${{ matrix.python }}`. [src: .github/workflows/test.yml]
+`uv run pytest`. [src: .github/workflows/test.yml]
+`uv run ruff check .`. [src: .github/workflows/test.yml]
+`uv run python scripts/generate_ops_registry_doc.py --check`. [src: .github/workflows/test.yml]
+`uv run python scripts/check_doc_indexes.py`. [src: .github/workflows/test.yml]
+`uv build`. [src: .github/workflows/test.yml]
+
+## Options (exact parser call sites)
+Parser definition in scripts/generate_ops_registry_doc.py. [src: scripts/generate_ops_registry_doc.py:66]
+```python
+parser.add_argument("--check", action="store_true", help="Fail if generated files differ")
+```
+Parser definition in scripts/generate_repo_indexes.py. [src: scripts/generate_repo_indexes.py:527]
+```python
+parser.add_argument("--refresh", action="store_true", help="Replace this generator's existing dossier")
+```
+Parser definition in scripts/rotate_workflow_logs.py. [src: scripts/rotate_workflow_logs.py:82]
+```python
+parser.add_argument("--apply", action="store_true", help="Write archives; default is dry run")
+```
+Parser definition in scripts/rotate_workflow_logs.py. [src: scripts/rotate_workflow_logs.py:83]
+```python
+parser.add_argument("--threshold", type=int, default=200_000, help="Rotation size in bytes")
+```
+Parser definition in scripts/rotate_workflow_logs.py. [src: scripts/rotate_workflow_logs.py:84]
+```python
+parser.add_argument("--keep", type=int, default=3, help="Keep this many recent version sections")
+```
+Parser definition in src/github_explorer/__main__.py. [src: src/github_explorer/__main__.py:19]
+```python
+parser.add_argument("--version", action="version", version=__version__)
+```
+Parser definition in src/github_explorer/__main__.py. [src: src/github_explorer/__main__.py:20]
+```python
+parser.add_argument("--cwd", type=Path, default=Path.cwd(), help="Repository working directory")
+```
+Parser definition in src/github_explorer/__main__.py. [src: src/github_explorer/__main__.py:21]
+```python
+parser.add_argument("--repo", default="", help="Optional [HOST/]OWNER/REPO override")
+```
+Parser definition in src/github_explorer/__main__.py. [src: src/github_explorer/__main__.py:22]
+```python
+parser.add_argument(
+        "--list-commands", action="store_true", help="Print the local gh catalog as JSON"
+    )
+```
+
+## Environment
+src/github_explorer/catalog.py references environment names: GH_PAGER, NO_COLOR, PAGER. [src: src/github_explorer/catalog.py]
+src/github_explorer/panel.py references environment names: GH_REPO. [src: src/github_explorer/panel.py]
+src/github_explorer/runner.py references environment names: GH_FORCE_TTY, GH_PAGER, GH_PROMPT_DISABLED, GH_REPO, NO_COLOR, PAGER. [src: src/github_explorer/runner.py]
+The child process inherits the caller's environment; inherited credentials are not enumerated or persisted by this generator. [src: src/github_explorer/runner.py]
+GH_REPO is cleared from the inherited environment, then set from the selected repository when nonempty. [src: src/github_explorer/runner.py#Invocation.environment]
+Captured mode sets GH_PROMPT_DISABLED=1, GH_PAGER=cat, PAGER=cat, NO_COLOR=1 and removes GH_FORCE_TTY. Interactive mode retains normal prompt behavior. [src: src/github_explorer/runner.py#Invocation.environment]
+Catalog help sets GH_PAGER=cat, PAGER=cat and NO_COLOR=1. [src: src/github_explorer/catalog.py#help_text]
+
+## Execution contracts
+Application commands require the installed gh executable and an existing working directory; --repo must have OWNER/REPO or HOST/OWNER/REPO shape. [src: src/github_explorer/__main__.py]
+--list-commands prints a JSON catalog; normal launch opens the Textual UI. [src: src/github_explorer/__main__.py]
+Captured command output is retained in memory; Terminal mode uses the attached terminal. Child commands may change GitHub state after explicit execution. [src: src/github_explorer/runner.py; README.md#execution-behavior]
+Application command options include argparse's implicit -h/--help; explicit options are copied above. [src: src/github_explorer/__main__.py]
+The application has no persistent configuration file of its own; gh uses its existing authentication and configuration. [src: README.md#install-and-run; src/github_explorer/__main__.py]
+Successful CLI completion returns 0; caught OSError/ValueError failures exit 1 with Error on stderr; argparse rejects invalid input. [src: src/github_explorer/__main__.py#main]
+Repository maintenance scripts write their named documentation outputs or validate them; they do not execute gh. [src: scripts/generate_repo_indexes.py; scripts/check_doc_indexes.py]
+generate_repo_indexes.py writes docs/high_signal_file_index.json, docs/codebase-overview.md and the docs/llms/ family. Existing owned output requires --refresh; foreign output is refused. [src: scripts/generate_repo_indexes.py#write]
+check_doc_indexes.py reads the recorded manifest and compares source census and generated contents; it prints diagnostics and exits 1 on drift, or 0 on success. [src: scripts/check_doc_indexes.py#main]
+
+## Quick answers
+run → `github-explorer`, `ghx`, `python -m github_explorer` (Entrypoints). [src: pyproject.toml; src/github_explorer/__main__.py]
+test → `uv run pytest` (CI commands). [src: .github/workflows/test.yml]
+lint → `uv run ruff check .` (CI commands). [src: .github/workflows/test.yml]
+build → `uv build` (CI commands). [src: .github/workflows/test.yml]

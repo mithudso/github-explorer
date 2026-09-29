@@ -4,4 +4,4 @@ from .app import GitHubExplorer
 from .panel import GitHubPanel
 
 __all__ = ["GitHubExplorer", "GitHubPanel"]
-__version__ = "0.1.0"
+__version__ = "0.1.1"

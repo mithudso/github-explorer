@@ -1,0 +1,83 @@
+# github-explorer — static repository reference
+> Source: . · https://github.com/mithudso/github-explorer @ 11a8a5b dirty
+> Generated: 2026-09-29 by crawl-repo-to-llms v1.2.0
+> Census: 72 enumerated / 17 deep-read / 55 shallow · partial: remaining metadata cards shallow; no index probes
+
+## Architecture
+Package: github-explorer; version: 0.1.1. [src: pyproject.toml]
+Purpose: A standalone terminal workbench for the full installed GitHub CLI. [src: pyproject.toml]
+Requires Python >=3.11. [src: pyproject.toml]
+Runtime dependencies: textual>=8,<9, rich>=13. [src: pyproject.toml]
+scripts/check_doc_indexes.py: Check source paths, hashes and generated documentation without application probes. [src: scripts/check_doc_indexes.py]
+scripts/generate_ops_registry_doc.py: Generate public operation metadata without importing the application or invoking gh. [src: scripts/generate_ops_registry_doc.py]
+scripts/generate_repo_indexes.py: Generate portable static repository indexes without importing application code. [src: scripts/generate_repo_indexes.py]
+scripts/rotate_workflow_logs.py: Archive old workflow sections, preserving headers and recent continuation context. [src: scripts/rotate_workflow_logs.py]
+src/github_explorer/__init__.py: Standalone GitHub Explorer and its reusable Textual screen. [src: src/github_explorer/__init__.py]
+src/github_explorer/app.py: Standalone host; the panel remains embeddable in another Textual App. [src: src/github_explorer/app.py]
+src/github_explorer/catalog.py: Read the installed CLI's built-in reference; do not run aliases or extensions. [src: src/github_explorer/catalog.py]
+src/github_explorer/operations.py: Declarative inventory for maintainers; never executes or retries commands. [src: src/github_explorer/operations.py]
+src/github_explorer/panel.py: Reusable GitHub control screen. Depends only on Textual and this package. [src: src/github_explorer/panel.py]
+src/github_explorer/runner.py: Shell-free command execution with cancellation and bounded captured output. [src: src/github_explorer/runner.py]
+tests/test_doc_indexes.py: Exercise stale, deleted and newly added sources in isolated fixture repositories. [src: tests/test_doc_indexes.py]
+tests/test_maintenance.py: Regression checks for maintenance writes and static operation metadata. [src: tests/test_maintenance.py]
+
+## Operations
+`github-explorer` → `github_explorer.__main__:main`. [src: pyproject.toml#project.scripts]
+`ghx` → `github_explorer.__main__:main`. [src: pyproject.toml#project.scripts]
+`python -m github_explorer` dispatches the package entrypoint. [src: src/github_explorer/__main__.py]
+`python scripts/check_doc_indexes.py`; inspect its options below before use. [src: scripts/check_doc_indexes.py]
+`python scripts/generate_ops_registry_doc.py`; inspect its options below before use. [src: scripts/generate_ops_registry_doc.py]
+`python scripts/generate_repo_indexes.py`; inspect its options below before use. [src: scripts/generate_repo_indexes.py]
+`python scripts/rotate_workflow_logs.py`; inspect its options below before use. [src: scripts/rotate_workflow_logs.py]
+
+## Conventions and gotchas
+Use uv sync --locked, uv run pytest, uv run ruff check . and uv build for the documented development workflow. [src: README.md#development]
+Catalog discovery reads local gh help; discovered aliases and extensions can execute external programs when explicitly requested. [src: src/github_explorer/catalog.py]
+Stop cannot undo completed GitHub actions. [src: README.md#execution-behavior]
+Shell expansion, pipelines and redirects are not supported by command execution. [src: README.md#execution-behavior]
+## Development and maintenance
+Restart the app after source changes; no service, database or watch server is required. Select the uv .venv interpreter for the integrated-terminal VS Code launch. [src: docs/DEVELOPMENT.md#prerequisites-and-setup]
+Preserve the discovery/catalog.py, execution/runner.py, reusable UI/panel.py and standalone app.py seams. [src: docs/DEVELOPMENT.md#making-a-change]
+A release change updates pyproject.toml, __init__.py, CHANGELOG.md and the project version in uv.lock together. [src: docs/DEVELOPMENT.md#making-a-change]
+Run `uv run python scripts/generate_ops_registry_doc.py --check` and `uv run python scripts/check_doc_indexes.py` to detect generated-document drift. [src: docs/DEVELOPMENT.md#checks]
+Use tmp_path, monkeypatch, fixture Python children and App.run_test(); verify observable effects and absence of execution before confirmation. [src: docs/TESTING.md#writing-tests]
+No numeric coverage threshold or standalone type-checker is configured. Fixtures do not prove all gh versions, aliases, terminals or Enterprise deployments. [src: docs/TESTING.md#targets-and-ci-gates; docs/TESTING.md#limitations-and-smoke-checks]
+## Runtime boundaries
+The application has no listening port or persistent datastore. Operations metadata is not a second executor. [src: docs/ARCHITECTURE.md#context-and-containers; docs/ARCHITECTURE.md#components]
+Local help calls each time out after 30 seconds. Captured mode defaults to 300 seconds; the UI accepts greater than zero through 86400 seconds. Terminal mode has no application timeout. [src: docs/ARCHITECTURE.md#deployment-and-quality-attributes]
+Confirmation is a UX boundary, not a sandbox: installed gh, aliases and extensions retain the user's permissions and may run other programs. [src: docs/SECURITY.md#principals-and-trust-boundaries; docs/SECURITY.md#stride-review]
+There is no durable command audit trail, central error file or remote telemetry. Sanitize captured text and arguments before copying or reporting them. [src: docs/SECURITY.md#secrets-input-and-output; docs/SECURITY.md#reporting-and-incidents]
+The package exposes and consumes no MCP tools; project MCP configuration contains empty server maps. [src: docs/MCP.md]
+--help and --version require no gh installation; --list-commands needs local gh help only. The ghx and github-explorer launchers are equivalent. [src: docs/INSTALLATION.md]
+Catalog reload replaces the in-memory catalog; captured output retains at most two million characters and the visible log at most 5000 lines. No disk cache exists. [src: docs/caching-and-optimization.md]
+Workflow rotation defaults to dry-run, a 200000-byte threshold and three retained sections; --apply writes archives and editor markers cause refusal. [src: docs/runbooks/metadata-maintenance.md]
+The operation registry is declarative metadata and has no run/history/reset operation CLI. [src: docs/cli-and-operations.md]
+The application has no direct HTTP SDK or configured API base URL; gh chooses endpoints. Repository indexes use static text and JSON with no Ollama process or watcher. [src: docs/integrations-and-assumptions.md]
+## Documentation routing
+docs/ARCHITECTURE.md: Architecture; Context and containers; Components; Runtime views; Deployment and quality attributes; Architectural decisions. [src: docs/ARCHITECTURE.md]
+docs/COMPONENTS.md: Components; Application modules; Embedding example; Inside a Textual 8 App method:; Maintenance tools and tests. [src: docs/COMPONENTS.md]
+docs/DEVELOPMENT.md: Development; Prerequisites and setup; Checks; Making a change; Environment; Troubleshooting. [src: docs/DEVELOPMENT.md]
+docs/INSTALLATION.md: Installation; Prerequisites; Install; Verification; Upgrade and uninstall. [src: docs/INSTALLATION.md]
+docs/MCP.md: MCP applicability. [src: docs/MCP.md]
+docs/SECURITY.md: Security model; Principals and trust boundaries; STRIDE review; Secrets, input, and output; Review checklist; Reporting and incidents. [src: docs/SECURITY.md]
+docs/TESTING.md: Testing; Strategy and suites; Writing tests; Targets and CI gates; Limitations and smoke checks. [src: docs/TESTING.md]
+docs/archive/README.md: . [src: docs/archive/README.md]
+docs/bootstrap-file-report.md: Bootstrap file report. [src: docs/bootstrap-file-report.md]
+docs/caching-and-optimization.md: Caching and performance; In-memory state; Work scheduling and limits; Profiling. [src: docs/caching-and-optimization.md]
+docs/cli-and-operations.md: CLI and operations; User entry points; Maintenance registry. [src: docs/cli-and-operations.md]
+docs/error-monitoring-guide.md: Error diagnosis; Where to look; Failure map; Escalation. [src: docs/error-monitoring-guide.md]
+docs/external-calls.md: External calls; Applicability of the five-standard service contract. [src: docs/external-calls.md]
+docs/integrations-and-assumptions.md: Integrations and assumptions; Runtime boundaries; Assumptions; Development services. [src: docs/integrations-and-assumptions.md]
+docs/known-issues.md: Known limitations and troubleshooting. [src: docs/known-issues.md]
+docs/logging.md: Logging and output; Current approach; Levels and diagnostics; Adding diagnostics. [src: docs/logging.md]
+docs/onboarding.md: Contributor onboarding. [src: docs/onboarding.md]
+docs/repo-bootstrap-audit-2026-09-29.md: Repository bootstrap audit — 2026-09-29; Outcome; Findings and resolution; Applicability decisions; Review coverage; Dependencies and tooling; Remaining scope; Final continuation review. [src: docs/repo-bootstrap-audit-2026-09-29.md]
+docs/requirements.md: Requirements; Functional requirements; Non-functional requirements; Dependencies. [src: docs/requirements.md]
+docs/runbooks/metadata-maintenance.md: Refresh repository metadata; Preconditions; Actions; Verification; Escalation. [src: docs/runbooks/metadata-maintenance.md]
+docs/runbooks/release-and-rollback.md: Prepare a release or roll back an installation; Preconditions; Actions; Verification; Escalation. [src: docs/runbooks/release-and-rollback.md]
+docs/runbooks/troubleshooting.md: Diagnose a local failure; Preconditions; Actions; Verification; Escalation. [src: docs/runbooks/troubleshooting.md]
+
+## Coverage limits
+Source, scripts and tests have curated cards from direct review; remaining metadata cards are shallow. Parser definitions are statically extracted. [src: scripts/generate_repo_indexes.py]
+Agent instructions and workflow logs are inventoried by path and hash only. No private instructions are copied into this dossier. [src: scripts/generate_repo_indexes.py]
+Generated outputs are excluded from the source census to prevent recursive drift. No index, network, gh, or application probes were run for this dossier. [src: scripts/generate_repo_indexes.py]

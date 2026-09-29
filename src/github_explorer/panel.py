@@ -23,6 +23,7 @@ from textual.widgets import (
     TextArea,
     Tree,
 )
+from textual.worker import get_current_worker
 
 from . import catalog, runner
 
@@ -152,13 +153,24 @@ class GitHubPanel(Screen):
 
     @work(thread=True, exclusive=True, group="gh-catalog")
     def load_commands(self):
+        worker = get_current_worker()
         try:
             commands = catalog.load_catalog(self.repo_path)
-            self.app.call_from_thread(self.loaded, commands)
         except Exception as exc:
-            self.app.call_from_thread(self.status, str(exc))
+            if not worker.is_cancelled:
+                self.app.call_from_thread(self.catalog_failed, str(exc), worker)
+        else:
+            if not worker.is_cancelled:
+                self.app.call_from_thread(self.loaded, commands, worker)
 
-    def loaded(self, commands):
+    def catalog_failed(self, message, worker):
+        if self.is_mounted and not worker.is_cancelled:
+            self.status(message)
+
+    def loaded(self, commands, worker):
+        # Cancelling a Textual thread worker does not stop its underlying thread.
+        if not self.is_mounted or worker.is_cancelled:
+            return
         self.commands = commands
         self.filter_commands()
         self.status(
@@ -319,7 +331,7 @@ class GitHubPanel(Screen):
         self.query_one("#gh-terminal", Button).disabled = False
         suffix = " · cancelled" if result.cancelled else " · timed out" if result.timed_out else ""
         if result.truncated:
-            suffix += " · captured output limited to 2 MB"
+            suffix += " · captured output limited to 2 million characters"
         self.status(f"Exit {result.returncode}{suffix}")
         if result.returncode == -1:
             self.write_output(result.output)

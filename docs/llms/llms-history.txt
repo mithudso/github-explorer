@@ -1,0 +1,9 @@
+# github-explorer — history
+> Source: . · https://github.com/mithudso/github-explorer @ 11a8a5b dirty
+> Generated: 2026-09-29 by crawl-repo-to-llms v1.2.0
+> Census: 72 enumerated / 17 deep-read / 55 shallow · partial: remaining metadata cards shallow; no index probes
+
+## Recorded history (up to 200 commits)
+History records the generation snapshot; the checker retains that snapshot across commits. [src: scripts/generate_repo_indexes.py]
+11a8a5b 2026-09-29 docs: record public release verification [src: git]
+ccade9e 2026-09-29 feat: launch standalone GitHub Explorer TUI [src: git]

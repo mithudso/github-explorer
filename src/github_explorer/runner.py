@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import codecs
+import math
 import os
 import selectors
 import shlex
@@ -103,8 +104,8 @@ class CommandRunner:
         on_output: Callable[[str], None],
         timeout: float = 300,
     ) -> Result:
-        if timeout <= 0:
-            raise ValueError("Timeout must be positive")
+        if not math.isfinite(timeout) or timeout <= 0:
+            raise ValueError("Timeout must be finite and positive")
         if self.cancelled.is_set():
             return Result(-1, "", cancelled=True)
         process = subprocess.Popen(
@@ -132,10 +133,9 @@ class CommandRunner:
                         chunk = os.read(key.fd, 8192)
                         if not chunk:
                             selector.unregister(key.fileobj)
-                            continue
-                        text = decoder.decode(chunk)
+                        text = decoder.decode(chunk, final=not chunk)
                         room = max(0, OUTPUT_LIMIT - len(output))
-                        if room:
+                        if room and text:
                             output += text[:room]
                             on_output(text[:room])
                         truncated |= len(text) > room
