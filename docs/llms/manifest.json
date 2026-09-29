@@ -4,11 +4,12 @@
   "schema_version": 1,
   "source": ".",
   "remote": "https://github.com/mithudso/github-explorer",
-  "commit": "99876a0123b43de964be5363be935f9a8ff35e9a",
+  "commit": "59db5c23a7a61c6a265e6769e4b63531a34cd996",
   "branch": "main",
   "generated_at": "2026-09-29",
   "dirty": true,
   "history": [
+    "59db5c2 2026-09-29 build: package GitHub Explorer for Homebrew and npm",
     "99876a0 2026-09-29 feat: embed Vim editing and persistent repository status",
     "fe8ffeb 2026-09-29 Merge pull request #1 from mithudso/release/explorer-0.3.0",
     "bebfa9a 2026-09-29 fix: use supported GitHub funding configuration",

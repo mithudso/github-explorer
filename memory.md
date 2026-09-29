@@ -1,6 +1,6 @@
 # Continuation record
-Version: 15
-Delta: Prepare Homebrew and npm publication with verified release artifacts.
+Version: 16
+Delta: Publish v0.4.1 and the Homebrew tap; npm token rejected; website promotion underway.
 
 ## Request and scope
 Create a standalone GitHub Explorer TUI and public mithudso/github-explorer repository.
@@ -163,3 +163,15 @@ previously installed github-panel and skillsx commands remain unchanged.
 - Homebrew core's age/notability policy makes the author's tap the appropriate channel.
 - Remaining: final archive checksums, release commit/tag/assets, tap publication and npm
   registry publication after login/scope confirmation. Preserve exact tested release files.
+
+## Published distribution state
+- GitHub release: https://github.com/mithudso/github-explorer/releases/tag/v0.4.1
+- Release commit 59db5c2 includes the earlier 99876a0 editor/status changes. Main and v0.4.1 are pushed.
+- GitHub CI run 36646862639 passed all five jobs: macOS/Linux Python 3.11/3.14 and npm packaging.
+- Uploaded wheel, source archive, npm tarball and SHA256SUMS. Re-downloaded all assets and verified hashes.
+- Published Homebrew formula in mithudso/homebrew-tap commit 89eaa72. Rebuilt from the final downloaded archive; brew test, brew style and strict audit pass.
+- Install: brew install mithudso/tap/github-explorer. npm can install the release tarball URL documented in README.
+- The user authorized NPM_TOKEN from the shell configuration. A temporary npm config referenced the token only through the environment. npm whoami rejects it with E401. No token value was printed or committed. Registry publishing still needs valid credentials and account/scope verification.
+- Local Git HTTPS DNS lookup failed while dig resolved github.com. A one-command http.curloptResolve override enabled pushes without changing global networking.
+- Website task is tracked in the LLMS Explorer project as TASK-30, with an isolated worktree /tmp/llms-github-explorer-site. Real screenshots were captured from a clean public repository clone; no repository mutations were executed.
+- Remaining: complete and publish website changes; publish npm registry package after valid authentication.

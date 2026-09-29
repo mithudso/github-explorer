@@ -1,6 +1,6 @@
 # Prompts
-Version: 13
-Delta: Package and submit Homebrew and npm distributions.
+Version: 15
+Delta: Publish distributions, add website promotion and check supplied npm authentication.
 
 ## 2026-09-29
 > Create a new project ~/dev/github-explorer as a standalone TUI using the github-panel as the basis and create a public remote github repo for it.
@@ -42,3 +42,11 @@ The repeated request resumed the interrupted turn before any tool work began.
 
 ## Prompt v13 - 2026-09-29
 > Package all of this up to be submitted to homebrew and npm and then submit it.
+
+## Prompt v14 - 2026-09-29
+> Add this github explorer to the ~/dev/llms-explorer website on the front page and in the Downloads page with screenshots, full description, options, usage, and links to both github and installation and setup instructions.
+
+## Prompt v15 - 2026-09-29
+> The NPM token for publishing is in the ~/.zshrc file as the NPM_TOKEN variable.
+
+Only the variable name and requested credential location are recorded; no credential value is stored.
