@@ -4,11 +4,12 @@
   "schema_version": 1,
   "source": ".",
   "remote": "https://github.com/mithudso/github-explorer",
-  "commit": "fe8ffeb22114ad0bd6467ea9736b76da85c5e2b4",
+  "commit": "99876a0123b43de964be5363be935f9a8ff35e9a",
   "branch": "main",
   "generated_at": "2026-09-29",
   "dirty": true,
   "history": [
+    "99876a0 2026-09-29 feat: embed Vim editing and persistent repository status",
     "fe8ffeb 2026-09-29 Merge pull request #1 from mithudso/release/explorer-0.3.0",
     "bebfa9a 2026-09-29 fix: use supported GitHub funding configuration",
     "2ddcc1b 2026-09-29 docs: record release delivery and refresh repository indexes",
@@ -20,9 +21,9 @@
     "ccade9e 2026-09-29 feat: launch standalone GitHub Explorer TUI"
   ],
   "census": {
-    "enumerated": 80,
+    "enumerated": 87,
     "deep_read": 24,
-    "shallow": 56
+    "shallow": 63
   },
   "files": [
     ".editorconfig",
@@ -58,6 +59,7 @@
     "docs/DEVELOPMENT.md",
     "docs/INSTALLATION.md",
     "docs/MCP.md",
+    "docs/RELEASING.md",
     "docs/SECURITY.md",
     "docs/TESTING.md",
     "docs/archive/README.md",
@@ -78,8 +80,14 @@
     "docs/runbooks/troubleshooting.md",
     "docs/tool-inventory.json",
     "memory.md",
+    "npm/bin/github-explorer.cjs",
+    "npm/check-package.cjs",
+    "npm/package.json",
+    "npm/test/launcher.cjs",
+    "packaging/homebrew/github-explorer.rb",
     "prompts.md",
     "pyproject.toml",
+    "scripts/build_distributions.py",
     "scripts/check_doc_indexes.py",
     "scripts/generate_ops_registry_doc.py",
     "scripts/generate_repo_indexes.py",
@@ -123,19 +131,19 @@
   ],
   "counts_by_role": {
     "config": 7,
-    "docs": 42,
+    "docs": 43,
     "entrypoint": 1,
     "infra": 1,
     "library": 6,
-    "meta": 6,
-    "script": 4,
+    "meta": 11,
+    "script": 5,
     "test": 13
   },
   "counts_by_importance": {
     "critical": 2,
     "high": 8,
-    "normal": 53,
-    "peripheral": 17
+    "normal": 59,
+    "peripheral": 18
   },
   "budget_used": 24,
   "deferred_paths": [
@@ -172,6 +180,7 @@
     "docs/DEVELOPMENT.md",
     "docs/INSTALLATION.md",
     "docs/MCP.md",
+    "docs/RELEASING.md",
     "docs/SECURITY.md",
     "docs/TESTING.md",
     "docs/archive/README.md",
@@ -192,8 +201,14 @@
     "docs/runbooks/troubleshooting.md",
     "docs/tool-inventory.json",
     "memory.md",
+    "npm/bin/github-explorer.cjs",
+    "npm/check-package.cjs",
+    "npm/package.json",
+    "npm/test/launcher.cjs",
+    "packaging/homebrew/github-explorer.rb",
     "prompts.md",
     "pyproject.toml",
+    "scripts/build_distributions.py",
     "uv.lock"
   ],
   "scope": "Whole public file census; source, scripts and tests reviewed; other cards shallow.",
@@ -227,8 +242,8 @@
   "index_probes": "disabled",
   "generated_output_self_indexing": false,
   "executable_inventory": {
-    "entrypoints": 7,
-    "ci_commands": 6,
+    "entrypoints": 8,
+    "ci_commands": 13,
     "explicit_parser_definitions": 9,
     "environment_names": [
       "GH_FORCE_TTY",
@@ -247,7 +262,7 @@
     "method": "AST parser calls and manifest/CI declarations; no target execution"
   },
   "links": {
-    "unverified": 23,
+    "unverified": 46,
     "verified": 0
   }
 }

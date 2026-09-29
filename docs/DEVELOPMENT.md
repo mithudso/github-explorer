@@ -29,7 +29,8 @@ uv run python scripts/check_doc_indexes.py
 
 No standalone type-checker or numeric coverage threshold is configured. See
 [testing](TESTING.md) for behavioral priorities. CI runs checks on pushes and pull
-requests. There is no automated publication/deployment workflow.
+requests. Distribution packaging and publication commands are in [Releasing](RELEASING.md).
+Publication is manual; CI also validates the npm launcher and package contents.
 
 ## Making a change
 

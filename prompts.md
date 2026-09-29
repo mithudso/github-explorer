@@ -1,6 +1,6 @@
 # Prompts
-Version: 12
-Delta: Add embedded Vim editing, repository status and hideable actions.
+Version: 13
+Delta: Package and submit Homebrew and npm distributions.
 
 ## 2026-09-29
 > Create a new project ~/dev/github-explorer as a standalone TUI using the github-panel as the basis and create a public remote github repo for it.
@@ -39,3 +39,6 @@ The repeated request resumed the interrupted turn before any tool work began.
 
 ## Prompt v12 - 2026-09-29
 > When a repository file is selected, the display window on the right should become a vim editor and allow for saving the file. The total number of files changed should be recorded in a statusline at the bottom. Also the hotkey list and buttons at the bottom should be hideable. Also if there are any prs or other branches open for the repo that should be displayed in the status bar as well. As well the current branch should always be displayed in the statusbar as well.
+
+## Prompt v13 - 2026-09-29
+> Package all of this up to be submitted to homebrew and npm and then submit it.

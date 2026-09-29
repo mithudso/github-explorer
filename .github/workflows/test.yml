@@ -18,3 +18,18 @@ jobs:
       - run: uv run python scripts/generate_ops_registry_doc.py --check
       - run: uv run python scripts/check_doc_indexes.py
       - run: uv build
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: uv sync --locked
+      - run: npm --prefix npm test
+      - run: uv run python scripts/build_distributions.py
+      - run: npm pack ./npm --pack-destination dist
+      - run: npm install --prefix /tmp/ghx-npm --ignore-scripts ./dist/*.tgz
+      - run: /tmp/ghx-npm/node_modules/.bin/github-explorer --version
+      - run: /tmp/ghx-npm/node_modules/.bin/ghx --list-commands

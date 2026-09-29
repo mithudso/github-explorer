@@ -1,10 +1,11 @@
 # github-explorer — history
-> Source: . · https://github.com/mithudso/github-explorer @ fe8ffeb dirty
+> Source: . · https://github.com/mithudso/github-explorer @ 99876a0 dirty
 > Generated: 2026-09-29 by crawl-repo-to-llms v1.2.0
-> Census: 80 enumerated / 24 deep-read / 56 shallow · partial: remaining metadata cards shallow; no index probes
+> Census: 87 enumerated / 24 deep-read / 63 shallow · partial: remaining metadata cards shallow; no index probes
 
 ## Recorded history (up to 200 commits)
 History records the generation snapshot; the checker retains that snapshot across commits. [src: scripts/generate_repo_indexes.py]
+99876a0 2026-09-29 feat: embed Vim editing and persistent repository status [src: git]
 fe8ffeb 2026-09-29 Merge pull request #1 from mithudso/release/explorer-0.3.0 [src: git]
 bebfa9a 2026-09-29 fix: use supported GitHub funding configuration [src: git]
 2ddcc1b 2026-09-29 docs: record release delivery and refresh repository indexes [src: git]

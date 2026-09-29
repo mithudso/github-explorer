@@ -1,12 +1,13 @@
 # github-explorer — executable inventory
-> Source: . · https://github.com/mithudso/github-explorer @ fe8ffeb dirty
+> Source: . · https://github.com/mithudso/github-explorer @ 99876a0 dirty
 > Generated: 2026-09-29 by crawl-repo-to-llms v1.2.0
-> Census: 80 enumerated / 24 deep-read / 56 shallow · partial: remaining metadata cards shallow; no index probes
+> Census: 87 enumerated / 24 deep-read / 63 shallow · partial: remaining metadata cards shallow; no index probes
 
 ## Entrypoints
 `github-explorer` → `github_explorer.__main__:main`. [src: pyproject.toml#project.scripts]
 `ghx` → `github_explorer.__main__:main`. [src: pyproject.toml#project.scripts]
 `python -m github_explorer` dispatches the package entrypoint. [src: src/github_explorer/__main__.py]
+`python scripts/build_distributions.py`; inspect its options below before use. [src: scripts/build_distributions.py]
 `python scripts/check_doc_indexes.py`; inspect its options below before use. [src: scripts/check_doc_indexes.py]
 `python scripts/generate_ops_registry_doc.py`; inspect its options below before use. [src: scripts/generate_ops_registry_doc.py]
 `python scripts/generate_repo_indexes.py`; inspect its options below before use. [src: scripts/generate_repo_indexes.py]
@@ -19,6 +20,13 @@
 `uv run python scripts/generate_ops_registry_doc.py --check`. [src: .github/workflows/test.yml]
 `uv run python scripts/check_doc_indexes.py`. [src: .github/workflows/test.yml]
 `uv build`. [src: .github/workflows/test.yml]
+`uv sync --locked`. [src: .github/workflows/test.yml]
+`npm --prefix npm test`. [src: .github/workflows/test.yml]
+`uv run python scripts/build_distributions.py`. [src: .github/workflows/test.yml]
+`npm pack ./npm --pack-destination dist`. [src: .github/workflows/test.yml]
+`npm install --prefix /tmp/ghx-npm --ignore-scripts ./dist/*.tgz`. [src: .github/workflows/test.yml]
+`/tmp/ghx-npm/node_modules/.bin/github-explorer --version`. [src: .github/workflows/test.yml]
+`/tmp/ghx-npm/node_modules/.bin/ghx --list-commands`. [src: .github/workflows/test.yml]
 
 ## Options (exact parser call sites)
 Parser definition in scripts/generate_ops_registry_doc.py. [src: scripts/generate_ops_registry_doc.py:66]

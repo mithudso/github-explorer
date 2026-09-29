@@ -21,3 +21,11 @@ htmlcov/
 *.swo
 *~
 *.rotation-tmp
+
+# Distribution staging
+node_modules/
+*.tgz
+npm/python/
+npm/README.md
+npm/LICENSE
+npm/NOTICE.md

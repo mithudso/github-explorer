@@ -1,0 +1,16 @@
+{
+  "name": "@mithudso/github-explorer",
+  "version": "0.4.1",
+  "description": "GitHub terminal workbench with embedded Vim, repository files and Git/gh commands",
+  "license": "MIT",
+  "homepage": "https://github.com/mithudso/github-explorer#readme",
+  "repository": { "type": "git", "url": "git+https://github.com/mithudso/github-explorer.git", "directory": "npm" },
+  "bugs": { "url": "https://github.com/mithudso/github-explorer/issues" },
+  "bin": { "github-explorer": "bin/github-explorer.cjs", "ghx": "bin/github-explorer.cjs" },
+  "files": ["bin/", "python/", "README.md", "LICENSE", "NOTICE.md"],
+  "engines": { "node": ">=18" },
+  "os": ["darwin", "linux"],
+  "publishConfig": { "access": "public", "registry": "https://registry.npmjs.org/" },
+  "scripts": { "test": "node --test test/*.cjs", "prepack": "node check-package.cjs" },
+  "keywords": ["github", "gh", "git", "tui", "vim", "terminal"]
+}

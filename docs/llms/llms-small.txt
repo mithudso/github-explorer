@@ -1,9 +1,9 @@
 # github-explorer — budget digest
-> Source: . · https://github.com/mithudso/github-explorer @ fe8ffeb dirty
+> Source: . · https://github.com/mithudso/github-explorer @ 99876a0 dirty
 > Generated: 2026-09-29 by crawl-repo-to-llms v1.2.0
-> Census: 80 enumerated / 24 deep-read / 56 shallow · partial: remaining metadata cards shallow; no index probes
+> Census: 87 enumerated / 24 deep-read / 63 shallow · partial: remaining metadata cards shallow; no index probes
 
-Package: github-explorer; version: 0.4.0. [src: pyproject.toml]
+Package: github-explorer; version: 0.4.1. [src: pyproject.toml]
 Purpose: A standalone terminal workbench for the full installed GitHub CLI. [src: pyproject.toml]
 Requires Python >=3.11. [src: pyproject.toml]
 Runtime dependencies: textual>=8,<9, rich>=13, textual-tty>=0.4,<0.5. [src: pyproject.toml]
@@ -30,5 +30,12 @@ src/github_explorer/runner.py — high. [asserted]
 `uv run python scripts/generate_ops_registry_doc.py --check`. [src: .github/workflows/test.yml]
 `uv run python scripts/check_doc_indexes.py`. [src: .github/workflows/test.yml]
 `uv build`. [src: .github/workflows/test.yml]
+`uv sync --locked`. [src: .github/workflows/test.yml]
+`npm --prefix npm test`. [src: .github/workflows/test.yml]
+`uv run python scripts/build_distributions.py`. [src: .github/workflows/test.yml]
+`npm pack ./npm --pack-destination dist`. [src: .github/workflows/test.yml]
+`npm install --prefix /tmp/ghx-npm --ignore-scripts ./dist/*.tgz`. [src: .github/workflows/test.yml]
+`/tmp/ghx-npm/node_modules/.bin/github-explorer --version`. [src: .github/workflows/test.yml]
+`/tmp/ghx-npm/node_modules/.bin/ghx --list-commands`. [src: .github/workflows/test.yml]
 
 See llms-full.txt for limitations and llms-executable.txt for exact parser definitions. [src: scripts/generate_repo_indexes.py]

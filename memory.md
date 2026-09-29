@@ -1,6 +1,6 @@
 # Continuation record
-Version: 14
-Delta: Add embedded Vim editing, persistent repository status and hideable actions.
+Version: 15
+Delta: Prepare Homebrew and npm publication with verified release artifacts.
 
 ## Request and scope
 Create a standalone GitHub Explorer TUI and public mithudso/github-explorer repository.
@@ -141,3 +141,25 @@ previously installed github-panel and skillsx commands remain unchanged.
 - Implementation lesson: hiding actions during Vim changed the terminal dimensions and exposed unstyled blank rows from textual-tty. Textual monochrome rendering raised AttributeError: NoneType has no attribute color in filter.monochrome_style. VimEditor.render_line now applies the widget style to all returned strips; the real-Vim regression resizes and toggles actions with the editor open.
 - Integration lesson: installed gh rejected combined --paginate --slurp --jq with "the --slurp option is not supported with --jq or --template". repository_activity now uses --paginate with per-page projections, parses the JSON object stream, and combines all pages. The fixture includes multiple pages and the live smoke verifies the installed CLI accepts the exact flags.
 - Lifecycle lesson: Textual dispatches mount handlers along the MRO. Calling Terminal.on_mount from VimEditor.on_mount without event.prevent_default started two PTYs and caused "Task was destroyed but it is pending" for HostPort._pump. The editor now prevents repeated default dispatch and the real-Vim test checks a single child starts and exits.
+
+## Distribution request — packaging validated, publication in progress
+- Publish the complete editor/status release through Homebrew and npm.
+- The existing public mithudso/homebrew-tap is the Homebrew distribution target.
+- The unscoped npm name github-explorer belongs to another project. Use an owned scope.
+- npm authentication currently returns E401; account login and scope confirmation are pending.
+- Package the Python application without changing its TUI behavior. Keep runtime dependencies isolated.
+- Version 0.4.1 adds npm/package.json, argv-only Node launchers, three launcher tests,
+  scripts/build_distributions.py, a checksummed Homebrew formula and docs/RELEASING.md.
+- npm ships a wheel and pinned runtime requirements. uv runs the package in an isolated
+  cached environment while preserving the caller's cwd, arguments and terminal.
+- All 90 Python tests and all three Node tests passed. Ruff and metadata/index checks passed.
+- A temporary npm tarball installation reports 0.4.1 through both aliases and discovers 229 commands.
+- Homebrew source installation passed on Apple Silicon. The first build failed with
+  ModuleNotFoundError: No module named 'json' while global site packages were visible.
+  Set virtualenv_install_with_resources system_site_packages: false to isolate the app;
+  the rebuild passed. Do not inherit globally installed Python packages.
+- The public npm name is provisionally @mithudso/github-explorer; registry authentication
+  remains E401. README supplies a GitHub release tarball installation fallback.
+- Homebrew core's age/notability policy makes the author's tap the appropriate channel.
+- Remaining: final archive checksums, release commit/tag/assets, tap publication and npm
+  registry publication after login/scope confirmation. Preserve exact tested release files.

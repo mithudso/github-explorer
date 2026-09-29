@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.4.1 — 2026-09-29
+
+- Package the complete TUI for Homebrew and npm with both command aliases.
+- Pin distribution dependencies and validate packaged installation paths.
+- Add release artifacts, checksums and documented publication commands.
+
 ## 0.4.0 — 2026-09-29
 
 - Edit matching local checkout files in actual Vim embedded in the right pane.

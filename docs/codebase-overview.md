@@ -1,13 +1,14 @@
 # github-explorer — codebase overview
-> Source: . · https://github.com/mithudso/github-explorer @ fe8ffeb dirty
+> Source: . · https://github.com/mithudso/github-explorer @ 99876a0 dirty
 > Generated: 2026-09-29 by crawl-repo-to-llms v1.2.0
-> Census: 80 enumerated / 24 deep-read / 56 shallow · partial: remaining metadata cards shallow; no index probes
+> Census: 87 enumerated / 24 deep-read / 63 shallow · partial: remaining metadata cards shallow; no index probes
 
 ## Architecture
-Package: github-explorer; version: 0.4.0. [src: pyproject.toml]
+Package: github-explorer; version: 0.4.1. [src: pyproject.toml]
 Purpose: A standalone terminal workbench for the full installed GitHub CLI. [src: pyproject.toml]
 Requires Python >=3.11. [src: pyproject.toml]
 Runtime dependencies: textual>=8,<9, rich>=13, textual-tty>=0.4,<0.5. [src: pyproject.toml]
+scripts/build_distributions.py: Stage npm payload and a checksummed Homebrew formula from the locked release. [src: scripts/build_distributions.py]
 scripts/check_doc_indexes.py: Check source paths, hashes and generated documentation without application probes. [src: scripts/check_doc_indexes.py]
 scripts/generate_ops_registry_doc.py: Generate public operation metadata without importing the application or invoking gh. [src: scripts/generate_ops_registry_doc.py]
 scripts/generate_repo_indexes.py: Generate portable static repository indexes without importing application code. [src: scripts/generate_repo_indexes.py]
@@ -25,6 +26,7 @@ tests/test_maintenance.py: Regression checks for maintenance writes and static o
 `github-explorer` → `github_explorer.__main__:main`. [src: pyproject.toml#project.scripts]
 `ghx` → `github_explorer.__main__:main`. [src: pyproject.toml#project.scripts]
 `python -m github_explorer` dispatches the package entrypoint. [src: src/github_explorer/__main__.py]
+`python scripts/build_distributions.py`; inspect its options below before use. [src: scripts/build_distributions.py]
 `python scripts/check_doc_indexes.py`; inspect its options below before use. [src: scripts/check_doc_indexes.py]
 `python scripts/generate_ops_registry_doc.py`; inspect its options below before use. [src: scripts/generate_ops_registry_doc.py]
 `python scripts/generate_repo_indexes.py`; inspect its options below before use. [src: scripts/generate_repo_indexes.py]
@@ -60,6 +62,7 @@ docs/COMPONENTS.md: Components; Application modules; Embedding example; Inside a
 docs/DEVELOPMENT.md: Development; Prerequisites and setup; Checks; Making a change; Environment; Troubleshooting. [src: docs/DEVELOPMENT.md]
 docs/INSTALLATION.md: Installation; Prerequisites; Install; Verification; Upgrade and uninstall. [src: docs/INSTALLATION.md]
 docs/MCP.md: MCP applicability. [src: docs/MCP.md]
+docs/RELEASING.md: Distribution and releases; Release procedure. [src: docs/RELEASING.md]
 docs/SECURITY.md: Security model; Principals and trust boundaries; STRIDE review; Secrets, input, and output; Review checklist; Reporting and incidents; Embedded editor; Repository browsing and settings. [src: docs/SECURITY.md]
 docs/TESTING.md: Testing; Strategy and suites; Writing tests; Targets and CI gates; Limitations and smoke checks. [src: docs/TESTING.md]
 docs/archive/README.md: . [src: docs/archive/README.md]
@@ -127,6 +130,7 @@ Generated outputs are excluded from the source census to prevent recursive drift
 - docs/DEVELOPMENT.md: Docs file; semantic purpose requires source review. [asserted]
 - docs/INSTALLATION.md: Docs file; semantic purpose requires source review. [asserted]
 - docs/MCP.md: Docs file; semantic purpose requires source review. [asserted]
+- docs/RELEASING.md: Docs file; semantic purpose requires source review. [asserted]
 - docs/SECURITY.md: Docs file; semantic purpose requires source review. [asserted]
 - docs/TESTING.md: Docs file; semantic purpose requires source review. [asserted]
 - docs/bootstrap-file-report.md: Docs file; semantic purpose requires source review. [asserted]
@@ -148,7 +152,17 @@ Generated outputs are excluded from the source census to prevent recursive drift
 - docs/runbooks/metadata-maintenance.md: Docs file; semantic purpose requires source review. [asserted]
 - docs/runbooks/release-and-rollback.md: Docs file; semantic purpose requires source review. [asserted]
 - docs/runbooks/troubleshooting.md: Docs file; semantic purpose requires source review. [asserted]
+### npm
+- npm/check-package.cjs: Meta file; semantic purpose requires source review. [asserted]
+- npm/package.json: Meta file; semantic purpose requires source review. [asserted]
+### npm/bin
+- npm/bin/github-explorer.cjs: Meta file; semantic purpose requires source review. [asserted]
+### npm/test
+- npm/test/launcher.cjs: Meta file; semantic purpose requires source review. [asserted]
+### packaging/homebrew
+- packaging/homebrew/github-explorer.rb: Meta file; semantic purpose requires source review. [asserted]
 ### scripts
+- scripts/build_distributions.py: Script file; semantic purpose requires source review. Key symbols: main. [asserted]
 - scripts/check_doc_indexes.py: Compare the current source census and regenerated contents with committed indexes. Key symbols: check, main. [src: scripts/check_doc_indexes.py]
 - scripts/generate_ops_registry_doc.py: Parse OPERATIONS with AST and generate the operations registry and empty tool inventory. Key symbols: render, write_outputs, main. [src: scripts/generate_ops_registry_doc.py]
 - scripts/generate_repo_indexes.py: Generate static file indexes and the provenance-tagged repository dossier. Key symbols: git, included, census, role, importance, read_public, safe_remote, snapshot, code_inventory, json_text, render, write. [src: scripts/generate_repo_indexes.py]

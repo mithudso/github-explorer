@@ -1,10 +1,10 @@
 # github-explorer — infrastructure and links
-> Source: . · https://github.com/mithudso/github-explorer @ fe8ffeb dirty
+> Source: . · https://github.com/mithudso/github-explorer @ 99876a0 dirty
 > Generated: 2026-09-29 by crawl-repo-to-llms v1.2.0
-> Census: 80 enumerated / 24 deep-read / 56 shallow · partial: remaining metadata cards shallow; no index probes
+> Census: 87 enumerated / 24 deep-read / 63 shallow · partial: remaining metadata cards shallow; no index probes
 
 ## Toolchain and CI
-Package: github-explorer; version: 0.4.0. [src: pyproject.toml]
+Package: github-explorer; version: 0.4.1. [src: pyproject.toml]
 Purpose: A standalone terminal workbench for the full installed GitHub CLI. [src: pyproject.toml]
 Requires Python >=3.11. [src: pyproject.toml]
 Runtime dependencies: textual>=8,<9, rich>=13, textual-tty>=0.4,<0.5. [src: pyproject.toml]
@@ -14,6 +14,13 @@ Runtime dependencies: textual>=8,<9, rich>=13, textual-tty>=0.4,<0.5. [src: pypr
 `uv run python scripts/generate_ops_registry_doc.py --check`. [src: .github/workflows/test.yml]
 `uv run python scripts/check_doc_indexes.py`. [src: .github/workflows/test.yml]
 `uv build`. [src: .github/workflows/test.yml]
+`uv sync --locked`. [src: .github/workflows/test.yml]
+`npm --prefix npm test`. [src: .github/workflows/test.yml]
+`uv run python scripts/build_distributions.py`. [src: .github/workflows/test.yml]
+`npm pack ./npm --pack-destination dist`. [src: .github/workflows/test.yml]
+`npm install --prefix /tmp/ghx-npm --ignore-scripts ./dist/*.tgz`. [src: .github/workflows/test.yml]
+`/tmp/ghx-npm/node_modules/.bin/github-explorer --version`. [src: .github/workflows/test.yml]
+`/tmp/ghx-npm/node_modules/.bin/ghx --list-commands`. [src: .github/workflows/test.yml]
 
 ## Environment
 src/github_explorer/catalog.py references environment names: GH_PAGER, NO_COLOR, PAGER. [src: src/github_explorer/catalog.py]
@@ -25,15 +32,38 @@ https://venmo.com/Mitchphudson — unverified; no network reachability probe. [s
 https://www.paypal.com/ncp/payment/8WLQPBK6PHFX2 — unverified; no network reachability probe. [src: .github/FUNDING.yml]
 https://github.com/mithudso — unverified; no network reachability probe. [src: .github/SECURITY.md]
 https://github.com/mithudso — unverified; no network reachability probe. [src: CODE_OF_CONDUCT.md]
-https://cli.github.com/ — unverified; no network reachability probe. [src: README.md]
+https://docs.astral.sh/uv/getting-started/installation/ — unverified; no network reachability probe. [src: README.md]
 https://github.com/mithudso/github-explorer.git — unverified; no network reachability probe. [src: README.md]
+https://github.com/mithudso/github-explorer/releases/download/v0.4.1/mithudso-github-explorer-0.4.1.tgz — unverified; no network reachability probe. [src: README.md]
 https://HOST/OWNER/REPO — unverified; no network reachability probe. [src: docs/ARCHITECTURE.md]
 https://docs.github.com/en/rest/git/trees#get-a-tree — unverified; no network reachability probe. [src: docs/ARCHITECTURE.md]
 https://github.com/cli/cli/blob/trunk/pkg/cmd/repo/edit/edit.go — unverified; no network reachability probe. [src: docs/ARCHITECTURE.md]
 https://github.com/mithudso/github-explorer.git — unverified; no network reachability probe. [src: docs/INSTALLATION.md]
+https://docs.brew.sh/Package-Acceptance-Policy — unverified; no network reachability probe. [src: docs/RELEASING.md]
 https://docs.astral.sh/uv/guides/integration/dependabot/ — unverified; no network reachability probe. [src: docs/repo-bootstrap-audit-2026-09-29.md]
+https://docs.astral.sh/uv/getting-started/installation/' — unverified; no network reachability probe. [src: npm/bin/github-explorer.cjs]
+https://github.com/mithudso/github-explorer#readme — unverified; no network reachability probe. [src: npm/package.json]
+https://github.com/mithudso/github-explorer.git — unverified; no network reachability probe. [src: npm/package.json]
+https://github.com/mithudso/github-explorer/issues — unverified; no network reachability probe. [src: npm/package.json]
+https://registry.npmjs.org/ — unverified; no network reachability probe. [src: npm/package.json]
+https://files.pythonhosted.org/packages/00/21/39a76b01bd5eea82a04baaca7580e105d8c59450df03998345bb2cfb307b/textual-8.2.8.tar.gz — unverified; no network reachability probe. [src: packaging/homebrew/github-explorer.rb]
+https://files.pythonhosted.org/packages/06/ff/7841249c247aa650a76b9ee4bbaeae59370dc8bfd2f6c01f3630c35eb134/markdown_it_py-4.2.0.tar.gz — unverified; no network reachability probe. [src: packaging/homebrew/github-explorer.rb]
+https://files.pythonhosted.org/packages/17/c8/721b3855fe457da514fe249247d404b9b39c5d16532278f70ebaa6acf18b/platformdirs-4.12.2.tar.gz — unverified; no network reachability probe. [src: packaging/homebrew/github-explorer.rb]
+https://files.pythonhosted.org/packages/45/98/7a1a5f31fd5c7ba93e963b168e244b8e3dd705b3d2a718e3c3307583bf57/linkify_it_py-2.2.0.tar.gz — unverified; no network reachability probe. [src: packaging/homebrew/github-explorer.rb]
+https://files.pythonhosted.org/packages/49/2e/ced460408999b33da6b31b0021b0f37d329e202d4169aeb164493778f25b/pygments-2.21.0.tar.gz — unverified; no network reachability probe. [src: packaging/homebrew/github-explorer.rb]
+https://files.pythonhosted.org/packages/59/fc/f8d0863f8862f25602c0404d75568e89fb6b4109804645e5cdfb1be5cf56/mdit_py_plugins-0.6.1.tar.gz — unverified; no network reachability probe. [src: packaging/homebrew/github-explorer.rb]
+https://files.pythonhosted.org/packages/75/c9/c48fb1a0e861455321f1df92b0eef84a526c455c13f45bc444eb57cae663/bittty-0.1.4.tar.gz — unverified; no network reachability probe. [src: packaging/homebrew/github-explorer.rb]
+https://files.pythonhosted.org/packages/c0/8f/0722ca900cc807c13a6a0c696dacf35430f72e0ec571c4275d2371fca3e9/rich-15.0.0.tar.gz — unverified; no network reachability probe. [src: packaging/homebrew/github-explorer.rb]
+https://files.pythonhosted.org/packages/d6/54/cfe61301667036ec958cb99bd3efefba235e65cdeb9c84d24a8293ba1d90/mdurl-0.1.2.tar.gz — unverified; no network reachability probe. [src: packaging/homebrew/github-explorer.rb]
+https://files.pythonhosted.org/packages/dc/ac/3a943d2792c9bb368aaa8b50121c0f778460ba2d7fbdc0a0366201d9e761/wcwidth-0.9.1.tar.gz — unverified; no network reachability probe. [src: packaging/homebrew/github-explorer.rb]
+https://files.pythonhosted.org/packages/f6/cc/6253133b5bb138fc3306cebfbda2c520f545d36b5be2c7255cc528bb45d6/typing_extensions-4.16.0.tar.gz — unverified; no network reachability probe. [src: packaging/homebrew/github-explorer.rb]
+https://files.pythonhosted.org/packages/fd/7f/3f0685a8f1d5502a79b8e964959397a233ce7909cae89fe314216e5f6c76/textual_tty-0.4.0.tar.gz — unverified; no network reachability probe. [src: packaging/homebrew/github-explorer.rb]
+https://github.com/mithudso/github-explorer — unverified; no network reachability probe. [src: packaging/homebrew/github-explorer.rb]
+https://github.com/mithudso/github-explorer/releases/download/v0.4.1/github_explorer-0.4.1.tar.gz — unverified; no network reachability probe. [src: packaging/homebrew/github-explorer.rb]
 https://github.com/mithudso/github-explorer — unverified; no network reachability probe. [src: pyproject.toml]
 https://github.com/mithudso/github-explorer/issues — unverified; no network reachability probe. [src: pyproject.toml]
+https://github.com/mithudso/github-explorer — unverified; no network reachability probe. [src: scripts/build_distributions.py]
+https://github.com/mithudso/github-explorer/releases/download/vVERSION/github_explorer-VERSION.tar.gz — unverified; no network reachability probe. [src: scripts/build_distributions.py]
 https://[^\s — unverified; no network reachability probe. [src: scripts/generate_repo_indexes.py]
 https://github.com/ — unverified; no network reachability probe. [src: scripts/generate_repo_indexes.py]
 https://github.com/owner/repo — unverified; no network reachability probe. [src: tests/test_doc_indexes.py]

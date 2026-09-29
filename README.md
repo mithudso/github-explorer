@@ -8,16 +8,42 @@ Built from the reusable GitHub panel with a public, self-contained Python packag
 
 ## Install and run
 
-Requires Python 3.11+, [GitHub CLI](https://cli.github.com/) and Git on PATH, and a terminal.
-Install Vim (`vim` on PATH) for embedded file editing.
-macOS and Linux are supported. Authenticate using your existing `gh` configuration:
+macOS and Linux are supported. Homebrew installs Python, GitHub CLI, Git, Vim and
+an isolated application environment:
 
 ```sh
+brew install mithudso/tap/github-explorer
 gh auth login
-uv tool install git+https://github.com/mithudso/github-explorer.git
 github-explorer --cwd ~/dev/my-project
 # Short alias:
 ghx --cwd ~/dev/my-project
+```
+
+For npm, install [uv](https://docs.astral.sh/uv/getting-started/installation/),
+GitHub CLI, Git and Vim on PATH first. Requires Node.js 18+. The scoped package
+bundles this release's Python application and pins its dependencies. uv sets up
+its cached Python environment on first launch (network access required):
+
+The registry release is pending publisher authentication. Until it is published,
+install the npm tarball from the GitHub release:
+
+```sh
+npm install -g https://github.com/mithudso/github-explorer/releases/download/v0.4.1/mithudso-github-explorer-0.4.1.tgz
+```
+
+Once published to the registry:
+
+```sh
+npm install -g @mithudso/github-explorer
+github-explorer --cwd ~/dev/my-project
+# Or run without a global npm install:
+npx @mithudso/github-explorer --cwd ~/dev/my-project
+```
+
+Python users can install the tagged source directly:
+
+```sh
+uv tool install git+https://github.com/mithudso/github-explorer.git@v0.4.1
 ```
 
 From a checkout:
