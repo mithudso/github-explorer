@@ -14,7 +14,9 @@ limited to 5000 lines. Terminal execution delegates streams to the terminal and
 does not capture its output. Explicit Copy output asks Textual to copy the last
 captured result. Clear output clears the displayed/captured result when idle.
 
-Repository files, selected file text and settings snapshots also remain in memory.
+Remote previews, editor terminal output and settings snapshots remain in memory.
+Vim writes local source files only through explicit saves; configuration/plugins,
+swap, backup, persistent undo and viminfo are disabled by its launch arguments.
 Automatic reads surface failures in the file or settings status and never write
 response bodies to disk. These reads do not populate Copy output.
 

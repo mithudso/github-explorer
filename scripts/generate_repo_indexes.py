@@ -55,13 +55,13 @@ REVIEWED = {
         "Changing help parsing, external-command classification or discovery errors.",
         "load_catalog → help_text → parse_catalog; flags_from_help; QUICK_ACTIONS; git_commands", [], "tests/test_catalog.py"),
     "src/github_explorer/runner.py": (
-        "Prepare shell-free argv, run child processes and read GitHub repository metadata, trees and blobs.",
+        "Prepare command and Vim argv; validate local files and read checkout status and GitHub activity.",
         "Execution shares repository context, bounded capture, cancellation and timeout semantics.",
         "Changing argument handling, subprocess cleanup, output decoding or environment isolation.",
         "prepare → Invocation.environment → CommandRunner.run; run_interactive",
         ["src/github_explorer/catalog.py"], "tests/test_runner.py"),
     "src/github_explorer/panel.py": (
-        "Compose file browsing, CLI controls, shortcuts, directional navigation, settings and confirmation.",
+        "Compose file browsing, embedded Vim, persistent status, hideable actions, settings and confirmation.",
         "One screen connects discovery and execution while keeping explicit user confirmation.",
         "Changing arrow navigation, quick actions, asynchronous refresh, previews or host integration.",
         "GitHubPanel.compose → load_commands/loaded → request_run → start_command/execute; CommandConfirm",
@@ -124,6 +124,18 @@ REVIEWED = {
         "Fixture Python children verify process behavior without GitHub side effects.",
         "Changing process execution, environment controls or bounded output handling.", "invocation; test_cancel_timeout_and_output_limit; test_incomplete_utf8_is_replaced_at_eof",
         ["src/github_explorer/runner.py"], "tests/test_runner.py"),
+    "tests/test_workspace.py": (
+        "Verify Git fixture status, safe editing paths, checkout identity and paginated activity reads.",
+        "Local writes must not follow remote override identity or unsafe paths.",
+        "Changing workspace discovery, file validation, Vim argv or status parsing.",
+        "checkout; test_real_git_counts_unique_changes_and_current_branch; test_editable_file_boundaries",
+        ["src/github_explorer/runner.py"], "tests/test_workspace.py"),
+    "tests/test_editor_status.py": (
+        "Exercise actual Vim on temporary files, save/switch/quit guards and persistent status.",
+        "Editor integration must preserve unsaved buffers and keep status visible when actions hide.",
+        "Changing Vim integration, status polling or action visibility.",
+        "local_files; test_real_vim_saves_and_protects_unsaved_file_switch",
+        ["src/github_explorer/panel.py", "src/github_explorer/runner.py", "src/github_explorer/app.py"], "tests/test_editor_status.py"),
     "tests/test_shortcuts.py": (
         "Verify all twelve common command buttons and hotkeys, confirmations and responsive layout.",
         "Git and GitHub shortcuts must retain explicit execution and the correct context.",
@@ -397,7 +409,7 @@ def render(root: Path, metadata: dict | None = None) -> dict[str, str]:
     architecture = ["## Architecture", *facts, "", "## Operations", *commands,
                     "", "## Conventions and gotchas",
                     "Use uv sync --locked, uv run pytest, uv run ruff check . and uv build for the documented development workflow. [src: README.md#development]",
-                    "Opening the panel reads GitHub repository metadata and default-branch files; selecting a file reads its blob. Settings options come from local gh repo edit help and require confirmed changes. [src: src/github_explorer/panel.py; src/github_explorer/runner.py]",
+                    "Opening the panel reads local Git and GitHub metadata. Matching checkouts list local files for Vim editing; remote-only contexts use read-only default-branch previews. Persistent status shows branch, changed files, PRs and other branches. [src: src/github_explorer/panel.py; src/github_explorer/runner.py]",
                     "Catalog discovery reads local gh help; discovered aliases and extensions can execute external programs when explicitly requested. [src: src/github_explorer/catalog.py]",
                     "Stop cannot undo completed local or remote actions. [src: README.md#execution-behavior]",
                     "Shell expansion, pipelines and redirects are not supported by command execution. [src: README.md#execution-behavior]",

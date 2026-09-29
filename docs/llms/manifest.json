@@ -4,11 +4,13 @@
   "schema_version": 1,
   "source": ".",
   "remote": "https://github.com/mithudso/github-explorer",
-  "commit": "2ddcc1bc6f333eadefe957670d8ea161edb32143",
-  "branch": "release/explorer-0.3.0",
+  "commit": "fe8ffeb22114ad0bd6467ea9736b76da85c5e2b4",
+  "branch": "main",
   "generated_at": "2026-09-29",
   "dirty": true,
   "history": [
+    "fe8ffeb 2026-09-29 Merge pull request #1 from mithudso/release/explorer-0.3.0",
+    "bebfa9a 2026-09-29 fix: use supported GitHub funding configuration",
     "2ddcc1b 2026-09-29 docs: record release delivery and refresh repository indexes",
     "c9faa57 2026-09-29 chore: add GitHub funding configuration (.github/FUNDING.yml)",
     "d541f15 2026-09-29 feat: add command shortcuts and directional TUI navigation",
@@ -18,8 +20,8 @@
     "ccade9e 2026-09-29 feat: launch standalone GitHub Explorer TUI"
   ],
   "census": {
-    "enumerated": 78,
-    "deep_read": 22,
+    "enumerated": 80,
+    "deep_read": 24,
     "shallow": 56
   },
   "files": [
@@ -93,6 +95,7 @@
     "tests/test_catalog.py",
     "tests/test_cli.py",
     "tests/test_doc_indexes.py",
+    "tests/test_editor_status.py",
     "tests/test_maintenance.py",
     "tests/test_navigation.py",
     "tests/test_panel.py",
@@ -100,6 +103,7 @@
     "tests/test_repository_panel.py",
     "tests/test_runner.py",
     "tests/test_shortcuts.py",
+    "tests/test_workspace.py",
     "uv.lock"
   ],
   "outputs": [
@@ -125,15 +129,15 @@
     "library": 6,
     "meta": 6,
     "script": 4,
-    "test": 11
+    "test": 13
   },
   "counts_by_importance": {
     "critical": 2,
     "high": 8,
     "normal": 53,
-    "peripheral": 15
+    "peripheral": 17
   },
-  "budget_used": 22,
+  "budget_used": 24,
   "deferred_paths": [
     ".editorconfig",
     ".env.example",
@@ -243,7 +247,7 @@
     "method": "AST parser calls and manifest/CI declarations; no target execution"
   },
   "links": {
-    "unverified": 19,
+    "unverified": 23,
     "verified": 0
   }
 }

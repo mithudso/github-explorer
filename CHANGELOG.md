@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.4.0 — 2026-09-29
+
+- Edit matching local checkout files in actual Vim embedded in the right pane.
+- Save with :w, Ctrl+S or Save; preserve Vim's unsaved-file switch and close prompts.
+- Keep remote-only repositories read-only and reject unsafe/non-text local paths.
+- Show current branch, distinct changed files, open PRs and other branches in persistent status.
+- Add a status details/refresh dialog and hide/show controls for bottom buttons and shortcuts.
+
 ## 0.3.0 — 2026-09-29
 
 - Add twelve common Git/GitHub actions as bottom buttons and F1–F12 hotkeys.

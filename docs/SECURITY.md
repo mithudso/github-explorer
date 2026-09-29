@@ -57,11 +57,26 @@ remote telemetry, on-call service, or promised response SLA. The app makes no
 compliance certification or data-residency claim; GitHub CLI decides where its
 network requests go based on its configuration and the executed command.
 
+## Embedded editor
+
+Only a matching local checkout enables editing. Matching resolves the checkout's
+GitHub identity without the selected repository override. Paths must remain inside
+the checkout and cannot traverse symlinks or `.git`; only existing UTF-8 text files
+up to 500 KB open in Vim. Remote previews never become local file contents.
+
+Vim runs as literal argv in a PTY, with configuration/plugins, modelines, swap,
+backups, persistent undo and viminfo disabled. Editor output stays in memory.
+Explicit saves persist the selected file. Vim still has the user's privileges;
+intentional Vim commands can access other paths or launch other programs. This
+is an editor integration, not a sandbox. Vim handles write errors, on-disk changes
+and unsaved buffer prompts. Explorer guards normal close and standalone Ctrl+Q;
+forced process termination and embedding hosts remain outside those guards.
+
 ## Repository browsing and settings
 
-Startup performs read-only repository discovery and Git tree requests. Selected
-files are read by blob SHA and displayed as literal text; no remote path is opened
-as a local filesystem path. File contents and settings snapshots remain in memory.
+Startup performs read-only repository discovery, local Git reads and PR/branch
+requests. Remote-only files are read by blob SHA and displayed as literal text;
+remote preview bytes are never written into a checkout. File contents and settings snapshots remain in memory.
 Previews are limited to 500 KB. Truncated API output is rejected. All API reads use
 explicit GET and the host resolved by `gh repo view`; Enterprise repositories retain
 their host. Repository edit commands pin an explicit target and require confirmation.

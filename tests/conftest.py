@@ -15,3 +15,7 @@ def ui_repository(monkeypatch):
         ),
     )
     monkeypatch.setattr(runner, "repository_files", lambda repository, executor: [])
+    def no_checkout(cwd, executor):
+        raise ValueError("Fixture has no local checkout")
+    monkeypatch.setattr(runner, "workspace_status", no_checkout)
+    monkeypatch.setattr(runner, "repository_activity", lambda repository, executor: ([], []))

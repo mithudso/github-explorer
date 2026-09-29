@@ -21,8 +21,8 @@ for failures and [testing](TESTING.md) for test limitations.
 
 ## Repository browser and settings boundaries
 
-The browser shows GitHub's default branch, not the local checkout or unpushed
-changes. Large trees require multiple read-only requests and may hit API limits;
+Matching local checkouts show current-branch tracked/untracked files and support
+Vim editing. Remote-only and mismatched repositories show read-only default-branch files. Large trees require multiple read-only requests and may hit API limits;
 Refresh files retries after the cause is resolved. Previews omit binary/non-UTF-8
 files and blobs larger than 500 KB. Settings values unavailable through the REST
 response are labeled unknown; the user can still select and submit supported CLI

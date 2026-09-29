@@ -1,7 +1,7 @@
 # github-explorer — executable inventory
-> Source: . · https://github.com/mithudso/github-explorer @ 2ddcc1b dirty
+> Source: . · https://github.com/mithudso/github-explorer @ fe8ffeb dirty
 > Generated: 2026-09-29 by crawl-repo-to-llms v1.2.0
-> Census: 78 enumerated / 22 deep-read / 56 shallow · partial: remaining metadata cards shallow; no index probes
+> Census: 80 enumerated / 24 deep-read / 56 shallow · partial: remaining metadata cards shallow; no index probes
 
 ## Entrypoints
 `github-explorer` → `github_explorer.__main__:main`. [src: pyproject.toml#project.scripts]
@@ -25,7 +25,7 @@ Parser definition in scripts/generate_ops_registry_doc.py. [src: scripts/generat
 ```python
 parser.add_argument("--check", action="store_true", help="Fail if generated files differ")
 ```
-Parser definition in scripts/generate_repo_indexes.py. [src: scripts/generate_repo_indexes.py:555]
+Parser definition in scripts/generate_repo_indexes.py. [src: scripts/generate_repo_indexes.py:567]
 ```python
 parser.add_argument("--refresh", action="store_true", help="Replace this generator's existing dossier")
 ```

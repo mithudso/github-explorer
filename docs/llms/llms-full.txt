@@ -1,13 +1,13 @@
 # github-explorer — static repository reference
-> Source: . · https://github.com/mithudso/github-explorer @ 2ddcc1b dirty
+> Source: . · https://github.com/mithudso/github-explorer @ fe8ffeb dirty
 > Generated: 2026-09-29 by crawl-repo-to-llms v1.2.0
-> Census: 78 enumerated / 22 deep-read / 56 shallow · partial: remaining metadata cards shallow; no index probes
+> Census: 80 enumerated / 24 deep-read / 56 shallow · partial: remaining metadata cards shallow; no index probes
 
 ## Architecture
-Package: github-explorer; version: 0.3.0. [src: pyproject.toml]
+Package: github-explorer; version: 0.4.0. [src: pyproject.toml]
 Purpose: A standalone terminal workbench for the full installed GitHub CLI. [src: pyproject.toml]
 Requires Python >=3.11. [src: pyproject.toml]
-Runtime dependencies: textual>=8,<9, rich>=13. [src: pyproject.toml]
+Runtime dependencies: textual>=8,<9, rich>=13, textual-tty>=0.4,<0.5. [src: pyproject.toml]
 scripts/check_doc_indexes.py: Check source paths, hashes and generated documentation without application probes. [src: scripts/check_doc_indexes.py]
 scripts/generate_ops_registry_doc.py: Generate public operation metadata without importing the application or invoking gh. [src: scripts/generate_ops_registry_doc.py]
 scripts/generate_repo_indexes.py: Generate portable static repository indexes without importing application code. [src: scripts/generate_repo_indexes.py]
@@ -16,7 +16,7 @@ src/github_explorer/__init__.py: Standalone GitHub Explorer and its reusable Tex
 src/github_explorer/app.py: Standalone host; the panel remains embeddable in another Textual App. [src: src/github_explorer/app.py]
 src/github_explorer/catalog.py: Read the installed CLI's built-in reference; do not run aliases or extensions. [src: src/github_explorer/catalog.py]
 src/github_explorer/operations.py: Declarative inventory for maintainers; never executes or retries commands. [src: src/github_explorer/operations.py]
-src/github_explorer/panel.py: Reusable GitHub control screen. Depends only on Textual and this package. [src: src/github_explorer/panel.py]
+src/github_explorer/panel.py: Reusable GitHub control screen with an embedded Vim terminal. [src: src/github_explorer/panel.py]
 src/github_explorer/runner.py: Shell-free command execution with cancellation and bounded captured output. [src: src/github_explorer/runner.py]
 tests/test_doc_indexes.py: Exercise stale, deleted and newly added sources in isolated fixture repositories. [src: tests/test_doc_indexes.py]
 tests/test_maintenance.py: Regression checks for maintenance writes and static operation metadata. [src: tests/test_maintenance.py]
@@ -32,7 +32,7 @@ tests/test_maintenance.py: Regression checks for maintenance writes and static o
 
 ## Conventions and gotchas
 Use uv sync --locked, uv run pytest, uv run ruff check . and uv build for the documented development workflow. [src: README.md#development]
-Opening the panel reads GitHub repository metadata and default-branch files; selecting a file reads its blob. Settings options come from local gh repo edit help and require confirmed changes. [src: src/github_explorer/panel.py; src/github_explorer/runner.py]
+Opening the panel reads local Git and GitHub metadata. Matching checkouts list local files for Vim editing; remote-only contexts use read-only default-branch previews. Persistent status shows branch, changed files, PRs and other branches. [src: src/github_explorer/panel.py; src/github_explorer/runner.py]
 Catalog discovery reads local gh help; discovered aliases and extensions can execute external programs when explicitly requested. [src: src/github_explorer/catalog.py]
 Stop cannot undo completed local or remote actions. [src: README.md#execution-behavior]
 Shell expansion, pipelines and redirects are not supported by command execution. [src: README.md#execution-behavior]
@@ -60,7 +60,7 @@ docs/COMPONENTS.md: Components; Application modules; Embedding example; Inside a
 docs/DEVELOPMENT.md: Development; Prerequisites and setup; Checks; Making a change; Environment; Troubleshooting. [src: docs/DEVELOPMENT.md]
 docs/INSTALLATION.md: Installation; Prerequisites; Install; Verification; Upgrade and uninstall. [src: docs/INSTALLATION.md]
 docs/MCP.md: MCP applicability. [src: docs/MCP.md]
-docs/SECURITY.md: Security model; Principals and trust boundaries; STRIDE review; Secrets, input, and output; Review checklist; Reporting and incidents; Repository browsing and settings. [src: docs/SECURITY.md]
+docs/SECURITY.md: Security model; Principals and trust boundaries; STRIDE review; Secrets, input, and output; Review checklist; Reporting and incidents; Embedded editor; Repository browsing and settings. [src: docs/SECURITY.md]
 docs/TESTING.md: Testing; Strategy and suites; Writing tests; Targets and CI gates; Limitations and smoke checks. [src: docs/TESTING.md]
 docs/archive/README.md: . [src: docs/archive/README.md]
 docs/bootstrap-file-report.md: Bootstrap file report. [src: docs/bootstrap-file-report.md]

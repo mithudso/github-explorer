@@ -7,6 +7,7 @@
 | Installed `gh` help | `catalog.help_text`, `catalog.load_catalog` | Local help text out; installed binary resolved through PATH; no Explorer API client |
 | Captured `gh`/`git` command | `runner.CommandRunner.run` | Explicit argv/cwd/env in; combined stdout/stderr and exit status out; the selected executable owns auth/network behavior |
 | Terminal `gh`/`git` command | `runner.run_interactive` | Explicit argv/cwd/env in; inherited terminal streams; the selected executable owns auth/network behavior |
+| Embedded Vim | `runner.vim_command`, `panel.VimEditor`, textual-tty/bittty | Local text path and literal argv; PTY output in memory; saves write the checkout |
 | Host terminal / clipboard | `panel.GitHubPanel` via Textual | Explicit copy of last captured result; terminal capabilities determine clipboard behavior |
 
 Explorer has no hardcoded GitHub API base URL or direct HTTP SDK. The installed
@@ -39,9 +40,10 @@ embedding process, or watcher is required or enabled.
 
 ## Default repository reads
 
-The file browser automatically reads remote metadata and the default-branch Git
-tree through `gh repo view` and `gh api --method GET`; it does not enumerate local
-uncommitted files. Directory-by-directory traversal may take multiple requests for
+The file browser resolves GitHub identity and checks the local checkout identity
+without an override. Matching checkouts use git ls-files; other contexts use remote
+default-branch trees through explicit GET. Status reads local Git every two seconds
+and paginated open PRs/branches every minute. Directory-by-directory traversal may take multiple requests for
 large repositories. File previews use immutable blob SHAs and a 500 KB limit.
 Settings use the repository REST response for known current values and local
 `gh repo edit --help` for the complete editable option set. GitHub permissions,

@@ -1,13 +1,13 @@
 # github-explorer — infrastructure and links
-> Source: . · https://github.com/mithudso/github-explorer @ 2ddcc1b dirty
+> Source: . · https://github.com/mithudso/github-explorer @ fe8ffeb dirty
 > Generated: 2026-09-29 by crawl-repo-to-llms v1.2.0
-> Census: 78 enumerated / 22 deep-read / 56 shallow · partial: remaining metadata cards shallow; no index probes
+> Census: 80 enumerated / 24 deep-read / 56 shallow · partial: remaining metadata cards shallow; no index probes
 
 ## Toolchain and CI
-Package: github-explorer; version: 0.3.0. [src: pyproject.toml]
+Package: github-explorer; version: 0.4.0. [src: pyproject.toml]
 Purpose: A standalone terminal workbench for the full installed GitHub CLI. [src: pyproject.toml]
 Requires Python >=3.11. [src: pyproject.toml]
-Runtime dependencies: textual>=8,<9, rich>=13. [src: pyproject.toml]
+Runtime dependencies: textual>=8,<9, rich>=13, textual-tty>=0.4,<0.5. [src: pyproject.toml]
 `uv sync --locked --python ${{ matrix.python }}`. [src: .github/workflows/test.yml]
 `uv run pytest`. [src: .github/workflows/test.yml]
 `uv run ruff check .`. [src: .github/workflows/test.yml]
@@ -38,5 +38,9 @@ https://[^\s — unverified; no network reachability probe. [src: scripts/genera
 https://github.com/ — unverified; no network reachability probe. [src: scripts/generate_repo_indexes.py]
 https://github.com/owner/repo — unverified; no network reachability probe. [src: tests/test_doc_indexes.py]
 https://github.com/owner/repo.git?token=secret#secret — unverified; no network reachability probe. [src: tests/test_doc_indexes.py]
+https://github.com/owner/repository/pull/7'} — unverified; no network reachability probe. [src: tests/test_editor_status.py]
 https://git.example.test/o/r — unverified; no network reachability probe. [src: tests/test_repository.py]
 https://example.com/o/r — unverified; no network reachability probe. [src: tests/test_runner.py]
+https://github.com/owner/repo'} — unverified; no network reachability probe. [src: tests/test_workspace.py]
+https://host/o/r/pull/10'} — unverified; no network reachability probe. [src: tests/test_workspace.py]
+https://host/o/r/pull/9'} — unverified; no network reachability probe. [src: tests/test_workspace.py]

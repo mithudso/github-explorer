@@ -13,6 +13,7 @@ headless Textual interactions. It does not mutate live GitHub data.
 | Panel | `uv run pytest tests/test_panel.py` | Confirmation/cancel, argument editing, captured/terminal execution, stop, embed dismissal |
 | Shortcuts/navigation | `uv run pytest tests/test_shortcuts.py tests/test_navigation.py` | All twelve buttons/hotkeys, no execution before confirmation, Git scope, responsive bar, tree arrows, directional focus, dropdowns and editing |
 | Repository | `uv run pytest tests/test_repository.py tests/test_repository_panel.py` | Read-only metadata/trees/blobs, errors, host context, file browser, settings selection/cancel/confirm and stale reads |
+| Editor/status | `uv run pytest tests/test_workspace.py tests/test_editor_status.py` | Git fixture counts/branches, safe file paths, actual Vim saves and unsaved-switch prompts, quit guards, hide/show, unknown/stale status |
 | Maintenance | `uv run pytest tests/test_maintenance.py tests/test_doc_indexes.py` | Rotation safety, metadata drift, index generation, private-file exclusions |
 | All tests | `uv run pytest` | Every collected test under `tests/`, including maintenance tooling tests |
 
@@ -54,4 +55,6 @@ local CLI help. Optional live smoke commands must be read-only, explicitly selec
 and must not persist sensitive output. See [logging](logging.md) for privacy rules.
 
 UI tests use `ui_repository` from `tests/conftest.py` to replace automatic GitHub reads.
-Tests never require network credentials or mutate real repository settings.
+Tests never require network credentials or mutate real repository settings. Git
+status tests create temporary repositories; editor tests run installed Vim only on
+temporary fixture files. Install Vim to run these tests; they skip when unavailable.

@@ -43,6 +43,7 @@ background service runs. See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
 - Preserve bounded capture, cancellation, and captured-mode timeouts.
 - Keep terminal execution explicit; it may perform account-wide or local actions.
 - Do not persist command output, argv, credentials, or private project data.
+  Explicit Vim saves write the selected local file; keep editor session files disabled.
 - Use fixture commands in tests. Live smoke tests must be read-only.
 - Retain `LICENSE` and `NOTICE.md`; this is a public repository.
 - Preserve unrelated dirty work; stage only the files belonging to the task.

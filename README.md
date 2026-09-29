@@ -1,14 +1,15 @@
 # GitHub Explorer
 
 A standalone terminal workbench for GitHub repositories and the installed GitHub
-CLI. Browse repository files, edit settings, read command help, and run Git and
-GitHub operations without leaving your TUI.
+CLI. Edit checkout files in embedded Vim, browse remote files, edit repository
+settings, and run Git and GitHub operations without leaving your TUI.
 
 Built from the reusable GitHub panel with a public, self-contained Python package.
 
 ## Install and run
 
 Requires Python 3.11+, [GitHub CLI](https://cli.github.com/) and Git on PATH, and a terminal.
+Install Vim (`vim` on PATH) for embedded file editing.
 macOS and Linux are supported. Authenticate using your existing `gh` configuration:
 
 ```sh
@@ -37,8 +38,11 @@ or larger for the most comfortable layout.
 
 ## What it does
 
-- Browse and search default-branch files from GitHub above the CLI command tree.
-  Select a file for a read-only text preview; local uncommitted files are not shown.
+- Browse and search current-checkout files above the CLI tree, including untracked
+  files. Select a text file to edit and save it with actual Vim in the right pane.
+  Remote-only or mismatched repositories use read-only GitHub previews.
+- Keep the current branch, changed-file count, open PRs and other branches visible
+  in the bottom status bar. Hide or show the action buttons without hiding status.
 - Open **Repo settings** to see every option exposed by local `gh repo edit --help`,
   view current values where available, and review selected changes before applying.
 - Discover and search the installed `gh` command catalog, including repository,
@@ -56,8 +60,8 @@ or larger for the most comfortable layout.
 Select a command in the tree to open its help and populate the command editor.
 Choose **Run** or **Terminal** when ready. **Escape** or **Quit** closes the app.
 The command catalog comes from local `gh help reference` and `gh --help`. Opening
-the app also makes read-only GitHub requests for the repository and its default-branch
-file tree. Command availability follows your installed GitHub CLI version. Raw entry supports commands and extension
+the app also reads local Git status and GitHub repository/PR/branch metadata.
+The file list uses a matching checkout, or reads the remote default-branch tree. Command availability follows your installed GitHub CLI version. Raw entry supports commands and extension
 subcommands that the generated reference does not list.
 
 For shell-friendly inventory without opening the TUI:
@@ -113,23 +117,58 @@ If a captured command needs authentication input, cancel its preview and use Ter
 - Text fields keep Left/Right for editing; Up/Down moves between controls. Multiline
   editors retain their own cursor navigation. Previews and output scroll within
   their content; at a boundary, arrows move to nearby controls. **Tab/Shift+Tab**
-  always move between controls. Arrows do not select a file or run a command;
+  move between controls outside Vim. Arrows do not select a file or run a command;
   use **Enter** to activate the focused item.
 
 Navigation also works in repository settings and command confirmation dialogs.
 
 ## Files and repository settings
 
-The left pane starts with repository files; the CLI tree remains underneath. Expand
-folders or use **Find a repository file** to reveal matching paths. The default
-**Repository files** tab previews the selected blob from GitHub in memory. Binary,
-non-UTF-8 and files larger than 500 KB have an explanatory placeholder. Submodule
-entries show their commit. Empty repositories show zero files; failed reads show
-an error without disabling the CLI tree.
+The left pane starts with repository files and keeps the CLI tree underneath.
+When the working directory belongs to the selected GitHub repository, the list
+shows tracked and untracked files from the **local current branch**. Selecting a
+UTF-8 text file opens actual Vim in the right pane. The command form makes room
+for the editor while Vim is open.
 
-Press Enter after changing the working directory or repository field, or click
-**Refresh files**. This reads the GitHub default branch, even when your local
-checkout is on a different branch. Unpushed changes appear after pushing and refreshing.
+- Use normal Vim commands: `i` to insert, Escape for Normal mode, `:w` to save,
+  `:wq` to save and close, and `:q` to close. Vim warns about unsaved changes.
+- **Save :w** or **Ctrl+S** requests a save; **Close :q** asks Vim to close and
+  prompts if necessary. Read Vim's message for write errors. Saving writes the
+  local file; it does not stage, commit, push or edit GitHub directly.
+- `Ctrl+\` returns focus to the file list. Selecting another file uses Vim's
+  Save/Discard/Cancel prompt when the current buffer has changes. Arrow keys,
+  Escape, Tab and F1–F12 go to Vim while it has focus.
+- Close Vim before running repository commands, changing context, or quitting the
+  explorer. The standalone app guards Ctrl+Q as well as its normal close controls.
+- Vim starts without personal configuration/plugins, modelines, swap, backups,
+  undo files or viminfo. Only explicit file saves persist. This also means there
+  is no automatic crash-recovery copy. Normal Vim editing and commands remain available.
+
+Symlinks, submodules/directories, binary/non-UTF-8 files and files over 500 KB are
+not opened for embedded editing. Missing or deleted files report an error.
+If Vim is missing, install it and select the file again.
+
+Without a matching local checkout, the file list and previews use GitHub's default
+branch and remain read-only. Choose the matching local working directory to edit;
+the explorer never replaces a local file with remote preview bytes. Press Enter
+after changing context, or click **Refresh files**, with Vim closed.
+
+The two-line bottom status bar always shows the local branch (or detached HEAD),
+plus the number of distinct files with staged, unstaged, untracked or conflicted
+changes. Renames and files changed both in the index and working tree count once.
+The count refreshes every two seconds, after saves and after commands. Unsaved
+buffer changes are marked in Vim and enter the Git count after saving.
+
+Open PR numbers and other branch names/counts appear on the second line. Branches
+combine the selected repository's GitHub branches with local branches when the
+checkout matches. **Status / refresh** opens the complete list, PR titles/URLs,
+context and errors, and requests fresh status. GitHub status refreshes every minute
+and after commands. Unavailable status is labeled unknown rather than zero.
+
+**Hide actions** or **Ctrl+B** hides the bottom command controls and shortcut list.
+**Show actions** restores them; status and this toggle stay visible. F1–F12 still
+work outside Vim. Ctrl+B inside Vim keeps its native page-up behavior; use the
+visible button or `Ctrl+\` to leave Vim before toggling with the keyboard.
 
 **Repo settings** loads the installed CLI's editable flags and current GitHub values.
 Check **Change** for each option to submit, then choose **Review changes**. Only
@@ -175,7 +214,9 @@ def action_github(self):
     self.push_screen(GitHubPanel(Path.cwd(), repo="owner/repository"))
 ```
 
-Escape returns to the host app. Terminal mode requires the host to support
+Escape outside Vim returns to the host app after its editor is closed. Embedded
+hosts must guard their own global quit actions while a panel editor is active.
+Terminal mode requires the host to support
 `App.suspend()`; captured mode remains available without it. Widget IDs and styles
 are scoped to the panel. No Skills Explorer installation is required.
 

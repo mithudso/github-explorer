@@ -197,8 +197,8 @@ class Repository:
         return f"{self.host}/{self.name}"
 
 
-def read_json(invocation: Invocation, executor: CommandRunner) -> dict:
-    """Read bounded JSON through the same cancellable subprocess implementation."""
+def _read_output(invocation: Invocation, executor: CommandRunner) -> str:
+    """Read bounded output through the same cancellable subprocess implementation."""
     result = executor.run(invocation, lambda text: None, timeout=30)
     if result.cancelled:
         raise ValueError("Repository read cancelled")
@@ -208,7 +208,11 @@ def read_json(invocation: Invocation, executor: CommandRunner) -> dict:
         raise ValueError(result.output.strip() or f"GitHub exited with {result.returncode}")
     if result.truncated:
         raise ValueError("Repository response exceeds the capture limit; narrow the request")
-    data = json.loads(result.output)
+    return result.output
+
+
+def read_json(invocation: Invocation, executor: CommandRunner) -> dict:
+    data = json.loads(_read_output(invocation, executor))
     if not isinstance(data, dict):
         raise ValueError("Expected a GitHub JSON object")
     return data
@@ -281,3 +285,126 @@ def repository_file_text(repository: Repository, entry: dict, executor: CommandR
         return content.decode("utf-8")
     except UnicodeDecodeError:
         return "Non-UTF-8 file; text preview unavailable."
+
+
+@dataclass(frozen=True)
+class Workspace:
+    root: Path
+    branch: str
+    changed: int
+    branches: tuple[str, ...]
+
+
+def git_read(cwd: Path, args: tuple[str, ...], executor: CommandRunner) -> str:
+    result = executor.run(Invocation((git_executable(), *args), cwd, program="git"), lambda text: None, 15)
+    if result.returncode or result.cancelled or result.timed_out or result.truncated:
+        raise ValueError(result.output.strip() or "Local Git status unavailable")
+    return result.output
+
+
+def changed_file_count(porcelain: str) -> int:
+    """Count each porcelain v1 -z entry once, including a rename's two paths."""
+    entries = iter(porcelain.split("\0"))
+    count = 0
+    for entry in entries:
+        if not entry:
+            continue
+        if len(entry) < 4 or entry[2] != " ":
+            raise ValueError("Invalid Git status response")
+        count += 1
+        if "R" in entry[:2] or "C" in entry[:2]:
+            next(entries, None)
+    return count
+
+
+def workspace_status(cwd: Path, executor: CommandRunner) -> Workspace:
+    root = Path(git_read(cwd, ("rev-parse", "--show-toplevel"), executor).strip()).resolve()
+    # Porcelain v2 headers represent unborn and detached branches without guessing.
+    info = git_read(root, ("status", "--porcelain=v2", "--branch", "--untracked-files=no"), executor)
+    headers = dict(line[2:].split(" ", 1) for line in info.splitlines() if line.startswith("# "))
+    branch = headers.get("branch.head", "unknown")
+    if branch == "(detached)":
+        branch = f"detached@{headers.get('branch.oid', 'unknown')[:8]}"
+    changes = git_read(root, ("status", "--porcelain=v1", "-z", "--untracked-files=all"), executor)
+    branches = git_read(root, ("for-each-ref", "--format=%(refname:short)", "refs/heads"), executor)
+    return Workspace(root, branch, changed_file_count(changes), tuple(branches.splitlines()))
+
+
+def workspace_matches(repository: Repository, workspace: Workspace, executor: CommandRunner) -> bool:
+    """An override must not make a different checkout writable."""
+    context = repository.context
+    identity = read_json(Invocation(
+        (context.argv[0], "repo", "view", "--json", "nameWithOwner,url"), workspace.root,
+    ), executor)
+    url = urlsplit(identity.get("url", ""))
+    return (identity.get("nameWithOwner", "").casefold() == repository.name.casefold()
+            and url.netloc.casefold() == repository.host.casefold())
+
+
+def workspace_files(workspace: Workspace, executor: CommandRunner) -> list[dict]:
+    names = git_read(workspace.root, ("ls-files", "-z", "--cached", "--others", "--exclude-standard"), executor)
+    return [{"path": path, "type": "local"} for path in sorted(set(names.split("\0"))) if path]
+
+
+def editable_file(workspace: Workspace, name: str) -> Path:
+    relative = Path(name)
+    if relative.is_absolute() or any(part == ".." or part.casefold() == ".git" for part in relative.parts):
+        raise ValueError("Choose a file inside the local checkout")
+    path = workspace.root / relative
+    for component in (path, *path.parents):
+        if component == workspace.root:
+            break
+        if component.is_symlink():
+            raise ValueError("Symlinks cannot be edited in the repository pane")
+    if not path.resolve().is_relative_to(workspace.root) or not path.is_file():
+        raise ValueError("File is missing or is a submodule/directory; choose an existing local file")
+    if path.stat().st_size > 500_000:
+        raise ValueError("Embedded editing is limited to files of 500 KB or less")
+    content = path.read_bytes()
+    if b"\0" in content:
+        raise ValueError("Binary files cannot be edited in the repository pane")
+    try:
+        content.decode("utf-8")
+    except UnicodeDecodeError as exc:
+        raise ValueError("Embedded editing requires a UTF-8 text file") from exc
+    return path
+
+
+def vim_command(workspace: Workspace, path: Path) -> list[str]:
+    binary = shutil.which("vim")
+    if not binary:
+        raise ValueError("Vim is not installed or is not on PATH")
+    return [
+        binary, "-N", "-u", "NONE", "-U", "NONE", "-i", "NONE", "-n", "--noplugin",
+        "--cmd", "set nomodeline nobackup nowritebackup noundofile",
+        "--cmd", "set encoding=utf-8 mouse=a laststatus=2",
+        "--cmd", f"execute 'cd ' . fnameescape({json.dumps(str(workspace.root), ensure_ascii=False)})",
+        "--", str(path),
+    ]
+
+
+def repository_activity(repository: Repository, executor: CommandRunner) -> tuple[list[dict], list[str]]:
+    """Read all pages, retaining only PR/branch status fields in memory."""
+    def collection(endpoint, projection):
+        context = repository.context
+        output = _read_output(Invocation(
+            (context.argv[0], "api", "--method", "GET", "--hostname", repository.host,
+             f"repos/{repository.name}/{endpoint}", "--paginate", "--jq",
+             "{items: [.[] | " + projection + "]}"),
+            context.cwd, repository.target,
+        ), executor).strip()
+        if not output:
+            raise ValueError("GitHub returned no activity data")
+        # gh applies --jq to each page; --slurp cannot be combined with --jq.
+        decoder, items = json.JSONDecoder(), []
+        while output:
+            page, end = decoder.raw_decode(output)
+            if not isinstance(page, dict) or not isinstance(page.get("items"), list):
+                raise ValueError("Invalid GitHub activity page")
+            items.extend(page["items"])
+            output = output[end:].lstrip()
+        return items
+
+    prs = collection("pulls?state=open&per_page=100", "{number, title, url: .html_url}")
+    branches = collection("branches?per_page=100", ".name")
+    return prs, branches

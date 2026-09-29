@@ -9,7 +9,7 @@
     "purpose": "Meta file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/release/explorer-0.3.0/.editorconfig"
+    "link": "https://github.com/mithudso/github-explorer/blob/main/.editorconfig"
   },
   {
     "path": ".env.example",
@@ -21,7 +21,7 @@
     "purpose": "Config file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/release/explorer-0.3.0/.env.example"
+    "link": "https://github.com/mithudso/github-explorer/blob/main/.env.example"
   },
   {
     "path": ".gitattributes",
@@ -33,7 +33,7 @@
     "purpose": "Meta file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/release/explorer-0.3.0/.gitattributes"
+    "link": "https://github.com/mithudso/github-explorer/blob/main/.gitattributes"
   },
   {
     "path": ".github/CODEOWNERS",
@@ -45,7 +45,7 @@
     "purpose": "Docs file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/release/explorer-0.3.0/.github/CODEOWNERS"
+    "link": "https://github.com/mithudso/github-explorer/blob/main/.github/CODEOWNERS"
   },
   {
     "path": ".github/FUNDING.yml",
@@ -57,7 +57,7 @@
     "purpose": "Docs file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/release/explorer-0.3.0/.github/FUNDING.yml"
+    "link": "https://github.com/mithudso/github-explorer/blob/main/.github/FUNDING.yml"
   },
   {
     "path": ".github/ISSUE_TEMPLATE/bug_report.md",
@@ -69,7 +69,7 @@
     "purpose": "Docs file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/release/explorer-0.3.0/.github/ISSUE_TEMPLATE/bug_report.md"
+    "link": "https://github.com/mithudso/github-explorer/blob/main/.github/ISSUE_TEMPLATE/bug_report.md"
   },
   {
     "path": ".github/ISSUE_TEMPLATE/feature_request.md",
@@ -81,7 +81,7 @@
     "purpose": "Docs file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/release/explorer-0.3.0/.github/ISSUE_TEMPLATE/feature_request.md"
+    "link": "https://github.com/mithudso/github-explorer/blob/main/.github/ISSUE_TEMPLATE/feature_request.md"
   },
   {
     "path": ".github/PULL_REQUEST_TEMPLATE.md",
@@ -93,7 +93,7 @@
     "purpose": "Docs file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/release/explorer-0.3.0/.github/PULL_REQUEST_TEMPLATE.md"
+    "link": "https://github.com/mithudso/github-explorer/blob/main/.github/PULL_REQUEST_TEMPLATE.md"
   },
   {
     "path": ".github/SECURITY.md",
@@ -105,7 +105,7 @@
     "purpose": "Docs file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/release/explorer-0.3.0/.github/SECURITY.md"
+    "link": "https://github.com/mithudso/github-explorer/blob/main/.github/SECURITY.md"
   },
   {
     "path": ".github/copilot-instructions.md",
@@ -117,7 +117,7 @@
     "purpose": "Docs file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/release/explorer-0.3.0/.github/copilot-instructions.md"
+    "link": "https://github.com/mithudso/github-explorer/blob/main/.github/copilot-instructions.md"
   },
   {
     "path": ".github/dependabot.yml",
@@ -129,7 +129,7 @@
     "purpose": "Docs file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/release/explorer-0.3.0/.github/dependabot.yml"
+    "link": "https://github.com/mithudso/github-explorer/blob/main/.github/dependabot.yml"
   },
   {
     "path": ".github/workflows/test.yml",
@@ -141,7 +141,7 @@
     "purpose": "Infra file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/release/explorer-0.3.0/.github/workflows/test.yml"
+    "link": "https://github.com/mithudso/github-explorer/blob/main/.github/workflows/test.yml"
   },
   {
     "path": ".gitignore",
@@ -153,7 +153,7 @@
     "purpose": "Meta file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/release/explorer-0.3.0/.gitignore"
+    "link": "https://github.com/mithudso/github-explorer/blob/main/.gitignore"
   },
   {
     "path": ".mcp.json",
@@ -165,7 +165,7 @@
     "purpose": "Meta file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/release/explorer-0.3.0/.mcp.json"
+    "link": "https://github.com/mithudso/github-explorer/blob/main/.mcp.json"
   },
   {
     "path": ".vscode/extensions.json",
@@ -177,7 +177,7 @@
     "purpose": "Config file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/release/explorer-0.3.0/.vscode/extensions.json"
+    "link": "https://github.com/mithudso/github-explorer/blob/main/.vscode/extensions.json"
   },
   {
     "path": ".vscode/launch.json",
@@ -189,7 +189,7 @@
     "purpose": "Config file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/release/explorer-0.3.0/.vscode/launch.json"
+    "link": "https://github.com/mithudso/github-explorer/blob/main/.vscode/launch.json"
   },
   {
     "path": ".vscode/mcp.json",
@@ -201,7 +201,7 @@
     "purpose": "Config file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/release/explorer-0.3.0/.vscode/mcp.json"
+    "link": "https://github.com/mithudso/github-explorer/blob/main/.vscode/mcp.json"
   },
   {
     "path": ".vscode/settings.json",
@@ -213,43 +213,43 @@
     "purpose": "Config file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/release/explorer-0.3.0/.vscode/settings.json"
+    "link": "https://github.com/mithudso/github-explorer/blob/main/.vscode/settings.json"
   },
   {
     "path": "AGENTS.md",
     "role": "docs",
     "importance": "normal",
-    "bytes": 1698,
-    "sha256": "f4c7958bbac66d379c834af649393a470d940a8ddedf3ea24850f79996396a90",
+    "bytes": 1817,
+    "sha256": "689d9e79c83c271111c1a640237dab1950eb682549cc306bfe8d045d6c8db7f1",
     "depth": "shallow",
     "purpose": "Docs file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/release/explorer-0.3.0/AGENTS.md"
+    "link": "https://github.com/mithudso/github-explorer/blob/main/AGENTS.md"
   },
   {
     "path": "CHANGELOG.md",
     "role": "docs",
     "importance": "normal",
-    "bytes": 1935,
-    "sha256": "e7d0f961b490123753538ec907e4c138055a3154ee05bfe9d01cacfc78d87c78",
+    "bytes": 2400,
+    "sha256": "29defc6d7a89525985389c2a9ea95a04fb66578dab1077281397d762aab31666",
     "depth": "shallow",
     "purpose": "Docs file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/release/explorer-0.3.0/CHANGELOG.md"
+    "link": "https://github.com/mithudso/github-explorer/blob/main/CHANGELOG.md"
   },
   {
     "path": "CLAUDE.md",
     "role": "docs",
     "importance": "normal",
-    "bytes": 2908,
-    "sha256": "06a58d2160828e258876a2aea8b32fa51daf645f6b5d648e4bec1e52c26a453a",
+    "bytes": 2996,
+    "sha256": "0f417d7b9e16d2dcbf96d5d5be0568fc75721ad265b91105c6f16cf6d235c82a",
     "depth": "shallow",
     "purpose": "Docs file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/release/explorer-0.3.0/CLAUDE.md"
+    "link": "https://github.com/mithudso/github-explorer/blob/main/CLAUDE.md"
   },
   {
     "path": "CODE_OF_CONDUCT.md",
@@ -261,7 +261,7 @@
     "purpose": "Docs file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/release/explorer-0.3.0/CODE_OF_CONDUCT.md"
+    "link": "https://github.com/mithudso/github-explorer/blob/main/CODE_OF_CONDUCT.md"
   },
   {
     "path": "CONTRIBUTING.md",
@@ -273,7 +273,7 @@
     "purpose": "Docs file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/release/explorer-0.3.0/CONTRIBUTING.md"
+    "link": "https://github.com/mithudso/github-explorer/blob/main/CONTRIBUTING.md"
   },
   {
     "path": "GEMINI.md",
@@ -285,7 +285,7 @@
     "purpose": "Docs file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/release/explorer-0.3.0/GEMINI.md"
+    "link": "https://github.com/mithudso/github-explorer/blob/main/GEMINI.md"
   },
   {
     "path": "LICENSE",
@@ -297,7 +297,7 @@
     "purpose": "Meta file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/release/explorer-0.3.0/LICENSE"
+    "link": "https://github.com/mithudso/github-explorer/blob/main/LICENSE"
   },
   {
     "path": "MANIFEST.in",
@@ -309,7 +309,7 @@
     "purpose": "Meta file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/release/explorer-0.3.0/MANIFEST.in"
+    "link": "https://github.com/mithudso/github-explorer/blob/main/MANIFEST.in"
   },
   {
     "path": "NOTICE.md",
@@ -321,67 +321,67 @@
     "purpose": "Docs file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/release/explorer-0.3.0/NOTICE.md"
+    "link": "https://github.com/mithudso/github-explorer/blob/main/NOTICE.md"
   },
   {
     "path": "README.md",
     "role": "docs",
     "importance": "high",
-    "bytes": 11284,
-    "sha256": "22bf5460b63ecaa703fcf363990953079e034b22b323556a8297ea5fc9bdbd25",
+    "bytes": 14116,
+    "sha256": "f33ae6e6fab1dabb4c5f38d7cf5edc528c783382728929e27a93c2c4d55b7c0f",
     "depth": "shallow",
     "purpose": "Docs file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/release/explorer-0.3.0/README.md"
+    "link": "https://github.com/mithudso/github-explorer/blob/main/README.md"
   },
   {
     "path": "docs/ARCHITECTURE.md",
     "role": "docs",
     "importance": "normal",
-    "bytes": 5110,
-    "sha256": "29f66cefb0b6a06cd3ca3b1cda2c7fc6006d72b68f22a0fd32ac585aaef64be2",
+    "bytes": 5952,
+    "sha256": "b568cb66e60ea8db125d5308cbfd6bd126c0060f98b241cec3854dc35724975e",
     "depth": "shallow",
     "purpose": "Docs file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/release/explorer-0.3.0/docs/ARCHITECTURE.md"
+    "link": "https://github.com/mithudso/github-explorer/blob/main/docs/ARCHITECTURE.md"
   },
   {
     "path": "docs/COMPONENTS.md",
     "role": "docs",
     "importance": "normal",
-    "bytes": 4207,
-    "sha256": "e1205e0986ad900e5ea4133e2cd1de0cbd8c94a8c867163cd97e691676e85e72",
+    "bytes": 4602,
+    "sha256": "87720381f86dc02348e8581bea0295ecc8e8c87b56221a71874fbbbebfc1d99c",
     "depth": "shallow",
     "purpose": "Docs file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/release/explorer-0.3.0/docs/COMPONENTS.md"
+    "link": "https://github.com/mithudso/github-explorer/blob/main/docs/COMPONENTS.md"
   },
   {
     "path": "docs/DEVELOPMENT.md",
     "role": "docs",
     "importance": "normal",
-    "bytes": 3289,
-    "sha256": "8447a570b9c5c329680348f92c9fa7416083c5cb85f51327a2200f03e4c5d0fa",
+    "bytes": 3309,
+    "sha256": "56588d5da9817bf03094c7e67cc4122b7fbd658e98048dcbdc9d647851f85938",
     "depth": "shallow",
     "purpose": "Docs file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/release/explorer-0.3.0/docs/DEVELOPMENT.md"
+    "link": "https://github.com/mithudso/github-explorer/blob/main/docs/DEVELOPMENT.md"
   },
   {
     "path": "docs/INSTALLATION.md",
     "role": "docs",
     "importance": "normal",
-    "bytes": 1968,
-    "sha256": "abeeaacb7ca817fc2944bd13ae1ed7f3490e6410ad7b712ea5a13b334059850f",
+    "bytes": 2022,
+    "sha256": "c603bae06ac799ae74aa91bbc41457e39948a5138cbdd899e6e8c53ec94da3c2",
     "depth": "shallow",
     "purpose": "Docs file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/release/explorer-0.3.0/docs/INSTALLATION.md"
+    "link": "https://github.com/mithudso/github-explorer/blob/main/docs/INSTALLATION.md"
   },
   {
     "path": "docs/MCP.md",
@@ -393,31 +393,31 @@
     "purpose": "Docs file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/release/explorer-0.3.0/docs/MCP.md"
+    "link": "https://github.com/mithudso/github-explorer/blob/main/docs/MCP.md"
   },
   {
     "path": "docs/SECURITY.md",
     "role": "docs",
     "importance": "normal",
-    "bytes": 4231,
-    "sha256": "17d365fa8f0c6626ced73ed7e13020f6ce9ea3aa9d8dd4c8bf0f61cf5f3fb775",
+    "bytes": 5156,
+    "sha256": "cfb24cc3d4fdba01a576d5ff7bdc104baf5cd290fabe6cd5068393118c586a4c",
     "depth": "shallow",
     "purpose": "Docs file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/release/explorer-0.3.0/docs/SECURITY.md"
+    "link": "https://github.com/mithudso/github-explorer/blob/main/docs/SECURITY.md"
   },
   {
     "path": "docs/TESTING.md",
     "role": "docs",
     "importance": "normal",
-    "bytes": 3251,
-    "sha256": "edf30c20f0b4219e105d4beae61bd5bf102d61508025c4e4b1c419df2f979fc7",
+    "bytes": 3649,
+    "sha256": "ae6c6749243888136341ff6108fa6f3bb45632b39f687da0542b39eeb985f785",
     "depth": "shallow",
     "purpose": "Docs file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/release/explorer-0.3.0/docs/TESTING.md"
+    "link": "https://github.com/mithudso/github-explorer/blob/main/docs/TESTING.md"
   },
   {
     "path": "docs/archive/README.md",
@@ -429,7 +429,7 @@
     "purpose": "Docs file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/release/explorer-0.3.0/docs/archive/README.md"
+    "link": "https://github.com/mithudso/github-explorer/blob/main/docs/archive/README.md"
   },
   {
     "path": "docs/bootstrap-file-report.md",
@@ -441,31 +441,31 @@
     "purpose": "Docs file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/release/explorer-0.3.0/docs/bootstrap-file-report.md"
+    "link": "https://github.com/mithudso/github-explorer/blob/main/docs/bootstrap-file-report.md"
   },
   {
     "path": "docs/caching-and-optimization.md",
     "role": "docs",
     "importance": "normal",
-    "bytes": 2242,
-    "sha256": "edc898417961fe84c039ae5f4b12701cbe2fe10ee03632cfa0756e6c15f8a9bb",
+    "bytes": 2672,
+    "sha256": "68ecab88110978f04a4889d4267c93a4ba31937449f9eafa0e2905672d67e0ca",
     "depth": "shallow",
     "purpose": "Docs file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/release/explorer-0.3.0/docs/caching-and-optimization.md"
+    "link": "https://github.com/mithudso/github-explorer/blob/main/docs/caching-and-optimization.md"
   },
   {
     "path": "docs/cli-and-operations.md",
     "role": "docs",
     "importance": "normal",
-    "bytes": 2403,
-    "sha256": "53e13e352e62705e4bc86fa91e17d0efefd7108c7e7183ec021d51a0808ace2b",
+    "bytes": 2466,
+    "sha256": "71908a42e26a5729b58c84b441c9e8abaf90a091995243e0f267695e0a7ba7f9",
     "depth": "shallow",
     "purpose": "Docs file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/release/explorer-0.3.0/docs/cli-and-operations.md"
+    "link": "https://github.com/mithudso/github-explorer/blob/main/docs/cli-and-operations.md"
   },
   {
     "path": "docs/error-monitoring-guide.md",
@@ -477,79 +477,79 @@
     "purpose": "Docs file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/release/explorer-0.3.0/docs/error-monitoring-guide.md"
+    "link": "https://github.com/mithudso/github-explorer/blob/main/docs/error-monitoring-guide.md"
   },
   {
     "path": "docs/external-calls.md",
     "role": "docs",
     "importance": "normal",
-    "bytes": 3455,
-    "sha256": "a98c302dd0458ece9628a4e1554538260aeafe33764f78e1a10b9b284e4a55d5",
+    "bytes": 4269,
+    "sha256": "6cef4be27500e7c633f8d59f272b19b0e71fcb85c60a5c77688c46b0f5097381",
     "depth": "shallow",
     "purpose": "Docs file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/release/explorer-0.3.0/docs/external-calls.md"
+    "link": "https://github.com/mithudso/github-explorer/blob/main/docs/external-calls.md"
   },
   {
     "path": "docs/integrations-and-assumptions.md",
     "role": "docs",
     "importance": "normal",
-    "bytes": 3037,
-    "sha256": "cf4b2d1a4637f056b6f67a8acf391eda8d92ecd500bbbd3f9d5a13bedb5701fd",
+    "bytes": 3312,
+    "sha256": "cb7b57c307fa297195f350035f42ad2408db3e0a1512d3d917a74ac8d525fc63",
     "depth": "shallow",
     "purpose": "Docs file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/release/explorer-0.3.0/docs/integrations-and-assumptions.md"
+    "link": "https://github.com/mithudso/github-explorer/blob/main/docs/integrations-and-assumptions.md"
   },
   {
     "path": "docs/known-issues.md",
     "role": "docs",
     "importance": "normal",
-    "bytes": 2532,
-    "sha256": "31f31a9f92c47a7eb606c3d754766bfb34ddcb8a60b991468ceb25f1857c3944",
+    "bytes": 2616,
+    "sha256": "010b83a9018e7a95e59c6a530294b92ccfdf6e052b4b8ae3a71c1f7e5cbc249d",
     "depth": "shallow",
     "purpose": "Docs file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/release/explorer-0.3.0/docs/known-issues.md"
+    "link": "https://github.com/mithudso/github-explorer/blob/main/docs/known-issues.md"
   },
   {
     "path": "docs/logging.md",
     "role": "docs",
     "importance": "normal",
-    "bytes": 2127,
-    "sha256": "6da28f0f7f184b8b267afe73aadce86a6fdbb799f665a94c7f3cb5b80a48755b",
+    "bytes": 2287,
+    "sha256": "78cf8a74b98170c5f5b8d97f41a585ee8730848bf3b6ec39e5ddd3ee32fdb448",
     "depth": "shallow",
     "purpose": "Docs file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/release/explorer-0.3.0/docs/logging.md"
+    "link": "https://github.com/mithudso/github-explorer/blob/main/docs/logging.md"
   },
   {
     "path": "docs/onboarding.md",
     "role": "docs",
     "importance": "normal",
-    "bytes": 1203,
-    "sha256": "4d3f3e3c35a138bd79107f3b60c75b290d8c961feda273d99641f41099b49991",
+    "bytes": 1307,
+    "sha256": "62d937d507b52480a91a64a34a31f300a88a26b03b49e25a3fb5657afc19bb30",
     "depth": "shallow",
     "purpose": "Docs file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/release/explorer-0.3.0/docs/onboarding.md"
+    "link": "https://github.com/mithudso/github-explorer/blob/main/docs/onboarding.md"
   },
   {
     "path": "docs/operations-registry.json",
     "role": "docs",
     "importance": "normal",
-    "bytes": 6570,
-    "sha256": "94566e563701a390429768e98e34247bdbf41ddb28874174c5115d2523e70bb6",
+    "bytes": 8933,
+    "sha256": "9b2429be6d903268d949bda69f8fa20a1578524a06a7d13bbaa82c761038d77f",
     "depth": "shallow",
     "purpose": "Docs file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/release/explorer-0.3.0/docs/operations-registry.json"
+    "link": "https://github.com/mithudso/github-explorer/blob/main/docs/operations-registry.json"
   },
   {
     "path": "docs/repo-bootstrap-audit-2026-09-29.md",
@@ -561,19 +561,19 @@
     "purpose": "Docs file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/release/explorer-0.3.0/docs/repo-bootstrap-audit-2026-09-29.md"
+    "link": "https://github.com/mithudso/github-explorer/blob/main/docs/repo-bootstrap-audit-2026-09-29.md"
   },
   {
     "path": "docs/requirements.md",
     "role": "docs",
     "importance": "normal",
-    "bytes": 2830,
-    "sha256": "d7ce4074e63ddd51cade8957ccba8eb2e2171ef3289fbe5b2f41cfd06d2f7f2d",
+    "bytes": 3276,
+    "sha256": "01cdbd2237e811b61fc7006b0706cd664b6460a2f7d5afb0aebd05a766d41ccc",
     "depth": "shallow",
     "purpose": "Docs file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/release/explorer-0.3.0/docs/requirements.md"
+    "link": "https://github.com/mithudso/github-explorer/blob/main/docs/requirements.md"
   },
   {
     "path": "docs/runbooks/metadata-maintenance.md",
@@ -585,7 +585,7 @@
     "purpose": "Docs file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/release/explorer-0.3.0/docs/runbooks/metadata-maintenance.md"
+    "link": "https://github.com/mithudso/github-explorer/blob/main/docs/runbooks/metadata-maintenance.md"
   },
   {
     "path": "docs/runbooks/release-and-rollback.md",
@@ -597,7 +597,7 @@
     "purpose": "Docs file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/release/explorer-0.3.0/docs/runbooks/release-and-rollback.md"
+    "link": "https://github.com/mithudso/github-explorer/blob/main/docs/runbooks/release-and-rollback.md"
   },
   {
     "path": "docs/runbooks/troubleshooting.md",
@@ -609,7 +609,7 @@
     "purpose": "Docs file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/release/explorer-0.3.0/docs/runbooks/troubleshooting.md"
+    "link": "https://github.com/mithudso/github-explorer/blob/main/docs/runbooks/troubleshooting.md"
   },
   {
     "path": "docs/tool-inventory.json",
@@ -621,43 +621,43 @@
     "purpose": "Docs file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/release/explorer-0.3.0/docs/tool-inventory.json"
+    "link": "https://github.com/mithudso/github-explorer/blob/main/docs/tool-inventory.json"
   },
   {
     "path": "memory.md",
     "role": "docs",
     "importance": "normal",
-    "bytes": 17867,
-    "sha256": "79b400a691a79fdbe81e1ca8a0abee77b94c7950a81947436e57134ce031199d",
+    "bytes": 21480,
+    "sha256": "230fe9c3c92f387b53b180e78f4bb15fb9f5b6f70fd3508243d973f9799c4efc",
     "depth": "shallow",
     "purpose": "Docs file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/release/explorer-0.3.0/memory.md"
+    "link": "https://github.com/mithudso/github-explorer/blob/main/memory.md"
   },
   {
     "path": "prompts.md",
     "role": "docs",
     "importance": "normal",
-    "bytes": 1737,
-    "sha256": "6deff7b97f905550e935f2d64d6d06d837be94735403565948dc6bfd1edf73c3",
+    "bytes": 2240,
+    "sha256": "f86f0974db35549ff0b328a57a60fd1a880eab557f066c3ac7f4dc1536a64617",
     "depth": "shallow",
     "purpose": "Docs file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/release/explorer-0.3.0/prompts.md"
+    "link": "https://github.com/mithudso/github-explorer/blob/main/prompts.md"
   },
   {
     "path": "pyproject.toml",
     "role": "config",
     "importance": "critical",
-    "bytes": 984,
-    "sha256": "edc21e5fe159f68531b497367df8f6a2a7eb21875b6177252247818fe722c221",
+    "bytes": 1024,
+    "sha256": "c1ed072b082a560fcd4c65656e8db2c1887fd1fb6e45b05c4a9c97274543e878",
     "depth": "shallow",
     "purpose": "Config file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/release/explorer-0.3.0/pyproject.toml"
+    "link": "https://github.com/mithudso/github-explorer/blob/main/pyproject.toml"
   },
   {
     "path": "scripts/check_doc_indexes.py",
@@ -672,7 +672,7 @@
       "check",
       "main"
     ],
-    "link": "https://github.com/mithudso/github-explorer/blob/release/explorer-0.3.0/scripts/check_doc_indexes.py",
+    "link": "https://github.com/mithudso/github-explorer/blob/main/scripts/check_doc_indexes.py",
     "why": "Missing, changed or deleted sources must make stale documentation visible in CI.",
     "when": "Changing drift detection, missing-output diagnostics or snapshot handling.",
     "how_to_read": "check; main",
@@ -699,7 +699,7 @@
       "write_outputs",
       "main"
     ],
-    "link": "https://github.com/mithudso/github-explorer/blob/release/explorer-0.3.0/scripts/generate_ops_registry_doc.py",
+    "link": "https://github.com/mithudso/github-explorer/blob/main/scripts/generate_ops_registry_doc.py",
     "why": "Published operation metadata must match source without importing the application.",
     "when": "Changing registry schema, generated metadata or drift checking.",
     "how_to_read": "render; main --check",
@@ -716,8 +716,8 @@
     "path": "scripts/generate_repo_indexes.py",
     "role": "script",
     "importance": "peripheral",
-    "bytes": 38705,
-    "sha256": "20095a43ceadcd0de4fe90efd0d9735be092363da63427a516de8aee403097b5",
+    "bytes": 39763,
+    "sha256": "89593ddbe820799851ae9c14f173b927f56afc3adb09257940195bf7df2d1335",
     "depth": "deep-read",
     "purpose": "Generate static file indexes and the provenance-tagged repository dossier.",
     "provenance": "[src: scripts/generate_repo_indexes.py]",
@@ -738,7 +738,7 @@
       "safe_source",
       "document"
     ],
-    "link": "https://github.com/mithudso/github-explorer/blob/release/explorer-0.3.0/scripts/generate_repo_indexes.py",
+    "link": "https://github.com/mithudso/github-explorer/blob/main/scripts/generate_repo_indexes.py",
     "why": "A portable source map helps maintainers locate implementation and operating details.",
     "when": "Changing census exclusions, file cards, parser extraction or generated documentation.",
     "how_to_read": "census → code_inventory → render → write; REVIEWED holds curated explanations",
@@ -766,7 +766,7 @@
       "rotate",
       "main"
     ],
-    "link": "https://github.com/mithudso/github-explorer/blob/release/explorer-0.3.0/scripts/rotate_workflow_logs.py",
+    "link": "https://github.com/mithudso/github-explorer/blob/main/scripts/rotate_workflow_logs.py",
     "why": "Long workflow logs need bounded active files without losing earlier records.",
     "when": "Changing archive thresholds, section parsing or safeguards around writes.",
     "how_to_read": "plan_rotation → rotate → main; --apply enables writes",
@@ -785,12 +785,12 @@
     "role": "library",
     "importance": "high",
     "bytes": 197,
-    "sha256": "2d2158ee3c3f2d33b52241268ca2ae542dfe9d76d8ddfc4a80f16669c4a45ece",
+    "sha256": "411afbc263850c6c1db6582f97a8df9562d43374cad7ea97f848be5edb6263ad",
     "depth": "deep-read",
     "purpose": "Expose GitHubExplorer, GitHubPanel and the package version.",
     "provenance": "[src: src/github_explorer/__init__.py]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/release/explorer-0.3.0/src/github_explorer/__init__.py",
+    "link": "https://github.com/mithudso/github-explorer/blob/main/src/github_explorer/__init__.py",
     "why": "Consumers import the reusable screen and standalone host from this facade.",
     "when": "Changing public imports or the release version.",
     "how_to_read": "__all__, __version__",
@@ -816,7 +816,7 @@
     "symbols": [
       "main"
     ],
-    "link": "https://github.com/mithudso/github-explorer/blob/release/explorer-0.3.0/src/github_explorer/__main__.py",
+    "link": "https://github.com/mithudso/github-explorer/blob/main/src/github_explorer/__main__.py",
     "why": "Both console-script aliases and python -m use this entrypoint.",
     "when": "Changing CLI flags, startup validation or error exit behavior.",
     "how_to_read": "main",
@@ -836,17 +836,18 @@
     "path": "src/github_explorer/app.py",
     "role": "library",
     "importance": "high",
-    "bytes": 604,
-    "sha256": "5e9e31ab4093d6c68e4e57b9b5b7fffe7658af4afed56bd81c09317bf6619189",
+    "bytes": 899,
+    "sha256": "6bd20861b13520e32eb65c5723aa8cfe326ccd940b748e548d13ab53a7ad98c5",
     "depth": "deep-read",
     "purpose": "Host GitHubPanel in a standalone Textual application.",
     "provenance": "[src: src/github_explorer/app.py]",
     "symbols": [
       "GitHubExplorer",
       "__init__",
-      "on_mount"
+      "on_mount",
+      "action_quit"
     ],
-    "link": "https://github.com/mithudso/github-explorer/blob/release/explorer-0.3.0/src/github_explorer/app.py",
+    "link": "https://github.com/mithudso/github-explorer/blob/main/src/github_explorer/app.py",
     "why": "Keeping the host separate allows other Textual apps to embed the panel.",
     "when": "Changing standalone startup, branding or exit behavior.",
     "how_to_read": "GitHubExplorer.__init__, on_mount",
@@ -858,7 +859,8 @@
     "depended_on_by": [
       "src/github_explorer/__init__.py",
       "src/github_explorer/__main__.py",
-      "tests/test_cli.py"
+      "tests/test_cli.py",
+      "tests/test_editor_status.py"
     ]
   },
   {
@@ -885,7 +887,7 @@
       "settings_arguments",
       "name"
     ],
-    "link": "https://github.com/mithudso/github-explorer/blob/release/explorer-0.3.0/src/github_explorer/catalog.py",
+    "link": "https://github.com/mithudso/github-explorer/blob/main/src/github_explorer/catalog.py",
     "why": "The UI needs searchable local commands without executing aliases or extensions.",
     "when": "Changing help parsing, external-command classification or discovery errors.",
     "how_to_read": "load_catalog → help_text → parse_catalog; flags_from_help; QUICK_ACTIONS; git_commands",
@@ -906,8 +908,8 @@
     "path": "src/github_explorer/operations.py",
     "role": "library",
     "importance": "high",
-    "bytes": 6642,
-    "sha256": "60c948877c81c02c512f5357c80fe75b2c6b4a22cd24e2641ec64899efd9f001",
+    "bytes": 9047,
+    "sha256": "e0c9ee2c8a39f5e7703ce3140918e5751f40fe137033ddb2c73230460cb46bea",
     "depth": "deep-read",
     "purpose": "Declare runtime operation metadata records and return independent copies.",
     "provenance": "[src: src/github_explorer/operations.py]",
@@ -915,7 +917,7 @@
       "list_operations",
       "get_operation"
     ],
-    "link": "https://github.com/mithudso/github-explorer/blob/release/explorer-0.3.0/src/github_explorer/operations.py",
+    "link": "https://github.com/mithudso/github-explorer/blob/main/src/github_explorer/operations.py",
     "why": "Maintainers can document behavior and remediation without triggering discovery or execution.",
     "when": "Changing the public operation inventory, source anchors or remediation guidance.",
     "how_to_read": "OPERATIONS; list_operations; get_operation",
@@ -931,19 +933,30 @@
     "path": "src/github_explorer/panel.py",
     "role": "library",
     "importance": "high",
-    "bytes": 34396,
-    "sha256": "6ec6140d9fdab84d476233c6f8b0b6e20229c72974bc14876d894707f716c2a2",
+    "bytes": 47844,
+    "sha256": "7cd5404cd9d7853ec4682531e3b14fad3c57cb9793973a7efcb7bf9c02d9955c",
     "depth": "deep-read",
-    "purpose": "Compose file browsing, CLI controls, shortcuts, directional navigation, settings and confirmation.",
+    "purpose": "Compose file browsing, embedded Vim, persistent status, hideable actions, settings and confirmation.",
     "provenance": "[src: src/github_explorer/panel.py]",
     "symbols": [
       "ArrowNavigation",
+      "VimEditor",
+      "RepositoryStatus",
       "CommandConfirm",
       "RepoSettings",
       "GitHubPanel",
       "check_action",
       "action_navigate",
       "focus_in_direction",
+      "Closed",
+      "render_line",
+      "on_mount",
+      "ex",
+      "open_file",
+      "exited",
+      "__init__",
+      "compose",
+      "close",
       "__init__",
       "compose",
       "choose",
@@ -971,6 +984,18 @@
       "choose_file",
       "load_file",
       "file_loaded",
+      "editor_closed",
+      "action_save_file",
+      "action_focus_files",
+      "action_toggle_actions",
+      "refresh_local_status",
+      "read_local_status",
+      "local_status_loaded",
+      "refresh_activity",
+      "read_activity",
+      "activity_loaded",
+      "repository_status_text",
+      "render_repository_status",
       "settings_confirmed",
       "load_commands",
       "catalog_failed",
@@ -989,9 +1014,10 @@
       "finished",
       "action_close",
       "on_unmount",
+      "__init__",
       "confirmed"
     ],
-    "link": "https://github.com/mithudso/github-explorer/blob/release/explorer-0.3.0/src/github_explorer/panel.py",
+    "link": "https://github.com/mithudso/github-explorer/blob/main/src/github_explorer/panel.py",
     "why": "One screen connects discovery and execution while keeping explicit user confirmation.",
     "when": "Changing arrow navigation, quick actions, asynchronous refresh, previews or host integration.",
     "how_to_read": "GitHubPanel.compose → load_commands/loaded → request_run → start_command/execute; CommandConfirm",
@@ -1004,6 +1030,7 @@
     "depended_on_by": [
       "src/github_explorer/__init__.py",
       "src/github_explorer/app.py",
+      "tests/test_editor_status.py",
       "tests/test_navigation.py",
       "tests/test_panel.py",
       "tests/test_repository_panel.py",
@@ -1014,10 +1041,10 @@
     "path": "src/github_explorer/runner.py",
     "role": "library",
     "importance": "high",
-    "bytes": 10453,
-    "sha256": "715e3cbc82b9b04f03bc968703bdf607bff922bb4d6e09ac14a0e42213788f32",
+    "bytes": 16291,
+    "sha256": "5bda0c24da870a946e4c65719100eaded2297641cdc6a12ef163d15e3b027730",
     "depth": "deep-read",
-    "purpose": "Prepare shell-free argv, run child processes and read GitHub repository metadata, trees and blobs.",
+    "purpose": "Prepare command and Vim argv; validate local files and read checkout status and GitHub activity.",
     "provenance": "[src: src/github_explorer/runner.py]",
     "symbols": [
       "Invocation",
@@ -1028,20 +1055,31 @@
       "CommandRunner",
       "run_interactive",
       "Repository",
+      "_read_output",
       "read_json",
       "api_read",
       "repository_info",
       "repository_files",
       "repository_file_text",
+      "Workspace",
+      "git_read",
+      "changed_file_count",
+      "workspace_status",
+      "workspace_matches",
+      "workspace_files",
+      "editable_file",
+      "vim_command",
+      "repository_activity",
       "preview",
       "environment",
       "__init__",
       "cancel",
       "stop",
       "run",
-      "target"
+      "target",
+      "collection"
     ],
-    "link": "https://github.com/mithudso/github-explorer/blob/release/explorer-0.3.0/src/github_explorer/runner.py",
+    "link": "https://github.com/mithudso/github-explorer/blob/main/src/github_explorer/runner.py",
     "why": "Execution shares repository context, bounded capture, cancellation and timeout semantics.",
     "when": "Changing argument handling, subprocess cleanup, output decoding or environment isolation.",
     "how_to_read": "prepare → Invocation.environment → CommandRunner.run; run_interactive",
@@ -1054,25 +1092,28 @@
       "src/github_explorer/__main__.py",
       "src/github_explorer/panel.py",
       "tests/conftest.py",
+      "tests/test_editor_status.py",
       "tests/test_panel.py",
       "tests/test_repository.py",
       "tests/test_runner.py",
-      "tests/test_shortcuts.py"
+      "tests/test_shortcuts.py",
+      "tests/test_workspace.py"
     ]
   },
   {
     "path": "tests/conftest.py",
     "role": "test",
     "importance": "peripheral",
-    "bytes": 628,
-    "sha256": "912d0ef088915cc4ee98362edfd498da077a7ef623f6ee65a649883156620554",
+    "bytes": 881,
+    "sha256": "21811242296e93b91c93617c9aa68ee494bae1c00c00767842038200adbb4e52",
     "depth": "deep-read",
     "purpose": "Provide network-free repository fixtures for UI tests.",
     "provenance": "[src: tests/conftest.py]",
     "symbols": [
-      "ui_repository"
+      "ui_repository",
+      "no_checkout"
     ],
-    "link": "https://github.com/mithudso/github-explorer/blob/release/explorer-0.3.0/tests/conftest.py",
+    "link": "https://github.com/mithudso/github-explorer/blob/main/tests/conftest.py",
     "why": "Automatic startup reads must never access a real account in tests.",
     "when": "Changing shared UI repository fixtures.",
     "how_to_read": "ui_repository",
@@ -1098,7 +1139,7 @@
       "test_loading_uses_only_builtin_help_commands",
       "run"
     ],
-    "link": "https://github.com/mithudso/github-explorer/blob/release/explorer-0.3.0/tests/test_catalog.py",
+    "link": "https://github.com/mithudso/github-explorer/blob/main/tests/test_catalog.py",
     "why": "Fixtures enforce discovery without executing discovered commands.",
     "when": "Changing catalog parsers or discovery subprocess arguments.",
     "how_to_read": "REFERENCE; test_loading_uses_only_builtin_help_commands",
@@ -1127,7 +1168,7 @@
       "missing",
       "timeout"
     ],
-    "link": "https://github.com/mithudso/github-explorer/blob/release/explorer-0.3.0/tests/test_cli.py",
+    "link": "https://github.com/mithudso/github-explorer/blob/main/tests/test_cli.py",
     "why": "CLI modes must select the correct behavior and preserve useful error exits.",
     "when": "Changing startup options, errors, JSON shape or standalone screen integration.",
     "how_to_read": "test_catalog_export_never_starts_tui; test_standalone_host_branding_context_and_quit",
@@ -1163,7 +1204,7 @@
       "test_generation_refuses_symlinked_output_directory",
       "git"
     ],
-    "link": "https://github.com/mithudso/github-explorer/blob/release/explorer-0.3.0/tests/test_doc_indexes.py",
+    "link": "https://github.com/mithudso/github-explorer/blob/main/tests/test_doc_indexes.py",
     "why": "Fixture repositories check index correctness without application execution.",
     "when": "Changing source census, generated dossier contracts or public-data guards.",
     "how_to_read": "repo; test_generation_is_deterministic_and_does_not_index_its_outputs",
@@ -1173,6 +1214,39 @@
       "scripts/check_doc_indexes.py"
     ],
     "edit_provenance": "[src: README.md#development; tests/test_doc_indexes.py, asserted-by-test]",
+    "depended_on_by": []
+  },
+  {
+    "path": "tests/test_editor_status.py",
+    "role": "test",
+    "importance": "peripheral",
+    "bytes": 7703,
+    "sha256": "59e70654551665325ed1588ac80d0910640afe75bb950426cec0889ded9ba08f",
+    "depth": "deep-read",
+    "purpose": "Exercise actual Vim on temporary files, save/switch/quit guards and persistent status.",
+    "provenance": "[src: tests/test_editor_status.py]",
+    "symbols": [
+      "local_files",
+      "settle",
+      "test_status_remains_visible_when_actions_hidden",
+      "test_real_vim_saves_and_protects_unsaved_file_switch",
+      "test_status_failures_are_unknown_and_stale_results_ignored",
+      "test_refresh_updates_changed_count_and_missing_vim_is_reported",
+      "test_mismatched_checkout_remains_read_only",
+      "start_once",
+      "unavailable"
+    ],
+    "link": "https://github.com/mithudso/github-explorer/blob/main/tests/test_editor_status.py",
+    "why": "Editor integration must preserve unsaved buffers and keep status visible when actions hide.",
+    "when": "Changing Vim integration, status polling or action visibility.",
+    "how_to_read": "local_files; test_real_vim_saves_and_protects_unsaved_file_switch",
+    "how_to_edit": "Run uv run pytest tests/test_editor_status.py; full gates: uv run pytest, uv run ruff check ., uv build.",
+    "depends_on": [
+      "src/github_explorer/panel.py",
+      "src/github_explorer/runner.py",
+      "src/github_explorer/app.py"
+    ],
+    "edit_provenance": "[src: README.md#development; tests/test_editor_status.py, asserted-by-test]",
     "depended_on_by": []
   },
   {
@@ -1193,7 +1267,7 @@
       "test_operation_generator_refuses_symlink_before_any_output_write",
       "test_rotation_preserves_preexisting_temporary_file"
     ],
-    "link": "https://github.com/mithudso/github-explorer/blob/release/explorer-0.3.0/tests/test_maintenance.py",
+    "link": "https://github.com/mithudso/github-explorer/blob/main/tests/test_maintenance.py",
     "why": "Maintenance must preserve workflow content and keep public metadata synchronized.",
     "when": "Changing log rotation or operation registry generation.",
     "how_to_read": "script; test_rotation_preserves_all_sections_and_defaults_to_dry_run",
@@ -1222,7 +1296,7 @@
       "test_settings_and_confirmation_arrows",
       "test_tree_boundaries_and_readonly_content_allow_arrow_exit"
     ],
-    "link": "https://github.com/mithudso/github-explorer/blob/release/explorer-0.3.0/tests/test_navigation.py",
+    "link": "https://github.com/mithudso/github-explorer/blob/main/tests/test_navigation.py",
     "why": "Arrow navigation must not activate commands or discard native editing behavior.",
     "when": "Changing navigation in the panel, settings or confirmations.",
     "how_to_read": "test_tree_arrows_expand_walk_collapse_without_selecting; test_spatial_buttons_fields_and_dropdown",
@@ -1253,7 +1327,7 @@
       "run",
       "load"
     ],
-    "link": "https://github.com/mithudso/github-explorer/blob/release/explorer-0.3.0/tests/test_panel.py",
+    "link": "https://github.com/mithudso/github-explorer/blob/main/tests/test_panel.py",
     "why": "Textual pilots verify user actions before mocked command execution.",
     "when": "Changing screen events, confirmation boundaries or threaded completion callbacks.",
     "how_to_read": "Host; test_embed_catalog_flags_preview_run_and_return; test_reload_ignores_cancelled_catalog_result",
@@ -1290,7 +1364,7 @@
       "run",
       "help_text"
     ],
-    "link": "https://github.com/mithudso/github-explorer/blob/release/explorer-0.3.0/tests/test_repository.py",
+    "link": "https://github.com/mithudso/github-explorer/blob/main/tests/test_repository.py",
     "why": "Read requests and settings argv need exact host/context and side-effect boundaries.",
     "when": "Changing repository read helpers or setting discovery.",
     "how_to_read": "FixtureRunner; repository",
@@ -1324,7 +1398,7 @@
       "files",
       "preview"
     ],
-    "link": "https://github.com/mithudso/github-explorer/blob/release/explorer-0.3.0/tests/test_repository_panel.py",
+    "link": "https://github.com/mithudso/github-explorer/blob/main/tests/test_repository_panel.py",
     "why": "User actions must preserve the resolved target and cancel without mutations.",
     "when": "Changing files and settings UI or worker lifecycle.",
     "how_to_read": "test_settings_current_values_cancel_and_confirm_exact_changes",
@@ -1356,7 +1430,7 @@
       "test_git_context_env_and_literal_arguments",
       "test_missing_git_is_actionable"
     ],
-    "link": "https://github.com/mithudso/github-explorer/blob/release/explorer-0.3.0/tests/test_runner.py",
+    "link": "https://github.com/mithudso/github-explorer/blob/main/tests/test_runner.py",
     "why": "Fixture Python children verify process behavior without GitHub side effects.",
     "when": "Changing process execution, environment controls or bounded output handling.",
     "how_to_read": "invocation; test_cancel_timeout_and_output_limit; test_incomplete_utf8_is_replaced_at_eof",
@@ -1384,7 +1458,7 @@
       "captured",
       "interactive"
     ],
-    "link": "https://github.com/mithudso/github-explorer/blob/release/explorer-0.3.0/tests/test_shortcuts.py",
+    "link": "https://github.com/mithudso/github-explorer/blob/main/tests/test_shortcuts.py",
     "why": "Git and GitHub shortcuts must retain explicit execution and the correct context.",
     "when": "Changing quick commands, hotkeys, busy guards or Git menu entries.",
     "how_to_read": "test_button_and_hotkey_preview_cancel_and_execute; test_shortcut_bar_fits_and_resizes",
@@ -1398,15 +1472,50 @@
     "depended_on_by": []
   },
   {
+    "path": "tests/test_workspace.py",
+    "role": "test",
+    "importance": "peripheral",
+    "bytes": 5305,
+    "sha256": "d50b5c101c4b2e113bb4a98c71bf4fcd128d6f3eb460b770159cbd3e02f7a858",
+    "depth": "deep-read",
+    "purpose": "Verify Git fixture status, safe editing paths, checkout identity and paginated activity reads.",
+    "provenance": "[src: tests/test_workspace.py]",
+    "symbols": [
+      "git",
+      "checkout",
+      "test_real_git_counts_unique_changes_and_current_branch",
+      "test_unborn_branch_and_deleted_files",
+      "test_editable_file_boundaries",
+      "test_vim_command_quotes_paths_disables_session_files",
+      "test_repository_activity_is_paginated_read_only_and_contextual",
+      "test_checkout_matching_ignores_override_and_checks_host",
+      "FixtureRunner",
+      "FixtureRunner",
+      "__init__",
+      "run",
+      "run"
+    ],
+    "link": "https://github.com/mithudso/github-explorer/blob/main/tests/test_workspace.py",
+    "why": "Local writes must not follow remote override identity or unsafe paths.",
+    "when": "Changing workspace discovery, file validation, Vim argv or status parsing.",
+    "how_to_read": "checkout; test_real_git_counts_unique_changes_and_current_branch; test_editable_file_boundaries",
+    "how_to_edit": "Run uv run pytest tests/test_workspace.py; full gates: uv run pytest, uv run ruff check ., uv build.",
+    "depends_on": [
+      "src/github_explorer/runner.py"
+    ],
+    "edit_provenance": "[src: README.md#development; tests/test_workspace.py, asserted-by-test]",
+    "depended_on_by": []
+  },
+  {
     "path": "uv.lock",
     "role": "config",
     "importance": "normal",
-    "bytes": 17683,
-    "sha256": "05a2f53a22c4fbe716d51fd5b79b28115a79e68b58a2fb3bac3ee11a36e97e17",
+    "bytes": 27794,
+    "sha256": "a5630f11d04e6f9b137bc0d91d2db75a74176d7f66c8db0475a3353d8a69f1b2",
     "depth": "shallow",
     "purpose": "Config file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/release/explorer-0.3.0/uv.lock"
+    "link": "https://github.com/mithudso/github-explorer/blob/main/uv.lock"
   }
 ]

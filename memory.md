@@ -1,6 +1,6 @@
 # Continuation record
-Version: 13
-Delta: Validate the release PR and normalize the concurrently added funding configuration.
+Version: 14
+Delta: Add embedded Vim editing, persistent repository status and hideable actions.
 
 ## Request and scope
 Create a standalone GitHub Explorer TUI and public mithudso/github-explorer repository.
@@ -126,3 +126,18 @@ previously installed github-panel and skillsx commands remain unchanged.
 - Completed: pushed the release branch and opened PR #1 at https://github.com/mithudso/github-explorer/pull/1. Refreshed generated metadata to include all committed files and this delivery record.
 - Delivery status: the linked PR is the authoritative record of CI and merge completion. This note is committed before those external actions. If resuming, inspect PR #1, wait for its current-head checks, merge if still open, then fast-forward local main to origin/main. No implementation work remains.
 - Funding validation: Ruby Psych rejected the unquoted @ value in .github/FUNDING.yml at line 5 column 8 with "found character that cannot start any token". Normalize the supplied Venmo/PayPal destinations to custom URLs, use the Buy Me a Coffee username, and remove the empty unsupported Cash App field. GitHub funding syntax is documented at https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/displaying-a-sponsor-button-in-your-repository.
+
+## v0.4.0 - 2026-09-29 — Editing and repository status
+- Request: edit and save selected repository files in Vim; show changed-file count, current branch, other branches and open PRs in a persistent bottom status bar; hide/show bottom buttons and hotkeys.
+- Baseline: clean main at fe8ffeb; version 0.3.0; 79 tests. PR #1 was merged and local main was synchronized.
+- Decision: embed actual Vim using a PTY widget. Use local current-branch files when the checkout matches the selected GitHub repository. Remote-only or mismatched contexts retain read-only previews; never save remote default-branch bytes over local edits.
+- Constraints: preserve local changes and Vim unsaved-buffer handling; do not persist editor output, session history or credentials. Saving a file is explicit and does not commit or push it. Resolve paths inside the checkout and reject symlinks/submodules for editing.
+- Status: count unique staged, unstaged, untracked and conflicted paths once; report current branch or detached HEAD, other local/remote branches and open GitHub PRs with errors represented as unknown. Keep status visible when actions are hidden.
+- Completed: embedded actual Vim with textual-tty/bittty, safe checkout/path selection, explicit saves, native unsaved-buffer prompts, single-process lifecycle, resize compatibility and standalone quit protection. Implementation is in runner.py, panel.py and app.py.
+- Completed: persistent branch/change/PR/other-branch status, paginated activity reads, local/remote refresh intervals, details dialog and hide/show actions. New tests are test_workspace.py and test_editor_status.py; shared UI fixtures isolate network and local status.
+- Completed: release version 0.4.0 and locked terminal dependencies; usage/security/architecture/operation docs and generated indexes updated. Prompt version 12 and memory version 14 preserve this request.
+- Validation: uv sync --locked, all 90 tests, Ruff, uv build and operation metadata checks passed. The source archive includes the new fixtures. A final live read-only smoke verified matching-checkout files, current branch/change/PR status, real Vim open/quit, hide/show and resize; README bytes were unchanged and the Vim child exited cleanly. Explicit write behavior was exercised only on temporary fixture files.
+- Remaining: no required implementation work. The commit containing this record is local; it has not been pushed and remote CI has not run for 0.4.0. No Stele project is associated with this repository.
+- Implementation lesson: hiding actions during Vim changed the terminal dimensions and exposed unstyled blank rows from textual-tty. Textual monochrome rendering raised AttributeError: NoneType has no attribute color in filter.monochrome_style. VimEditor.render_line now applies the widget style to all returned strips; the real-Vim regression resizes and toggles actions with the editor open.
+- Integration lesson: installed gh rejected combined --paginate --slurp --jq with "the --slurp option is not supported with --jq or --template". repository_activity now uses --paginate with per-page projections, parses the JSON object stream, and combines all pages. The fixture includes multiple pages and the live smoke verifies the installed CLI accepts the exact flags.
+- Lifecycle lesson: Textual dispatches mount handlers along the MRO. Calling Terminal.on_mount from VimEditor.on_mount without event.prevent_default started two PTYs and caused "Task was destroyed but it is pending" for HostPort._pump. The editor now prevents repeated default dispatch and the real-Vim test checks a single child starts and exits.

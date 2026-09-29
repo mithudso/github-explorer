@@ -30,13 +30,13 @@
       "id": "repository-read",
       "kind": "check",
       "transport": "subprocess",
-      "target": "gh repo view identity; gh api --method GET repository metadata, trees and blobs",
-      "description": "Read GitHub default-branch files, previews and current repository settings.",
+      "target": "gh repo view identity; gh api --method GET repository metadata, trees, blobs, paginated PRs and branches",
+      "description": "Read remote files, previews, repository settings, open PRs and branches.",
       "sourceFile": "src/github_explorer/runner.py",
       "sourceSymbol": "read_json",
       "readOnly": true,
       "verifyDatastore": false,
-      "trigger": "Panel entry, Refresh files, file selection and Repo settings",
+      "trigger": "Panel entry, Refresh files, remote file selection, Repo settings and activity refresh",
       "retryPolicy": "No automatic retry; refresh explicitly after resolving the cause.",
       "observability": "In-memory file list, preview, settings form or error status; no persistence.",
       "tests": [
@@ -103,6 +103,53 @@
         "nonzero-exit": "Inspect terminal diagnostics; verify side effects before retrying.",
         "interrupted": "Ctrl-C returns 130; verify remote state before retrying.",
         "suspend-unsupported": "Use a host supporting App.suspend() for terminal mode."
+      }
+    },
+    {
+      "id": "workspace-read",
+      "kind": "check",
+      "transport": "subprocess",
+      "target": "git rev-parse, status, for-each-ref and ls-files; gh repo view identity",
+      "description": "Read local branch, unique changed-file count, branches and checkout files.",
+      "sourceFile": "src/github_explorer/runner.py",
+      "sourceSymbol": "workspace_status",
+      "readOnly": true,
+      "verifyDatastore": false,
+      "trigger": "Panel entry, two-second status poll, refresh and command/editor completion",
+      "retryPolicy": "Periodic read-only refresh; no overlapping status reads.",
+      "observability": "Persistent status bar and details dialog; no disk log.",
+      "tests": [
+        "tests/test_workspace.py",
+        "tests/test_editor_status.py"
+      ],
+      "remediation": {
+        "read-failed": "Choose a valid checkout and check Git on PATH.",
+        "mismatch": "Choose the local checkout matching the selected GitHub repository to edit."
+      }
+    },
+    {
+      "id": "vim-editor",
+      "kind": "command",
+      "transport": "subprocess-pty",
+      "target": "Installed vim with explicit local path; textual-tty/bittty PTY",
+      "description": "Edit selected local text in actual Vim; save only on explicit user action.",
+      "sourceFile": "src/github_explorer/runner.py",
+      "sourceSymbol": "vim_command",
+      "readOnly": false,
+      "warning": "Vim saves change local files and intentional Vim commands have the user's privileges.",
+      "verifyDatastore": false,
+      "trigger": "Select a validated local text file in a matching checkout",
+      "retryPolicy": "No automatic write retry; Vim handles write errors and unsaved-buffer prompts.",
+      "observability": "PTY pane and local Git changed-file count; editor output is not logged.",
+      "tests": [
+        "tests/test_workspace.py",
+        "tests/test_editor_status.py"
+      ],
+      "remediation": {
+        "missing-executable": "Install Vim on PATH and select the file again.",
+        "invalid-path": "Select an existing in-checkout UTF-8 file, without symlinks, at most 500 KB.",
+        "write-failed": "Read Vim's error; check permissions and on-disk changes before retrying.",
+        "unsaved-buffer": "Use Vim's Save/Discard/Cancel prompt or :wq/:q before leaving."
       }
     },
     {

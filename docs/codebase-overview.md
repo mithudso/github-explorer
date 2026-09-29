@@ -1,13 +1,13 @@
 # github-explorer — codebase overview
-> Source: . · https://github.com/mithudso/github-explorer @ 2ddcc1b dirty
+> Source: . · https://github.com/mithudso/github-explorer @ fe8ffeb dirty
 > Generated: 2026-09-29 by crawl-repo-to-llms v1.2.0
-> Census: 78 enumerated / 22 deep-read / 56 shallow · partial: remaining metadata cards shallow; no index probes
+> Census: 80 enumerated / 24 deep-read / 56 shallow · partial: remaining metadata cards shallow; no index probes
 
 ## Architecture
-Package: github-explorer; version: 0.3.0. [src: pyproject.toml]
+Package: github-explorer; version: 0.4.0. [src: pyproject.toml]
 Purpose: A standalone terminal workbench for the full installed GitHub CLI. [src: pyproject.toml]
 Requires Python >=3.11. [src: pyproject.toml]
-Runtime dependencies: textual>=8,<9, rich>=13. [src: pyproject.toml]
+Runtime dependencies: textual>=8,<9, rich>=13, textual-tty>=0.4,<0.5. [src: pyproject.toml]
 scripts/check_doc_indexes.py: Check source paths, hashes and generated documentation without application probes. [src: scripts/check_doc_indexes.py]
 scripts/generate_ops_registry_doc.py: Generate public operation metadata without importing the application or invoking gh. [src: scripts/generate_ops_registry_doc.py]
 scripts/generate_repo_indexes.py: Generate portable static repository indexes without importing application code. [src: scripts/generate_repo_indexes.py]
@@ -16,7 +16,7 @@ src/github_explorer/__init__.py: Standalone GitHub Explorer and its reusable Tex
 src/github_explorer/app.py: Standalone host; the panel remains embeddable in another Textual App. [src: src/github_explorer/app.py]
 src/github_explorer/catalog.py: Read the installed CLI's built-in reference; do not run aliases or extensions. [src: src/github_explorer/catalog.py]
 src/github_explorer/operations.py: Declarative inventory for maintainers; never executes or retries commands. [src: src/github_explorer/operations.py]
-src/github_explorer/panel.py: Reusable GitHub control screen. Depends only on Textual and this package. [src: src/github_explorer/panel.py]
+src/github_explorer/panel.py: Reusable GitHub control screen with an embedded Vim terminal. [src: src/github_explorer/panel.py]
 src/github_explorer/runner.py: Shell-free command execution with cancellation and bounded captured output. [src: src/github_explorer/runner.py]
 tests/test_doc_indexes.py: Exercise stale, deleted and newly added sources in isolated fixture repositories. [src: tests/test_doc_indexes.py]
 tests/test_maintenance.py: Regression checks for maintenance writes and static operation metadata. [src: tests/test_maintenance.py]
@@ -32,7 +32,7 @@ tests/test_maintenance.py: Regression checks for maintenance writes and static o
 
 ## Conventions and gotchas
 Use uv sync --locked, uv run pytest, uv run ruff check . and uv build for the documented development workflow. [src: README.md#development]
-Opening the panel reads GitHub repository metadata and default-branch files; selecting a file reads its blob. Settings options come from local gh repo edit help and require confirmed changes. [src: src/github_explorer/panel.py; src/github_explorer/runner.py]
+Opening the panel reads local Git and GitHub metadata. Matching checkouts list local files for Vim editing; remote-only contexts use read-only default-branch previews. Persistent status shows branch, changed files, PRs and other branches. [src: src/github_explorer/panel.py; src/github_explorer/runner.py]
 Catalog discovery reads local gh help; discovered aliases and extensions can execute external programs when explicitly requested. [src: src/github_explorer/catalog.py]
 Stop cannot undo completed local or remote actions. [src: README.md#execution-behavior]
 Shell expansion, pipelines and redirects are not supported by command execution. [src: README.md#execution-behavior]
@@ -60,7 +60,7 @@ docs/COMPONENTS.md: Components; Application modules; Embedding example; Inside a
 docs/DEVELOPMENT.md: Development; Prerequisites and setup; Checks; Making a change; Environment; Troubleshooting. [src: docs/DEVELOPMENT.md]
 docs/INSTALLATION.md: Installation; Prerequisites; Install; Verification; Upgrade and uninstall. [src: docs/INSTALLATION.md]
 docs/MCP.md: MCP applicability. [src: docs/MCP.md]
-docs/SECURITY.md: Security model; Principals and trust boundaries; STRIDE review; Secrets, input, and output; Review checklist; Reporting and incidents; Repository browsing and settings. [src: docs/SECURITY.md]
+docs/SECURITY.md: Security model; Principals and trust boundaries; STRIDE review; Secrets, input, and output; Review checklist; Reporting and incidents; Embedded editor; Repository browsing and settings. [src: docs/SECURITY.md]
 docs/TESTING.md: Testing; Strategy and suites; Writing tests; Targets and CI gates; Limitations and smoke checks. [src: docs/TESTING.md]
 docs/archive/README.md: . [src: docs/archive/README.md]
 docs/bootstrap-file-report.md: Bootstrap file report. [src: docs/bootstrap-file-report.md]
@@ -156,16 +156,17 @@ Generated outputs are excluded from the source census to prevent recursive drift
 ### src/github_explorer
 - src/github_explorer/__init__.py: Expose GitHubExplorer, GitHubPanel and the package version. [src: src/github_explorer/__init__.py]
 - src/github_explorer/__main__.py: Parse launch options, validate repository context and select JSON catalog or TUI mode. Key symbols: main. [src: src/github_explorer/__main__.py]
-- src/github_explorer/app.py: Host GitHubPanel in a standalone Textual application. Key symbols: GitHubExplorer, __init__, on_mount. [src: src/github_explorer/app.py]
+- src/github_explorer/app.py: Host GitHubPanel in a standalone Textual application. Key symbols: GitHubExplorer, __init__, on_mount, action_quit. [src: src/github_explorer/app.py]
 - src/github_explorer/catalog.py: Parse local gh help, derive repository setting arguments and define curated Git shortcuts. Key symbols: Flag, Command, QuickAction, git_commands, flags_from_help, parse_catalog, executable, help_text, load_catalog, repository_settings, setting_value, settings_arguments. [src: src/github_explorer/catalog.py]
 - src/github_explorer/operations.py: Declare runtime operation metadata records and return independent copies. Key symbols: list_operations, get_operation. [src: src/github_explorer/operations.py]
-- src/github_explorer/panel.py: Compose file browsing, CLI controls, shortcuts, directional navigation, settings and confirmation. Key symbols: ArrowNavigation, CommandConfirm, RepoSettings, GitHubPanel, check_action, action_navigate, focus_in_direction, __init__, compose, choose, action_cancel, __init__. [src: src/github_explorer/panel.py]
-- src/github_explorer/runner.py: Prepare shell-free argv, run child processes and read GitHub repository metadata, trees and blobs. Key symbols: Invocation, git_executable, prepare, re_repo, Result, CommandRunner, run_interactive, Repository, read_json, api_read, repository_info, repository_files. [src: src/github_explorer/runner.py]
+- src/github_explorer/panel.py: Compose file browsing, embedded Vim, persistent status, hideable actions, settings and confirmation. Key symbols: ArrowNavigation, VimEditor, RepositoryStatus, CommandConfirm, RepoSettings, GitHubPanel, check_action, action_navigate, focus_in_direction, Closed, render_line, on_mount. [src: src/github_explorer/panel.py]
+- src/github_explorer/runner.py: Prepare command and Vim argv; validate local files and read checkout status and GitHub activity. Key symbols: Invocation, git_executable, prepare, re_repo, Result, CommandRunner, run_interactive, Repository, _read_output, read_json, api_read, repository_info. [src: src/github_explorer/runner.py]
 ### tests
-- tests/conftest.py: Provide network-free repository fixtures for UI tests. Key symbols: ui_repository. [src: tests/conftest.py]
+- tests/conftest.py: Provide network-free repository fixtures for UI tests. Key symbols: ui_repository, no_checkout. [src: tests/conftest.py]
 - tests/test_catalog.py: Test nested help parsing, alias classification, flags and the built-in-only discovery calls. Key symbols: test_full_reference_and_extensions_are_parsed_without_execution, test_flags_preserve_value_types_and_inherited_options, test_loading_uses_only_builtin_help_commands, run. [src: tests/test_catalog.py]
 - tests/test_cli.py: Test CLI help/version, validation, JSON export, timeout handling and standalone hosting. Key symbols: test_help_and_version_need_no_github_install, test_invalid_context_and_missing_gh, test_catalog_export_never_starts_tui, test_catalog_timeout_exits_without_traceback, test_standalone_host_branding_context_and_quit, missing, timeout. [src: tests/test_cli.py]
 - tests/test_doc_indexes.py: Test deterministic generation, stale sources, file deletion/addition, exclusions and collisions. Key symbols: repo, test_generation_is_deterministic_and_does_not_index_its_outputs, test_changed_source_is_stale, test_deleted_source_and_new_source_are_reported, test_missing_output_and_tampered_filemap_are_reported, test_private_ignored_files_and_symlinks_are_excluded, test_tracked_source_directory_replaced_by_symlink_is_excluded, test_collision_requires_owned_manifest_and_explicit_refresh, test_manifest_and_caps, test_options_are_extracted_without_importing_code, test_remote_credentials_are_not_published, test_generation_refuses_symlinked_output_directory. [src: tests/test_doc_indexes.py]
+- tests/test_editor_status.py: Exercise actual Vim on temporary files, save/switch/quit guards and persistent status. Key symbols: local_files, settle, test_status_remains_visible_when_actions_hidden, test_real_vim_saves_and_protects_unsaved_file_switch, test_status_failures_are_unknown_and_stale_results_ignored, test_refresh_updates_changed_count_and_missing_vim_is_reported, test_mismatched_checkout_remains_read_only, start_once, unavailable. [src: tests/test_editor_status.py]
 - tests/test_maintenance.py: Test archival preservation and refusal, fenced headings, copied metadata and generated registries. Key symbols: script, test_rotation_preserves_all_sections_and_defaults_to_dry_run, test_rotation_refuses_all_writes_when_either_log_has_editor_marker, test_rotation_ignores_heading_in_fenced_example, test_metadata_is_copied_and_generated_artifacts_are_current, test_operation_generator_refuses_symlink_before_any_output_write, test_rotation_preserves_preexisting_temporary_file. [src: tests/test_maintenance.py]
 - tests/test_navigation.py: Verify tree expansion, spatial arrow focus, native dropdowns and text editing. Key symbols: navigation, test_tree_arrows_expand_walk_collapse_without_selecting, test_spatial_buttons_fields_and_dropdown, test_settings_and_confirmation_arrows, test_tree_boundaries_and_readonly_content_allow_arrow_exit. [src: tests/test_navigation.py]
 - tests/test_panel.py: Exercise embedded UI confirmation, argument editing, capture, clipboard, stopping and catalog races. Key symbols: Host, test_embed_catalog_flags_preview_run_and_return, test_stop_keeps_panel_until_command_ends, test_reload_ignores_cancelled_catalog_result, __init__, on_mount, run, run, load. [src: tests/test_panel.py]
@@ -173,6 +174,7 @@ Generated outputs are excluded from the source census to prevent recursive drift
 - tests/test_repository_panel.py: Exercise default file browsing, settings confirmation and stale repository reads. Key symbols: test_files_are_above_catalog_default_search_and_preview, test_settings_current_values_cancel_and_confirm_exact_changes, test_failed_repository_read_leaves_cli_usable, test_late_file_read_cannot_replace_refreshed_repository, test_visibility_requires_explicit_acceptance_before_confirmation, test_late_preview_cannot_replace_new_selection, preview, run, fail, files, preview. [src: tests/test_repository_panel.py]
 - tests/test_runner.py: Exercise literal argv, context, child exit status, cancellation, timeout and UTF-8 capture. Key symbols: invocation, test_exact_argv_context_and_no_shell, test_capture_exit_and_context, test_cancel_timeout_and_output_limit, test_cancel_before_start, test_interactive_uses_normal_terminal, test_incomplete_utf8_is_replaced_at_eof, test_invalid_timeout_cannot_start_a_process, test_git_context_env_and_literal_arguments, test_missing_git_is_actionable. [src: tests/test_runner.py]
 - tests/test_shortcuts.py: Verify all twelve common command buttons and hotkeys, confirmations and responsive layout. Key symbols: shortcuts, test_button_and_hotkey_preview_cancel_and_execute, test_git_menu_typing_and_busy_shortcuts, test_shortcut_bar_fits_and_resizes, captured, interactive. [src: tests/test_shortcuts.py]
+- tests/test_workspace.py: Verify Git fixture status, safe editing paths, checkout identity and paginated activity reads. Key symbols: git, checkout, test_real_git_counts_unique_changes_and_current_branch, test_unborn_branch_and_deleted_files, test_editable_file_boundaries, test_vim_command_quotes_paths_disables_session_files, test_repository_activity_is_paginated_read_only_and_contextual, test_checkout_matching_ignores_override_and_checks_host, FixtureRunner, FixtureRunner, __init__, run. [src: tests/test_workspace.py]
 
 ## Generated outputs (excluded from recursive source census)
 - docs/high_signal_file_index.json [src: scripts/generate_repo_indexes.py]

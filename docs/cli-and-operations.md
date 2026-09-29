@@ -14,7 +14,8 @@
 | `--list-commands` | Read local help and print command/description/external JSON |
 
 With no inventory/help option, the command opens the TUI and reads the GitHub
-default-branch file list above the CLI catalog. Select files for read-only previews.
+file list above the CLI catalog. A matching checkout uses local files and embedded
+Vim; remote-only contexts use read-only default-branch previews.
 Repo settings opens the CLI-derived form; checked changes require confirmation.
 Choose a command, edit
 arguments, then use Run or Terminal and approve the preview. Run captures bounded

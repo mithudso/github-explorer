@@ -7,7 +7,8 @@ panel.py and the standalone host in app.py. Public exports belong in __init__.py
 Discover gh commands using local help only; keep curated Git shortcuts in catalog.py. Never execute discovered aliases or
 extensions during catalog loading. Execute argv without a shell. Preserve command
 previews, explicit execution, cancellation/timeouts and repository context.
-Do not persist command output or credentials. Use fixture commands in tests;
+Do not persist command output or credentials. Explicit editor saves may write selected
+local files; keep remote previews read-only and preserve unsaved Vim buffers. Use fixture commands in tests;
 live smoke tests may use read-only GitHub operations only.
 
 This repository is public. Commit only project code and documentation; exclude

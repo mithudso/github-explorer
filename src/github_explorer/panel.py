@@ -1,7 +1,8 @@
-"""Reusable GitHub control screen. Depends only on Textual and this package."""
+"""Reusable GitHub control screen with an embedded Vim terminal."""
 
 from __future__ import annotations
 
+import json
 import shlex
 from pathlib import Path
 
@@ -10,6 +11,7 @@ from textual import on, work
 from textual.app import ComposeResult
 from textual.binding import Binding
 from textual.containers import Horizontal, Vertical, VerticalScroll
+from textual.message import Message
 from textual.screen import ModalScreen, Screen
 from textual.widgets import (
     Button,
@@ -26,6 +28,7 @@ from textual.widgets import (
     Tree,
 )
 from textual.worker import get_current_worker
+from textual_tty import Terminal
 
 from . import catalog, runner
 
@@ -39,6 +42,10 @@ class ArrowNavigation:
     """Directional focus, with native text, dropdown and tab navigation retained."""
 
     def check_action(self, action, parameters):
+        if isinstance(self.focused, VimEditor) and action in {
+            "navigate", "close", "quick_command", "toggle_actions",
+        }:
+            return False
         if action == "navigate":
             focused = self.focused
             direction = parameters[0]
@@ -124,6 +131,65 @@ class ArrowNavigation:
                 candidates.append(((overlap <= 0, distance, offset), widget))
         if candidates:
             min(candidates, key=lambda candidate: candidate[0])[1].focus()
+
+
+class VimEditor(Terminal):
+    """Actual Vim in a PTY; the application never copies a remote blob to disk."""
+
+    class Closed(Message):
+        def __init__(self, editor, exit_code):
+            self.editor, self.exit_code = editor, exit_code
+            super().__init__()
+
+    def render_line(self, y):
+        # Resizing may expose a blank PTY row before the emulator resizes.
+        # Textual's monochrome filter requires a Style even on blank segments.
+        return super().render_line(y).apply_style(self.rich_style)
+
+    async def on_mount(self, event):
+        # Textual dispatches mount to each class in the MRO. Terminal's handler
+        # already calls its base; prevent a second PTY/process from being started.
+        event.prevent_default()
+        await super().on_mount()
+        if self.board.process is None:
+            self.post_message(self.Closed(self, -1))
+
+    def ex(self, command):
+        self.board.display.input("\x1b\x1b:" + command + "\r")
+        self.focus()
+
+    def open_file(self, path):
+        self.ex("execute 'confirm edit ' . fnameescape(" + json.dumps(str(path), ensure_ascii=False) + ")")
+
+    @on(Terminal.ProcessExited)
+    def exited(self, event):
+        event.stop()
+        self.post_message(self.Closed(self, event.exit_code))
+
+
+class RepositoryStatus(ArrowNavigation, ModalScreen):
+    BINDINGS = [("escape", "dismiss", "Close"), *ARROW_BINDINGS]
+    DEFAULT_CSS = """
+    RepositoryStatus { align: center middle; }
+    RepositoryStatus > Vertical { width: 100; max-width: 95%; height: 80%;
+        background: $surface; border: round $primary; padding: 1 2; }
+    RepositoryStatus TextArea { height: 1fr; }
+    """
+
+    def __init__(self, text):
+        super().__init__()
+        self.text = text
+
+    def compose(self):
+        with Vertical():
+            yield Label("Repository status")
+            yield TextArea(self.text, read_only=True)
+            yield Button("Close", id="status-close")
+
+    @on(Button.Pressed)
+    def close(self, event):
+        event.stop()
+        self.dismiss()
 
 
 class CommandConfirm(ArrowNavigation, ModalScreen):
@@ -292,6 +358,9 @@ class GitHubPanel(ArrowNavigation, Screen):
 
     BINDINGS = [
         Binding("escape", "close", "Back", priority=True),
+        Binding("ctrl+b", "toggle_actions", "Hide/show actions", priority=True),
+        Binding("ctrl+backslash", "focus_files", "File list", priority=True),
+        Binding("ctrl+s", "save_file", "Save file", priority=True),
         *ARROW_BINDINGS,
         *(Binding(action.key, f"quick_command('{action.id}')", action.label, priority=True)
           for action in catalog.QUICK_ACTIONS),
@@ -308,6 +377,13 @@ class GitHubPanel(ArrowNavigation, Screen):
     GitHubPanel #gh-files { height: 2fr; }
     GitHubPanel #gh-file-status { height: auto; max-height: 4; color: $text-muted; }
     GitHubPanel #gh-file-preview { height: 1fr; }
+    GitHubPanel #gh-vim { height: 1fr; }
+    GitHubPanel #gh-editor-buttons { height: 1; }
+    GitHubPanel #gh-editor-buttons Button { height: 1; }
+    GitHubPanel #gh-command-controls { height: auto; }
+    GitHubPanel #gh-persistent-status { height: 2; background: $boost; }
+    GitHubPanel #gh-repository-status { height: 2; width: 1fr; }
+    GitHubPanel #gh-persistent-status Button { height: 1; width: 18; min-width: 12; }
     GitHubPanel #gh-file-title { height: auto; max-height: 3; }
     GitHubPanel #gh-command { height: 5; }
     GitHubPanel #gh-tabs { height: 1fr; }
@@ -338,6 +414,16 @@ class GitHubPanel(ArrowNavigation, Screen):
         self.files: list[dict] = []
         self.readers: dict[str, runner.CommandRunner] = {}
         self.refresh_after_run = False
+        self.workspace = None
+        self.local_status = None
+        self.local_error = "Loading local checkout…"
+        self.open_prs = None
+        self.remote_branches = None
+        self.activity_error = "Loading GitHub status…"
+        self.editor = None
+        self.actions_visible = True
+        self._status_worker = None
+        self._activity_worker = None
 
     def compose(self) -> ComposeResult:
         exit_hint = "Escape to quit" if self.standalone else "Escape to return"
@@ -358,19 +444,23 @@ class GitHubPanel(ArrowNavigation, Screen):
                 yield Input(placeholder="Search gh and Git commands…", id="gh-search")
                 yield Tree("Commands · gh + git", id="gh-tree")
             with Vertical(id="gh-detail"):
-                yield Label("Command · enter gh or git commands and arguments")
-                yield TextArea("gh repo view", id="gh-command")
-                with Horizontal(classes="gh-row"):
-                    yield Select([], prompt="Add a flag", id="gh-flag")
-                    yield Input(placeholder="Flag value (one argument)", id="gh-value")
-                    yield Button("Add flag", id="gh-add-flag")
-                with Horizontal(classes="gh-row"):
-                    yield Input(placeholder="Positional argument (one argument)", id="gh-arg")
-                    yield Button("Add argument", id="gh-add-arg")
-                    yield Input("300", placeholder="Timeout seconds", id="gh-timeout")
+                with Vertical(id="gh-command-controls"):
+                    yield Label("Command · enter gh or git commands and arguments")
+                    yield TextArea("gh repo view", id="gh-command")
+                    with Horizontal(classes="gh-row"):
+                        yield Select([], prompt="Add a flag", id="gh-flag")
+                        yield Input(placeholder="Flag value (one argument)", id="gh-value")
+                        yield Button("Add flag", id="gh-add-flag")
+                    with Horizontal(classes="gh-row"):
+                        yield Input(placeholder="Positional argument (one argument)", id="gh-arg")
+                        yield Button("Add argument", id="gh-add-arg")
+                        yield Input("300", placeholder="Timeout seconds", id="gh-timeout")
                 with TabbedContent(id="gh-tabs"):
                     with TabPane("Repository files", id="gh-files-tab"):
                         yield Static("Select a file to preview it.", id="gh-file-title", markup=False)
+                        with Horizontal(id="gh-editor-buttons"):
+                            yield Button("Save :w", id="gh-save-file", compact=True, disabled=True)
+                            yield Button("Close :q", id="gh-close-editor", compact=True, disabled=True)
                         yield TextArea("", read_only=True, id="gh-file-preview")
                     with TabPane("Command help", id="gh-help-tab"):
                         yield TextArea(
@@ -402,7 +492,14 @@ class GitHubPanel(ArrowNavigation, Screen):
                     compact=True, tooltip=f"{' '.join(action.argv)} — {action.description}",
                 )
 
+        with Horizontal(id="gh-persistent-status"):
+            yield Static("Branch: loading · Changed: …\nPRs: … · Other branches: …", id="gh-repository-status", markup=False)
+            yield Button("Status / refresh", id="gh-status-details", compact=True)
+            yield Button("Hide actions", id="gh-toggle-actions", compact=True)
+
     def on_mount(self):
+        self.set_interval(2, self.refresh_local_status)
+        self.set_interval(60, self.refresh_activity)
         self.load_commands()
         self.refresh_files()
         self.query_one("#gh-files", Tree).focus()
@@ -437,11 +534,24 @@ class GitHubPanel(ArrowNavigation, Screen):
     @on(Input.Submitted, "#gh-cwd")
     @on(Input.Submitted, "#gh-repo")
     def refresh_files(self):
-        if "preview" in self.readers:
-            self.readers["preview"].cancel()
+        if self.editor:
+            self.status("Close Vim with :wq or :q before changing repository context or refreshing files.")
+            return
+        for group in ("preview", "activity", "local-status"):
+            if group in self.readers:
+                self.readers[group].cancel()
+        for worker in (self._activity_worker, self._status_worker):
+            if worker:
+                worker.cancel()
+        self._activity_worker = self._status_worker = None
         self.repository = None
+        self.workspace = None
+        self.open_prs = self.remote_branches = None
+        self.activity_error = "Loading GitHub status…"
         self.files = []
         self.filter_files()
+        self.render_repository_status()
+        self.refresh_local_status()
         self.query_one("#gh-file-preview", TextArea).load_text("")
         self.query_one("#gh-file-title", Static).update("Select a file to preview it.")
         try:
@@ -455,21 +565,34 @@ class GitHubPanel(ArrowNavigation, Screen):
     @work(thread=True, exclusive=True, group="gh-files")
     def load_files(self, context, executor):
         worker = get_current_worker()
+        workspace = None
         try:
             repository = runner.repository_info(context, executor)
-            files = runner.repository_files(repository, executor)
-            message = f"{repository.name} · {repository.branch or 'empty'} · {len(files)} files"
+            try:
+                candidate = runner.workspace_status(context.cwd, executor)
+                if runner.workspace_matches(repository, candidate, executor):
+                    workspace = candidate
+            except (ValueError, OSError):
+                pass
+            if workspace:
+                files = runner.workspace_files(workspace, executor)
+                message = f"Local checkout · {workspace.branch} · {len(files)} files"
+            else:
+                files = runner.repository_files(repository, executor)
+                message = f"GitHub · {repository.branch or 'empty'} · {len(files)} files · read-only"
         except Exception as exc:
             repository, files, message = None, [], str(exc)
         if not worker.is_cancelled and not executor.cancelled.is_set():
-            self.app.call_from_thread(self.files_loaded, context, repository, files, message, worker)
+            self.app.call_from_thread(self.files_loaded, context, repository, files, message, worker, workspace)
 
-    def files_loaded(self, context, repository, files, message, worker):
+    def files_loaded(self, context, repository, files, message, worker, workspace=None):
         if not self.is_mounted or worker.is_cancelled or not self.context_matches(context):
             return
         self.repository, self.files = repository, files
+        self.workspace = workspace
         self.query_one("#gh-file-status", Static).update(message)
         self.filter_files()
+        self.refresh_activity()
 
     @on(Input.Changed, "#gh-file-search")
     def filter_files(self):
@@ -489,7 +612,7 @@ class GitHubPanel(ArrowNavigation, Screen):
         tree.root.expand()
 
     @on(Tree.NodeSelected, "#gh-files")
-    def choose_file(self, event: Tree.NodeSelected):
+    async def choose_file(self, event: Tree.NodeSelected):
         if not isinstance(event.node.data, dict) or not self.repository:
             return
         if not self.context_matches(self.repository.context):
@@ -497,7 +620,31 @@ class GitHubPanel(ArrowNavigation, Screen):
             return
         entry = event.node.data
         self.query_one("#gh-tabs", TabbedContent).active = "gh-files-tab"
-        self.query_one("#gh-file-title", Static).update(entry["path"])
+        if entry["type"] == "local" and self.workspace:
+            try:
+                path = runner.editable_file(self.workspace, entry["path"])
+                if self.editor:
+                    self.editor.open_file(path)
+                else:
+                    editor = VimEditor(command=runner.vim_command(self.workspace, path), id="gh-vim")
+                    self.editor = editor
+                    for selector in ("#gh-cwd", "#gh-repo", "#gh-refresh-files", "#gh-settings"):
+                        self.query_one(selector).disabled = True
+                    self.query_one("#gh-command-controls").display = False
+                    self.query_one("#gh-file-preview").display = False
+                    await self.query_one("#gh-files-tab", TabPane).mount(editor)
+                    editor.focus()
+                self.query_one("#gh-file-title", Static).update(
+                    "Vim · :w saves locally · :q closes · Ctrl+\\ returns to files"
+                )
+                self.query_one("#gh-save-file", Button).disabled = False
+                self.query_one("#gh-close-editor", Button).disabled = False
+            except (OSError, ValueError) as exc:
+                self.status(str(exc))
+            return
+        self.query_one("#gh-file-title", Static).update(
+            entry["path"] + " · read-only GitHub preview; select a matching checkout to edit"
+        )
         self.query_one("#gh-file-preview", TextArea).load_text("Loading file…")
         self.load_file(self.repository, entry, self.new_reader("preview"))
 
@@ -515,6 +662,124 @@ class GitHubPanel(ArrowNavigation, Screen):
         if (self.is_mounted and not worker.is_cancelled and not executor.cancelled.is_set()
                 and self.repository is repository and self.context_matches(repository.context)):
             self.query_one("#gh-file-preview", TextArea).load_text(text)
+
+    @on(VimEditor.Closed)
+    async def editor_closed(self, event):
+        event.stop()
+        if event.editor is not self.editor:
+            return
+        self.editor = None
+        for selector in ("#gh-cwd", "#gh-repo", "#gh-refresh-files", "#gh-settings"):
+            self.query_one(selector).disabled = False
+        await event.editor.remove()
+        self.query_one("#gh-command-controls").display = True
+        self.query_one("#gh-file-preview").display = True
+        self.query_one("#gh-save-file", Button).disabled = True
+        self.query_one("#gh-close-editor", Button).disabled = True
+        self.status(f"Vim exited ({event.exit_code}); saved files remain in the local checkout.")
+        self.refresh_files()
+        self.refresh_local_status()
+        self.action_focus_files()
+
+    def action_save_file(self):
+        if self.editor:
+            self.editor.ex("write")
+            self.status("Save requested in Vim; check its message for success or write errors.")
+            self.set_timer(0.3, self.refresh_local_status)
+
+    def action_focus_files(self):
+        self.query_one("#gh-files", Tree).focus()
+
+    def action_toggle_actions(self):
+        self.actions_visible = not self.actions_visible
+        for selector in ("#gh-buttons", "#gh-quick-title", "#gh-quick-buttons"):
+            self.query_one(selector).display = self.actions_visible
+        self.query_one("#gh-toggle-actions", Button).label = (
+            "Hide actions" if self.actions_visible else "Show actions"
+        )
+
+    def refresh_local_status(self):
+        if self._status_worker and self._status_worker.is_running:
+            return
+        cwd = self.query_one("#gh-cwd", Input).value
+        self._status_worker = self.read_local_status(cwd, self.new_reader("local-status"))
+
+    @work(thread=True, exclusive=True, group="gh-local-status")
+    def read_local_status(self, cwd, executor):
+        try:
+            state = runner.workspace_status(Path(cwd).expanduser().resolve(), executor)
+            error = ""
+        except Exception as exc:
+            state, error = None, str(exc)
+        if not get_current_worker().is_cancelled:
+            self.app.call_from_thread(self.local_status_loaded, cwd, state, error)
+
+    def local_status_loaded(self, cwd, state, error):
+        if not self.is_mounted or self.query_one("#gh-cwd", Input).value != cwd:
+            return
+        previous = self.local_status
+        self.local_status, self.local_error = state, error
+        self.render_repository_status()
+        if (state and previous and state.branch != previous.branch and not self.editor):
+            self.refresh_files()
+
+    def refresh_activity(self):
+        if not self.repository or not self.context_matches(self.repository.context):
+            return
+        if self._activity_worker and self._activity_worker.is_running:
+            return
+        self._activity_worker = self.read_activity(self.repository, self.new_reader("activity"))
+
+    @work(thread=True, exclusive=True, group="gh-activity")
+    def read_activity(self, repository, executor):
+        try:
+            prs, branches = runner.repository_activity(repository, executor)
+            error = ""
+        except Exception as exc:
+            prs, branches, error = None, None, str(exc)
+        if not get_current_worker().is_cancelled:
+            self.app.call_from_thread(self.activity_loaded, repository, prs, branches, error)
+
+    def activity_loaded(self, repository, prs, branches, error):
+        if (self.is_mounted and self.repository is repository
+                and self.context_matches(repository.context)):
+            self.open_prs, self.remote_branches, self.activity_error = prs, branches, error
+            self.render_repository_status()
+
+    def repository_status_text(self):
+        state = self.local_status
+        branch = state.branch if state else "unavailable"
+        changed = str(state.changed) if state else "unknown"
+        names = set(self.remote_branches or [])
+        if state and self.workspace:
+            names.update(state.branches)
+            names.discard(branch)
+        others = ", ".join(sorted(names)) or "none"
+        prs = self.open_prs
+        numbers = ", ".join(f"#{pr['number']}" for pr in (prs or [])) or "none"
+        pr_summary = "unknown" if prs is None else f"{len(prs)} ({numbers})"
+        branch_summary = "unknown" if self.remote_branches is None else f"{len(names)} ({others})"
+        summary = f"Branch: {branch} · Changed: {changed}\nPRs: {pr_summary} · Other branches: {branch_summary}"
+        details = summary + f"\n\nLocal checkout: {state.root if state else 'unavailable'}"
+        details += f"\nGitHub repository: {self.repository.target if self.repository else 'unavailable'}"
+        details += "\n\nChanged counts include staged, unstaged, untracked and conflicted files once."
+        details += "\nUnsaved Vim buffers are marked in Vim; the Git count updates after saving."
+        details += "\n\n" + "\n".join(f"#{pr['number']} {pr['title']}\n{pr['url']}" for pr in (prs or []))
+        if self.local_error:
+            details += f"\n\nLocal status: {self.local_error}"
+        if self.activity_error:
+            details += f"\n\nGitHub status: {self.activity_error}"
+        return summary, details
+
+    def render_repository_status(self):
+        summary, details = self.repository_status_text()
+        widget = self.query_one("#gh-repository-status", Static)
+        widget.update(summary)
+        widget.tooltip = details
+        if isinstance(self.app.screen, RepositoryStatus):
+            view = self.app.screen.query_one(TextArea)
+            if view.text != details:
+                view.load_text(details)
 
     def settings_confirmed(self, invocation):
         if invocation:
@@ -592,6 +857,9 @@ class GitHubPanel(ArrowNavigation, Screen):
     def action_quick_command(self, action_id: str):
         if self.app.screen is not self:
             return
+        if self.editor:
+            self.status("Close Vim with :wq or :q before running repository commands.")
+            return
         if self.busy:
             self.status("A command is running. Stop it before starting another.")
             return
@@ -619,7 +887,18 @@ class GitHubPanel(ArrowNavigation, Screen):
     def pressed(self, event: Button.Pressed):
         event.stop()
         action = event.button.id
-        if action == "gh-close":
+        if action == "gh-toggle-actions":
+            self.action_toggle_actions()
+        elif action == "gh-status-details":
+            self.refresh_local_status()
+            self.refresh_activity()
+            self.app.push_screen(RepositoryStatus(self.repository_status_text()[1]))
+        elif action == "gh-save-file":
+            self.action_save_file()
+        elif action == "gh-close-editor":
+            if self.editor:
+                self.editor.ex("confirm quit")
+        elif action == "gh-close":
             self.action_close()
         elif action and action.startswith("quick-"):
             self.action_quick_command(action.removeprefix("quick-"))
@@ -682,6 +961,9 @@ class GitHubPanel(ArrowNavigation, Screen):
                 self.last_result = None
 
     def request_run(self, interactive, hint=""):
+        if self.editor:
+            self.status("Close Vim with :wq or :q before running repository commands.")
+            return
         if self.busy:
             self.status("A command is running. Stop it before starting another.")
             return
@@ -754,6 +1036,8 @@ class GitHubPanel(ArrowNavigation, Screen):
         if result.truncated:
             suffix += " · captured output limited to 2 million characters"
         self.status(f"Exit {result.returncode}{suffix}")
+        self.refresh_local_status()
+        self.refresh_activity()
         if result.returncode == -1:
             self.write_output(result.output)
         if self.refresh_after_run:
@@ -761,7 +1045,11 @@ class GitHubPanel(ArrowNavigation, Screen):
             self.refresh_files()
 
     def action_close(self):
-        if self.busy:
+        if self.editor:
+            self.status("Close Vim with :wq or :q first; Vim will protect unsaved changes.")
+            self.query_one("#gh-tabs", TabbedContent).active = "gh-files-tab"
+            self.editor.focus()
+        elif self.busy:
             self.status("Stop the running command before closing the panel")
         else:
             self.dismiss(self.last_result)

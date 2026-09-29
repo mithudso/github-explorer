@@ -21,3 +21,10 @@ class GitHubExplorer(App):
             GitHubPanel(self.cwd, repo=self.repo, standalone=True),
             lambda result: self.exit(),
         )
+
+    def action_quit(self):
+        for screen in self.screen_stack:
+            if isinstance(screen, GitHubPanel) and (screen.editor or screen.busy):
+                self.notify("Close Vim with :wq or :q, and stop running commands before quitting.")
+                return
+        self.exit()

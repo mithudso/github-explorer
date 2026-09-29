@@ -12,12 +12,16 @@
 8. Preserve repository context and normal account/organization command scope.
 9. Expose `github-explorer`, `ghx`, module invocation, and local catalog JSON export.
 10. Keep captured output volatile; copy it only on an explicit user action.
-11. Load GitHub default-branch files by default above the existing CLI tree; support search and previews.
+11. List local current-branch files for matching checkouts; use read-only GitHub default-branch files otherwise.
 12. Discover all repo edit options from installed help, display available current values, and confirm selected changes.
 
 13. Provide common Git/GitHub actions as matching bottom buttons and F1–F12 bindings.
 14. Expand/navigate trees and move focus using arrows while preserving text editing.
 15. Keep direct Git working-directory scope distinct from the GitHub repository override.
+
+16. Embed actual Vim for selected local text files and preserve explicit saving and unsaved-buffer prompts.
+17. Always show current branch, distinct changed-file count, open PRs and other branches in bottom status.
+18. Hide/show bottom buttons and shortcuts while preserving the status bar and restore control.
 
 ## Non-functional requirements
 
@@ -36,6 +40,8 @@ set, including transitive dependencies. `uv sync --locked` installs that set.
 | --- | --- | --- |
 | Python | `>=3.11` | Runtime |
 | Textual | `>=8,<9` | Terminal UI and workers |
+| textual-tty | `>=0.4,<0.5` | Embedded PTY widget, using bittty |
+| Vim | Installed on PATH | Actual editor for local files |
 | Rich | `>=13` | Literal text/rendering |
 | setuptools | `>=77` (build) | Wheel/source package backend |
 | pytest | `>=8` (dev) | Test runner |

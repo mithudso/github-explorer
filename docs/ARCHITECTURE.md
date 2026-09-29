@@ -32,7 +32,8 @@ command/flag records, including settings from `gh repo edit --help`, and declare
 curated Git commands and `QUICK_ACTIONS`. `ArrowNavigation` in `panel.py` handles
 spatial focus and tree expansion while preserving native text/dropdown behavior. `runner.py`
 owns invocation context, subprocess lifecycle, repository metadata/tree reads and
-bounded blob previews.
+bounded blob previews, local checkout validation, Git status and Vim argv.
+`VimEditor` embeds `textual-tty`/`bittty` for PTY rendering and lifecycle.
 `operations.py` describes these and clipboard boundaries for generated maintenance metadata;
 it is not a second command executor. [Components](COMPONENTS.md) lists APIs.
 
@@ -40,8 +41,10 @@ it is not a second command executor. [Components](COMPONENTS.md) lists APIs.
 
 1. Startup validates the working directory and optional repository override.
 2. The catalog worker runs two local help commands, parses them, and populates the tree.
-3. An independent worker resolves the repository and host, then reads the default-branch
-   Git tree one directory at a time. File selection reads a blob by immutable SHA.
+3. A worker resolves the GitHub identity and verifies the local checkout without a
+   repository override. Matching checkouts list local tracked/untracked files; other
+   contexts read GitHub default-branch trees and immutable blobs. Selecting a local
+   text file starts Vim in the right pane; saves target that local path.
    Stale or cancelled workers cannot replace a newer repository or preview.
 4. CLI selection loads cached help; argument widgets quote each appended argument.
 5. Run, Terminal, a shortcut button or F1–F12 prepares argv and shows the exact
@@ -50,6 +53,14 @@ it is not a second command executor. [Components](COMPONENTS.md) lists APIs.
    mode suspends Textual and attaches the child to the terminal.
 7. Completion updates the screen. Stop requests cancellation in captured mode.
    Closing a busy screen is blocked; unmount requests cancellation.
+
+Local status workers run every two seconds. GitHub PR/branch workers run every
+minute and paginate read-only API responses. The persistent status bar is separate
+from hideable action rows. Failures display unknown counts and errors in the status
+dialog; stale contexts cannot replace newer status. Vim stays mounted when changing
+files, so `confirm edit` preserves Vim's native unsaved-buffer prompt. Repository
+context controls and command execution are blocked until Vim closes. The standalone
+host guards Ctrl+Q; embedded hosts own their global quit policy.
 
 ## Deployment and quality attributes
 

@@ -4,7 +4,7 @@
 
 Use Python 3.11 or newer, `uv`, and a Git checkout. The lockfile supplies resolved
 versions; the CI matrix exercises Python 3.11 and 3.14 on macOS and Linux.
-Install GitHub CLI and Git on PATH to run the app and local Git actions. Authenticate with `gh auth login` only
+Install GitHub CLI, Git and Vim on PATH for the app, local Git actions and embedded editing. Authenticate with `gh auth login` only
 for the default repository file browser, settings reads, and commands that need GitHub access. Fixture tests require no account.
 
 ```sh
