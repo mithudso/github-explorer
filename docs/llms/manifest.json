@@ -4,11 +4,12 @@
   "schema_version": 1,
   "source": ".",
   "remote": "https://github.com/mithudso/github-explorer",
-  "commit": "c9faa57dfa706b5009553dc237dfb86e3f9e63fc",
+  "commit": "2ddcc1bc6f333eadefe957670d8ea161edb32143",
   "branch": "release/explorer-0.3.0",
   "generated_at": "2026-09-29",
   "dirty": true,
   "history": [
+    "2ddcc1b 2026-09-29 docs: record release delivery and refresh repository indexes",
     "c9faa57 2026-09-29 chore: add GitHub funding configuration (.github/FUNDING.yml)",
     "d541f15 2026-09-29 feat: add command shortcuts and directional TUI navigation",
     "4e571cb 2026-09-29 feat: browse repository files and edit repository settings",

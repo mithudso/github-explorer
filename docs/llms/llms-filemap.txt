@@ -1,5 +1,5 @@
 # github-explorer — file inventory
-> Source: . · https://github.com/mithudso/github-explorer @ c9faa57 dirty
+> Source: . · https://github.com/mithudso/github-explorer @ 2ddcc1b dirty
 > Generated: 2026-09-29 by crawl-repo-to-llms v1.2.0
 > Census: 78 enumerated / 22 deep-read / 56 shallow · partial: remaining metadata cards shallow; no index probes
 
@@ -8,7 +8,7 @@
 .env.example — config, normal, 768 bytes; shallow. [src: .env.example]
 .gitattributes — meta, normal, 100 bytes; shallow. [src: .gitattributes]
 .github/CODEOWNERS — docs, normal, 174 bytes; shallow. [src: .github/CODEOWNERS]
-.github/FUNDING.yml — docs, normal, 225 bytes; shallow. [src: .github/FUNDING.yml]
+.github/FUNDING.yml — docs, normal, 226 bytes; shallow. [src: .github/FUNDING.yml]
 .github/ISSUE_TEMPLATE/bug_report.md — docs, normal, 498 bytes; shallow. [src: .github/ISSUE_TEMPLATE/bug_report.md]
 .github/ISSUE_TEMPLATE/feature_request.md — docs, normal, 362 bytes; shallow. [src: .github/ISSUE_TEMPLATE/feature_request.md]
 .github/PULL_REQUEST_TEMPLATE.md — docs, normal, 421 bytes; shallow. [src: .github/PULL_REQUEST_TEMPLATE.md]
@@ -56,7 +56,7 @@ docs/runbooks/metadata-maintenance.md — docs, normal, 1504 bytes; shallow. [sr
 docs/runbooks/release-and-rollback.md — docs, normal, 1431 bytes; shallow. [src: docs/runbooks/release-and-rollback.md]
 docs/runbooks/troubleshooting.md — docs, normal, 1127 bytes; shallow. [src: docs/runbooks/troubleshooting.md]
 docs/tool-inventory.json — docs, normal, 184 bytes; shallow. [src: docs/tool-inventory.json]
-memory.md — docs, normal, 17331 bytes; shallow. [src: memory.md]
+memory.md — docs, normal, 17867 bytes; shallow. [src: memory.md]
 prompts.md — docs, normal, 1737 bytes; shallow. [src: prompts.md]
 pyproject.toml — config, critical, 984 bytes; shallow. [src: pyproject.toml]
 scripts/check_doc_indexes.py — script, peripheral, 1754 bytes; deep-read. [src: scripts/check_doc_indexes.py]

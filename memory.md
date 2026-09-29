@@ -1,6 +1,6 @@
 # Continuation record
-Version: 12
-Delta: Publish version 0.3.0 through a pull request and merge.
+Version: 13
+Delta: Validate the release PR and normalize the concurrently added funding configuration.
 
 ## Request and scope
 Create a standalone GitHub Explorer TUI and public mithudso/github-explorer repository.
@@ -125,3 +125,4 @@ previously installed github-panel and skillsx commands remain unchanged.
 - Validation: the preceding implementation passed all 79 tests, Ruff, build, metadata checks and a live read-only smoke. No application source changes are required for delivery; retain release version 0.3.0.
 - Completed: pushed the release branch and opened PR #1 at https://github.com/mithudso/github-explorer/pull/1. Refreshed generated metadata to include all committed files and this delivery record.
 - Delivery status: the linked PR is the authoritative record of CI and merge completion. This note is committed before those external actions. If resuming, inspect PR #1, wait for its current-head checks, merge if still open, then fast-forward local main to origin/main. No implementation work remains.
+- Funding validation: Ruby Psych rejected the unquoted @ value in .github/FUNDING.yml at line 5 column 8 with "found character that cannot start any token". Normalize the supplied Venmo/PayPal destinations to custom URLs, use the Buy Me a Coffee username, and remove the empty unsupported Cash App field. GitHub funding syntax is documented at https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/displaying-a-sponsor-button-in-your-repository.
