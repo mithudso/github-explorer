@@ -1,6 +1,6 @@
 # Continuation record
-Version: 19
-Delta: Verify public npm installation; both distribution channels complete; website PR awaiting merge.
+Version: 20
+Delta: Complete package publication and verify the live homepage and Downloads promotion.
 
 ## Request and scope
 Create a standalone GitHub Explorer TUI and public mithudso/github-explorer repository.
@@ -209,3 +209,10 @@ previously installed github-panel and skillsx commands remain unchanged.
   returns 229 commands. The earlier post-publish 404 responses resolved after processing.
 - Homebrew and npm distribution requests are complete. Both project and tap commits
   are pushed. The active remaining work is website PR #125 and live deployment verification.
+
+## Website publication
+- Website PR #125 merged as 4a80b6f7725051a39febe924878ba4554c572980. Every PR check passed.
+- Homepage and Downloads include a shared GitHub Explorer section, real editor and command screenshots, full features, CLI options, twelve hotkeys, Vim usage, setup and GitHub/Homebrew/npm links. Skills Explorer remains present.
+- Verified locally and on the hosted preview at 1440px and 390px: both pages render, screenshots decode and no horizontal page overflow occurs. Astro check/build, 240 site tests, Ruff and privacy scanning pass.
+- Cloudflare production deployment d92363bf-d366-4d8e-ba0d-b5631bc1e5df successfully published the merged commit. Live https://llms-explorer.com/ and /downloads/ pass Chromium checks at 1440px and 390px, with both products present, working section anchors, loaded screenshots and no page overflow.
+- Homebrew, npm and website publication are complete. No required implementation or publication steps remain.

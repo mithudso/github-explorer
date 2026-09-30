@@ -1,5 +1,5 @@
 # github-explorer — index inventory
-> Source: . · https://github.com/mithudso/github-explorer @ 7e6650f dirty
+> Source: . · https://github.com/mithudso/github-explorer @ a817933 dirty
 > Generated: 2026-09-29 by crawl-repo-to-llms v1.2.0
 > Census: 87 enumerated / 24 deep-read / 63 shallow · partial: remaining metadata cards shallow; no index probes
 

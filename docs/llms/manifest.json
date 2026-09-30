@@ -4,11 +4,12 @@
   "schema_version": 1,
   "source": ".",
   "remote": "https://github.com/mithudso/github-explorer",
-  "commit": "7e6650f1e1acae3d1896d578db94cae7a70b2c5f",
+  "commit": "a817933af73abc0e4a679a97aed9443ffc491e8c",
   "branch": "main",
   "generated_at": "2026-09-29",
   "dirty": true,
   "history": [
+    "a817933 2026-09-29 docs: verify public npm release installation",
     "7e6650f 2026-09-29 docs: record verified distributions and npm submission",
     "ac3707d 2026-09-29 build: publish npm under the verified mitchphudson scope",
     "19be07b 2026-09-29 docs: record release publication and website continuation",
