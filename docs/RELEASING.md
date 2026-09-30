@@ -30,7 +30,7 @@ a compatible Python when none is available. Subsequent launches reuse its cache.
    submission with its own [acceptance policy](https://docs.brew.sh/Package-Acceptance-Policy).
    This young project currently uses the author's tap.
 7. Sign in using `npm login` (never commit credentials), then run
-   `npm publish dist/mithudso-github-explorer-VERSION.tgz --access public`.
+   `npm publish dist/mitchphudson-github-explorer-VERSION.tgz --access public`.
    npm may require browser/2FA verification. Confirm the version and integrity
    through `npm view`, then install from the registry into a temporary prefix.
 
@@ -42,3 +42,7 @@ support macOS and Linux, and use the user's GitHub CLI authentication.
 Release artifacts and npm staging files are ignored by Git. The GitHub release
 is their durable distribution location. Do not publish logs, credentials, local
 state or generated build directories as source files.
+
+If npm resolves a parent project configuration, publish from a temporary directory
+with an explicit user config and the absolute tarball path. Verify `npm whoami`
+using that same directory and config. An ancestor .npmrc can override the user config.

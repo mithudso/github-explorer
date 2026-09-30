@@ -24,26 +24,17 @@ GitHub CLI, Git and Vim on PATH first. Requires Node.js 18+. The scoped package
 bundles this release's Python application and pins its dependencies. uv sets up
 its cached Python environment on first launch (network access required):
 
-The registry release is pending publisher authentication. Until it is published,
-install the npm tarball from the GitHub release:
-
 ```sh
-npm install -g https://github.com/mithudso/github-explorer/releases/download/v0.4.1/mithudso-github-explorer-0.4.1.tgz
-```
-
-Once published to the registry:
-
-```sh
-npm install -g @mithudso/github-explorer
+npm install -g @mitchphudson/github-explorer
 github-explorer --cwd ~/dev/my-project
 # Or run without a global npm install:
-npx @mithudso/github-explorer --cwd ~/dev/my-project
+npx @mitchphudson/github-explorer --cwd ~/dev/my-project
 ```
 
 Python users can install the tagged source directly:
 
 ```sh
-uv tool install git+https://github.com/mithudso/github-explorer.git@v0.4.1
+uv tool install git+https://github.com/mithudso/github-explorer.git@v0.4.2
 ```
 
 From a checkout:

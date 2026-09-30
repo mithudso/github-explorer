@@ -4,11 +4,12 @@
   "schema_version": 1,
   "source": ".",
   "remote": "https://github.com/mithudso/github-explorer",
-  "commit": "59db5c23a7a61c6a265e6769e4b63531a34cd996",
+  "commit": "19be07b5d723eefe47ab6ef1b6a21b158d68e405",
   "branch": "main",
   "generated_at": "2026-09-29",
   "dirty": true,
   "history": [
+    "19be07b 2026-09-29 docs: record release publication and website continuation",
     "59db5c2 2026-09-29 build: package GitHub Explorer for Homebrew and npm",
     "99876a0 2026-09-29 feat: embed Vim editing and persistent repository status",
     "fe8ffeb 2026-09-29 Merge pull request #1 from mithudso/release/explorer-0.3.0",
@@ -263,7 +264,7 @@
     "method": "AST parser calls and manifest/CI declarations; no target execution"
   },
   "links": {
-    "unverified": 46,
+    "unverified": 45,
     "verified": 0
   }
 }

@@ -1,6 +1,6 @@
 {
-  "name": "@mithudso/github-explorer",
-  "version": "0.4.1",
+  "name": "@mitchphudson/github-explorer",
+  "version": "0.4.2",
   "description": "GitHub terminal workbench with embedded Vim, repository files and Git/gh commands",
   "license": "MIT",
   "homepage": "https://github.com/mithudso/github-explorer#readme",

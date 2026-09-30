@@ -1,10 +1,10 @@
 # github-explorer — infrastructure and links
-> Source: . · https://github.com/mithudso/github-explorer @ 59db5c2 dirty
+> Source: . · https://github.com/mithudso/github-explorer @ 19be07b dirty
 > Generated: 2026-09-29 by crawl-repo-to-llms v1.2.0
 > Census: 87 enumerated / 24 deep-read / 63 shallow · partial: remaining metadata cards shallow; no index probes
 
 ## Toolchain and CI
-Package: github-explorer; version: 0.4.1. [src: pyproject.toml]
+Package: github-explorer; version: 0.4.2. [src: pyproject.toml]
 Purpose: A standalone terminal workbench for the full installed GitHub CLI. [src: pyproject.toml]
 Requires Python >=3.11. [src: pyproject.toml]
 Runtime dependencies: textual>=8,<9, rich>=13, textual-tty>=0.4,<0.5. [src: pyproject.toml]
@@ -34,7 +34,6 @@ https://github.com/mithudso — unverified; no network reachability probe. [src:
 https://github.com/mithudso — unverified; no network reachability probe. [src: CODE_OF_CONDUCT.md]
 https://docs.astral.sh/uv/getting-started/installation/ — unverified; no network reachability probe. [src: README.md]
 https://github.com/mithudso/github-explorer.git — unverified; no network reachability probe. [src: README.md]
-https://github.com/mithudso/github-explorer/releases/download/v0.4.1/mithudso-github-explorer-0.4.1.tgz — unverified; no network reachability probe. [src: README.md]
 https://HOST/OWNER/REPO — unverified; no network reachability probe. [src: docs/ARCHITECTURE.md]
 https://docs.github.com/en/rest/git/trees#get-a-tree — unverified; no network reachability probe. [src: docs/ARCHITECTURE.md]
 https://github.com/cli/cli/blob/trunk/pkg/cmd/repo/edit/edit.go — unverified; no network reachability probe. [src: docs/ARCHITECTURE.md]
@@ -59,7 +58,7 @@ https://files.pythonhosted.org/packages/dc/ac/3a943d2792c9bb368aaa8b50121c0f7784
 https://files.pythonhosted.org/packages/f6/cc/6253133b5bb138fc3306cebfbda2c520f545d36b5be2c7255cc528bb45d6/typing_extensions-4.16.0.tar.gz — unverified; no network reachability probe. [src: packaging/homebrew/github-explorer.rb]
 https://files.pythonhosted.org/packages/fd/7f/3f0685a8f1d5502a79b8e964959397a233ce7909cae89fe314216e5f6c76/textual_tty-0.4.0.tar.gz — unverified; no network reachability probe. [src: packaging/homebrew/github-explorer.rb]
 https://github.com/mithudso/github-explorer — unverified; no network reachability probe. [src: packaging/homebrew/github-explorer.rb]
-https://github.com/mithudso/github-explorer/releases/download/v0.4.1/github_explorer-0.4.1.tar.gz — unverified; no network reachability probe. [src: packaging/homebrew/github-explorer.rb]
+https://github.com/mithudso/github-explorer/releases/download/v0.4.2/github_explorer-0.4.2.tar.gz — unverified; no network reachability probe. [src: packaging/homebrew/github-explorer.rb]
 https://github.com/mithudso/github-explorer — unverified; no network reachability probe. [src: pyproject.toml]
 https://github.com/mithudso/github-explorer/issues — unverified; no network reachability probe. [src: pyproject.toml]
 https://github.com/mithudso/github-explorer — unverified; no network reachability probe. [src: scripts/build_distributions.py]

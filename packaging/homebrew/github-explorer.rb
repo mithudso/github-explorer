@@ -3,8 +3,8 @@ class GithubExplorer < Formula
 
   desc "Terminal workbench for GitHub with embedded Vim and Git commands"
   homepage "https://github.com/mithudso/github-explorer"
-  url "https://github.com/mithudso/github-explorer/releases/download/v0.4.1/github_explorer-0.4.1.tar.gz"
-  sha256 "f6a892d679415473a4ed6a9347f954ea295343263e3739ed44f2258b28682bc8"
+  url "https://github.com/mithudso/github-explorer/releases/download/v0.4.2/github_explorer-0.4.2.tar.gz"
+  sha256 "400f9f1690d89e22370302b5242bd4845340aef526c17c28247147c9ba4ad4ca"
   license "MIT"
 
   depends_on "gh"

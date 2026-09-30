@@ -1,5 +1,5 @@
 # github-explorer — file inventory
-> Source: . · https://github.com/mithudso/github-explorer @ 59db5c2 dirty
+> Source: . · https://github.com/mithudso/github-explorer @ 19be07b dirty
 > Generated: 2026-09-29 by crawl-repo-to-llms v1.2.0
 > Census: 87 enumerated / 24 deep-read / 63 shallow · partial: remaining metadata cards shallow; no index probes
 
@@ -23,7 +23,7 @@
 .vscode/mcp.json — config, normal, 20 bytes; shallow. [src: .vscode/mcp.json]
 .vscode/settings.json — config, normal, 396 bytes; shallow. [src: .vscode/settings.json]
 AGENTS.md — docs, normal, 1817 bytes; shallow. [src: AGENTS.md]
-CHANGELOG.md — docs, normal, 2647 bytes; shallow. [src: CHANGELOG.md]
+CHANGELOG.md — docs, normal, 2832 bytes; shallow. [src: CHANGELOG.md]
 CLAUDE.md — docs, normal, 2996 bytes; shallow. [src: CLAUDE.md]
 CODE_OF_CONDUCT.md — docs, normal, 664 bytes; shallow. [src: CODE_OF_CONDUCT.md]
 CONTRIBUTING.md — docs, normal, 1039 bytes; shallow. [src: CONTRIBUTING.md]
@@ -31,13 +31,13 @@ GEMINI.md — docs, normal, 253 bytes; shallow. [src: GEMINI.md]
 LICENSE — meta, normal, 1083 bytes; shallow. [src: LICENSE]
 MANIFEST.in — meta, normal, 215 bytes; shallow. [src: MANIFEST.in]
 NOTICE.md — docs, normal, 641 bytes; shallow. [src: NOTICE.md]
-README.md — docs, high, 14907 bytes; shallow. [src: README.md]
+README.md — docs, high, 14621 bytes; shallow. [src: README.md]
 docs/ARCHITECTURE.md — docs, normal, 5952 bytes; shallow. [src: docs/ARCHITECTURE.md]
 docs/COMPONENTS.md — docs, normal, 4602 bytes; shallow. [src: docs/COMPONENTS.md]
 docs/DEVELOPMENT.md — docs, normal, 3416 bytes; shallow. [src: docs/DEVELOPMENT.md]
 docs/INSTALLATION.md — docs, normal, 2022 bytes; shallow. [src: docs/INSTALLATION.md]
 docs/MCP.md — docs, normal, 768 bytes; shallow. [src: docs/MCP.md]
-docs/RELEASING.md — docs, normal, 2905 bytes; shallow. [src: docs/RELEASING.md]
+docs/RELEASING.md — docs, normal, 3160 bytes; shallow. [src: docs/RELEASING.md]
 docs/SECURITY.md — docs, normal, 5156 bytes; shallow. [src: docs/SECURITY.md]
 docs/TESTING.md — docs, normal, 3649 bytes; shallow. [src: docs/TESTING.md]
 docs/archive/README.md — docs, normal, 497 bytes; shallow. [src: docs/archive/README.md]
@@ -57,10 +57,10 @@ docs/runbooks/metadata-maintenance.md — docs, normal, 1504 bytes; shallow. [sr
 docs/runbooks/release-and-rollback.md — docs, normal, 1431 bytes; shallow. [src: docs/runbooks/release-and-rollback.md]
 docs/runbooks/troubleshooting.md — docs, normal, 1127 bytes; shallow. [src: docs/runbooks/troubleshooting.md]
 docs/tool-inventory.json — docs, normal, 184 bytes; shallow. [src: docs/tool-inventory.json]
-memory.md — docs, normal, 24805 bytes; shallow. [src: memory.md]
+memory.md — docs, normal, 25536 bytes; shallow. [src: memory.md]
 npm/bin/github-explorer.cjs — meta, normal, 1246 bytes; shallow. [src: npm/bin/github-explorer.cjs]
 npm/check-package.cjs — meta, normal, 438 bytes; shallow. [src: npm/check-package.cjs]
-npm/package.json — meta, normal, 909 bytes; shallow. [src: npm/package.json]
+npm/package.json — meta, normal, 913 bytes; shallow. [src: npm/package.json]
 npm/test/launcher.cjs — meta, normal, 2789 bytes; shallow. [src: npm/test/launcher.cjs]
 packaging/homebrew/github-explorer.rb — meta, normal, 3868 bytes; shallow. [src: packaging/homebrew/github-explorer.rb]
 prompts.md — docs, normal, 2832 bytes; shallow. [src: prompts.md]

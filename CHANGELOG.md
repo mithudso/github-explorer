@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.4.2 — 2026-09-29
+
+- Publish npm under the verified owner scope, @mitchphudson/github-explorer.
+- Align Homebrew, Python and npm release versions and installation documentation.
+
 ## 0.4.1 — 2026-09-29
 
 - Package the complete TUI for Homebrew and npm with both command aliases.

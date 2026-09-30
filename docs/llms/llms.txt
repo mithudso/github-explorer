@@ -1,5 +1,5 @@
 # github-explorer — routing index
-> Source: . · https://github.com/mithudso/github-explorer @ 59db5c2 dirty
+> Source: . · https://github.com/mithudso/github-explorer @ 19be07b dirty
 > Generated: 2026-09-29 by crawl-repo-to-llms v1.2.0
 > Census: 87 enumerated / 24 deep-read / 63 shallow · partial: remaining metadata cards shallow; no index probes
 

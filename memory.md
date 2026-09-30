@@ -1,6 +1,6 @@
 # Continuation record
-Version: 16
-Delta: Publish v0.4.1 and the Homebrew tap; npm token rejected; website promotion underway.
+Version: 17
+Delta: Resolve npm configuration conflict and release under the verified publisher scope.
 
 ## Request and scope
 Create a standalone GitHub Explorer TUI and public mithudso/github-explorer repository.
@@ -175,3 +175,13 @@ previously installed github-panel and skillsx commands remain unchanged.
 - Local Git HTTPS DNS lookup failed while dig resolved github.com. A one-command http.curloptResolve override enabled pushes without changing global networking.
 - Website task is tracked in the LLMS Explorer project as TASK-30, with an isolated worktree /tmp/llms-github-explorer-site. Real screenshots were captured from a clean public repository clone; no repository mutations were executed.
 - Remaining: complete and publish website changes; publish npm registry package after valid authentication.
+
+## npm authentication correction and 0.4.2
+- Direct registry verification accepts the supplied token for mitchphudson. It was not expired.
+- npm prefix in this checkout resolves an ancestor project. Running npm from a temporary
+  directory with the explicit temporary user config removes the conflicting project
+  configuration; npm whoami now succeeds. No user configuration was changed.
+- The earlier E401 was an npm configuration conflict, not a rejected token. Use the same
+  isolated working directory/config for publication. Never log the token.
+- Advance all distribution versions to 0.4.2 and use @mitchphudson/github-explorer. The
+  published 0.4.1 artifacts remain unchanged. Update website installer links after release.
