@@ -1,10 +1,11 @@
 # github-explorer — history
-> Source: . · https://github.com/mithudso/github-explorer @ 19be07b dirty
+> Source: . · https://github.com/mithudso/github-explorer @ ac3707d dirty
 > Generated: 2026-09-29 by crawl-repo-to-llms v1.2.0
 > Census: 87 enumerated / 24 deep-read / 63 shallow · partial: remaining metadata cards shallow; no index probes
 
 ## Recorded history (up to 200 commits)
 History records the generation snapshot; the checker retains that snapshot across commits. [src: scripts/generate_repo_indexes.py]
+ac3707d 2026-09-29 build: publish npm under the verified mitchphudson scope [src: git]
 19be07b 2026-09-29 docs: record release publication and website continuation [src: git]
 59db5c2 2026-09-29 build: package GitHub Explorer for Homebrew and npm [src: git]
 99876a0 2026-09-29 feat: embed Vim editing and persistent repository status [src: git]

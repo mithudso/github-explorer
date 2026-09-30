@@ -1,6 +1,6 @@
 # Continuation record
-Version: 17
-Delta: Resolve npm configuration conflict and release under the verified publisher scope.
+Version: 18
+Delta: Publish 0.4.2 to GitHub and Homebrew; npm accepted and processing; website PR under final checks.
 
 ## Request and scope
 Create a standalone GitHub Explorer TUI and public mithudso/github-explorer repository.
@@ -185,3 +185,19 @@ previously installed github-panel and skillsx commands remain unchanged.
   isolated working directory/config for publication. Never log the token.
 - Advance all distribution versions to 0.4.2 and use @mitchphudson/github-explorer. The
   published 0.4.1 artifacts remain unchanged. Update website installer links after release.
+
+## Final release submission evidence
+- Release v0.4.2: https://github.com/mithudso/github-explorer/releases/tag/v0.4.2
+- Release commit ac3707d; all five CI jobs passed in run 36648309289.
+- Homebrew tap commit cc744a5 publishes 0.4.2. Source upgrade, formula tests, style and
+  strict audit passed. Downloaded release assets match SHA256SUMS.
+- npm publish accepted @mitchphudson/github-explorer@0.4.2 with public access and exit 0.
+  npm reported that processing may take a few minutes. Subsequent registry queries
+  still return 404; npm stage list is empty. Do not republish this version. Verify
+  registry availability and install from it before claiming registry distribution live.
+- The npm release tarball remains available on GitHub and has passed isolated
+  installation checks. The website and release notes link that working fallback.
+- Website PR: https://github.com/mithudso/llms-explorer/pull/125. It includes screenshots,
+  homepage overview, Downloads guide, full options/usage/setup and release links.
+  All 240 site tests pass with isolated API/hub test dependencies; typecheck, build,
+  privacy scanning and desktop/mobile browser review passed. CI rerun is pending.
