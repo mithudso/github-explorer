@@ -1,5 +1,5 @@
 # github-explorer — file inventory
-> Source: . · https://github.com/mithudso/github-explorer @ ac3707d dirty
+> Source: . · https://github.com/mithudso/github-explorer @ 7e6650f dirty
 > Generated: 2026-09-29 by crawl-repo-to-llms v1.2.0
 > Census: 87 enumerated / 24 deep-read / 63 shallow · partial: remaining metadata cards shallow; no index probes
 
@@ -57,7 +57,7 @@ docs/runbooks/metadata-maintenance.md — docs, normal, 1504 bytes; shallow. [sr
 docs/runbooks/release-and-rollback.md — docs, normal, 1431 bytes; shallow. [src: docs/runbooks/release-and-rollback.md]
 docs/runbooks/troubleshooting.md — docs, normal, 1127 bytes; shallow. [src: docs/runbooks/troubleshooting.md]
 docs/tool-inventory.json — docs, normal, 184 bytes; shallow. [src: docs/tool-inventory.json]
-memory.md — docs, normal, 26739 bytes; shallow. [src: memory.md]
+memory.md — docs, normal, 27294 bytes; shallow. [src: memory.md]
 npm/bin/github-explorer.cjs — meta, normal, 1246 bytes; shallow. [src: npm/bin/github-explorer.cjs]
 npm/check-package.cjs — meta, normal, 438 bytes; shallow. [src: npm/check-package.cjs]
 npm/package.json — meta, normal, 913 bytes; shallow. [src: npm/package.json]

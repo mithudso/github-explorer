@@ -4,11 +4,12 @@
   "schema_version": 1,
   "source": ".",
   "remote": "https://github.com/mithudso/github-explorer",
-  "commit": "ac3707d60419fcb4d83f095192f980d01d88fca0",
+  "commit": "7e6650f1e1acae3d1896d578db94cae7a70b2c5f",
   "branch": "main",
   "generated_at": "2026-09-29",
   "dirty": true,
   "history": [
+    "7e6650f 2026-09-29 docs: record verified distributions and npm submission",
     "ac3707d 2026-09-29 build: publish npm under the verified mitchphudson scope",
     "19be07b 2026-09-29 docs: record release publication and website continuation",
     "59db5c2 2026-09-29 build: package GitHub Explorer for Homebrew and npm",

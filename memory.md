@@ -1,6 +1,6 @@
 # Continuation record
-Version: 18
-Delta: Publish 0.4.2 to GitHub and Homebrew; npm accepted and processing; website PR under final checks.
+Version: 19
+Delta: Verify public npm installation; both distribution channels complete; website PR awaiting merge.
 
 ## Request and scope
 Create a standalone GitHub Explorer TUI and public mithudso/github-explorer repository.
@@ -201,3 +201,11 @@ previously installed github-panel and skillsx commands remain unchanged.
   homepage overview, Downloads guide, full options/usage/setup and release links.
   All 240 site tests pass with isolated API/hub test dependencies; typecheck, build,
   privacy scanning and desktop/mobile browser review passed. CI rerun is pending.
+
+## npm publication complete
+- https://www.npmjs.com/package/@mitchphudson/github-explorer now serves version 0.4.2.
+- Installed @mitchphudson/github-explorer@0.4.2 from the public registry into a fresh
+  temporary prefix/cache. github-explorer and ghx both report 0.4.2; catalog discovery
+  returns 229 commands. The earlier post-publish 404 responses resolved after processing.
+- Homebrew and npm distribution requests are complete. Both project and tap commits
+  are pushed. The active remaining work is website PR #125 and live deployment verification.
