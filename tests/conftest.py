@@ -1,12 +1,13 @@
 import pytest
 
-from github_explorer import runner
+from github_explorer import catalog, runner
 
 
 @pytest.fixture
 def ui_repository(monkeypatch):
     """Keep every UI test off the network; individual tests replace these fixtures."""
     monkeypatch.setattr(runner, "executable", lambda: "/fixture/gh")
+    monkeypatch.setattr(catalog, "repository_settings", lambda cwd: ())
     monkeypatch.setattr(
         runner, "repository_info",
         lambda context, executor: runner.Repository(

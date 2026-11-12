@@ -11,7 +11,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def plan_rotation(root: Path, threshold: int, keep: int) -> list[tuple[Path, str, str]]:
+def plan_rotation(root: Path, threshold: int, keep: int) -> list[tuple[Path, str, str, str]]:
     """Read both logs before any write; refuse live editor markers and unsafe paths."""
     if threshold < 1 or keep < 1:
         raise ValueError("threshold and keep must be positive")
@@ -29,13 +29,13 @@ def plan_rotation(root: Path, threshold: int, keep: int) -> list[tuple[Path, str
         # Only top-level workflow sections. Ignore Markdown headings in code fences.
         starts, offset, fence = [], 0, None
         for line in content.splitlines(keepends=True):
-            stripped = line.lstrip()
-            marker = re.match(r"(`{3,}|~{3,})", stripped)
+            marker = re.match(r"^ {0,3}(`{3,}|~{3,})(.*)$", line.rstrip("\r\n"))
             if marker:
                 token = marker[1]
-                if fence is None:
+                if fence is None and (token[0] != "`" or "`" not in marker[2]):
                     fence = token
-                elif token[0] == fence[0] and len(token) >= len(fence):
+                elif (fence is not None and token[0] == fence[0]
+                      and len(token) >= len(fence) and not marker[2].strip()):
                     fence = None
             elif fence is None and re.match(r"^## (?:Prompt v|v\d|\d{4}-\d{2}-\d{2})", line):
                 starts.append(offset)
@@ -43,7 +43,7 @@ def plan_rotation(root: Path, threshold: int, keep: int) -> list[tuple[Path, str
         if len(starts) <= keep:
             continue
         cut = starts[-keep]
-        plans.append((path, content[:starts[0]] + content[cut:], content[starts[0]:cut]))
+        plans.append((path, content[:starts[0]] + content[cut:], content[starts[0]:cut], content))
     return plans
 
 
@@ -51,10 +51,13 @@ def rotate(root: Path, *, threshold: int = 200_000, keep: int = 3, apply: bool =
     plans = plan_rotation(root, threshold, keep)
     archive = root / "docs/archive"
     if plans and apply:
+        for path, _, _, original in plans:
+            if path.read_text() != original:
+                raise ValueError(f"{path.name} changed during rotation; retry when writers are idle")
         if (root / "docs").is_symlink() or archive.is_symlink():
             raise ValueError("Refusing a symlinked archive directory")
         archive.mkdir(parents=True, exist_ok=True)
-    for path, retained, old in plans:
+    for path, retained, old, original in plans:
         if apply:
             stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S%fZ")
             target = archive / f"{path.stem}-{stamp}.md"
@@ -67,6 +70,8 @@ def rotate(root: Path, *, threshold: int = 200_000, keep: int = 3, apply: bool =
                 with temporary.open("x") as stream:
                     created = True
                     stream.write(retained)
+                if path.is_symlink() or path.read_text() != original:
+                    raise ValueError(f"{path.name} changed during rotation; retry when writers are idle")
                 temporary.replace(path)
             finally:
                 if created and temporary.exists():

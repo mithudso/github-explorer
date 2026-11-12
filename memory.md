@@ -1,6 +1,6 @@
 # Continuation record
-Version: 20
-Delta: Complete package publication and verify the live homepage and Downloads promotion.
+Version: 21
+Delta: Bootstrap and optimize runtime, indexes, log rotation and distribution boundaries.
 
 ## Request and scope
 Create a standalone GitHub Explorer TUI and public mithudso/github-explorer repository.
@@ -216,3 +216,16 @@ previously installed github-panel and skillsx commands remain unchanged.
 - Verified locally and on the hosted preview at 1440px and 390px: both pages render, screenshots decode and no horizontal page overflow occurs. Astro check/build, 240 site tests, Ruff and privacy scanning pass.
 - Cloudflare production deployment d92363bf-d366-4d8e-ba0d-b5631bc1e5df successfully published the merged commit. Live https://llms-explorer.com/ and /downloads/ pass Chromium checks at 1440px and 390px, with both products present, working section anchors, loaded screenshots and no page overflow.
 - Homebrew, npm and website publication are complete. No required implementation or publication steps remain.
+
+## v0.4.3 - 2026-11-12 — Bootstrap and deep code optimization
+- Request: run repo-bootstrapper and code-deep-optimizer across the public repository.
+- Completed: reviewed all 30 final Python/CommonJS source and test files, CI, packaging and the bootstrap manifest. Added a maintained project wiki and refreshed contributor and release guidance.
+- Runtime: prevent command/editor overlap, preserve whitespace in checkout roots, and report invalid home-directory contexts without an unhandled traceback.
+- Maintenance: exclude nested private document bodies, encode source links, parse complete CI and npm command metadata, preserve foreign generated files and unreadable-output diagnostics, and refuse detected log changes during rotation.
+- Distribution: refuse symlinked release inputs/outputs, unknown npm staging files, nonregular payload files and missing launchers before public packaging. Runtime dependencies remain unchanged; PyYAML is development-only.
+- Tests: added fixture counterexamples and stronger assertions for host matching, quitting, terminal delegation and network-free settings errors. Mutants bypassing host checks, Quit and terminal mode were rejected.
+- Validation: 139 Python tests, 11 npm tests, Ruff, builds, operation metadata and artifact installation checks pass; the final fresh-context independent gate passes with no remaining Medium+ findings. Static indexes were refreshed and checked. See docs/repo-bootstrap-audit-2026-11-12.md for the final receipt before delivery.
+- Artifact smoke: built and installed a seven-file npm tarball outside the checkout. Both aliases report 0.4.3 and discover 236 local help commands. The final source archive includes release-input guards and its rebuilt npm package passed isolated installation again.
+- Constraints: no live GitHub mutation, semantic indexing, persistent command logging, registry publication or Homebrew-tap update. The checked-in Homebrew formula retains the published 0.4.2 archive.
+- Implementation status: 19 corroborated findings corrected; optimizer exits CLEAN after four rounds and two blind gates. No implementation follow-up remains.
+- Delivery gate: the final pushed-commit checks must pass before merge and remote-main verification. The PR and task tracker hold the remote delivery receipt.

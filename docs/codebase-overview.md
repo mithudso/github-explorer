@@ -1,10 +1,10 @@
 # github-explorer — codebase overview
-> Source: . · https://github.com/mithudso/github-explorer @ a817933 dirty
-> Generated: 2026-09-29 by crawl-repo-to-llms v1.2.0
-> Census: 87 enumerated / 24 deep-read / 63 shallow · partial: remaining metadata cards shallow; no index probes
+> Source: . · https://github.com/mithudso/github-explorer @ c9f38a0 dirty
+> Generated: 2026-11-12 by crawl-repo-to-llms v1.3.0
+> Census: 92 enumerated / 26 deep-read / 66 shallow · partial: remaining metadata cards shallow; no index probes
 
 ## Architecture
-Package: github-explorer; version: 0.4.2. [src: pyproject.toml]
+Package: github-explorer; version: 0.4.3. [src: pyproject.toml]
 Purpose: A standalone terminal workbench for the full installed GitHub CLI. [src: pyproject.toml]
 Requires Python >=3.11. [src: pyproject.toml]
 Runtime dependencies: textual>=8,<9, rich>=13, textual-tty>=0.4,<0.5. [src: pyproject.toml]
@@ -19,6 +19,7 @@ src/github_explorer/catalog.py: Read the installed CLI's built-in reference; do 
 src/github_explorer/operations.py: Declarative inventory for maintainers; never executes or retries commands. [src: src/github_explorer/operations.py]
 src/github_explorer/panel.py: Reusable GitHub control screen with an embedded Vim terminal. [src: src/github_explorer/panel.py]
 src/github_explorer/runner.py: Shell-free command execution with cancellation and bounded captured output. [src: src/github_explorer/runner.py]
+tests/test_distributions.py: Keep release staging bounded to owned files and local output paths. [src: tests/test_distributions.py]
 tests/test_doc_indexes.py: Exercise stale, deleted and newly added sources in isolated fixture repositories. [src: tests/test_doc_indexes.py]
 tests/test_maintenance.py: Regression checks for maintenance writes and static operation metadata. [src: tests/test_maintenance.py]
 
@@ -26,6 +27,10 @@ tests/test_maintenance.py: Regression checks for maintenance writes and static o
 `github-explorer` → `github_explorer.__main__:main`. [src: pyproject.toml#project.scripts]
 `ghx` → `github_explorer.__main__:main`. [src: pyproject.toml#project.scripts]
 `python -m github_explorer` dispatches the package entrypoint. [src: src/github_explorer/__main__.py]
+`github-explorer` → `npm/bin/github-explorer.cjs` (npm launcher). [src: npm/package.json]
+`ghx` → `npm/bin/github-explorer.cjs` (npm launcher). [src: npm/package.json]
+`npm --prefix npm run test` → `node --test test/*.cjs`. [src: npm/package.json]
+`npm --prefix npm run prepack` → `node check-package.cjs`. [src: npm/package.json]
 `python scripts/build_distributions.py`; inspect its options below before use. [src: scripts/build_distributions.py]
 `python scripts/check_doc_indexes.py`; inspect its options below before use. [src: scripts/check_doc_indexes.py]
 `python scripts/generate_ops_registry_doc.py`; inspect its options below before use. [src: scripts/generate_ops_registry_doc.py]
@@ -76,10 +81,12 @@ docs/known-issues.md: Known limitations and troubleshooting; Repository browser 
 docs/logging.md: Logging and output; Current approach; Levels and diagnostics; Adding diagnostics. [src: docs/logging.md]
 docs/onboarding.md: Contributor onboarding. [src: docs/onboarding.md]
 docs/repo-bootstrap-audit-2026-09-29.md: Repository bootstrap audit — 2026-09-29; Outcome; Findings and resolution; Applicability decisions; Review coverage; Dependencies and tooling; Remaining scope; Final continuation review. [src: docs/repo-bootstrap-audit-2026-09-29.md]
+docs/repo-bootstrap-audit-2026-11-12.md: Bootstrap and code optimization audit — 2026-11-12; Coverage and method; Findings and corrections; Bootstrap manifest; Validation; Convergence; Limits and rollback. [src: docs/repo-bootstrap-audit-2026-11-12.md]
 docs/requirements.md: Requirements; Functional requirements; Non-functional requirements; Dependencies. [src: docs/requirements.md]
 docs/runbooks/metadata-maintenance.md: Refresh repository metadata; Preconditions; Actions; Verification; Escalation. [src: docs/runbooks/metadata-maintenance.md]
 docs/runbooks/release-and-rollback.md: Prepare a release or roll back an installation; Preconditions; Actions; Verification; Escalation. [src: docs/runbooks/release-and-rollback.md]
 docs/runbooks/troubleshooting.md: Diagnose a local failure; Preconditions; Actions; Verification; Escalation. [src: docs/runbooks/troubleshooting.md]
+docs/wiki/README.md: Project wiki; Start here; Verified contributor commands; Scripts and operating references; Design and maintenance direction. [src: docs/wiki/README.md]
 
 ## Coverage limits
 Source, scripts and tests have curated cards from direct review; remaining metadata cards are shallow. Parser definitions are statically extracted. [src: scripts/generate_repo_indexes.py]
@@ -92,7 +99,8 @@ Generated outputs are excluded from the source census to prevent recursive drift
 - .env.example: Config file; semantic purpose requires source review. [asserted]
 - .gitattributes: Meta file; semantic purpose requires source review. [asserted]
 - .gitignore: Meta file; semantic purpose requires source review. [asserted]
-- .mcp.json: Meta file; semantic purpose requires source review. [asserted]
+- .mcp.json: Config file; semantic purpose requires source review. [asserted]
+- .node-version: Meta file; semantic purpose requires source review. [asserted]
 - AGENTS.md: Docs file; semantic purpose requires source review. [asserted]
 - CHANGELOG.md: Docs file; semantic purpose requires source review. [asserted]
 - CLAUDE.md: Docs file; semantic purpose requires source review. [asserted]
@@ -144,6 +152,7 @@ Generated outputs are excluded from the source census to prevent recursive drift
 - docs/onboarding.md: Docs file; semantic purpose requires source review. [asserted]
 - docs/operations-registry.json: Docs file; semantic purpose requires source review. [asserted]
 - docs/repo-bootstrap-audit-2026-09-29.md: Docs file; semantic purpose requires source review. [asserted]
+- docs/repo-bootstrap-audit-2026-11-12.md: Docs file; semantic purpose requires source review. [asserted]
 - docs/requirements.md: Docs file; semantic purpose requires source review. [asserted]
 - docs/tool-inventory.json: Docs file; semantic purpose requires source review. [asserted]
 ### docs/archive
@@ -152,20 +161,23 @@ Generated outputs are excluded from the source census to prevent recursive drift
 - docs/runbooks/metadata-maintenance.md: Docs file; semantic purpose requires source review. [asserted]
 - docs/runbooks/release-and-rollback.md: Docs file; semantic purpose requires source review. [asserted]
 - docs/runbooks/troubleshooting.md: Docs file; semantic purpose requires source review. [asserted]
+### docs/wiki
+- docs/wiki/README.md: Docs file; semantic purpose requires source review. [asserted]
 ### npm
-- npm/check-package.cjs: Meta file; semantic purpose requires source review. [asserted]
-- npm/package.json: Meta file; semantic purpose requires source review. [asserted]
+- npm/check-package.cjs: Script file; semantic purpose requires source review. [asserted]
+- npm/package.json: Config file; semantic purpose requires source review. [asserted]
 ### npm/bin
-- npm/bin/github-explorer.cjs: Meta file; semantic purpose requires source review. [asserted]
+- npm/bin/github-explorer.cjs: Entrypoint file; semantic purpose requires source review. [asserted]
 ### npm/test
-- npm/test/launcher.cjs: Meta file; semantic purpose requires source review. [asserted]
+- npm/test/launcher.cjs: Test file; semantic purpose requires source review. [asserted]
+- npm/test/packaging.cjs: Test file; semantic purpose requires source review. [asserted]
 ### packaging/homebrew
 - packaging/homebrew/github-explorer.rb: Meta file; semantic purpose requires source review. [asserted]
 ### scripts
-- scripts/build_distributions.py: Script file; semantic purpose requires source review. Key symbols: main. [asserted]
+- scripts/build_distributions.py: Preflight release inputs/outputs, stage the npm wheel and generate Homebrew resources. Key symbols: preflight_inputs, preflight_outputs, main. [src: scripts/build_distributions.py]
 - scripts/check_doc_indexes.py: Compare the current source census and regenerated contents with committed indexes. Key symbols: check, main. [src: scripts/check_doc_indexes.py]
 - scripts/generate_ops_registry_doc.py: Parse OPERATIONS with AST and generate the operations registry and empty tool inventory. Key symbols: render, write_outputs, main. [src: scripts/generate_ops_registry_doc.py]
-- scripts/generate_repo_indexes.py: Generate static file indexes and the provenance-tagged repository dossier. Key symbols: git, included, census, role, importance, read_public, safe_remote, snapshot, code_inventory, json_text, render, write. [src: scripts/generate_repo_indexes.py]
+- scripts/generate_repo_indexes.py: Generate static file indexes and the provenance-tagged repository dossier. Key symbols: git, included, census, role, importance, read_public, safe_remote, snapshot, code_inventory, json_text, workflow_commands, render. [src: scripts/generate_repo_indexes.py]
 - scripts/rotate_workflow_logs.py: Plan or archive older prompt and memory sections while retaining current context. Key symbols: plan_rotation, rotate, main. [src: scripts/rotate_workflow_logs.py]
 ### src/github_explorer
 - src/github_explorer/__init__.py: Expose GitHubExplorer, GitHubPanel and the package version. [src: src/github_explorer/__init__.py]
@@ -178,17 +190,18 @@ Generated outputs are excluded from the source census to prevent recursive drift
 ### tests
 - tests/conftest.py: Provide network-free repository fixtures for UI tests. Key symbols: ui_repository, no_checkout. [src: tests/conftest.py]
 - tests/test_catalog.py: Test nested help parsing, alias classification, flags and the built-in-only discovery calls. Key symbols: test_full_reference_and_extensions_are_parsed_without_execution, test_flags_preserve_value_types_and_inherited_options, test_loading_uses_only_builtin_help_commands, run. [src: tests/test_catalog.py]
-- tests/test_cli.py: Test CLI help/version, validation, JSON export, timeout handling and standalone hosting. Key symbols: test_help_and_version_need_no_github_install, test_invalid_context_and_missing_gh, test_catalog_export_never_starts_tui, test_catalog_timeout_exits_without_traceback, test_standalone_host_branding_context_and_quit, missing, timeout. [src: tests/test_cli.py]
+- tests/test_cli.py: Test CLI help/version, validation, JSON export, timeout handling and standalone hosting. Key symbols: test_help_and_version_need_no_github_install, test_invalid_context_and_missing_gh, test_catalog_export_never_starts_tui, test_unknown_home_directory_is_an_argument_error, test_catalog_timeout_exits_without_traceback, test_standalone_host_branding_context_and_quit, missing, timeout. [src: tests/test_cli.py]
+- tests/test_distributions.py: Verify isolated release staging, foreign-file refusal and symlink preservation. Key symbols: builder, test_builder_refuses_unexpected_payload_before_any_build, test_builder_refuses_symlinks_before_any_mutation, test_builder_stages_only_matching_release_and_removes_owned_old_wheel, test_builder_refuses_symlinked_release_inputs_before_build, run. [src: tests/test_distributions.py]
 - tests/test_doc_indexes.py: Test deterministic generation, stale sources, file deletion/addition, exclusions and collisions. Key symbols: repo, test_generation_is_deterministic_and_does_not_index_its_outputs, test_changed_source_is_stale, test_deleted_source_and_new_source_are_reported, test_missing_output_and_tampered_filemap_are_reported, test_private_ignored_files_and_symlinks_are_excluded, test_tracked_source_directory_replaced_by_symlink_is_excluded, test_collision_requires_owned_manifest_and_explicit_refresh, test_manifest_and_caps, test_options_are_extracted_without_importing_code, test_remote_credentials_are_not_published, test_generation_refuses_symlinked_output_directory. [src: tests/test_doc_indexes.py]
-- tests/test_editor_status.py: Exercise actual Vim on temporary files, save/switch/quit guards and persistent status. Key symbols: local_files, settle, test_status_remains_visible_when_actions_hidden, test_real_vim_saves_and_protects_unsaved_file_switch, test_status_failures_are_unknown_and_stale_results_ignored, test_refresh_updates_changed_count_and_missing_vim_is_reported, test_mismatched_checkout_remains_read_only, start_once, unavailable. [src: tests/test_editor_status.py]
-- tests/test_maintenance.py: Test archival preservation and refusal, fenced headings, copied metadata and generated registries. Key symbols: script, test_rotation_preserves_all_sections_and_defaults_to_dry_run, test_rotation_refuses_all_writes_when_either_log_has_editor_marker, test_rotation_ignores_heading_in_fenced_example, test_metadata_is_copied_and_generated_artifacts_are_current, test_operation_generator_refuses_symlink_before_any_output_write, test_rotation_preserves_preexisting_temporary_file. [src: tests/test_maintenance.py]
+- tests/test_editor_status.py: Exercise actual Vim on temporary files, save/switch/quit guards and persistent status. Key symbols: local_files, settle, test_status_remains_visible_when_actions_hidden, test_real_vim_saves_and_protects_unsaved_file_switch, test_status_failures_are_unknown_and_stale_results_ignored, test_refresh_updates_changed_count_and_missing_vim_is_reported, test_mismatched_checkout_remains_read_only, test_running_command_blocks_local_editor_until_completion, test_start_command_cannot_bypass_an_open_editor, start_once, run, editor_request. [src: tests/test_editor_status.py]
+- tests/test_maintenance.py: Test archival preservation and refusal, fenced headings, copied metadata and generated registries. Key symbols: script, test_rotation_preserves_all_sections_and_defaults_to_dry_run, test_rotation_refuses_all_writes_when_either_log_has_editor_marker, test_rotation_ignores_heading_in_fenced_example, test_metadata_is_copied_and_generated_artifacts_are_current, test_operation_generator_refuses_symlink_before_any_output_write, test_rotation_preserves_preexisting_temporary_file, test_rotation_refuses_concurrent_append_after_planning, test_rotation_keeps_headings_after_invalid_fence_closers_in_latest_section, append_after_plan. [src: tests/test_maintenance.py]
 - tests/test_navigation.py: Verify tree expansion, spatial arrow focus, native dropdowns and text editing. Key symbols: navigation, test_tree_arrows_expand_walk_collapse_without_selecting, test_spatial_buttons_fields_and_dropdown, test_settings_and_confirmation_arrows, test_tree_boundaries_and_readonly_content_allow_arrow_exit. [src: tests/test_navigation.py]
-- tests/test_panel.py: Exercise embedded UI confirmation, argument editing, capture, clipboard, stopping and catalog races. Key symbols: Host, test_embed_catalog_flags_preview_run_and_return, test_stop_keeps_panel_until_command_ends, test_reload_ignores_cancelled_catalog_result, __init__, on_mount, run, run, load. [src: tests/test_panel.py]
+- tests/test_panel.py: Exercise embedded UI confirmation, argument editing, capture, clipboard, stopping and catalog races. Key symbols: Host, test_embed_catalog_flags_preview_run_and_return, test_stop_keeps_panel_until_command_ends, test_reload_ignores_cancelled_catalog_result, __init__, on_mount, run, run, load, suspend, terminal. [src: tests/test_panel.py]
 - tests/test_repository.py: Verify repository identity, trees, previews, read failures and selected setting arguments. Key symbols: FixtureRunner, repository, test_repository_identity_pins_host_and_cwd, test_file_walk_lists_hidden_nested_files_and_submodules, test_empty_and_truncated_trees, test_repository_read_errors_are_explicit, test_blob_previews_are_read_only_and_bounded, test_settings_discovery_includes_new_flags_without_executing_them, test_settings_arguments_preserve_clear_and_false_require_visibility_acceptance, test_squash_settings_current_mode_and_required_flag, __init__, run. [src: tests/test_repository.py]
 - tests/test_repository_panel.py: Exercise default file browsing, settings confirmation and stale repository reads. Key symbols: test_files_are_above_catalog_default_search_and_preview, test_settings_current_values_cancel_and_confirm_exact_changes, test_failed_repository_read_leaves_cli_usable, test_late_file_read_cannot_replace_refreshed_repository, test_visibility_requires_explicit_acceptance_before_confirmation, test_late_preview_cannot_replace_new_selection, preview, run, fail, files, preview. [src: tests/test_repository_panel.py]
-- tests/test_runner.py: Exercise literal argv, context, child exit status, cancellation, timeout and UTF-8 capture. Key symbols: invocation, test_exact_argv_context_and_no_shell, test_capture_exit_and_context, test_cancel_timeout_and_output_limit, test_cancel_before_start, test_interactive_uses_normal_terminal, test_incomplete_utf8_is_replaced_at_eof, test_invalid_timeout_cannot_start_a_process, test_git_context_env_and_literal_arguments, test_missing_git_is_actionable. [src: tests/test_runner.py]
+- tests/test_runner.py: Exercise literal argv, context, child exit status, cancellation, timeout and UTF-8 capture. Key symbols: invocation, test_exact_argv_context_and_no_shell, test_capture_exit_and_context, test_cancel_timeout_and_output_limit, test_cancel_before_start, test_interactive_uses_normal_terminal, test_incomplete_utf8_is_replaced_at_eof, test_invalid_timeout_cannot_start_a_process, test_git_context_env_and_literal_arguments, test_missing_git_is_actionable, test_unknown_home_directory_is_a_context_error. [src: tests/test_runner.py]
 - tests/test_shortcuts.py: Verify all twelve common command buttons and hotkeys, confirmations and responsive layout. Key symbols: shortcuts, test_button_and_hotkey_preview_cancel_and_execute, test_git_menu_typing_and_busy_shortcuts, test_shortcut_bar_fits_and_resizes, captured, interactive. [src: tests/test_shortcuts.py]
-- tests/test_workspace.py: Verify Git fixture status, safe editing paths, checkout identity and paginated activity reads. Key symbols: git, checkout, test_real_git_counts_unique_changes_and_current_branch, test_unborn_branch_and_deleted_files, test_editable_file_boundaries, test_vim_command_quotes_paths_disables_session_files, test_repository_activity_is_paginated_read_only_and_contextual, test_checkout_matching_ignores_override_and_checks_host, FixtureRunner, FixtureRunner, __init__, run. [src: tests/test_workspace.py]
+- tests/test_workspace.py: Verify Git fixture status, safe editing paths, checkout identity and paginated activity reads. Key symbols: git, checkout, test_real_git_counts_unique_changes_and_current_branch, test_unborn_branch_and_deleted_files, test_checkout_root_preserves_trailing_whitespace, test_editable_file_boundaries, test_vim_command_quotes_paths_disables_session_files, test_repository_activity_is_paginated_read_only_and_contextual, test_checkout_matching_ignores_override_and_checks_host, FixtureRunner, FixtureRunner, __init__. [src: tests/test_workspace.py]
 
 ## Generated outputs (excluded from recursive source census)
 - docs/high_signal_file_index.json [src: scripts/generate_repo_indexes.py]

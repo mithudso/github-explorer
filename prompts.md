@@ -1,6 +1,6 @@
 # Prompts
-Version: 15
-Delta: Publish distributions, add website promotion and check supplied npm authentication.
+Version: 16
+Delta: Run repository bootstrap and deep code optimization.
 
 ## 2026-09-29
 > Create a new project ~/dev/github-explorer as a standalone TUI using the github-panel as the basis and create a public remote github repo for it.
@@ -50,3 +50,6 @@ The repeated request resumed the interrupted turn before any tool work began.
 > The NPM token for publishing is in the ~/.zshrc file as the NPM_TOKEN variable.
 
 Only the variable name and requested credential location are recorded; no credential value is stored.
+
+## Prompt v16 - 2026-11-12
+> Run the repo bootstrapper skill and the deep code optimizer skill on this repo.

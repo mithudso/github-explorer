@@ -1,12 +1,16 @@
 # github-explorer — executable inventory
-> Source: . · https://github.com/mithudso/github-explorer @ a817933 dirty
-> Generated: 2026-09-29 by crawl-repo-to-llms v1.2.0
-> Census: 87 enumerated / 24 deep-read / 63 shallow · partial: remaining metadata cards shallow; no index probes
+> Source: . · https://github.com/mithudso/github-explorer @ c9f38a0 dirty
+> Generated: 2026-11-12 by crawl-repo-to-llms v1.3.0
+> Census: 92 enumerated / 26 deep-read / 66 shallow · partial: remaining metadata cards shallow; no index probes
 
 ## Entrypoints
 `github-explorer` → `github_explorer.__main__:main`. [src: pyproject.toml#project.scripts]
 `ghx` → `github_explorer.__main__:main`. [src: pyproject.toml#project.scripts]
 `python -m github_explorer` dispatches the package entrypoint. [src: src/github_explorer/__main__.py]
+`github-explorer` → `npm/bin/github-explorer.cjs` (npm launcher). [src: npm/package.json]
+`ghx` → `npm/bin/github-explorer.cjs` (npm launcher). [src: npm/package.json]
+`npm --prefix npm run test` → `node --test test/*.cjs`. [src: npm/package.json]
+`npm --prefix npm run prepack` → `node check-package.cjs`. [src: npm/package.json]
 `python scripts/build_distributions.py`; inspect its options below before use. [src: scripts/build_distributions.py]
 `python scripts/check_doc_indexes.py`; inspect its options below before use. [src: scripts/check_doc_indexes.py]
 `python scripts/generate_ops_registry_doc.py`; inspect its options below before use. [src: scripts/generate_ops_registry_doc.py]
@@ -33,19 +37,19 @@ Parser definition in scripts/generate_ops_registry_doc.py. [src: scripts/generat
 ```python
 parser.add_argument("--check", action="store_true", help="Fail if generated files differ")
 ```
-Parser definition in scripts/generate_repo_indexes.py. [src: scripts/generate_repo_indexes.py:567]
+Parser definition in scripts/generate_repo_indexes.py. [src: scripts/generate_repo_indexes.py:611]
 ```python
 parser.add_argument("--refresh", action="store_true", help="Replace this generator's existing dossier")
 ```
-Parser definition in scripts/rotate_workflow_logs.py. [src: scripts/rotate_workflow_logs.py:82]
+Parser definition in scripts/rotate_workflow_logs.py. [src: scripts/rotate_workflow_logs.py:87]
 ```python
 parser.add_argument("--apply", action="store_true", help="Write archives; default is dry run")
 ```
-Parser definition in scripts/rotate_workflow_logs.py. [src: scripts/rotate_workflow_logs.py:83]
+Parser definition in scripts/rotate_workflow_logs.py. [src: scripts/rotate_workflow_logs.py:88]
 ```python
 parser.add_argument("--threshold", type=int, default=200_000, help="Rotation size in bytes")
 ```
-Parser definition in scripts/rotate_workflow_logs.py. [src: scripts/rotate_workflow_logs.py:84]
+Parser definition in scripts/rotate_workflow_logs.py. [src: scripts/rotate_workflow_logs.py:89]
 ```python
 parser.add_argument("--keep", type=int, default=3, help="Keep this many recent version sections")
 ```

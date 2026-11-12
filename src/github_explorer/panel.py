@@ -619,6 +619,9 @@ class GitHubPanel(ArrowNavigation, Screen):
             self.status("Repository context changed. Refresh files first.")
             return
         entry = event.node.data
+        if entry["type"] == "local" and self.busy:
+            self.status("Wait for the running command to finish before opening Vim.")
+            return
         self.query_one("#gh-tabs", TabbedContent).active = "gh-files-tab"
         if entry["type"] == "local" and self.workspace:
             try:
@@ -985,6 +988,9 @@ class GitHubPanel(ArrowNavigation, Screen):
         )
 
     def start_command(self, invocation, interactive, timeout):
+        if self.editor:
+            self.status("Close Vim with :wq or :q before running repository commands.")
+            return
         if self.busy:
             return
         self.busy = True

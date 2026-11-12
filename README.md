@@ -244,6 +244,9 @@ uv sync --locked
 uv run pytest
 uv run ruff check .
 uv build
+npm --prefix npm test
+uv run python scripts/generate_ops_registry_doc.py --check
+uv run python scripts/check_doc_indexes.py
 ```
 
 Tests use fixture commands and mocked CLI catalogs. They do not mutate GitHub.
@@ -253,6 +256,7 @@ MIT licensed. See [LICENSE](LICENSE) and [NOTICE.md](NOTICE.md) for attribution.
 
 ## Documentation
 
+- [Project wiki](docs/wiki/README.md): maintained commands, scripts, references and design guidance.
 - Getting started: [installation](docs/INSTALLATION.md), [onboarding](docs/onboarding.md),
   [requirements](docs/requirements.md).
 - Design: [architecture](docs/ARCHITECTURE.md), [components](docs/COMPONENTS.md),

@@ -15,6 +15,8 @@ headless Textual interactions. It does not mutate live GitHub data.
 | Repository | `uv run pytest tests/test_repository.py tests/test_repository_panel.py` | Read-only metadata/trees/blobs, errors, host context, file browser, settings selection/cancel/confirm and stale reads |
 | Editor/status | `uv run pytest tests/test_workspace.py tests/test_editor_status.py` | Git fixture counts/branches, safe file paths, actual Vim saves and unsaved-switch prompts, quit guards, hide/show, unknown/stale status |
 | Maintenance | `uv run pytest tests/test_maintenance.py tests/test_doc_indexes.py` | Rotation safety, metadata drift, index generation, private-file exclusions |
+| Distribution staging | `uv run pytest tests/test_distributions.py` | Allowlisted release payload, symlink refusal before writes, versioned wheel/formula generation |
+| npm launcher and prepack | `npm --prefix npm test` | Literal argv, cwd/exit status, missing uv, required regular files and closed payload allowlist |
 | All tests | `uv run pytest` | Every collected test under `tests/`, including maintenance tooling tests |
 
 ## Writing tests
@@ -41,6 +43,7 @@ uv sync --locked
 uv run pytest
 uv run ruff check .
 uv build
+npm --prefix npm test
 uv run python scripts/generate_ops_registry_doc.py --check
 uv run python scripts/check_doc_indexes.py
 ```

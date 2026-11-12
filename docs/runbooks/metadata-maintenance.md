@@ -13,7 +13,9 @@ changes. Do not start semantic indexing, embeddings, or an Ollama process.
 3. Regenerate navigation artifacts with `uv run python scripts/generate_repo_indexes.py --refresh`.
 4. Run `uv run python scripts/rotate_workflow_logs.py` for a dry run when either
    workflow log approaches 200 KB. Close active editors and review the plan, then
-   use `--apply` to archive old sections. The default retains the latest three
+   wait for every log writer to become idle, then use `--apply` to archive old sections.
+   Rotation refuses detected source changes after planning and before replacement.
+   The default retains the latest three
    sections per log and refuses editor markers; `--help` lists size/retention options.
 5. Record the task, validation, and remaining work in the versioned workflow logs.
 6. Regenerate navigation artifacts again after log edits or rotation; the census

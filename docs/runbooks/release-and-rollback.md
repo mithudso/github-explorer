@@ -7,16 +7,20 @@ maintainer action; the repository has no automated release workflow.
 
 ## Actions
 
-1. Update the package version in `pyproject.toml` and `__init__.py`, refresh
+1. Update the package version in `pyproject.toml`, `__init__.py` and `npm/package.json`, refresh
    `uv.lock`, and record the change in `CHANGELOG.md`.
 2. Update workflow logs and affected docs; regenerate operations and file indexes.
-3. Run `uv sync --locked`, `uv run pytest`, `uv run ruff check .`, and `uv build`.
+3. Run `uv sync --locked`, `uv run pytest`, `uv run ruff check .`, `npm --prefix npm test`, and `uv build`.
 4. Run the metadata checks in [development](../DEVELOPMENT.md).
 5. Review the staged diff for local state, credentials, and private output, then
    commit only the intended files. Retain `LICENSE` and `NOTICE.md` in packages.
 6. If rolling back a local tool install, reinstall a known reviewed Git revision
    using `uv tool install --force git+https://github.com/mithudso/github-explorer.git@REVISION`,
    replacing `REVISION` with the actual revision. Do not guess a release tag.
+
+Follow [the distribution guide](../RELEASING.md) for staging, inspecting, hashing,
+tagging and publishing artifacts. Keep the Homebrew formula on the last published
+archive until preparing a new distribution; a source change alone does not publish it.
 
 ## Verification
 

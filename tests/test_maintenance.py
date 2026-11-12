@@ -97,3 +97,33 @@ def test_rotation_preserves_preexisting_temporary_file(tmp_path):
         rotate(tmp_path, threshold=1, keep=1, apply=True)
     assert temporary.read_text() == "recovery state"
     assert path.read_text() == original
+
+
+def test_rotation_refuses_concurrent_append_after_planning(tmp_path, monkeypatch):
+    module = script('rotate_workflow_logs')
+    path = tmp_path / 'prompts.md'
+    original = '## Prompt v1\none\n## Prompt v2\ntwo\n'
+    appended = '## Prompt v3\nconcurrent work\n'
+    path.write_text(original)
+    plan = module.plan_rotation
+
+    def append_after_plan(*args):
+        result = plan(*args)
+        with path.open('a') as stream:
+            stream.write(appended)
+        return result
+
+    monkeypatch.setattr(module, 'plan_rotation', append_after_plan)
+    with pytest.raises(ValueError, match='changed during rotation'):
+        module.rotate(tmp_path, threshold=1, keep=1, apply=True)
+    assert path.read_text() == original + appended
+    assert not (tmp_path / 'docs/archive').exists()
+
+
+def test_rotation_keeps_headings_after_invalid_fence_closers_in_latest_section(tmp_path):
+    module = script('rotate_workflow_logs')
+    path = tmp_path / 'memory.md'
+    latest = '## v2\n```md\n```still-fenced\n## v99\nexample\n```\nlatest\n'
+    path.write_text('# Memory\n## v1\nold\n' + latest)
+    module.rotate(tmp_path, threshold=1, keep=1, apply=True)
+    assert path.read_text() == '# Memory\n' + latest

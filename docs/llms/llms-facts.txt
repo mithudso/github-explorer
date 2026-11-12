@@ -1,9 +1,9 @@
 # github-explorer — atomic facts
-> Source: . · https://github.com/mithudso/github-explorer @ a817933 dirty
-> Generated: 2026-09-29 by crawl-repo-to-llms v1.2.0
-> Census: 87 enumerated / 24 deep-read / 63 shallow · partial: remaining metadata cards shallow; no index probes
+> Source: . · https://github.com/mithudso/github-explorer @ c9f38a0 dirty
+> Generated: 2026-11-12 by crawl-repo-to-llms v1.3.0
+> Census: 92 enumerated / 26 deep-read / 66 shallow · partial: remaining metadata cards shallow; no index probes
 
-Package: github-explorer; version: 0.4.2. [src: pyproject.toml]
+Package: github-explorer; version: 0.4.3. [src: pyproject.toml]
 Purpose: A standalone terminal workbench for the full installed GitHub CLI. [src: pyproject.toml]
 Requires Python >=3.11. [src: pyproject.toml]
 Runtime dependencies: textual>=8,<9, rich>=13, textual-tty>=0.4,<0.5. [src: pyproject.toml]
@@ -18,5 +18,6 @@ src/github_explorer/catalog.py: Read the installed CLI's built-in reference; do 
 src/github_explorer/operations.py: Declarative inventory for maintainers; never executes or retries commands. [src: src/github_explorer/operations.py]
 src/github_explorer/panel.py: Reusable GitHub control screen with an embedded Vim terminal. [src: src/github_explorer/panel.py]
 src/github_explorer/runner.py: Shell-free command execution with cancellation and bounded captured output. [src: src/github_explorer/runner.py]
+tests/test_distributions.py: Keep release staging bounded to owned files and local output paths. [src: tests/test_distributions.py]
 tests/test_doc_indexes.py: Exercise stale, deleted and newly added sources in isolated fixture repositories. [src: tests/test_doc_indexes.py]
 tests/test_maintenance.py: Regression checks for maintenance writes and static operation metadata. [src: tests/test_maintenance.py]

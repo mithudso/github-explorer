@@ -25,7 +25,7 @@ jobs:
       - uses: astral-sh/setup-uv@v6
       - uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version-file: .node-version
       - run: uv sync --locked
       - run: npm --prefix npm test
       - run: uv run python scripts/build_distributions.py

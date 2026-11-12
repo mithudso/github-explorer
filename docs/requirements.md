@@ -47,6 +47,8 @@ set, including transitive dependencies. `uv sync --locked` installs that set.
 | pytest | `>=8` (dev) | Test runner |
 | pytest-asyncio | `>=0.24` (dev) | Async UI tests |
 | Ruff | `>=0.11` (dev) | Lint and import checks |
+| PyYAML | `>=6` (dev) | Safely parse workflow command metadata without execution |
+| Node.js | `>=18`; CI major in `.node-version` | npm launcher and packaging checks |
 | Git | Installed on PATH; no pinned version | Local checkout commands and shortcuts |
 | GitHub CLI | Installed on PATH; no pinned version | Command discovery and execution |
 | uv | Developer/install tool; no pinned version | Environment, lock, tests, build |

@@ -19,12 +19,15 @@ uv run pytest
 uv run pytest tests/test_runner.py
 uv run ruff check .
 uv build
+npm --prefix npm test
 uv run python scripts/generate_ops_registry_doc.py --check
 uv run python scripts/check_doc_indexes.py
 ```
 
 The app requires `gh` on PATH and uses `git` on PATH for local Git commands. Fixture tests do not require GitHub authentication.
 There is no separate type-checker or service to start.
+The npm launcher tests require Node.js 18+; CI uses `.node-version`.
+Use the [project wiki](docs/wiki/README.md) for maintained commands and references.
 
 ## Runtime architecture
 
