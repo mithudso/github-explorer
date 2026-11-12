@@ -23,11 +23,14 @@ uv run pytest
 uv run pytest tests/test_runner.py
 uv run ruff check .
 uv build
+npm --prefix npm test
 uv run python scripts/generate_ops_registry_doc.py --check
 uv run python scripts/check_doc_indexes.py
 ```
 
 No type-checker or development server is configured.
+The npm tests need Node.js 18+; CI reads `.node-version`.
+The [project wiki](../docs/wiki/README.md) links maintained commands and references.
 
 ## High-level Architecture
 

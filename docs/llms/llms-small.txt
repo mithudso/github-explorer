@@ -1,9 +1,9 @@
 # github-explorer — budget digest
-> Source: . · https://github.com/mithudso/github-explorer @ a817933 dirty
-> Generated: 2026-09-29 by crawl-repo-to-llms v1.2.0
-> Census: 87 enumerated / 24 deep-read / 63 shallow · partial: remaining metadata cards shallow; no index probes
+> Source: . · https://github.com/mithudso/github-explorer @ c9f38a0 dirty
+> Generated: 2026-11-12 by crawl-repo-to-llms v1.3.0
+> Census: 92 enumerated / 26 deep-read / 66 shallow · partial: remaining metadata cards shallow; no index probes
 
-Package: github-explorer; version: 0.4.2. [src: pyproject.toml]
+Package: github-explorer; version: 0.4.3. [src: pyproject.toml]
 Purpose: A standalone terminal workbench for the full installed GitHub CLI. [src: pyproject.toml]
 Requires Python >=3.11. [src: pyproject.toml]
 Runtime dependencies: textual>=8,<9, rich>=13, textual-tty>=0.4,<0.5. [src: pyproject.toml]

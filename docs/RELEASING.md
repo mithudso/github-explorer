@@ -19,6 +19,8 @@ a compatible Python when none is available. Subsequent launches reuse its cache.
    resources from the runtime lockfile with SHA-256 hashes. Do this after final
    source/document changes. Keep the generated formula with the exact archive
    it references; rebuilding a source archive can change its checksum.
+   The script refuses symlinked release inputs/outputs and unexpected files in `npm/python`
+   before building. Move unrelated staging material out yourself; do not publish it.
 4. Run `npm pack ./npm --pack-destination dist` and inspect its file list. Install
    the tarball into a temporary prefix and exercise both aliases, `--version`,
    and `--list-commands` from outside the checkout. Run `brew style`, install the
@@ -42,6 +44,9 @@ support macOS and Linux, and use the user's GitHub CLI authentication.
 Release artifacts and npm staging files are ignored by Git. The GitHub release
 is their durable distribution location. Do not publish logs, credentials, local
 state or generated build directories as source files.
+The prepack gate requires regular files, the matching wheel and launcher, and an
+exact allowlist under `bin/` and `python/`; unexpected entries stop packaging.
+The checked-in formula remains on the last published archive between releases.
 
 If npm resolves a parent project configuration, publish from a temporary directory
 with an explicit user config and the absolute tarball path. Verify `npm whoami`

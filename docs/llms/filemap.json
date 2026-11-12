@@ -3,13 +3,13 @@
     "path": ".editorconfig",
     "role": "meta",
     "importance": "normal",
-    "bytes": 225,
-    "sha256": "19e6aa4a5e59bdf9e6ccc605e9d368815d80559c61225c148ef804e7639002b8",
+    "bytes": 229,
+    "sha256": "9b757416321a6e7bdc5772d4b08001aa4726b4ca53d398c59d40bebe50da4900",
     "depth": "shallow",
     "purpose": "Meta file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/main/.editorconfig"
+    "link": "https://github.com/mithudso/github-explorer/blob/maintenance%2Fbootstrap-deep-optimize-20261112/.editorconfig"
   },
   {
     "path": ".env.example",
@@ -21,7 +21,7 @@
     "purpose": "Config file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/main/.env.example"
+    "link": "https://github.com/mithudso/github-explorer/blob/maintenance%2Fbootstrap-deep-optimize-20261112/.env.example"
   },
   {
     "path": ".gitattributes",
@@ -33,7 +33,7 @@
     "purpose": "Meta file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/main/.gitattributes"
+    "link": "https://github.com/mithudso/github-explorer/blob/maintenance%2Fbootstrap-deep-optimize-20261112/.gitattributes"
   },
   {
     "path": ".github/CODEOWNERS",
@@ -45,7 +45,7 @@
     "purpose": "Docs file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/main/.github/CODEOWNERS"
+    "link": "https://github.com/mithudso/github-explorer/blob/maintenance%2Fbootstrap-deep-optimize-20261112/.github/CODEOWNERS"
   },
   {
     "path": ".github/FUNDING.yml",
@@ -57,7 +57,7 @@
     "purpose": "Docs file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/main/.github/FUNDING.yml"
+    "link": "https://github.com/mithudso/github-explorer/blob/maintenance%2Fbootstrap-deep-optimize-20261112/.github/FUNDING.yml"
   },
   {
     "path": ".github/ISSUE_TEMPLATE/bug_report.md",
@@ -69,7 +69,7 @@
     "purpose": "Docs file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/main/.github/ISSUE_TEMPLATE/bug_report.md"
+    "link": "https://github.com/mithudso/github-explorer/blob/maintenance%2Fbootstrap-deep-optimize-20261112/.github/ISSUE_TEMPLATE/bug_report.md"
   },
   {
     "path": ".github/ISSUE_TEMPLATE/feature_request.md",
@@ -81,7 +81,7 @@
     "purpose": "Docs file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/main/.github/ISSUE_TEMPLATE/feature_request.md"
+    "link": "https://github.com/mithudso/github-explorer/blob/maintenance%2Fbootstrap-deep-optimize-20261112/.github/ISSUE_TEMPLATE/feature_request.md"
   },
   {
     "path": ".github/PULL_REQUEST_TEMPLATE.md",
@@ -93,7 +93,7 @@
     "purpose": "Docs file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/main/.github/PULL_REQUEST_TEMPLATE.md"
+    "link": "https://github.com/mithudso/github-explorer/blob/maintenance%2Fbootstrap-deep-optimize-20261112/.github/PULL_REQUEST_TEMPLATE.md"
   },
   {
     "path": ".github/SECURITY.md",
@@ -105,19 +105,19 @@
     "purpose": "Docs file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/main/.github/SECURITY.md"
+    "link": "https://github.com/mithudso/github-explorer/blob/maintenance%2Fbootstrap-deep-optimize-20261112/.github/SECURITY.md"
   },
   {
     "path": ".github/copilot-instructions.md",
     "role": "docs",
     "importance": "normal",
-    "bytes": 2077,
-    "sha256": "25a47052e176972c3d6b0bce5b3f88e8fdb1ba034e5ede523bb3d2b8b4d0227c",
+    "bytes": 2242,
+    "sha256": "d3d002a732335d15922d28033b2ee9fb501885766183ebe08aeb4e058eeb8b7d",
     "depth": "shallow",
     "purpose": "Docs file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/main/.github/copilot-instructions.md"
+    "link": "https://github.com/mithudso/github-explorer/blob/maintenance%2Fbootstrap-deep-optimize-20261112/.github/copilot-instructions.md"
   },
   {
     "path": ".github/dependabot.yml",
@@ -129,19 +129,19 @@
     "purpose": "Docs file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/main/.github/dependabot.yml"
+    "link": "https://github.com/mithudso/github-explorer/blob/maintenance%2Fbootstrap-deep-optimize-20261112/.github/dependabot.yml"
   },
   {
     "path": ".github/workflows/test.yml",
     "role": "infra",
     "importance": "high",
-    "bytes": 1149,
-    "sha256": "e3e64469a3cd7b347e0a522c7f3e611fb1b8acd9933dc37b4cf0ad6dac83a189",
+    "bytes": 1163,
+    "sha256": "4933e50bff367333b6fda2db257db2a9e7fae40e4d9130813cef409584fbb67b",
     "depth": "shallow",
     "purpose": "Infra file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/main/.github/workflows/test.yml"
+    "link": "https://github.com/mithudso/github-explorer/blob/maintenance%2Fbootstrap-deep-optimize-20261112/.github/workflows/test.yml"
   },
   {
     "path": ".gitignore",
@@ -153,19 +153,31 @@
     "purpose": "Meta file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/main/.gitignore"
+    "link": "https://github.com/mithudso/github-explorer/blob/maintenance%2Fbootstrap-deep-optimize-20261112/.gitignore"
   },
   {
     "path": ".mcp.json",
-    "role": "meta",
+    "role": "config",
     "importance": "normal",
     "bytes": 23,
     "sha256": "d8e397af03b5b032f21d0aa967086f0c78b33c87b76f2e9898ae0a144df7de02",
     "depth": "shallow",
+    "purpose": "Config file; semantic purpose requires source review.",
+    "provenance": "[asserted]",
+    "symbols": [],
+    "link": "https://github.com/mithudso/github-explorer/blob/maintenance%2Fbootstrap-deep-optimize-20261112/.mcp.json"
+  },
+  {
+    "path": ".node-version",
+    "role": "meta",
+    "importance": "normal",
+    "bytes": 3,
+    "sha256": "f14b4987904bcb5814e4459a057ed4d20f58a633152288a761214dcd28780b56",
+    "depth": "shallow",
     "purpose": "Meta file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/main/.mcp.json"
+    "link": "https://github.com/mithudso/github-explorer/blob/maintenance%2Fbootstrap-deep-optimize-20261112/.node-version"
   },
   {
     "path": ".vscode/extensions.json",
@@ -177,7 +189,7 @@
     "purpose": "Config file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/main/.vscode/extensions.json"
+    "link": "https://github.com/mithudso/github-explorer/blob/maintenance%2Fbootstrap-deep-optimize-20261112/.vscode/extensions.json"
   },
   {
     "path": ".vscode/launch.json",
@@ -189,7 +201,7 @@
     "purpose": "Config file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/main/.vscode/launch.json"
+    "link": "https://github.com/mithudso/github-explorer/blob/maintenance%2Fbootstrap-deep-optimize-20261112/.vscode/launch.json"
   },
   {
     "path": ".vscode/mcp.json",
@@ -201,7 +213,7 @@
     "purpose": "Config file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/main/.vscode/mcp.json"
+    "link": "https://github.com/mithudso/github-explorer/blob/maintenance%2Fbootstrap-deep-optimize-20261112/.vscode/mcp.json"
   },
   {
     "path": ".vscode/settings.json",
@@ -213,43 +225,43 @@
     "purpose": "Config file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/main/.vscode/settings.json"
+    "link": "https://github.com/mithudso/github-explorer/blob/maintenance%2Fbootstrap-deep-optimize-20261112/.vscode/settings.json"
   },
   {
     "path": "AGENTS.md",
     "role": "docs",
     "importance": "normal",
-    "bytes": 1817,
-    "sha256": "689d9e79c83c271111c1a640237dab1950eb682549cc306bfe8d045d6c8db7f1",
+    "bytes": 1901,
+    "sha256": "b476a4e99d26124bf295acad37d0d564d410d482481448b4107c0446996b11c6",
     "depth": "shallow",
     "purpose": "Docs file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/main/AGENTS.md"
+    "link": "https://github.com/mithudso/github-explorer/blob/maintenance%2Fbootstrap-deep-optimize-20261112/AGENTS.md"
   },
   {
     "path": "CHANGELOG.md",
     "role": "docs",
     "importance": "normal",
-    "bytes": 2832,
-    "sha256": "17f8f1c964824900e184b4a32647fcf8095157699ef62f4ae44dda73f3f7dc3a",
+    "bytes": 3550,
+    "sha256": "6b6881f69b9d1a552ce48d7d10a5ccb26b8b2097c0bcfff7bdf21ea72bd31e92",
     "depth": "shallow",
     "purpose": "Docs file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/main/CHANGELOG.md"
+    "link": "https://github.com/mithudso/github-explorer/blob/maintenance%2Fbootstrap-deep-optimize-20261112/CHANGELOG.md"
   },
   {
     "path": "CLAUDE.md",
     "role": "docs",
     "importance": "normal",
-    "bytes": 2996,
-    "sha256": "0f417d7b9e16d2dcbf96d5d5be0568fc75721ad265b91105c6f16cf6d235c82a",
+    "bytes": 3171,
+    "sha256": "5e3f93ee57c5b3d3a1618961cf9d0e8823698ec3d50e7c047b7500c57ecbfae2",
     "depth": "shallow",
     "purpose": "Docs file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/main/CLAUDE.md"
+    "link": "https://github.com/mithudso/github-explorer/blob/maintenance%2Fbootstrap-deep-optimize-20261112/CLAUDE.md"
   },
   {
     "path": "CODE_OF_CONDUCT.md",
@@ -261,7 +273,7 @@
     "purpose": "Docs file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/main/CODE_OF_CONDUCT.md"
+    "link": "https://github.com/mithudso/github-explorer/blob/maintenance%2Fbootstrap-deep-optimize-20261112/CODE_OF_CONDUCT.md"
   },
   {
     "path": "CONTRIBUTING.md",
@@ -273,7 +285,7 @@
     "purpose": "Docs file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/main/CONTRIBUTING.md"
+    "link": "https://github.com/mithudso/github-explorer/blob/maintenance%2Fbootstrap-deep-optimize-20261112/CONTRIBUTING.md"
   },
   {
     "path": "GEMINI.md",
@@ -285,7 +297,7 @@
     "purpose": "Docs file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/main/GEMINI.md"
+    "link": "https://github.com/mithudso/github-explorer/blob/maintenance%2Fbootstrap-deep-optimize-20261112/GEMINI.md"
   },
   {
     "path": "LICENSE",
@@ -297,7 +309,7 @@
     "purpose": "Meta file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/main/LICENSE"
+    "link": "https://github.com/mithudso/github-explorer/blob/maintenance%2Fbootstrap-deep-optimize-20261112/LICENSE"
   },
   {
     "path": "MANIFEST.in",
@@ -309,7 +321,7 @@
     "purpose": "Meta file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/main/MANIFEST.in"
+    "link": "https://github.com/mithudso/github-explorer/blob/maintenance%2Fbootstrap-deep-optimize-20261112/MANIFEST.in"
   },
   {
     "path": "NOTICE.md",
@@ -321,19 +333,19 @@
     "purpose": "Docs file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/main/NOTICE.md"
+    "link": "https://github.com/mithudso/github-explorer/blob/maintenance%2Fbootstrap-deep-optimize-20261112/NOTICE.md"
   },
   {
     "path": "README.md",
     "role": "docs",
     "importance": "high",
-    "bytes": 14621,
-    "sha256": "36c484910b1f16728d997b509e4f3d58294e30cea764c3ebb209be7678086743",
+    "bytes": 14846,
+    "sha256": "62f49c7f469747d6d18427299c001f26b07fff900c795f7126d6d32bde8d50ae",
     "depth": "shallow",
     "purpose": "Docs file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/main/README.md"
+    "link": "https://github.com/mithudso/github-explorer/blob/maintenance%2Fbootstrap-deep-optimize-20261112/README.md"
   },
   {
     "path": "docs/ARCHITECTURE.md",
@@ -345,31 +357,31 @@
     "purpose": "Docs file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/main/docs/ARCHITECTURE.md"
+    "link": "https://github.com/mithudso/github-explorer/blob/maintenance%2Fbootstrap-deep-optimize-20261112/docs/ARCHITECTURE.md"
   },
   {
     "path": "docs/COMPONENTS.md",
     "role": "docs",
     "importance": "normal",
-    "bytes": 4602,
-    "sha256": "87720381f86dc02348e8581bea0295ecc8e8c87b56221a71874fbbbebfc1d99c",
+    "bytes": 5011,
+    "sha256": "8470ce0588097b63e31f5bb64cbcf2af63e6c5b124859589332674f1d4649fd6",
     "depth": "shallow",
     "purpose": "Docs file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/main/docs/COMPONENTS.md"
+    "link": "https://github.com/mithudso/github-explorer/blob/maintenance%2Fbootstrap-deep-optimize-20261112/docs/COMPONENTS.md"
   },
   {
     "path": "docs/DEVELOPMENT.md",
     "role": "docs",
     "importance": "normal",
-    "bytes": 3416,
-    "sha256": "d926bb4b573b05bbf53368cecc510c7f8f91c2b03976dee250da54807e3e0273",
+    "bytes": 3666,
+    "sha256": "054cfa3eec986061aca7233f184d6bd4f69a2ab1dd0eb0649450d5dcb1508434",
     "depth": "shallow",
     "purpose": "Docs file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/main/docs/DEVELOPMENT.md"
+    "link": "https://github.com/mithudso/github-explorer/blob/maintenance%2Fbootstrap-deep-optimize-20261112/docs/DEVELOPMENT.md"
   },
   {
     "path": "docs/INSTALLATION.md",
@@ -381,7 +393,7 @@
     "purpose": "Docs file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/main/docs/INSTALLATION.md"
+    "link": "https://github.com/mithudso/github-explorer/blob/maintenance%2Fbootstrap-deep-optimize-20261112/docs/INSTALLATION.md"
   },
   {
     "path": "docs/MCP.md",
@@ -393,19 +405,19 @@
     "purpose": "Docs file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/main/docs/MCP.md"
+    "link": "https://github.com/mithudso/github-explorer/blob/maintenance%2Fbootstrap-deep-optimize-20261112/docs/MCP.md"
   },
   {
     "path": "docs/RELEASING.md",
     "role": "docs",
     "importance": "normal",
-    "bytes": 3160,
-    "sha256": "2facedec35970f9ec2015159e339fc75e7025f8c63f4115e354dc8e1b1d9292d",
+    "bytes": 3576,
+    "sha256": "40defc82b37c3a4262ffe15717d783837b97eb37cb65c3156302e4c90d4fe3a1",
     "depth": "shallow",
     "purpose": "Docs file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/main/docs/RELEASING.md"
+    "link": "https://github.com/mithudso/github-explorer/blob/maintenance%2Fbootstrap-deep-optimize-20261112/docs/RELEASING.md"
   },
   {
     "path": "docs/SECURITY.md",
@@ -417,19 +429,19 @@
     "purpose": "Docs file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/main/docs/SECURITY.md"
+    "link": "https://github.com/mithudso/github-explorer/blob/maintenance%2Fbootstrap-deep-optimize-20261112/docs/SECURITY.md"
   },
   {
     "path": "docs/TESTING.md",
     "role": "docs",
     "importance": "normal",
-    "bytes": 3649,
-    "sha256": "ae6c6749243888136341ff6108fa6f3bb45632b39f687da0542b39eeb985f785",
+    "bytes": 3991,
+    "sha256": "71fc0a2918672efadbf082f930932be697b7cbff462a7d28539dfc4ad4b8514f",
     "depth": "shallow",
     "purpose": "Docs file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/main/docs/TESTING.md"
+    "link": "https://github.com/mithudso/github-explorer/blob/maintenance%2Fbootstrap-deep-optimize-20261112/docs/TESTING.md"
   },
   {
     "path": "docs/archive/README.md",
@@ -441,7 +453,7 @@
     "purpose": "Docs file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/main/docs/archive/README.md"
+    "link": "https://github.com/mithudso/github-explorer/blob/maintenance%2Fbootstrap-deep-optimize-20261112/docs/archive/README.md"
   },
   {
     "path": "docs/bootstrap-file-report.md",
@@ -453,7 +465,7 @@
     "purpose": "Docs file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/main/docs/bootstrap-file-report.md"
+    "link": "https://github.com/mithudso/github-explorer/blob/maintenance%2Fbootstrap-deep-optimize-20261112/docs/bootstrap-file-report.md"
   },
   {
     "path": "docs/caching-and-optimization.md",
@@ -465,7 +477,7 @@
     "purpose": "Docs file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/main/docs/caching-and-optimization.md"
+    "link": "https://github.com/mithudso/github-explorer/blob/maintenance%2Fbootstrap-deep-optimize-20261112/docs/caching-and-optimization.md"
   },
   {
     "path": "docs/cli-and-operations.md",
@@ -477,7 +489,7 @@
     "purpose": "Docs file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/main/docs/cli-and-operations.md"
+    "link": "https://github.com/mithudso/github-explorer/blob/maintenance%2Fbootstrap-deep-optimize-20261112/docs/cli-and-operations.md"
   },
   {
     "path": "docs/error-monitoring-guide.md",
@@ -489,7 +501,7 @@
     "purpose": "Docs file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/main/docs/error-monitoring-guide.md"
+    "link": "https://github.com/mithudso/github-explorer/blob/maintenance%2Fbootstrap-deep-optimize-20261112/docs/error-monitoring-guide.md"
   },
   {
     "path": "docs/external-calls.md",
@@ -501,7 +513,7 @@
     "purpose": "Docs file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/main/docs/external-calls.md"
+    "link": "https://github.com/mithudso/github-explorer/blob/maintenance%2Fbootstrap-deep-optimize-20261112/docs/external-calls.md"
   },
   {
     "path": "docs/integrations-and-assumptions.md",
@@ -513,7 +525,7 @@
     "purpose": "Docs file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/main/docs/integrations-and-assumptions.md"
+    "link": "https://github.com/mithudso/github-explorer/blob/maintenance%2Fbootstrap-deep-optimize-20261112/docs/integrations-and-assumptions.md"
   },
   {
     "path": "docs/known-issues.md",
@@ -525,7 +537,7 @@
     "purpose": "Docs file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/main/docs/known-issues.md"
+    "link": "https://github.com/mithudso/github-explorer/blob/maintenance%2Fbootstrap-deep-optimize-20261112/docs/known-issues.md"
   },
   {
     "path": "docs/logging.md",
@@ -537,7 +549,7 @@
     "purpose": "Docs file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/main/docs/logging.md"
+    "link": "https://github.com/mithudso/github-explorer/blob/maintenance%2Fbootstrap-deep-optimize-20261112/docs/logging.md"
   },
   {
     "path": "docs/onboarding.md",
@@ -549,7 +561,7 @@
     "purpose": "Docs file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/main/docs/onboarding.md"
+    "link": "https://github.com/mithudso/github-explorer/blob/maintenance%2Fbootstrap-deep-optimize-20261112/docs/onboarding.md"
   },
   {
     "path": "docs/operations-registry.json",
@@ -561,7 +573,7 @@
     "purpose": "Docs file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/main/docs/operations-registry.json"
+    "link": "https://github.com/mithudso/github-explorer/blob/maintenance%2Fbootstrap-deep-optimize-20261112/docs/operations-registry.json"
   },
   {
     "path": "docs/repo-bootstrap-audit-2026-09-29.md",
@@ -573,43 +585,55 @@
     "purpose": "Docs file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/main/docs/repo-bootstrap-audit-2026-09-29.md"
+    "link": "https://github.com/mithudso/github-explorer/blob/maintenance%2Fbootstrap-deep-optimize-20261112/docs/repo-bootstrap-audit-2026-09-29.md"
+  },
+  {
+    "path": "docs/repo-bootstrap-audit-2026-11-12.md",
+    "role": "docs",
+    "importance": "normal",
+    "bytes": 8431,
+    "sha256": "d1eca15a82641d65bfc1a5b00a9a8c67b4c93e37e111bbcf5802afbdf7587269",
+    "depth": "shallow",
+    "purpose": "Docs file; semantic purpose requires source review.",
+    "provenance": "[asserted]",
+    "symbols": [],
+    "link": "https://github.com/mithudso/github-explorer/blob/maintenance%2Fbootstrap-deep-optimize-20261112/docs/repo-bootstrap-audit-2026-11-12.md"
   },
   {
     "path": "docs/requirements.md",
     "role": "docs",
     "importance": "normal",
-    "bytes": 3276,
-    "sha256": "01cdbd2237e811b61fc7006b0706cd664b6460a2f7d5afb0aebd05a766d41ccc",
+    "bytes": 3446,
+    "sha256": "5548528d32f3b01b3af441b86ee49534603316c63dac73245d9446fb57aef97e",
     "depth": "shallow",
     "purpose": "Docs file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/main/docs/requirements.md"
+    "link": "https://github.com/mithudso/github-explorer/blob/maintenance%2Fbootstrap-deep-optimize-20261112/docs/requirements.md"
   },
   {
     "path": "docs/runbooks/metadata-maintenance.md",
     "role": "docs",
     "importance": "normal",
-    "bytes": 1504,
-    "sha256": "cc43093b7cbf503e815156356999cc8900efe57ac633ac590f5c77118e6df1f8",
+    "bytes": 1637,
+    "sha256": "7d50c348854a0e52d7b8650c7041e2415d420eb38f5fa1897a33ebec017f0d89",
     "depth": "shallow",
     "purpose": "Docs file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/main/docs/runbooks/metadata-maintenance.md"
+    "link": "https://github.com/mithudso/github-explorer/blob/maintenance%2Fbootstrap-deep-optimize-20261112/docs/runbooks/metadata-maintenance.md"
   },
   {
     "path": "docs/runbooks/release-and-rollback.md",
     "role": "docs",
     "importance": "normal",
-    "bytes": 1431,
-    "sha256": "958ee7b51749e3085b8a1a768bebc8540d115b5b206e5a71f72e8d8dcbb94817",
+    "bytes": 1729,
+    "sha256": "392c388a5ef6d9bb5a5c6dfb01ef7ed1cb993ad324b163ce4db49f0bfa91f502",
     "depth": "shallow",
     "purpose": "Docs file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/main/docs/runbooks/release-and-rollback.md"
+    "link": "https://github.com/mithudso/github-explorer/blob/maintenance%2Fbootstrap-deep-optimize-20261112/docs/runbooks/release-and-rollback.md"
   },
   {
     "path": "docs/runbooks/troubleshooting.md",
@@ -621,7 +645,7 @@
     "purpose": "Docs file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/main/docs/runbooks/troubleshooting.md"
+    "link": "https://github.com/mithudso/github-explorer/blob/maintenance%2Fbootstrap-deep-optimize-20261112/docs/runbooks/troubleshooting.md"
   },
   {
     "path": "docs/tool-inventory.json",
@@ -633,67 +657,91 @@
     "purpose": "Docs file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/main/docs/tool-inventory.json"
+    "link": "https://github.com/mithudso/github-explorer/blob/maintenance%2Fbootstrap-deep-optimize-20261112/docs/tool-inventory.json"
+  },
+  {
+    "path": "docs/wiki/README.md",
+    "role": "docs",
+    "importance": "normal",
+    "bytes": 3119,
+    "sha256": "25dc621940e4f63b07a007858fae33ebcda32f1ab523b4e55f5d570bc6b21a24",
+    "depth": "shallow",
+    "purpose": "Docs file; semantic purpose requires source review.",
+    "provenance": "[asserted]",
+    "symbols": [],
+    "link": "https://github.com/mithudso/github-explorer/blob/maintenance%2Fbootstrap-deep-optimize-20261112/docs/wiki/README.md"
   },
   {
     "path": "memory.md",
     "role": "docs",
     "importance": "normal",
-    "bytes": 28246,
-    "sha256": "37436b93ab1c5ec0855dec71026a5449837d7b9043fe779fb2c23505be49e1ea",
+    "bytes": 30541,
+    "sha256": "521000a0ad666619e1f5fc7138200e04b9ebde891aad3c2afed9278ddf669adf",
     "depth": "shallow",
     "purpose": "Docs file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/main/memory.md"
+    "link": "https://github.com/mithudso/github-explorer/blob/maintenance%2Fbootstrap-deep-optimize-20261112/memory.md"
   },
   {
     "path": "npm/bin/github-explorer.cjs",
-    "role": "meta",
+    "role": "entrypoint",
     "importance": "normal",
     "bytes": 1246,
     "sha256": "a5f27c1d736381abcc6e95835410b12b91af6fc8d71ed5f0deb838ffd90c2b7c",
     "depth": "shallow",
-    "purpose": "Meta file; semantic purpose requires source review.",
+    "purpose": "Entrypoint file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/main/npm/bin/github-explorer.cjs"
+    "link": "https://github.com/mithudso/github-explorer/blob/maintenance%2Fbootstrap-deep-optimize-20261112/npm/bin/github-explorer.cjs"
   },
   {
     "path": "npm/check-package.cjs",
-    "role": "meta",
-    "importance": "normal",
-    "bytes": 438,
-    "sha256": "a89c1a2ac0603505b491b31e8deb10579af0dbdeedb0d54c6a61662e7d0c5035",
+    "role": "script",
+    "importance": "peripheral",
+    "bytes": 922,
+    "sha256": "d60ccc0835fa65ae3e373f580e31d13bf20c201a5fc2ec20cc6c7490fc0453d5",
     "depth": "shallow",
-    "purpose": "Meta file; semantic purpose requires source review.",
+    "purpose": "Script file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/main/npm/check-package.cjs"
+    "link": "https://github.com/mithudso/github-explorer/blob/maintenance%2Fbootstrap-deep-optimize-20261112/npm/check-package.cjs"
   },
   {
     "path": "npm/package.json",
-    "role": "meta",
+    "role": "config",
     "importance": "normal",
-    "bytes": 913,
-    "sha256": "d7f98afc384474b3ab6ba9566278bb6b6bb0a177ad611ae2e9ebeef568b8fee9",
+    "bytes": 993,
+    "sha256": "b74e549cc4b2643f658b197865cf6030ad830746b49b33a9e3c4b7774446b6ac",
     "depth": "shallow",
-    "purpose": "Meta file; semantic purpose requires source review.",
+    "purpose": "Config file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/main/npm/package.json"
+    "link": "https://github.com/mithudso/github-explorer/blob/maintenance%2Fbootstrap-deep-optimize-20261112/npm/package.json"
   },
   {
     "path": "npm/test/launcher.cjs",
-    "role": "meta",
-    "importance": "normal",
+    "role": "test",
+    "importance": "peripheral",
     "bytes": 2789,
     "sha256": "e9a8aaa8217dcecf721ab99904ff5cf6d71f2f895be823d4070f4e3448750dbc",
     "depth": "shallow",
-    "purpose": "Meta file; semantic purpose requires source review.",
+    "purpose": "Test file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/main/npm/test/launcher.cjs"
+    "link": "https://github.com/mithudso/github-explorer/blob/maintenance%2Fbootstrap-deep-optimize-20261112/npm/test/launcher.cjs"
+  },
+  {
+    "path": "npm/test/packaging.cjs",
+    "role": "test",
+    "importance": "peripheral",
+    "bytes": 2151,
+    "sha256": "cf1be967e535ae3f1cfa5febb276488e3e31888957c94cb8f599bdc886407acf",
+    "depth": "shallow",
+    "purpose": "Test file; semantic purpose requires source review.",
+    "provenance": "[asserted]",
+    "symbols": [],
+    "link": "https://github.com/mithudso/github-explorer/blob/maintenance%2Fbootstrap-deep-optimize-20261112/npm/test/packaging.cjs"
   },
   {
     "path": "packaging/homebrew/github-explorer.rb",
@@ -705,52 +753,67 @@
     "purpose": "Meta file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/main/packaging/homebrew/github-explorer.rb"
+    "link": "https://github.com/mithudso/github-explorer/blob/maintenance%2Fbootstrap-deep-optimize-20261112/packaging/homebrew/github-explorer.rb"
   },
   {
     "path": "prompts.md",
     "role": "docs",
     "importance": "normal",
-    "bytes": 2832,
-    "sha256": "68d351f1f626e9b18a22651fff385d46c3ac41902e21142cec2ddc178354f786",
+    "bytes": 2911,
+    "sha256": "bc9ebe898846f9a340813f3ff653b7395959f615b7e8b84775f349851460fb1c",
     "depth": "shallow",
     "purpose": "Docs file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/main/prompts.md"
+    "link": "https://github.com/mithudso/github-explorer/blob/maintenance%2Fbootstrap-deep-optimize-20261112/prompts.md"
   },
   {
     "path": "pyproject.toml",
     "role": "config",
     "importance": "critical",
-    "bytes": 1024,
-    "sha256": "20a8a2bd29245ecc5349239ccc690410fe1eb344a7888644a2f2c8336ccd0a29",
+    "bytes": 1056,
+    "sha256": "837d3c58b070809fc66f3adfa2685a593315cd9c8041d1b9a4a0f028b0b2b228",
     "depth": "shallow",
     "purpose": "Config file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/main/pyproject.toml"
+    "link": "https://github.com/mithudso/github-explorer/blob/maintenance%2Fbootstrap-deep-optimize-20261112/pyproject.toml"
   },
   {
     "path": "scripts/build_distributions.py",
     "role": "script",
     "importance": "peripheral",
-    "bytes": 3177,
-    "sha256": "02ed3df5f4f0e03e27cfa4c13b4942ecc588517dcc6f5a18129c64400472ae8e",
-    "depth": "shallow",
-    "purpose": "Script file; semantic purpose requires source review.",
-    "provenance": "[asserted]",
+    "bytes": 5301,
+    "sha256": "9bd70ed1fa6cdfd4b3905a8970643c51a7617a078d3a0631cee573a62ad3085b",
+    "depth": "deep-read",
+    "purpose": "Preflight release inputs/outputs, stage the npm wheel and generate Homebrew resources.",
+    "provenance": "[src: scripts/build_distributions.py]",
     "symbols": [
+      "preflight_inputs",
+      "preflight_outputs",
       "main"
     ],
-    "link": "https://github.com/mithudso/github-explorer/blob/main/scripts/build_distributions.py"
+    "link": "https://github.com/mithudso/github-explorer/blob/maintenance%2Fbootstrap-deep-optimize-20261112/scripts/build_distributions.py",
+    "why": "Release packages must contain only validated public project payloads.",
+    "when": "Changing release staging, artifact ownership or symlink guards.",
+    "how_to_read": "preflight_inputs; preflight_outputs; main",
+    "how_to_edit": "Run uv run pytest tests/test_distributions.py; full gates: uv run pytest, uv run ruff check ., uv build.",
+    "depends_on": [
+      "pyproject.toml",
+      "npm/package.json",
+      "uv.lock"
+    ],
+    "edit_provenance": "[src: README.md#development; tests/test_distributions.py, asserted-by-test]",
+    "depended_on_by": [
+      "tests/test_distributions.py"
+    ]
   },
   {
     "path": "scripts/check_doc_indexes.py",
     "role": "script",
     "importance": "peripheral",
-    "bytes": 1754,
-    "sha256": "561b6c5a8da6aed5dd1ba9cf6763617ef4e2c302084269c47b4d22b144f20bbd",
+    "bytes": 1975,
+    "sha256": "0a74484a44e1d59f441a85d64ec4c992468edbdd953eb1aaa026925fc2638810",
     "depth": "deep-read",
     "purpose": "Compare the current source census and regenerated contents with committed indexes.",
     "provenance": "[src: scripts/check_doc_indexes.py]",
@@ -758,7 +821,7 @@
       "check",
       "main"
     ],
-    "link": "https://github.com/mithudso/github-explorer/blob/main/scripts/check_doc_indexes.py",
+    "link": "https://github.com/mithudso/github-explorer/blob/maintenance%2Fbootstrap-deep-optimize-20261112/scripts/check_doc_indexes.py",
     "why": "Missing, changed or deleted sources must make stale documentation visible in CI.",
     "when": "Changing drift detection, missing-output diagnostics or snapshot handling.",
     "how_to_read": "check; main",
@@ -785,7 +848,7 @@
       "write_outputs",
       "main"
     ],
-    "link": "https://github.com/mithudso/github-explorer/blob/main/scripts/generate_ops_registry_doc.py",
+    "link": "https://github.com/mithudso/github-explorer/blob/maintenance%2Fbootstrap-deep-optimize-20261112/scripts/generate_ops_registry_doc.py",
     "why": "Published operation metadata must match source without importing the application.",
     "when": "Changing registry schema, generated metadata or drift checking.",
     "how_to_read": "render; main --check",
@@ -802,8 +865,8 @@
     "path": "scripts/generate_repo_indexes.py",
     "role": "script",
     "importance": "peripheral",
-    "bytes": 39763,
-    "sha256": "89593ddbe820799851ae9c14f173b927f56afc3adb09257940195bf7df2d1335",
+    "bytes": 42243,
+    "sha256": "cd278590dfc6fe505ffe563bb2fba658c18d3055ef55665d26f469a592ed841f",
     "depth": "deep-read",
     "purpose": "Generate static file indexes and the provenance-tagged repository dossier.",
     "provenance": "[src: scripts/generate_repo_indexes.py]",
@@ -818,13 +881,14 @@
       "snapshot",
       "code_inventory",
       "json_text",
+      "workflow_commands",
       "render",
       "write",
       "main",
       "safe_source",
       "document"
     ],
-    "link": "https://github.com/mithudso/github-explorer/blob/main/scripts/generate_repo_indexes.py",
+    "link": "https://github.com/mithudso/github-explorer/blob/maintenance%2Fbootstrap-deep-optimize-20261112/scripts/generate_repo_indexes.py",
     "why": "A portable source map helps maintainers locate implementation and operating details.",
     "when": "Changing census exclusions, file cards, parser extraction or generated documentation.",
     "how_to_read": "census → code_inventory → render → write; REVIEWED holds curated explanations",
@@ -842,8 +906,8 @@
     "path": "scripts/rotate_workflow_logs.py",
     "role": "script",
     "importance": "peripheral",
-    "bytes": 3963,
-    "sha256": "e2873a6c6e0b2c24ffbd632e68c8dd809728a56a1e3f134e5f4b94cd6f148fec",
+    "bytes": 4457,
+    "sha256": "a299dbf588aac2aa1f2ac240d071f95dbcb13c09be9cd930b1a8c597286f0faa",
     "depth": "deep-read",
     "purpose": "Plan or archive older prompt and memory sections while retaining current context.",
     "provenance": "[src: scripts/rotate_workflow_logs.py]",
@@ -852,7 +916,7 @@
       "rotate",
       "main"
     ],
-    "link": "https://github.com/mithudso/github-explorer/blob/main/scripts/rotate_workflow_logs.py",
+    "link": "https://github.com/mithudso/github-explorer/blob/maintenance%2Fbootstrap-deep-optimize-20261112/scripts/rotate_workflow_logs.py",
     "why": "Long workflow logs need bounded active files without losing earlier records.",
     "when": "Changing archive thresholds, section parsing or safeguards around writes.",
     "how_to_read": "plan_rotation → rotate → main; --apply enables writes",
@@ -871,12 +935,12 @@
     "role": "library",
     "importance": "high",
     "bytes": 197,
-    "sha256": "409a8336a8745933d28c1a5eb24558a75512f4d24e8ce947264f04462f8ba207",
+    "sha256": "45e9ebcde67c8d52123e9101344a9d4eb39905072596052e531de08ef114cc66",
     "depth": "deep-read",
     "purpose": "Expose GitHubExplorer, GitHubPanel and the package version.",
     "provenance": "[src: src/github_explorer/__init__.py]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/main/src/github_explorer/__init__.py",
+    "link": "https://github.com/mithudso/github-explorer/blob/maintenance%2Fbootstrap-deep-optimize-20261112/src/github_explorer/__init__.py",
     "why": "Consumers import the reusable screen and standalone host from this facade.",
     "when": "Changing public imports or the release version.",
     "how_to_read": "__all__, __version__",
@@ -894,15 +958,15 @@
     "path": "src/github_explorer/__main__.py",
     "role": "entrypoint",
     "importance": "critical",
-    "bytes": 1683,
-    "sha256": "bde44028c28315e0d1090e0eeba48811723bb55f32b5d272d236e4d1f2ce22ad",
+    "bytes": 1800,
+    "sha256": "ac4dac7b1ad28ad21476e8a0e6d58e015009c5e88f15deeb3b17733aa43ae8c1",
     "depth": "deep-read",
     "purpose": "Parse launch options, validate repository context and select JSON catalog or TUI mode.",
     "provenance": "[src: src/github_explorer/__main__.py]",
     "symbols": [
       "main"
     ],
-    "link": "https://github.com/mithudso/github-explorer/blob/main/src/github_explorer/__main__.py",
+    "link": "https://github.com/mithudso/github-explorer/blob/maintenance%2Fbootstrap-deep-optimize-20261112/src/github_explorer/__main__.py",
     "why": "Both console-script aliases and python -m use this entrypoint.",
     "when": "Changing CLI flags, startup validation or error exit behavior.",
     "how_to_read": "main",
@@ -933,7 +997,7 @@
       "on_mount",
       "action_quit"
     ],
-    "link": "https://github.com/mithudso/github-explorer/blob/main/src/github_explorer/app.py",
+    "link": "https://github.com/mithudso/github-explorer/blob/maintenance%2Fbootstrap-deep-optimize-20261112/src/github_explorer/app.py",
     "why": "Keeping the host separate allows other Textual apps to embed the panel.",
     "when": "Changing standalone startup, branding or exit behavior.",
     "how_to_read": "GitHubExplorer.__init__, on_mount",
@@ -973,7 +1037,7 @@
       "settings_arguments",
       "name"
     ],
-    "link": "https://github.com/mithudso/github-explorer/blob/main/src/github_explorer/catalog.py",
+    "link": "https://github.com/mithudso/github-explorer/blob/maintenance%2Fbootstrap-deep-optimize-20261112/src/github_explorer/catalog.py",
     "why": "The UI needs searchable local commands without executing aliases or extensions.",
     "when": "Changing help parsing, external-command classification or discovery errors.",
     "how_to_read": "load_catalog → help_text → parse_catalog; flags_from_help; QUICK_ACTIONS; git_commands",
@@ -1003,7 +1067,7 @@
       "list_operations",
       "get_operation"
     ],
-    "link": "https://github.com/mithudso/github-explorer/blob/main/src/github_explorer/operations.py",
+    "link": "https://github.com/mithudso/github-explorer/blob/maintenance%2Fbootstrap-deep-optimize-20261112/src/github_explorer/operations.py",
     "why": "Maintainers can document behavior and remediation without triggering discovery or execution.",
     "when": "Changing the public operation inventory, source anchors or remediation guidance.",
     "how_to_read": "OPERATIONS; list_operations; get_operation",
@@ -1019,8 +1083,8 @@
     "path": "src/github_explorer/panel.py",
     "role": "library",
     "importance": "high",
-    "bytes": 47844,
-    "sha256": "7cd5404cd9d7853ec4682531e3b14fad3c57cb9793973a7efcb7bf9c02d9955c",
+    "bytes": 48131,
+    "sha256": "96d20fef302a86ec693521aef9a507dd66ef409d2737625d73ace41c2d75f240",
     "depth": "deep-read",
     "purpose": "Compose file browsing, embedded Vim, persistent status, hideable actions, settings and confirmation.",
     "provenance": "[src: src/github_explorer/panel.py]",
@@ -1103,7 +1167,7 @@
       "__init__",
       "confirmed"
     ],
-    "link": "https://github.com/mithudso/github-explorer/blob/main/src/github_explorer/panel.py",
+    "link": "https://github.com/mithudso/github-explorer/blob/maintenance%2Fbootstrap-deep-optimize-20261112/src/github_explorer/panel.py",
     "why": "One screen connects discovery and execution while keeping explicit user confirmation.",
     "when": "Changing arrow navigation, quick actions, asynchronous refresh, previews or host integration.",
     "how_to_read": "GitHubPanel.compose → load_commands/loaded → request_run → start_command/execute; CommandConfirm",
@@ -1127,8 +1191,8 @@
     "path": "src/github_explorer/runner.py",
     "role": "library",
     "importance": "high",
-    "bytes": 16291,
-    "sha256": "5bda0c24da870a946e4c65719100eaded2297641cdc6a12ef163d15e3b027730",
+    "bytes": 16425,
+    "sha256": "e0a7b3e413079fa8864683a159bdee93f7bc81aea0986a41ee81f5a15e6d6eee",
     "depth": "deep-read",
     "purpose": "Prepare command and Vim argv; validate local files and read checkout status and GitHub activity.",
     "provenance": "[src: src/github_explorer/runner.py]",
@@ -1165,7 +1229,7 @@
       "target",
       "collection"
     ],
-    "link": "https://github.com/mithudso/github-explorer/blob/main/src/github_explorer/runner.py",
+    "link": "https://github.com/mithudso/github-explorer/blob/maintenance%2Fbootstrap-deep-optimize-20261112/src/github_explorer/runner.py",
     "why": "Execution shares repository context, bounded capture, cancellation and timeout semantics.",
     "when": "Changing argument handling, subprocess cleanup, output decoding or environment isolation.",
     "how_to_read": "prepare → Invocation.environment → CommandRunner.run; run_interactive",
@@ -1190,8 +1254,8 @@
     "path": "tests/conftest.py",
     "role": "test",
     "importance": "peripheral",
-    "bytes": 881,
-    "sha256": "21811242296e93b91c93617c9aa68ee494bae1c00c00767842038200adbb4e52",
+    "bytes": 962,
+    "sha256": "8456195580c57183ad72ab92de1f3e335fe0eb867f425090bc889f87419d284e",
     "depth": "deep-read",
     "purpose": "Provide network-free repository fixtures for UI tests.",
     "provenance": "[src: tests/conftest.py]",
@@ -1199,7 +1263,7 @@
       "ui_repository",
       "no_checkout"
     ],
-    "link": "https://github.com/mithudso/github-explorer/blob/main/tests/conftest.py",
+    "link": "https://github.com/mithudso/github-explorer/blob/maintenance%2Fbootstrap-deep-optimize-20261112/tests/conftest.py",
     "why": "Automatic startup reads must never access a real account in tests.",
     "when": "Changing shared UI repository fixtures.",
     "how_to_read": "ui_repository",
@@ -1225,7 +1289,7 @@
       "test_loading_uses_only_builtin_help_commands",
       "run"
     ],
-    "link": "https://github.com/mithudso/github-explorer/blob/main/tests/test_catalog.py",
+    "link": "https://github.com/mithudso/github-explorer/blob/maintenance%2Fbootstrap-deep-optimize-20261112/tests/test_catalog.py",
     "why": "Fixtures enforce discovery without executing discovered commands.",
     "when": "Changing catalog parsers or discovery subprocess arguments.",
     "how_to_read": "REFERENCE; test_loading_uses_only_builtin_help_commands",
@@ -1240,8 +1304,8 @@
     "path": "tests/test_cli.py",
     "role": "test",
     "importance": "peripheral",
-    "bytes": 3192,
-    "sha256": "1e93c347f6d16fc4c4c19864305ee27214c7d708ae12423a681d59d4513f3a37",
+    "bytes": 3689,
+    "sha256": "019a275221993ca19d21d5a139654fc22d51f0a450617a8fc041d30a5ae1b832",
     "depth": "deep-read",
     "purpose": "Test CLI help/version, validation, JSON export, timeout handling and standalone hosting.",
     "provenance": "[src: tests/test_cli.py]",
@@ -1249,12 +1313,13 @@
       "test_help_and_version_need_no_github_install",
       "test_invalid_context_and_missing_gh",
       "test_catalog_export_never_starts_tui",
+      "test_unknown_home_directory_is_an_argument_error",
       "test_catalog_timeout_exits_without_traceback",
       "test_standalone_host_branding_context_and_quit",
       "missing",
       "timeout"
     ],
-    "link": "https://github.com/mithudso/github-explorer/blob/main/tests/test_cli.py",
+    "link": "https://github.com/mithudso/github-explorer/blob/maintenance%2Fbootstrap-deep-optimize-20261112/tests/test_cli.py",
     "why": "CLI modes must select the correct behavior and preserve useful error exits.",
     "when": "Changing startup options, errors, JSON shape or standalone screen integration.",
     "how_to_read": "test_catalog_export_never_starts_tui; test_standalone_host_branding_context_and_quit",
@@ -1267,11 +1332,39 @@
     "depended_on_by": []
   },
   {
+    "path": "tests/test_distributions.py",
+    "role": "test",
+    "importance": "peripheral",
+    "bytes": 4529,
+    "sha256": "5c844ea96577416a21c5a0ae68dbd895076b725bc3db152669dc639aa61568a1",
+    "depth": "deep-read",
+    "purpose": "Verify isolated release staging, foreign-file refusal and symlink preservation.",
+    "provenance": "[src: tests/test_distributions.py]",
+    "symbols": [
+      "builder",
+      "test_builder_refuses_unexpected_payload_before_any_build",
+      "test_builder_refuses_symlinks_before_any_mutation",
+      "test_builder_stages_only_matching_release_and_removes_owned_old_wheel",
+      "test_builder_refuses_symlinked_release_inputs_before_build",
+      "run"
+    ],
+    "link": "https://github.com/mithudso/github-explorer/blob/maintenance%2Fbootstrap-deep-optimize-20261112/tests/test_distributions.py",
+    "why": "Public packages must not copy private staging material or write outside the release tree.",
+    "when": "Changing distribution staging or output preflight.",
+    "how_to_read": "builder; test_builder_refuses_symlinks_before_any_mutation",
+    "how_to_edit": "Run uv run pytest tests/test_distributions.py; full gates: uv run pytest, uv run ruff check ., uv build.",
+    "depends_on": [
+      "scripts/build_distributions.py"
+    ],
+    "edit_provenance": "[src: README.md#development; tests/test_distributions.py, asserted-by-test]",
+    "depended_on_by": []
+  },
+  {
     "path": "tests/test_doc_indexes.py",
     "role": "test",
     "importance": "peripheral",
-    "bytes": 6389,
-    "sha256": "734713b2789cdb1bf66d9c806c93c49fb010929e06a3dfc03e9e71c3194002c1",
+    "bytes": 9889,
+    "sha256": "d0d1c3b6d527f78982f60d81aff05c2aa89a6578b80612a7c725b530bdf51ddf",
     "depth": "deep-read",
     "purpose": "Test deterministic generation, stale sources, file deletion/addition, exclusions and collisions.",
     "provenance": "[src: tests/test_doc_indexes.py]",
@@ -1288,9 +1381,15 @@
       "test_options_are_extracted_without_importing_code",
       "test_remote_credentials_are_not_published",
       "test_generation_refuses_symlinked_output_directory",
+      "test_nested_private_document_bodies_are_never_extracted",
+      "test_public_source_links_encode_path_and_branch",
+      "test_foreign_top_level_outputs_are_preserved_before_any_write",
+      "test_ci_inventory_reads_named_scalar_literal_and_folded_steps",
+      "test_checker_reports_unreadable_output_with_refresh_guidance",
+      "test_executable_inventory_includes_npm_launchers_and_scripts",
       "git"
     ],
-    "link": "https://github.com/mithudso/github-explorer/blob/main/tests/test_doc_indexes.py",
+    "link": "https://github.com/mithudso/github-explorer/blob/maintenance%2Fbootstrap-deep-optimize-20261112/tests/test_doc_indexes.py",
     "why": "Fixture repositories check index correctness without application execution.",
     "when": "Changing source census, generated dossier contracts or public-data guards.",
     "how_to_read": "repo; test_generation_is_deterministic_and_does_not_index_its_outputs",
@@ -1306,8 +1405,8 @@
     "path": "tests/test_editor_status.py",
     "role": "test",
     "importance": "peripheral",
-    "bytes": 7703,
-    "sha256": "59e70654551665325ed1588ac80d0910640afe75bb950426cec0889ded9ba08f",
+    "bytes": 9891,
+    "sha256": "ab5c14411786e233c7066696593fe7a410ede149acd70bbc0511e890aa47bdde",
     "depth": "deep-read",
     "purpose": "Exercise actual Vim on temporary files, save/switch/quit guards and persistent status.",
     "provenance": "[src: tests/test_editor_status.py]",
@@ -1319,10 +1418,14 @@
       "test_status_failures_are_unknown_and_stale_results_ignored",
       "test_refresh_updates_changed_count_and_missing_vim_is_reported",
       "test_mismatched_checkout_remains_read_only",
+      "test_running_command_blocks_local_editor_until_completion",
+      "test_start_command_cannot_bypass_an_open_editor",
       "start_once",
+      "run",
+      "editor_request",
       "unavailable"
     ],
-    "link": "https://github.com/mithudso/github-explorer/blob/main/tests/test_editor_status.py",
+    "link": "https://github.com/mithudso/github-explorer/blob/maintenance%2Fbootstrap-deep-optimize-20261112/tests/test_editor_status.py",
     "why": "Editor integration must preserve unsaved buffers and keep status visible when actions hide.",
     "when": "Changing Vim integration, status polling or action visibility.",
     "how_to_read": "local_files; test_real_vim_saves_and_protects_unsaved_file_switch",
@@ -1339,8 +1442,8 @@
     "path": "tests/test_maintenance.py",
     "role": "test",
     "importance": "peripheral",
-    "bytes": 4049,
-    "sha256": "83d8f7870b5ee07be4059e253489c20bcc32134a471a46f022cf6aa04b9d17f8",
+    "bytes": 5262,
+    "sha256": "7fa082995f7cc28acf2c2bffa82be7b70cafcfa2da27865d5fe24fcdb453be24",
     "depth": "deep-read",
     "purpose": "Test archival preservation and refusal, fenced headings, copied metadata and generated registries.",
     "provenance": "[src: tests/test_maintenance.py]",
@@ -1351,9 +1454,12 @@
       "test_rotation_ignores_heading_in_fenced_example",
       "test_metadata_is_copied_and_generated_artifacts_are_current",
       "test_operation_generator_refuses_symlink_before_any_output_write",
-      "test_rotation_preserves_preexisting_temporary_file"
+      "test_rotation_preserves_preexisting_temporary_file",
+      "test_rotation_refuses_concurrent_append_after_planning",
+      "test_rotation_keeps_headings_after_invalid_fence_closers_in_latest_section",
+      "append_after_plan"
     ],
-    "link": "https://github.com/mithudso/github-explorer/blob/main/tests/test_maintenance.py",
+    "link": "https://github.com/mithudso/github-explorer/blob/maintenance%2Fbootstrap-deep-optimize-20261112/tests/test_maintenance.py",
     "why": "Maintenance must preserve workflow content and keep public metadata synchronized.",
     "when": "Changing log rotation or operation registry generation.",
     "how_to_read": "script; test_rotation_preserves_all_sections_and_defaults_to_dry_run",
@@ -1382,7 +1488,7 @@
       "test_settings_and_confirmation_arrows",
       "test_tree_boundaries_and_readonly_content_allow_arrow_exit"
     ],
-    "link": "https://github.com/mithudso/github-explorer/blob/main/tests/test_navigation.py",
+    "link": "https://github.com/mithudso/github-explorer/blob/maintenance%2Fbootstrap-deep-optimize-20261112/tests/test_navigation.py",
     "why": "Arrow navigation must not activate commands or discard native editing behavior.",
     "when": "Changing navigation in the panel, settings or confirmations.",
     "how_to_read": "test_tree_arrows_expand_walk_collapse_without_selecting; test_spatial_buttons_fields_and_dropdown",
@@ -1397,8 +1503,8 @@
     "path": "tests/test_panel.py",
     "role": "test",
     "importance": "peripheral",
-    "bytes": 5444,
-    "sha256": "073ddaabd51af594aeda84cf6b6eebdb13715511e007137abb07a14ffe613571",
+    "bytes": 5821,
+    "sha256": "f39da5a8321de01fdd64d7c15dbe8b3707bedc085b71df6fdf25b75a01585107",
     "depth": "deep-read",
     "purpose": "Exercise embedded UI confirmation, argument editing, capture, clipboard, stopping and catalog races.",
     "provenance": "[src: tests/test_panel.py]",
@@ -1411,9 +1517,11 @@
       "on_mount",
       "run",
       "run",
-      "load"
+      "load",
+      "suspend",
+      "terminal"
     ],
-    "link": "https://github.com/mithudso/github-explorer/blob/main/tests/test_panel.py",
+    "link": "https://github.com/mithudso/github-explorer/blob/maintenance%2Fbootstrap-deep-optimize-20261112/tests/test_panel.py",
     "why": "Textual pilots verify user actions before mocked command execution.",
     "when": "Changing screen events, confirmation boundaries or threaded completion callbacks.",
     "how_to_read": "Host; test_embed_catalog_flags_preview_run_and_return; test_reload_ignores_cancelled_catalog_result",
@@ -1450,7 +1558,7 @@
       "run",
       "help_text"
     ],
-    "link": "https://github.com/mithudso/github-explorer/blob/main/tests/test_repository.py",
+    "link": "https://github.com/mithudso/github-explorer/blob/maintenance%2Fbootstrap-deep-optimize-20261112/tests/test_repository.py",
     "why": "Read requests and settings argv need exact host/context and side-effect boundaries.",
     "when": "Changing repository read helpers or setting discovery.",
     "how_to_read": "FixtureRunner; repository",
@@ -1466,8 +1574,8 @@
     "path": "tests/test_repository_panel.py",
     "role": "test",
     "importance": "peripheral",
-    "bytes": 10023,
-    "sha256": "b2c64d8c1605f5cc44a5cec38cd066ebc2a2427302ffd816e354a4d282118188",
+    "bytes": 10125,
+    "sha256": "52561dd4168f6c2c2b1d2d9e88c1e3f17728d7349c43215b4e93ab2ee31d93f9",
     "depth": "deep-read",
     "purpose": "Exercise default file browsing, settings confirmation and stale repository reads.",
     "provenance": "[src: tests/test_repository_panel.py]",
@@ -1484,7 +1592,7 @@
       "files",
       "preview"
     ],
-    "link": "https://github.com/mithudso/github-explorer/blob/main/tests/test_repository_panel.py",
+    "link": "https://github.com/mithudso/github-explorer/blob/maintenance%2Fbootstrap-deep-optimize-20261112/tests/test_repository_panel.py",
     "why": "User actions must preserve the resolved target and cancel without mutations.",
     "when": "Changing files and settings UI or worker lifecycle.",
     "how_to_read": "test_settings_current_values_cancel_and_confirm_exact_changes",
@@ -1499,8 +1607,8 @@
     "path": "tests/test_runner.py",
     "role": "test",
     "importance": "peripheral",
-    "bytes": 4975,
-    "sha256": "c41c2cb3f9f8f5cbdf6f8e1a5a12d9d4c3f3e1a68b96a2508239b09ba5c1e309",
+    "bytes": 5279,
+    "sha256": "96f0056fa2cf4e275a8331a2cf3893e159c5204c745cdfb32729b1a31cd06e3e",
     "depth": "deep-read",
     "purpose": "Exercise literal argv, context, child exit status, cancellation, timeout and UTF-8 capture.",
     "provenance": "[src: tests/test_runner.py]",
@@ -1514,9 +1622,10 @@
       "test_incomplete_utf8_is_replaced_at_eof",
       "test_invalid_timeout_cannot_start_a_process",
       "test_git_context_env_and_literal_arguments",
-      "test_missing_git_is_actionable"
+      "test_missing_git_is_actionable",
+      "test_unknown_home_directory_is_a_context_error"
     ],
-    "link": "https://github.com/mithudso/github-explorer/blob/main/tests/test_runner.py",
+    "link": "https://github.com/mithudso/github-explorer/blob/maintenance%2Fbootstrap-deep-optimize-20261112/tests/test_runner.py",
     "why": "Fixture Python children verify process behavior without GitHub side effects.",
     "when": "Changing process execution, environment controls or bounded output handling.",
     "how_to_read": "invocation; test_cancel_timeout_and_output_limit; test_incomplete_utf8_is_replaced_at_eof",
@@ -1544,7 +1653,7 @@
       "captured",
       "interactive"
     ],
-    "link": "https://github.com/mithudso/github-explorer/blob/main/tests/test_shortcuts.py",
+    "link": "https://github.com/mithudso/github-explorer/blob/maintenance%2Fbootstrap-deep-optimize-20261112/tests/test_shortcuts.py",
     "why": "Git and GitHub shortcuts must retain explicit execution and the correct context.",
     "when": "Changing quick commands, hotkeys, busy guards or Git menu entries.",
     "how_to_read": "test_button_and_hotkey_preview_cancel_and_execute; test_shortcut_bar_fits_and_resizes",
@@ -1561,8 +1670,8 @@
     "path": "tests/test_workspace.py",
     "role": "test",
     "importance": "peripheral",
-    "bytes": 5305,
-    "sha256": "d50b5c101c4b2e113bb4a98c71bf4fcd128d6f3eb460b770159cbd3e02f7a858",
+    "bytes": 5912,
+    "sha256": "85451f5a17ed1502ebb0300fa15897aa454339f3541a307a03079ec67432df73",
     "depth": "deep-read",
     "purpose": "Verify Git fixture status, safe editing paths, checkout identity and paginated activity reads.",
     "provenance": "[src: tests/test_workspace.py]",
@@ -1571,6 +1680,7 @@
       "checkout",
       "test_real_git_counts_unique_changes_and_current_branch",
       "test_unborn_branch_and_deleted_files",
+      "test_checkout_root_preserves_trailing_whitespace",
       "test_editable_file_boundaries",
       "test_vim_command_quotes_paths_disables_session_files",
       "test_repository_activity_is_paginated_read_only_and_contextual",
@@ -1581,7 +1691,7 @@
       "run",
       "run"
     ],
-    "link": "https://github.com/mithudso/github-explorer/blob/main/tests/test_workspace.py",
+    "link": "https://github.com/mithudso/github-explorer/blob/maintenance%2Fbootstrap-deep-optimize-20261112/tests/test_workspace.py",
     "why": "Local writes must not follow remote override identity or unsafe paths.",
     "when": "Changing workspace discovery, file validation, Vim argv or status parsing.",
     "how_to_read": "checkout; test_real_git_counts_unique_changes_and_current_branch; test_editable_file_boundaries",
@@ -1596,12 +1706,12 @@
     "path": "uv.lock",
     "role": "config",
     "importance": "normal",
-    "bytes": 27794,
-    "sha256": "814b6e1af9bc08345d29482125720d030400142e09b76ca3bb261ceedc458f24",
+    "bytes": 43473,
+    "sha256": "00ba01bbe66dd1958c039248aec2350867de58136ec504a2990737ae8bb53718",
     "depth": "shallow",
     "purpose": "Config file; semantic purpose requires source review.",
     "provenance": "[asserted]",
     "symbols": [],
-    "link": "https://github.com/mithudso/github-explorer/blob/main/uv.lock"
+    "link": "https://github.com/mithudso/github-explorer/blob/maintenance%2Fbootstrap-deep-optimize-20261112/uv.lock"
   }
 ]

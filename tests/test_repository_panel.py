@@ -101,6 +101,7 @@ async def test_settings_current_values_cancel_and_confirm_exact_changes(tmp_path
 
 async def test_failed_repository_read_leaves_cli_usable(tmp_path, monkeypatch):
     monkeypatch.setattr(catalog, "load_catalog", lambda path: [catalog.Command(("repo",), "Repo", "help")])
+    monkeypatch.setattr(catalog, 'help_text', lambda *args: pytest.fail('must not run installed gh'))
     def fail(context, executor):
         raise ValueError("Repository inaccessible; check authentication")
     monkeypatch.setattr(runner, "repository_info", fail)

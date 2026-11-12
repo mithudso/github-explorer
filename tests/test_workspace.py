@@ -45,6 +45,16 @@ def test_unborn_branch_and_deleted_files(tmp_path):
     assert runner.changed_file_count(' D removed\0UU conflict\0?? untracked\0') == 3
 
 
+@pytest.mark.parametrize('ending', [' ', '\t', '\n'])
+def test_checkout_root_preserves_trailing_whitespace(tmp_path, ending):
+    checkout = tmp_path / f'checkout{ending}'
+    checkout.mkdir()
+    git(checkout, 'init', '-b', 'main')
+    state = runner.workspace_status(checkout, runner.CommandRunner())
+    assert state.root == checkout.resolve()
+    assert state.branch == 'main' and state.changed == 0
+
+
 def test_editable_file_boundaries(checkout, tmp_path):
     state = runner.workspace_status(checkout, runner.CommandRunner())
     assert runner.editable_file(state, 'a.txt') == checkout / 'a.txt'
@@ -102,12 +112,17 @@ def test_repository_activity_is_paginated_read_only_and_contextual(tmp_path):
         assert call.cwd == tmp_path and call.repo == 'host/o/r'
 
 
-def test_checkout_matching_ignores_override_and_checks_host(tmp_path):
+@pytest.mark.parametrize('name,host,expected', [
+    ('other/repo', 'github.com', False),
+    ('owner/repo', 'enterprise.example.test', False),
+    ('OWNER/REPO', 'GITHUB.COM', True),
+])
+def test_checkout_matching_ignores_override_and_checks_host(tmp_path, name, host, expected):
     class FixtureRunner:
         def run(self, invocation, output, timeout):
             assert invocation.repo == ''
             return runner.Result(0, json.dumps({'nameWithOwner':'owner/repo', 'url':'https://github.com/owner/repo'}))
     state = runner.Workspace(tmp_path, 'main', 0, ())
     context = runner.Invocation(('/fixture/gh',), tmp_path, 'other/repo')
-    repo = runner.Repository(context, 'other/repo', 'github.com', 'main', {})
-    assert not runner.workspace_matches(repo, state, FixtureRunner())
+    repo = runner.Repository(context, name, host, 'main', {})
+    assert runner.workspace_matches(repo, state, FixtureRunner()) is expected

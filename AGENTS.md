@@ -18,6 +18,7 @@ their versions/deltas and the release version when appropriate, and commit chang
 
 ## Contributor orientation
 
+Use the [project wiki](docs/wiki/README.md) for maintained commands and references.
 Read [CLAUDE.md](CLAUDE.md) for shared commands and workflow logging, then
 [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md) and
 [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md). Keep generated operations metadata

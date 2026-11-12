@@ -27,7 +27,14 @@ def check(root: Path) -> list[str]:
     except (ValueError, KeyError, TypeError, OSError, SyntaxError) as exc:
         return [*errors, f"Invalid source or manifest: {exc}"]
     for path, content in expected.items():
-        if path not in missing_outputs and (root / path).read_text(encoding="utf-8") != content:
+        if path in missing_outputs:
+            continue
+        try:
+            actual_content = (root / path).read_text(encoding="utf-8")
+        except (OSError, UnicodeError) as exc:
+            errors.append(f"Unreadable generated file: {path}: {exc}")
+            continue
+        if actual_content != content:
             errors.append(f"Stale generated file: {path}")
     return errors
 

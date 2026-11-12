@@ -12,11 +12,13 @@ import tomllib
 from collections import Counter
 from datetime import date
 from pathlib import Path
-from urllib.parse import urlsplit
+from urllib.parse import quote, urlsplit
+
+import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
 GENERATOR = "crawl-repo-to-llms"
-SKILL_VERSION = "1.2.0"
+SKILL_VERSION = "1.3.0"
 SCHEMA_VERSION = 1
 OUTPUTS = (
     "docs/high_signal_file_index.json", "docs/codebase-overview.md",
@@ -94,6 +96,16 @@ REVIEWED = {
         "Missing, changed or deleted sources must make stale documentation visible in CI.",
         "Changing drift detection, missing-output diagnostics or snapshot handling.", "check; main",
         ["scripts/generate_repo_indexes.py"], "tests/test_doc_indexes.py"),
+    "scripts/build_distributions.py": (
+        "Preflight release inputs/outputs, stage the npm wheel and generate Homebrew resources.",
+        "Release packages must contain only validated public project payloads.",
+        "Changing release staging, artifact ownership or symlink guards.", "preflight_inputs; preflight_outputs; main",
+        ["pyproject.toml", "npm/package.json", "uv.lock"], "tests/test_distributions.py"),
+    "tests/test_distributions.py": (
+        "Verify isolated release staging, foreign-file refusal and symlink preservation.",
+        "Public packages must not copy private staging material or write outside the release tree.",
+        "Changing distribution staging or output preflight.", "builder; test_builder_refuses_symlinks_before_any_mutation",
+        ["scripts/build_distributions.py"], "tests/test_distributions.py"),
     "tests/conftest.py": (
         "Provide network-free repository fixtures for UI tests.",
         "Automatic startup reads must never access a real account in tests.",
@@ -207,8 +219,12 @@ def census(root: Path) -> list[str]:
 def role(path: str) -> str:
     if path.startswith(".vscode/") or Path(path).name == ".env.example":
         return "config"
-    if path.startswith("tests/"):
+    if path.startswith(("tests/", "npm/test/")):
         return "test"
+    if path.startswith("npm/bin/"):
+        return "entrypoint"
+    if path.startswith("npm/") and path.endswith('.cjs'):
+        return "script"
     if path.startswith(".github/workflows/"):
         return "infra"
     if path.startswith(".github/"):
@@ -221,7 +237,7 @@ def role(path: str) -> str:
         return "library"
     if path.startswith("docs/") or path.endswith(".md"):
         return "docs"
-    return "config" if path.endswith((".toml", ".lock")) else "meta"
+    return "config" if path.endswith((".toml", ".lock", ".json")) else "meta"
 
 
 def importance(path: str) -> str:
@@ -233,7 +249,7 @@ def importance(path: str) -> str:
 
 
 def read_public(root: Path, path: str) -> str:
-    if path in PRIVATE_DOCS or Path(path).name == ".env.example" or path.startswith("docs/archive/"):
+    if Path(path).name in PRIVATE_DOCS or Path(path).name == ".env.example" or path.startswith("docs/archive/"):
         return ""
     try:
         return (root / path).read_text(encoding="utf-8")
@@ -291,6 +307,24 @@ def json_text(value: object) -> str:
     return json.dumps(value, indent=2, ensure_ascii=False) + "\n"
 
 
+def workflow_commands(source: str) -> list[str]:
+    """Read scalar and block run values without executing or importing workflow code."""
+    try:
+        workflow = yaml.safe_load(source)
+    except yaml.YAMLError as exc:
+        raise ValueError("Invalid workflow YAML") from exc
+    if not isinstance(workflow, dict) or not isinstance(workflow.get("jobs"), dict):
+        return []
+    commands = []
+    for job in workflow["jobs"].values():
+        if not isinstance(job, dict) or not isinstance(job.get("steps"), list):
+            continue
+        for step in job["steps"]:
+            if isinstance(step, dict) and isinstance(step.get("run"), str):
+                commands.append(step["run"].rstrip("\n"))
+    return commands
+
+
 def render(root: Path, metadata: dict | None = None) -> dict[str, str]:
     metadata = metadata or snapshot(root)
     paths = census(root)
@@ -305,7 +339,7 @@ def render(root: Path, metadata: dict | None = None) -> dict[str, str]:
             "bytes": len(data), "sha256": hashlib.sha256(data).hexdigest(), "depth": "shallow",
             "purpose": f"{role(path).capitalize()} file; semantic purpose requires source review.",
             "provenance": "[asserted]", "symbols": code.get(path, {}).get("symbols", []),
-            "link": (f"{metadata['remote']}/blob/{metadata['branch']}/{path}"
+            "link": (f"{metadata['remote']}/blob/{quote(metadata['branch'], safe='')}/{quote(path, safe='/')}"
                      if metadata["remote"] != "no-public-remote" else path),
         })
         card = cards[-1]
@@ -366,12 +400,22 @@ def render(root: Path, metadata: dict | None = None) -> dict[str, str]:
     for path in paths:
         if path.startswith("scripts/") and path.endswith(".py"):
             commands.append(f"`python {path}`; inspect its options below before use. [src: {path}]")
+        if Path(path).name == 'package.json':
+            package = json.loads(sources[path])
+            directory = Path(path).parent.as_posix()
+            bins = package.get('bin', {})
+            if isinstance(bins, str):
+                bins = {package.get('name', directory): bins}
+            for name, entry in bins.items():
+                commands.append(f"`{name}` → `{directory}/{entry}` (npm launcher). [src: {path}]")
+            for name, command in package.get('scripts', {}).items():
+                commands.append(f"`npm --prefix {directory} run {name}` → `{command}`. [src: {path}]")
     ci_commands = []
     for path in paths:
         if path.startswith(".github/workflows/"):
             ci_commands.extend(
-                f"`{m.group(1)}`. [src: {path}]"
-                for m in re.finditer(r"^\s*- run: (.+)$", sources[path], re.M)
+                f"`{command}`. [src: {path}]"
+                for command in workflow_commands(sources[path])
             )
     options = []
     for path, info in code.items():
@@ -546,9 +590,9 @@ def write(root: Path, *, refresh: bool = False) -> None:
                 raise ValueError(f"Refusing symlinked generated path: {candidate.relative_to(root)}")
     target = root / "docs/llms"
     manifest_path = target / "manifest.json"
-    if target.exists() and any(target.iterdir()):
+    if any((root / output).exists() for output in OUTPUTS) or (target.exists() and any(target.iterdir())):
         if not manifest_path.exists():
-            raise ValueError("docs/llms is nonempty without a generator manifest")
+            raise ValueError("Existing generated paths without a generator manifest")
         manifest = json.loads(manifest_path.read_text())
         if manifest.get("generator") != GENERATOR:
             raise ValueError("docs/llms belongs to another generator")

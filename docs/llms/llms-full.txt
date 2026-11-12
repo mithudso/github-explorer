@@ -1,10 +1,10 @@
 # github-explorer — static repository reference
-> Source: . · https://github.com/mithudso/github-explorer @ a817933 dirty
-> Generated: 2026-09-29 by crawl-repo-to-llms v1.2.0
-> Census: 87 enumerated / 24 deep-read / 63 shallow · partial: remaining metadata cards shallow; no index probes
+> Source: . · https://github.com/mithudso/github-explorer @ c9f38a0 dirty
+> Generated: 2026-11-12 by crawl-repo-to-llms v1.3.0
+> Census: 92 enumerated / 26 deep-read / 66 shallow · partial: remaining metadata cards shallow; no index probes
 
 ## Architecture
-Package: github-explorer; version: 0.4.2. [src: pyproject.toml]
+Package: github-explorer; version: 0.4.3. [src: pyproject.toml]
 Purpose: A standalone terminal workbench for the full installed GitHub CLI. [src: pyproject.toml]
 Requires Python >=3.11. [src: pyproject.toml]
 Runtime dependencies: textual>=8,<9, rich>=13, textual-tty>=0.4,<0.5. [src: pyproject.toml]
@@ -19,6 +19,7 @@ src/github_explorer/catalog.py: Read the installed CLI's built-in reference; do 
 src/github_explorer/operations.py: Declarative inventory for maintainers; never executes or retries commands. [src: src/github_explorer/operations.py]
 src/github_explorer/panel.py: Reusable GitHub control screen with an embedded Vim terminal. [src: src/github_explorer/panel.py]
 src/github_explorer/runner.py: Shell-free command execution with cancellation and bounded captured output. [src: src/github_explorer/runner.py]
+tests/test_distributions.py: Keep release staging bounded to owned files and local output paths. [src: tests/test_distributions.py]
 tests/test_doc_indexes.py: Exercise stale, deleted and newly added sources in isolated fixture repositories. [src: tests/test_doc_indexes.py]
 tests/test_maintenance.py: Regression checks for maintenance writes and static operation metadata. [src: tests/test_maintenance.py]
 
@@ -26,6 +27,10 @@ tests/test_maintenance.py: Regression checks for maintenance writes and static o
 `github-explorer` → `github_explorer.__main__:main`. [src: pyproject.toml#project.scripts]
 `ghx` → `github_explorer.__main__:main`. [src: pyproject.toml#project.scripts]
 `python -m github_explorer` dispatches the package entrypoint. [src: src/github_explorer/__main__.py]
+`github-explorer` → `npm/bin/github-explorer.cjs` (npm launcher). [src: npm/package.json]
+`ghx` → `npm/bin/github-explorer.cjs` (npm launcher). [src: npm/package.json]
+`npm --prefix npm run test` → `node --test test/*.cjs`. [src: npm/package.json]
+`npm --prefix npm run prepack` → `node check-package.cjs`. [src: npm/package.json]
 `python scripts/build_distributions.py`; inspect its options below before use. [src: scripts/build_distributions.py]
 `python scripts/check_doc_indexes.py`; inspect its options below before use. [src: scripts/check_doc_indexes.py]
 `python scripts/generate_ops_registry_doc.py`; inspect its options below before use. [src: scripts/generate_ops_registry_doc.py]
@@ -76,10 +81,12 @@ docs/known-issues.md: Known limitations and troubleshooting; Repository browser 
 docs/logging.md: Logging and output; Current approach; Levels and diagnostics; Adding diagnostics. [src: docs/logging.md]
 docs/onboarding.md: Contributor onboarding. [src: docs/onboarding.md]
 docs/repo-bootstrap-audit-2026-09-29.md: Repository bootstrap audit — 2026-09-29; Outcome; Findings and resolution; Applicability decisions; Review coverage; Dependencies and tooling; Remaining scope; Final continuation review. [src: docs/repo-bootstrap-audit-2026-09-29.md]
+docs/repo-bootstrap-audit-2026-11-12.md: Bootstrap and code optimization audit — 2026-11-12; Coverage and method; Findings and corrections; Bootstrap manifest; Validation; Convergence; Limits and rollback. [src: docs/repo-bootstrap-audit-2026-11-12.md]
 docs/requirements.md: Requirements; Functional requirements; Non-functional requirements; Dependencies. [src: docs/requirements.md]
 docs/runbooks/metadata-maintenance.md: Refresh repository metadata; Preconditions; Actions; Verification; Escalation. [src: docs/runbooks/metadata-maintenance.md]
 docs/runbooks/release-and-rollback.md: Prepare a release or roll back an installation; Preconditions; Actions; Verification; Escalation. [src: docs/runbooks/release-and-rollback.md]
 docs/runbooks/troubleshooting.md: Diagnose a local failure; Preconditions; Actions; Verification; Escalation. [src: docs/runbooks/troubleshooting.md]
+docs/wiki/README.md: Project wiki; Start here; Verified contributor commands; Scripts and operating references; Design and maintenance direction. [src: docs/wiki/README.md]
 
 ## Coverage limits
 Source, scripts and tests have curated cards from direct review; remaining metadata cards are shallow. Parser definitions are statically extracted. [src: scripts/generate_repo_indexes.py]

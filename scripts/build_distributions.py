@@ -13,12 +13,59 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 
 
+def preflight_inputs(root: Path) -> None:
+    """Keep build metadata, copied documents and source-archive inputs inside the repo."""
+    paths = [root / name for name in [
+        'README.md', 'LICENSE', 'NOTICE.md', 'pyproject.toml', 'uv.lock', 'MANIFEST.in',
+        'npm/package.json', 'docs/operations-registry.json', 'docs/tool-inventory.json',
+    ]]
+    for name in ['src', 'scripts', 'tests']:
+        directory = root / name
+        paths.append(directory)
+        if not directory.is_symlink():
+            paths.extend(directory.rglob('*'))
+    for path in paths:
+        for component in (path, *path.parents):
+            if component == root:
+                break
+            if component.is_symlink():
+                raise ValueError(f'Refusing symlinked release input: {component.relative_to(root)}')
+
+
+def preflight_outputs(root: Path, version: str) -> None:
+    """Reject redirected writes and foreign staging material before building anything."""
+    paths = [
+        root / 'dist', root / f'dist/github_explorer-{version}-py3-none-any.whl',
+        root / f'dist/github_explorer-{version}.tar.gz', root / 'npm/python',
+        root / 'npm/python/requirements.txt',
+        *(root / 'npm' / name for name in ['README.md', 'LICENSE', 'NOTICE.md']),
+        root / 'packaging/homebrew/github-explorer.rb',
+    ]
+    payload = root / 'npm/python'
+    for path in paths:
+        for component in (path, *path.parents):
+            if component == root:
+                break
+            if component.is_symlink():
+                raise ValueError(f'Refusing symlinked release output: {component.relative_to(root)}')
+    if payload.exists():
+        for entry in payload.iterdir():
+            owned = entry.name == 'requirements.txt' or (
+                entry.name.startswith('github_explorer-')
+                and entry.name.endswith('-py3-none-any.whl')
+            )
+            if entry.is_symlink() or not entry.is_file() or not owned:
+                raise ValueError(f'Unexpected release staging entry: {entry.relative_to(root)}')
+
+
 def main() -> None:
+    preflight_inputs(ROOT)
     project = tomllib.loads((ROOT / "pyproject.toml").read_text())["project"]
     version = project["version"]
     npm = json.loads((ROOT / "npm/package.json").read_text())
     if npm["version"] != version:
         raise SystemExit("Python and npm versions differ")
+    preflight_outputs(ROOT, version)
     subprocess.run(["uv", "build", "--quiet"], cwd=ROOT, check=True)
     payload = ROOT / "npm/python"
     payload.mkdir(parents=True, exist_ok=True)

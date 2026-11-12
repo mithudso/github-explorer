@@ -23,6 +23,7 @@ uv run pytest
 uv run pytest tests/test_runner.py
 uv run ruff check .
 uv build
+npm --prefix npm test
 uv run python scripts/generate_ops_registry_doc.py --check
 uv run python scripts/check_doc_indexes.py
 ```
@@ -31,6 +32,9 @@ No standalone type-checker or numeric coverage threshold is configured. See
 [testing](TESTING.md) for behavioral priorities. CI runs checks on pushes and pull
 requests. Distribution packaging and publication commands are in [Releasing](RELEASING.md).
 Publication is manual; CI also validates the npm launcher and package contents.
+Node.js 18+ runs the npm tests; `.node-version` pins CI's Node major version.
+PyYAML is a development dependency for static workflow command extraction.
+The [project wiki](wiki/README.md) links scripts and operating references.
 
 ## Making a change
 

@@ -72,7 +72,10 @@ def prepare(command: str, cwd: str | Path, repo: str = "") -> Invocation:
     # prevents an accidental 'gh command && ...' from becoming gh arguments.
     if any(word in {";", "&&", "||", "|", ">", ">>", "<"} for word in words):
         raise ValueError("Enter one command; shell operators are not supported")
-    directory = Path(cwd).expanduser().resolve()
+    try:
+        directory = Path(cwd).expanduser().resolve()
+    except RuntimeError as exc:
+        raise ValueError(f"Choose a valid working directory: {exc}") from exc
     if not directory.is_dir():
         raise ValueError("Choose an existing working directory")
     repo = repo.strip()
@@ -318,7 +321,7 @@ def changed_file_count(porcelain: str) -> int:
 
 
 def workspace_status(cwd: Path, executor: CommandRunner) -> Workspace:
-    root = Path(git_read(cwd, ("rev-parse", "--show-toplevel"), executor).strip()).resolve()
+    root = Path(git_read(cwd, ("rev-parse", "--show-toplevel"), executor).removesuffix("\n")).resolve()
     # Porcelain v2 headers represent unborn and detached branches without guessing.
     info = git_read(root, ("status", "--porcelain=v2", "--branch", "--untracked-files=no"), executor)
     headers = dict(line[2:].split(" ", 1) for line in info.splitlines() if line.startswith("# "))

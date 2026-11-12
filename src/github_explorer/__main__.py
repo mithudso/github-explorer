@@ -23,7 +23,10 @@ def main(argv: list[str] | None = None) -> int:
         "--list-commands", action="store_true", help="Print the local gh catalog as JSON"
     )
     args = parser.parse_args(argv)
-    cwd = args.cwd.expanduser().absolute()
+    try:
+        cwd = args.cwd.expanduser().absolute()
+    except (OSError, RuntimeError) as exc:
+        parser.error(f"Working directory is invalid: {exc}")
     if not cwd.is_dir():
         parser.error(f"Working directory does not exist: {cwd}")
     if args.repo and not re_repo(args.repo):

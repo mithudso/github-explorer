@@ -1,6 +1,6 @@
 import asyncio
 import threading
-from contextlib import nullcontext
+from contextlib import contextmanager
 
 import pytest
 from textual.app import App
@@ -73,13 +73,27 @@ async def test_embed_catalog_flags_preview_run_and_return(tmp_path, monkeypatch)
         await pilot.click("#gh-clear")
         assert panel.last_result is None
         assert not panel.query_one("#gh-log", RichLog).lines
-        monkeypatch.setattr(app, "suspend", lambda: nullcontext())
-        monkeypatch.setattr(runner, "run_interactive", lambda invocation: 0)
+        terminal_calls, suspended = [], []
+
+        @contextmanager
+        def suspend():
+            suspended.append('entered')
+            yield
+            suspended.append('exited')
+
+        def terminal(invocation):
+            terminal_calls.append(invocation)
+            return 0
+
+        monkeypatch.setattr(app, "suspend", suspend)
+        monkeypatch.setattr(runner, "run_interactive", terminal)
         await pilot.click("#gh-terminal")
         await pilot.click("#gh-confirm-run")
         await app.workers.wait_for_complete()
         await pilot.pause()
         assert panel.last_result.returncode == 0
+        assert terminal_calls == calls and len(calls) == 1
+        assert suspended == ['entered', 'exited']
         await pilot.press("escape")
         assert app.screen is not panel
 

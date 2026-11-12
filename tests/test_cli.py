@@ -49,6 +49,15 @@ def test_catalog_export_never_starts_tui(tmp_path, monkeypatch, capsys):
     ]
 
 
+def test_unknown_home_directory_is_an_argument_error(monkeypatch, capsys):
+    monkeypatch.setattr(cli, 'executable', lambda: pytest.fail('must not inspect gh'))
+    with pytest.raises(SystemExit) as result:
+        cli.main(['--cwd', '~github_explorer_nonexistent_fixture_user'])
+    assert result.value.code == 2
+    error = capsys.readouterr().err
+    assert 'Working directory' in error and 'Traceback' not in error
+
+
 def test_catalog_timeout_exits_without_traceback(tmp_path, monkeypatch, capsys):
     monkeypatch.setattr(cli, "executable", lambda: "/mock/gh")
     monkeypatch.setattr(catalog, "executable", lambda: "/mock/gh")
@@ -75,6 +84,8 @@ async def test_standalone_host_branding_context_and_quit(tmp_path, monkeypatch):
         assert app.screen.repo == "owner/repository"
         assert str(app.screen.query_one("#gh-title", Label).render()).startswith("GitHub Explorer")
         assert str(app.screen.query_one("#gh-close", Button).label) == "Quit"
+        assert app.return_code is None
         await pilot.click("#gh-close")
         await pilot.pause()
+        assert app.return_code == 0
         assert app.return_value is None

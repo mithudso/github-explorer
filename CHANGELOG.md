@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.4.3 — 2026-11-12
+
+- Prevent local Vim editing while a command runs, and reject command starts while an editor is open.
+- Preserve checkout roots ending in whitespace and report invalid home-directory contexts cleanly.
+- Keep nested private workflow documents out of generated text; encode source links, parse complete CI commands, preserve foreign outputs and report unreadable indexes.
+- Refuse release input/output symlinks, unexpected npm payload files and incomplete packages before publication.
+- Refuse detected concurrent workflow-log changes during rotation and preserve headings inside fenced examples.
+- Add a maintained project wiki, align contributor/package checks and expand regression coverage.
+
 ## 0.4.2 — 2026-09-29
 
 - Publish npm under the verified owner scope, @mitchphudson/github-explorer.

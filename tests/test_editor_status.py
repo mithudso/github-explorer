@@ -1,4 +1,6 @@
+import asyncio
 import shutil
+import threading
 
 import pytest
 from textual.widgets import Static, Tree
@@ -155,3 +157,58 @@ async def test_mismatched_checkout_remains_read_only(tmp_path, local_files, monk
         assert (tmp_path / 'a.txt').read_text() == 'original\n'
         await pilot.press('ctrl+s')
         assert (tmp_path / 'a.txt').read_text() == 'original\n'
+
+
+async def test_running_command_blocks_local_editor_until_completion(tmp_path, local_files, monkeypatch):
+    started, release = threading.Event(), threading.Event()
+    attempts = []
+
+    def run(self, invocation, on_output, timeout):
+        started.set()
+        assert release.wait(5)
+        return runner.Result(0, 'fixture complete')
+
+    def editor_request(*args):
+        attempts.append(args)
+        raise ValueError('Fixture editor requested')
+
+    monkeypatch.setattr(runner.CommandRunner, 'run', run)
+    monkeypatch.setattr(runner, 'vim_command', editor_request)
+    app = GitHubExplorer(tmp_path)
+    async with app.run_test(size=(120, 40)) as pilot:
+        await app.workers.wait_for_complete()
+        panel = app.screen
+        await pilot.click('#gh-run')
+        await pilot.click('#gh-confirm-run')
+        try:
+            assert await asyncio.to_thread(started.wait, 5)
+            tree = panel.query_one('#gh-files', Tree)
+            tree.select_node(tree.root.children[0])
+            await pilot.pause()
+            assert panel.busy and panel.editor is None
+            assert attempts == []
+            assert 'running command' in str(panel.query_one('#gh-status', Static).render())
+            assert (tmp_path / 'a.txt').read_text() == 'original\n'
+        finally:
+            release.set()
+        await app.workers.wait_for_complete()
+        tree.select_node(tree.root.children[0])
+        await pilot.pause()
+        assert len(attempts) == 1
+
+
+async def test_start_command_cannot_bypass_an_open_editor(tmp_path, local_files, monkeypatch):
+    app = GitHubExplorer(tmp_path)
+    async with app.run_test():
+        await app.workers.wait_for_complete()
+        panel = app.screen
+        calls = []
+        monkeypatch.setattr(panel, 'execute', lambda *args: calls.append(args))
+        panel.editor = object()
+        try:
+            panel.start_command(panel.repository.context, False, 30)
+            assert not panel.busy and panel.runner is None
+            assert calls == []
+            assert 'Close Vim' in str(panel.query_one('#gh-status', Static).render())
+        finally:
+            panel.editor = None

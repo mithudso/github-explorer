@@ -7,6 +7,7 @@ import json
 import subprocess
 import sys
 from pathlib import Path
+from urllib.parse import quote, urlsplit
 
 import pytest
 
@@ -152,3 +153,83 @@ def test_generation_refuses_symlinked_output_directory(repo, tmp_path_factory):
     with pytest.raises(ValueError, match="symlinked generated path"):
         generator.write(repo)
     assert list(outside.iterdir()) == []
+
+
+@pytest.mark.parametrize('name', ['AGENTS.md', 'CLAUDE.md', 'prompts.md', 'memory.md'])
+def test_nested_private_document_bodies_are_never_extracted(repo, name):
+    directory = repo / 'docs' / 'nested'
+    directory.mkdir(parents=True)
+    (directory / name).write_text('# PRIVATE NESTED HEADING\nhttps://private.invalid/secret\n')
+    for content in generator.render(repo).values():
+        assert 'PRIVATE NESTED HEADING' not in content
+        assert 'private.invalid/secret' not in content
+
+
+@pytest.mark.parametrize('name', ['notes#draft.md', 'why?.md', '100%.md', 'with space.md', 'café.md'])
+def test_public_source_links_encode_path_and_branch(repo, name):
+    (repo / name).write_text('Public note.\n')
+    metadata = generator.snapshot(repo)
+    metadata.update(remote='https://github.com/example/fixture', branch='feature/a#b')
+    outputs = generator.render(repo, metadata)
+    cards = json.loads(outputs['docs/llms/filemap.json'])
+    link = next(card['link'] for card in cards if card['path'] == name)
+    assert link == f"https://github.com/example/fixture/blob/{quote(metadata['branch'], safe='')}/{quote(name, safe='/')}"
+    assert not urlsplit(link).fragment and not urlsplit(link).query
+
+
+@pytest.mark.parametrize('name', ['docs/codebase-overview.md', 'docs/high_signal_file_index.json'])
+@pytest.mark.parametrize('refresh', [False, True])
+def test_foreign_top_level_outputs_are_preserved_before_any_write(repo, name, refresh):
+    target = repo / name
+    target.parent.mkdir(parents=True)
+    target.write_text('Foreign material to preserve.\n')
+    with pytest.raises(ValueError, match='without a generator manifest'):
+        generator.write(repo, refresh=refresh)
+    assert target.read_text() == 'Foreign material to preserve.\n'
+    assert not (repo / 'docs/llms').exists()
+
+
+def test_ci_inventory_reads_named_scalar_literal_and_folded_steps(repo):
+    workflows = repo / '.github/workflows'
+    workflows.mkdir(parents=True)
+    (workflows / 'checks.yml').write_text('''jobs:
+  check:
+    steps:
+      - name: Scalar command
+        run: uv run pytest
+      - run: |
+          uv run ruff check .
+          uv build
+      - name: Folded command
+        run: >-
+          uv run python
+          scripts/check_doc_indexes.py
+''')
+    output = generator.render(repo)['docs/llms/llms-executable.txt']
+    assert '`uv run pytest`' in output
+    assert 'uv run ruff check .\nuv build' in output
+    assert 'uv run python scripts/check_doc_indexes.py' in output
+    assert '`|`' not in output and '`>-`' not in output
+
+
+def test_checker_reports_unreadable_output_with_refresh_guidance(repo, monkeypatch, capsys):
+    generator.write(repo)
+    (repo / 'docs/llms/llms.txt').write_bytes(b'\xff')
+    errors = checker.check(repo)
+    assert any('docs/llms/llms.txt' in error for error in errors)
+    monkeypatch.setattr(checker, 'ROOT', repo)
+    assert checker.main() == 1
+    assert 'Refresh with:' in capsys.readouterr().out
+
+
+def test_executable_inventory_includes_npm_launchers_and_scripts(repo):
+    (repo / 'npm').mkdir()
+    (repo / 'npm/package.json').write_text(json.dumps({
+        'name': '@example/fixture',
+        'bin': {'fixture': 'bin/fixture.cjs'},
+        'scripts': {'test': 'node --test test/*.cjs'},
+    }))
+    output = generator.render(repo)['docs/llms/llms-executable.txt']
+    assert 'npm/bin/fixture.cjs' in output
+    assert 'npm --prefix npm run test' in output
+    assert 'node --test test/*.cjs' in output

@@ -113,3 +113,9 @@ def test_missing_git_is_actionable(tmp_path, monkeypatch):
     monkeypatch.setattr(runner.shutil, "which", lambda name: None)
     with pytest.raises(ValueError, match="Git is not installed"):
         runner.prepare("git status", tmp_path)
+
+
+def test_unknown_home_directory_is_a_context_error(monkeypatch):
+    monkeypatch.setattr(runner, 'executable', lambda: pytest.fail('must not resolve gh'))
+    with pytest.raises(ValueError, match='working directory'):
+        runner.prepare('gh repo view', '~github_explorer_nonexistent_fixture_user')

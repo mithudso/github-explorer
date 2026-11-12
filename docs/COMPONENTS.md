@@ -39,6 +39,9 @@ embedded panel. The standalone host exits instead. Command output remains volati
 | `scripts/generate_repo_indexes.py` | Generate repository navigation and LLM-readable file indexes |
 | `scripts/check_doc_indexes.py` | Validate indexed paths |
 | `scripts/rotate_workflow_logs.py` | Archive older oversized workflow-log sections, refusing active swap files |
+| `scripts/build_distributions.py` | Preflight owned release paths, stage the npm payload and generate the release's Homebrew formula |
+| `npm/bin/github-explorer.cjs`, `npm/check-package.cjs` | Preserve literal argv and caller context through uv; reject incomplete or unexpected release payload |
+| `tests/test_distributions.py`, `npm/test/packaging.cjs` | Release staging and prepack boundary regressions |
 | `tests/test_catalog.py` | Help parsing and discovery boundaries |
 | `tests/test_runner.py` | Fixture subprocess behavior and execution safety |
 | `tests/test_cli.py` | CLI options, catalog export, and standalone host |
